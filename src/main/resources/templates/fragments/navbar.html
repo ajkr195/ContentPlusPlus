@@ -1,0 +1,330 @@
+<header class="app-header fixed-top" th:fragment="navbar">
+	<div class="app-header-inner">
+		<div class="container-fluid py-2">
+			<div class="app-header-content">
+				<div class="row justify-content-between align-items-center">
+
+					<div class="col-auto">
+						<a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+							<i class="fa-solid fa-bars fa-xl"></i>
+						</a>
+					</div>
+					
+					<div class="search-mobile-trigger d-sm-none col">
+						<i class="fas fa-search"></i>
+					</div>
+
+					<div class="app-search-box col">
+						<form class="app-search-form">
+							<input type="text" placeholder="Search..." name="search" class="form-control search-input">
+							<button type="submit" class="btn search-btn btn-primary" value="Search"><i
+									class="fas fa-search"></i></button>
+						</form>
+					</div>
+					
+
+
+					<div class="app-utilities col-auto">
+						<div class="app-utility-item app-notifications-dropdown dropdown">
+							<a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle"
+								data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"
+								title="Notifications">
+								<i class="fa-regular fa-bell fa-xl"></i>
+								<span class="icon-badge">3</span>
+							</a>
+
+
+							<div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
+								<div class="dropdown-menu-header p-3">
+									<h5 class="dropdown-menu-title mb-0">Notifications</h5>
+								</div>
+
+								<div class="dropdown-menu-content">
+									<div class="item p-3">
+										<div class="row gx-2 justify-content-between align-items-center">
+											<div class="col-auto">
+												<i class="fa-regular fa-user"></i>
+											</div>
+
+											<div class="col">
+												<div class="info">
+													<div class="desc">Amy shared a file with you. Lorem ipsum dolor
+														sit amet, consectetur adipiscing elit. </div>
+													<div class="meta"> 2 hrs ago</div>
+												</div>
+											</div>
+
+										</div>
+
+										<a class="link-mask" href="/notifications" th:href="@{/notifications}"></a>
+									</div>
+
+									<div class="item p-3">
+										<div class="row gx-2 justify-content-between align-items-center">
+											<div class="col-auto">
+												<div class="app-icon-holder">
+													<i class="fa-solid fa-file-invoice"></i>
+												</div>
+											</div>
+
+											<div class="col">
+												<div class="info">
+													<div class="desc">You have a new invoice. Proin venenatis
+														interdum est.</div>
+													<div class="meta"> 1 day ago</div>
+												</div>
+											</div>
+
+										</div>
+
+										<a class="link-mask" href="/notifications" th:href="@{/notifications}"></a>
+									</div>
+
+									<div class="item p-3">
+										<div class="row gx-2 justify-content-between align-items-center">
+											<div class="col-auto">
+												<div class="app-icon-holder icon-holder-mono">
+													<i class="fa-regular fa-chart-bar"></i>
+												</div>
+											</div>
+
+											<div class="col">
+												<div class="info">
+													<div class="desc">Your report is ready. Proin venenatis interdum
+														est.</div>
+													<div class="meta"> 3 days ago</div>
+												</div>
+											</div>
+
+										</div>
+
+										<a class="link-mask" href="/notifications" th:href="@{/notifications}"></a>
+									</div>
+
+									<div class="item p-3">
+										<div class="row gx-2 justify-content-between align-items-center">
+											<div class="col-auto">
+												<i class="fa-regular fa-comment"></i>
+											</div>
+
+											<div class="col">
+												<div class="info">
+													<div class="desc">James sent you a new message.</div>
+													<div class="meta"> 7 days ago</div>
+												</div>
+											</div>
+
+										</div>
+
+										<a class="link-mask" href="/notifications" th:href="@{/notifications}"></a>
+									</div>
+
+								</div>
+
+
+								<div class="dropdown-menu-footer p-2 text-center">
+									<a href="/notifications" th:href="@{/notifications}">View all</a>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="app-utility-item">
+							<a id="theme-switcher" href="#" title="DarkMode" onclick="switchTheme()">
+								<i class="fa-solid fa-sun fa-xl"></i>
+							</a>
+							<!--onclick="switchTheme()"-->
+						</div>
+
+
+						<div class="app-utility-item">
+							<a href="/settings" th:href="@{/settings}" title="Settings">
+								<i class="fa-solid fa-gear fa-xl"></i>
+							</a>
+						</div>
+
+
+						<div class="app-utility-item app-user-dropdown dropdown">
+							<a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#"
+								role="button" aria-expanded="false"><img class="profile-image"
+									th:src="@{/img/profile-1.png}" alt=""></a>
+							<ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
+								<li><a class="dropdown-item" href="/account" th:href="@{/account}">Account</a></li>
+								<li><a class="dropdown-item" href="/settings" th:href="@{/settings}">Settings</a></li>
+								<li>
+									<hr class="dropdown-divider">
+								</li>
+								<li><a class="dropdown-item" href="/login" th:href="@{/login}">Log Out</a></li>
+							</ul>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div id="app-sidepanel" class="app-sidepanel">
+		<div id="sidepanel-drop" class="sidepanel-drop"></div>
+		<div class="sidepanel-inner d-flex flex-column">
+			<a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+			<div class="app-branding text-center mb-5">
+				<a class="app-logo" href="/" th:href="@{/}"><img class="logo-icon" th:src="@{/img/brandlogo3.png}">
+					<div class="logo-text">Content++</div>
+				</a>
+
+			</div>
+
+
+			<nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+				<ul class="app-menu list-unstyled accordion" id="menu-accordion">
+					<li class="nav-item">
+
+						<a class="nav-link" th:classappend="${pagename == 'home' ? 'active' : ''}" href="/"
+							th:href="@{/}">
+							<span class="nav-icon">
+								<i class="fa-solid fa-gauge-simple-high fa-xl"></i>
+							</span>
+							<span class="nav-link-text">Dashboard</span>
+						</a>
+
+					</li>
+
+					<li class="nav-item">
+
+						<a class="nav-link" th:classappend="${pagename == 'mydocuments' ? 'active' : ''}" href="/mydocuments"
+							th:href="@{/mydocuments}">
+							<span class="nav-icon">
+								<i class="fa-solid fa-file-waveform fa-xl"></i>
+							</span>
+							<span class="nav-link-text">My Documents</span>
+						</a>
+
+					</li>
+
+					<li class="nav-item">
+
+						<a class="nav-link" th:classappend="${pagename == 'documents' ? 'active' : ''}"
+							href="/documents" th:href="@{/documents}">
+							<span class="nav-icon">
+								<i class="fa-solid fa-file fa-xl"></i>
+							</span>
+							<span class="nav-link-text">Documents</span>
+						</a>
+
+					</li>
+
+					<li class="nav-item has-submenu">
+
+						<a class="nav-link submenu-toggle"
+							th:classappend="${pagename == 'account' OR pagename == 'settings' OR pagename == 'notifications' ? 'active' : ''}"
+							href="#" data-bs-toggle="collapse" data-bs-target="#submenu-1" aria-expanded="false"
+							aria-controls="submenu-1">
+							<span class="nav-icon">
+								<i class="fa-solid fa-clone fa-xl"></i>
+							</span>
+							<span class="nav-link-text">Pages</span>
+							<span class="submenu-arrow">
+								<i class="fa-solid fa-chevron-down"></i>
+							</span>
+
+						</a>
+
+						<div id="submenu-1" class="collapse submenu submenu-1"
+							th:classappend="${pagename == 'account' OR pagename == 'settings' OR pagename == 'notifications' ? 'show' : ''}"
+							data-bs-parent="#menu-accordion">
+							<ul class="submenu-list list-unstyled">
+								<li class="submenu-item"><a class="submenu-link"
+										th:classappend="${pagename == 'notifications' ? 'active' : ''}"
+										href="/notifications" th:href="@{/notifications}">Notifications</a></li>
+								<li class="submenu-item"><a class="submenu-link"
+										th:classappend="${pagename == 'account' ? 'active' : ''}" href="/account"
+										th:href="@{/account}">Account</a>
+								</li>
+								<li class="submenu-item"><a class="submenu-link"
+										th:classappend="${pagename == 'settings' ? 'active' : ''}" href="/settings"
+										th:href="@{/settings}">Settings</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+
+					<li class="nav-item has-submenu">
+
+						<a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse"
+							data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
+							<span class="nav-icon">
+								<i class="fa-brands fa-hive fa-xl"></i>
+							</span>
+							<span class="nav-link-text">External</span>
+							<span class="submenu-arrow">
+								<i class="fa-solid fa-chevron-down"></i>
+							</span>
+
+						</a>
+
+						<div id="submenu-2" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
+							<ul class="submenu-list list-unstyled">
+								<li class="submenu-item"><a class="submenu-link" href="/login"
+										th:href="@{/login}">Login</a></li>
+								<li class="submenu-item"><a class="submenu-link" href="/signup"
+										th:href="@{/signup}">Signup</a></li>
+								<li class="submenu-item"><a class="submenu-link" href="/resetpassword"
+										th:href="@{/resetpassword}">Reset
+										password</a></li>
+								<li class="submenu-item"><a class="submenu-link" href="/404" th:href="@{/404}">404
+										page</a></li>
+							</ul>
+						</div>
+					</li>
+
+					<li class="nav-item">
+
+						<a class="nav-link" th:classappend="${pagename == 'help' ? 'active' : ''}" href="/help"
+							th:href="@{/help}">
+							<span class="nav-icon">
+								<i class="fa-regular fa-life-ring fa-xl"></i>
+							</span>
+							<span class="nav-link-text">Help</span>
+						</a>
+
+					</li>
+
+				</ul>
+
+			</nav>
+
+			<div class="app-sidepanel-footer">
+				<nav class="app-nav app-nav-footer">
+					<ul class="app-menu footer-menu list-unstyled">
+						<li class="nav-item">
+							<a class="nav-link" href="/settings" th:href="@{/settings}">
+								<span class="nav-icon">
+									<i class="fa-solid fa-cog fa-2xl text-secondary"></i>
+								</span>
+								<span class="nav-link-text mx-2">Settings</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/login" th:href="@{/login}">
+								<span class="nav-icon">
+									<i class="fa-solid fa-right-from-bracket fa-2xl text-secondary"></i>
+								</span>
+								<span class="nav-link-text mx-2">Logout</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+
+
+		</div>
+
+	</div>
+
+</header>
