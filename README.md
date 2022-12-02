@@ -1,6 +1,7 @@
 # Why ContentPlusPlus
-Content Management System were supposed to:
+Content Management Systems were supposed to:
   - Be simple. 
+  - Do exactly what enterprises/users want.
   - Be efficient.
   - Cloud-deployable.
   - Be able to do more than just storing the content.
