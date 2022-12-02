@@ -36,12 +36,12 @@ A simplified and universal content management system.
 
 
 <h4> Extend the project further to integrate a simplified work-flow to empower Business Analysts to create Task(Work) Flows where different users belonging to different business units, based on their roles and privileges will be able to: </h4>
-  - Trigger a Case (Work-Item).
+ <ul> - Trigger a Case (Work-Item).
   - View a Case (Work-Item) from respective business units. 
   - Modify a Case (Work-Item).
   - Approve a Case (Work-Item).
   - Reject a Case (Work-Item).
-  - Move a Case (Work-Item) to own personal in-baskets.
+  - Move a Case (Work-Item) to own personal in-baskets. </ul>
 
 
 
