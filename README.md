@@ -42,6 +42,7 @@ Content Management Systems were supposed to:
 # Extend the project further to integrate a simplified work-flow to empower Business Analysts to create Task(Work) Flows where different users belonging to different business units, based on their roles and privileges will be able to:
   - Trigger a Case (Work-Item).
   - View a Case (Work-Item) from respective business units. 
+  - Lock/Unlock a Case (Work-Item). 
   - Modify a Case (Work-Item).
   - Approve a Case (Work-Item).
   - Reject a Case (Work-Item).
