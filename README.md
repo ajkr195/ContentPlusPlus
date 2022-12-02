@@ -11,7 +11,7 @@ Content Management Systems were supposed to:
 A simplified and universal content management system.
 
 # Tech Stack:
-  <ul>- Java
+  - Java
   - Spring / SpringBoot
   - SpringBoot Web-Reactive
   - Spring Web-Flux (All Async)
