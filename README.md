@@ -1,4 +1,4 @@
-#Why ContentPlusPlus
+# Why ContentPlusPlus?
 Content Management Systems were supposed to:
   - Be simple. 
   - Do exactly what enterprises/users want.
