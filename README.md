@@ -16,16 +16,18 @@ Content Management Systems were supposed to:
   - Spring / SpringBoot
   - SpringBoot Web-Reactive
   - Spring Web-Flux (All Async)
-  - R2DBC 
+  - R2DBC
+  - Bootstrap5 and VanillaJS
 
 
 # Centrally Manage Content Storage using :
   - (Any) File Storage
+  - Azure blob/cloud Storage
+  - AWS (S3) Storage
   - FileNet
   - MongoDB
   - Alfresco
   - (Any) DataBase 
-  </ul>
 
 # Move Content among different system - seamlessly, anytime, anywhere.
 
