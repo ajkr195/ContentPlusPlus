@@ -43,7 +43,5 @@ A simplified and universal content management system.
   - Approve a Case (Work-Item).
   - Reject a Case (Work-Item).
   - Move a Case (Work-Item) to own personal in-baskets. 
-
-
-
-
+  - Assign a Case (Work-Item) to someone.
+  - Re-assign a Case (Work-Item) to someone.
