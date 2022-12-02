@@ -5,7 +5,7 @@ Content Management Systems were supposed to:
   - Be efficient.
   - Be Cloud-deployable.
   - Be able to do more than just storing the content.
-  - Seamlessly and aasily move the content from one location/system to another (Not limited to - FileStorage, Database, FileNet, ALfresco, AWS, Azure, MongoDB etc) </ul>
+  - Seamlessly and aasily move the content from one location/system to another (Not limited to - FileStorage, Database, FileNet, ALfresco, AWS, Azure, MongoDB etc)       </ul>
 
 <h4> ContentPlusPlus</h4>
 A simplified and universal content management system.
@@ -15,14 +15,16 @@ A simplified and universal content management system.
   - Spring / SpringBoot
   - SpringBoot Web-Reactive
   - Spring Web-Flux (All Async)
-  - R2DBC </ul>
+  - R2DBC 
+</ul>
 
 <h4>  Centrally Manage Content Storage using : </h4>
   <ul>- (Any) File Storage
   - FileNet
   - MongoDB
   - Alfresco
-  - (Any) DataBase </ul>
+  - (Any) DataBase 
+  </ul>
 
 <h4>  Move Content among different system - seamlessly, anytime, anywhere.</h4>
 
@@ -32,7 +34,8 @@ A simplified and universal content management system.
   - Document - Retrieve
   - Document - Edit-Update
   - Document - Deletion
-  - Document - Move </ul>
+  - Document - Move 
+ </ul>
 
 
 <h4> Extend the project further to integrate a simplified work-flow to empower Business Analysts to create Task(Work) Flows where different users belonging to different business units, based on their roles and privileges will be able to: </h4>
@@ -41,7 +44,8 @@ A simplified and universal content management system.
   - Modify a Case (Work-Item).
   - Approve a Case (Work-Item).
   - Reject a Case (Work-Item).
-  - Move a Case (Work-Item) to own personal in-baskets. </ul>
+  - Move a Case (Work-Item) to own personal in-baskets. 
+</ul>
 
 
 
