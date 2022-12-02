@@ -17,7 +17,7 @@ Content Management Systems were supposed to:
   - SpringBoot Web-Reactive
   - Spring Web-Flux (All Async)
   - R2DBC
-  - Bootstrap5 and VanillaJS
+  - Thymeleaf, Bootstrap5 and VanillaJS
 
 
 # Centrally Manage Content Storage using :
