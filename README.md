@@ -1,7 +1,7 @@
-# ContentPlusPlus
+# Content++
 A simplified and universal content management system.
 
-# Why ContentPlusPlus?
+# Why Content++ ?
 Content Management Systems were supposed to:
   - Be simple. 
   - Do exactly what enterprises/users want.
