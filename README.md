@@ -49,6 +49,8 @@ Content Management Systems were supposed to:
   - Move a Case (Work-Item) to own personal in-baskets. 
   - Assign a Case (Work-Item) to someone.
   - Re-assign a Case (Work-Item) to someone.
+  - Track history and milestones of a Case (Work-Item).
+  - A quick overview is here - https://github.com/ajkr195/CaseManager
 
 
 UI is derived and heavily based on (if you want to support this project) - https://github.com/xriley/portal-theme-bs5 
