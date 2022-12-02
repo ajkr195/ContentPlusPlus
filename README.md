@@ -45,3 +45,6 @@ A simplified and universal content management system.
   - Move a Case (Work-Item) to own personal in-baskets. 
   - Assign a Case (Work-Item) to someone.
   - Re-assign a Case (Work-Item) to someone.
+
+
+UI is derived and heavily based on (if you want to support this project) - https://github.com/xriley/portal-theme-bs5 
