@@ -1,4 +1,4 @@
-<h4> Why ContentPlusPlus
+<h4> Why ContentPlusPlus </h4>
 Content Management Systems were supposed to:
   - Be simple. 
   - Do exactly what enterprises/users want.
@@ -7,24 +7,24 @@ Content Management Systems were supposed to:
   - Be able to do more than just storing the content.
   - Seamlessly and aasily move the content from one location/system to another (Not limited to - FileStorage, Database, FileNet, ALfresco, AWS, Azure, MongoDB etc)
 
-<h4> ContentPlusPlus
+<h4> ContentPlusPlus</h4>
 A simplified and universal content management system.
 
-<h4>  Tech Stack:
+<h4>  Tech Stack:</h4>
   - Java
   - Spring / SpringBoot
   - SpringBoot Web-Reactive
   - Spring Web-Flux (All Async)
   - R2DBC
 
-<h4>  Centrally Manage Content Storage using : 
+<h4>  Centrally Manage Content Storage using : </h4>
   - (Any) File Storage
   - FileNet
   - MongoDB
   - Alfresco
   - (Any) DataBase
 
-<h4>  Move Content among different system - seamlessly, anytime, anywhere.
+<h4>  Move Content among different system - seamlessly, anytime, anywhere.</h4>
 
 <h4>  Centrally manage admin and other roles related to: </h4>
 
