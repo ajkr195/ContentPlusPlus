@@ -1,10 +1,6 @@
 # Content++
 A simplified and universal content management system.
 
-![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/2.JPG)
-
-![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/1.JPG)
-
 # Why Content++ ?
 Content Management Systems were supposed to:
   - Be simple. 
@@ -55,5 +51,9 @@ Content Management Systems were supposed to:
   - Track history and milestones of a Case (Work-Item).
   - A quick overview is here - https://github.com/ajkr195/CaseManager
 
+
+![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/2.JPG)
+
+![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/1.JPG)
 
 UI is derived and heavily based on (if you want to support this project) - https://github.com/xriley/portal-theme-bs5 
