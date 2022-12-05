@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.contentplusplus.springboot.entity.AppRole;
-import com.contentplusplus.springboot.entity.AppUser;
+import com.contentplusplus.springboot.model.AppRole;
+import com.contentplusplus.springboot.model.AppUser;
 import com.contentplusplus.springboot.repository.AppRoleRepository;
 import com.contentplusplus.springboot.service.AppUserService;
 import com.contentplusplus.springboot.validator.AppUserAddValidator;

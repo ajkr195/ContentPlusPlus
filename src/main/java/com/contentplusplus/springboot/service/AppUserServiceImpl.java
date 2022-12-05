@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.contentplusplus.springboot.entity.AppRole;
-import com.contentplusplus.springboot.entity.AppUser;
+import com.contentplusplus.springboot.model.AppRole;
+import com.contentplusplus.springboot.model.AppUser;
 import com.contentplusplus.springboot.repository.AppRoleRepository;
 import com.contentplusplus.springboot.repository.AppUserRepository;
 

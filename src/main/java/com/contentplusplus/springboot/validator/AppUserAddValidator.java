@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.contentplusplus.springboot.entity.AppUser;
+import com.contentplusplus.springboot.model.AppUser;
 import com.contentplusplus.springboot.service.AppUserService;
 
 @Component

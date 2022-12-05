@@ -1,7 +1,7 @@
 package com.contentplusplus.springboot.security;
 
-import com.contentplusplus.springboot.entity.AppRole;
-import com.contentplusplus.springboot.entity.AppUser;
+import com.contentplusplus.springboot.model.AppRole;
+import com.contentplusplus.springboot.model.AppUser;
 import com.contentplusplus.springboot.repository.AppUserRepository;
 
 import org.springframework.security.core.GrantedAuthority;
