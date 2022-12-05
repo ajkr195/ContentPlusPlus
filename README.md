@@ -10,7 +10,7 @@ Content Management Systems were supposed to:
   - Be efficient.
   - Be both - On-premises and Cloud deployable.
   - Be able to do more than just storing the content.
-  - Seamlessly and aasily move the content from one location/system to another (Not limited to - FileStorage, Database, FileNet, Alfresco, AWS, Azure, MongoDB etc)     
+  - Seamlessly and easily move the content from one location/system to another (Not limited to - FileStorage, Database, FileNet, Alfresco, AWS, Azure, MongoDB etc)     
 
 
 # Tech Stack:
