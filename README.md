@@ -14,10 +14,9 @@ Content Management Systems were supposed to:
 # Tech Stack:
   - Java
   - Spring / SpringBoot
-  - SpringBoot Web-Reactive
-  - Spring Web-Flux (All Async)
-  - R2DBC
-  - Thymeleaf, Bootstrap5 and VanillaJS
+  - SpringBoot
+  - Storage using: DB, NoSQLDB, FileNet, AWS S3, Azure Blob and Alfresco
+  - Thymeleaf, Bootstrap5.x and VanillaJS
 
 
 # Centrally Manage Content Storage using :
@@ -49,6 +48,7 @@ Content Management Systems were supposed to:
   - Move a Case (Work-Item) to own personal in-baskets. 
   - Assign a Case (Work-Item) to someone.
   - Re-assign a Case (Work-Item) to someone.
+  - Attach/Detach/Delete Case Documents
   - Track history and milestones of a Case (Work-Item).
   - A quick overview is here - https://github.com/ajkr195/CaseManager
 
