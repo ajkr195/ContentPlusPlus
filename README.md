@@ -20,13 +20,13 @@ Content Management Systems were supposed to:
 
 
 # Centrally Manage Content Storage using :
-  - (Any) File Storage
+  - (Any) File Storage (Disk Based) System
   - Azure blob/cloud Storage
   - AWS (S3) Storage
   - FileNet
   - MongoDB
   - Alfresco
-  - (Any) DataBase 
+  - (Any) SQL/NoSQL Database
 
 # Move Content among different system - seamlessly, anytime, anywhere.
 
