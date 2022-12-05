@@ -13,23 +13,72 @@
 					<h2 class="auth-heading text-center mb-4">Sign up to Content++</h2>
 
 					<div class="auth-form-container text-start mx-auto">
-						<form class="auth-form auth-signup-form">
+						<div th:if="${param.success}">
+							<div class="alert alert-info">You've successfully registered
+								to our app!</div>
+						</div>
+						<form class="auth-form auth-signup-form" th:action="@{/signup/save}" th:object="${user}"
+							method="post">
 							<div class="email mb-3">
-								<label class="sr-only" for="signup-email">Your Name</label>
-								<input id="signup-name" name="signup-name" type="text" class="form-control signup-name"
-									placeholder="Full name" required="required">
+								<label class="sr-only" for="userfirstname">Your Email</label>
+								<input id="signup-userfirstname" name="userfirstname" type="text"
+									class="form-control signup-email" placeholder="First Name"
+									th:field="${user.userfirstname}" />
+								<p th:errors="*{userfirstname}" class="text-danger"
+									th:if="${#fields.hasErrors('userfirstname')}">
 							</div>
+							<div class="email mb-3">
+								<label class="sr-only" for="userlastname">Your Email</label>
+								<input id="signup-userlastname" name="userlastname" type="text"
+									class="form-control signup-email" placeholder="Last Name"
+									th:field="${user.userlastname}" />
+								<p th:errors="*{userlastname}" class="text-danger"
+									th:if="${#fields.hasErrors('userlastname')}">
+								</p>
+							</div>
+
+
 							<div class="email mb-3">
 								<label class="sr-only" for="signup-email">Your Email</label>
 								<input id="signup-email" name="signup-email" type="email"
-									class="form-control signup-email" placeholder="Email" required="required">
+									class="form-control signup-email" placeholder="Email"
+									th:field="${user.useremail}" />
+								<p th:errors="*{useremail}" class="text-danger"
+									th:if="${#fields.hasErrors('useremail')}">
+								</p>
 							</div>
 							<div class="password mb-3">
 								<label class="sr-only" for="signup-password">Password</label>
 								<input id="signup-password" name="signup-password" type="password"
-									class="form-control signup-password" placeholder="Create a password"
-									required="required">
+									class="form-control signup-password" th:field="${user.userpassword}"
+									placeholder="Create a password" />
+								<p class="errorclass" th:if="${#fields.hasErrors('userpassword')}"
+									th:errors="*{userpassword}" />
 							</div>
+
+							<div class="password mb-3">
+								<label class="sr-only" for="signup-password">Password</label>
+								<input id="signup-password" name="signup-password" type="password"
+									class="form-control signup-password" th:field="${user.passwordConfirm}"
+									placeholder="Create a password" />
+								<p class="errorclass" th:if="${#fields.hasErrors('passwordConfirm')}"
+									th:errors="*{passwordConfirm}" />
+							</div>
+
+
+							<div class="email mb-3">
+								<label class="sr-only" for="signup-userroles">Select Role(s)</label>
+								<select class="form-select form-select-sm" id="userroles" th:field="${user.roles}"
+									multiple>
+									<option value="" selected>-- Select Role --</option>
+									<option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">Role
+									</option>
+								</select>
+								<p class="errorclass" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" />
+							</div>
+
+
+
 							<div class="extra mb-3">
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" value="" id="RememberPassword">
@@ -39,6 +88,18 @@
 									</label>
 								</div>
 							</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 							<div class="text-center">
 								<button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Sign

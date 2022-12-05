@@ -9,7 +9,7 @@
 							<i class="fa-solid fa-bars fa-xl"></i>
 						</a>
 					</div>
-					
+
 					<div class="search-mobile-trigger d-sm-none col">
 						<i class="search-mobile-trigger-icon fas fa-search"></i>
 					</div>
@@ -21,7 +21,7 @@
 									class="fas fa-search"></i></button>
 						</form>
 					</div>
-					
+
 
 
 					<div class="app-utilities col-auto">
@@ -155,7 +155,7 @@
 								<li>
 									<hr class="dropdown-divider">
 								</li>
-								<li><a class="dropdown-item" href="/login" th:href="@{/login}">Log Out</a></li>
+								<li><a class="dropdown-item" href="/logout" th:href="@{/logout}">Log Out</a></li>
 							</ul>
 						</div>
 
@@ -185,8 +185,8 @@
 				<ul class="app-menu list-unstyled accordion" id="menu-accordion">
 					<li class="nav-item">
 
-						<a class="nav-link" th:classappend="${pagename == 'home' ? 'active' : ''}" href="/"
-							th:href="@{/}">
+						<a class="nav-link" th:classappend="${pagename == 'home'  OR pagename == null ? 'active' : ''}"
+							href="/" th:href="@{/}">
 							<span class="nav-icon">
 								<i class="fa-solid fa-gauge-simple-high fa-xl"></i>
 							</span>
@@ -197,8 +197,8 @@
 
 					<li class="nav-item">
 
-						<a class="nav-link" th:classappend="${pagename == 'mydocuments' ? 'active' : ''}" href="/mydocuments"
-							th:href="@{/mydocuments}">
+						<a class="nav-link" th:classappend="${pagename == 'mydocuments' ? 'active' : ''}"
+							href="/mydocuments" th:href="@{/mydocuments}">
 							<span class="nav-icon">
 								<i class="fa-solid fa-file-waveform fa-xl"></i>
 							</span>
@@ -218,6 +218,19 @@
 						</a>
 
 					</li>
+
+					<li class="nav-item">
+
+						<a class="nav-link" th:classappend="${pagename == 'listuser' ? 'active' : ''}" href="/listuser"
+							th:href="@{/listuser}">
+							<span class="nav-icon">
+								<i class="fa-solid fa-file-waveform fa-xl"></i>
+							</span>
+							<span class="nav-link-text">Users</span>
+						</a>
+
+					</li>
+
 
 					<li class="nav-item has-submenu">
 
@@ -311,7 +324,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/login" th:href="@{/login}">
+							<a class="nav-link" href="/logout" th:href="@{/logout}">
 								<span class="nav-icon">
 									<i class="fa-solid fa-right-from-bracket fa-2xl text-secondary"></i>
 								</span>

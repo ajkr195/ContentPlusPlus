@@ -4,6 +4,12 @@ body {
     color: #5d6778;
 }
 
+.errorclass {
+	color: red;
+	padding: 0 .5rem;
+    font-size: .775rem;
+}
+
 h1,
 .h1,
 h2,

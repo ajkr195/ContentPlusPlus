@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class="app">
+
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+	<div class="app-wrapper">
+
+		<div class="app-content pt-3 p-md-3 p-lg-4">
+			<div class="container-fluid">
+
+				<div class="row g-3 mb-4 align-items-center justify-content-between">
+					<div class="col-auto">
+						<h1 class="app-page-title mb-0">Users</h1>
+					</div>
+					<div class="col-auto">
+						<div class="page-utilities">
+							<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+								<div class="col-auto">
+									<form class="table-search-form row gx-1 align-items-center">
+										<div class="col-auto">
+											<input type="text" id="search-orders" name="searchorders"
+												class="form-control search-orders" placeholder="Search">
+										</div>
+										<div class="col-auto">
+											<button type="submit" class="btn app-btn-secondary">Search</button>
+										</div>
+									</form>
+
+								</div>
+								<div class="col-auto">
+
+									<select class="form-select w-auto">
+										<option selected value="option-1">All</option>
+										<option value="option-2">This week</option>
+										<option value="option-3">This month</option>
+										<option value="option-4">Last 3 months</option>
+
+									</select>
+								</div>
+								<div class="col-auto">
+									<a class="btn app-btn-primary" href="#">
+										<i class="fa-solid fa-download"></i>
+										Download CSV
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<nav id="orders-table-tab"
+					class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+					<a class="flex-sm-fill text-sm-center nav-link active" id="users-all-tab" data-bs-toggle="tab"
+						href="#users-all" role="tab" aria-controls="users-all" aria-selected="true">All</a>
+					<a class="flex-sm-fill text-sm-center nav-link" id="users-active-tab" data-bs-toggle="tab"
+						href="#users-active" role="tab" aria-controls="users-active" aria-selected="false">Active</a>
+					<a class="flex-sm-fill text-sm-center nav-link" id="users-inactive-tab" data-bs-toggle="tab"
+						href="#users-inactive" role="tab" aria-controls="users-inactive"
+						aria-selected="false">In-Active</a>
+				</nav>
+
+
+				<div class="tab-content" id="orders-table-tab-content">
+					<div class="tab-pane fade show active" id="users-all" role="tabpanel"
+						aria-labelledby="users-all-tab">
+						<div class="app-card app-card-orders-table shadow-sm mb-5">
+							<div class="app-card-body">
+								<div class="table-responsive">
+									<table class="table app-table-hover mb-0 text-left">
+										<thead>
+											<tr>
+												<th class="cell">Id</th>
+												<th class="cell">FirstName</th>
+												<th class="cell">LastName</th>
+												<th class="cell">Email</th>
+												<th class="cell">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+
+
+										<tbody>
+											<tr th:each="user: ${users}">
+												<td class="cell" th:text="${user.id}"></td>
+												<td class="cell"> <span class="truncate"
+														th:text="${user.userfirstname}"></span></td>
+												<td class="cell"><span class="note"
+														th:text="${user.userlastname}"></span> </td>
+												<td class="cell"><span class="badge bg-success" th:text="${user.useremail}"></span>
+												</td>
+												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a>
+												</td>
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+
+							</div>
+						</div>
+						<nav class="app-pagination">
+							<ul class="pagination justify-content-center">
+								<li class="page-item disabled">
+									<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+								</li>
+								<li class="page-item active"><a class="page-link" href="#">1</a></li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item">
+									<a class="page-link" href="#">Next</a>
+								</li>
+							</ul>
+						</nav>
+
+					</div>
+
+					<div class="tab-pane fade" id="users-active" role="tabpanel" aria-labelledby="users-active-tab">
+						<div class="app-card app-card-orders-table mb-5">
+							<div class="app-card-body">
+								<div class="table-responsive">
+
+									<table class="table mb-0 text-left">
+										<thead>
+											<tr>
+												<th class="cell">Id</th>
+												<th class="cell">FirstName</th>
+												<th class="cell">LastName</th>
+												<th class="cell">Email</th>
+												<th class="cell">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="user: ${users}">
+												<td class="cell" th:text="${user.id}"></td>
+												<td class="cell"> <span class="truncate"
+														th:text="${user.userfirstname}"></span></td>
+												<td class="cell"><span class="note"
+														th:text="${user.userlastname}"></span> </td>
+												<td class="cell"><span class="badge bg-success" th:text="${user.useremail}"></span>
+												</td>
+												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="tab-pane fade" id="users-inactive" role="tabpanel" aria-labelledby="users-inactive-tab">
+						<div class="app-card app-card-orders-table mb-5">
+							<div class="app-card-body">
+								<div class="table-responsive">
+									<table class="table mb-0 text-left">
+										<thead>
+											<tr>
+												<th class="cell">Id</th>
+												<th class="cell">FirstName</th>
+												<th class="cell">LastName</th>
+												<th class="cell">Email</th>
+												<th class="cell">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="user: ${users}">
+												<td class="cell" th:text="${user.id}"></td>
+												<td class="cell"> <span class="truncate"
+														th:text="${user.userfirstname}"></span></td>
+												<td class="cell"><span class="note"
+														th:text="${user.userlastname}"></span> </td>
+												<td class="cell"><span class="badge bg-success" th:text="${user.useremail}"></span>
+												</td>
+												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+
+		<div th:replace="~{fragments/footer :: footer}"></div>
+
+	</div>
+
+	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/webjars/font-awesome/js/all.js}"></script>
+
+	<script th:src="@{/js/app.js}"></script>
+
+</body>
+
+</html>
