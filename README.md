@@ -1,6 +1,8 @@
 # Content++
 A simplified and universal content management system.
 
+![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/1.JPG)
+
 # Why Content++ ?
 Content Management Systems were supposed to:
   - Be simple. 
