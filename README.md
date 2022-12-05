@@ -13,8 +13,7 @@ Content Management Systems were supposed to:
 
 # Tech Stack:
   - Java
-  - Spring / SpringBoot
-  - SpringBoot
+  - SpringBoot 3.x
   - Storage using: DB, NoSQLDB, FileNet, AWS S3, Azure Blob and Alfresco
   - Thymeleaf, Bootstrap5.x and VanillaJS
 
