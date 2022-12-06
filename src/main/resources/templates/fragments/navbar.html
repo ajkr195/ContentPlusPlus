@@ -150,15 +150,25 @@
 								role="button" aria-expanded="false"><img class="profile-image"
 									th:src="@{/img/profile-1.png}" alt=""></a>
 							<ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-								<li><a class="dropdown-item" href="/account" th:href="@{/account}">Account</a></li>
-								<li><a class="dropdown-item" href="/settings" th:href="@{/settings}">Settings</a></li>
+								<li><a class="dropdown-item" href="/account" th:href="@{/account}"><i
+											class="fa-solid fa-user text-secondary"></i> Account</a></li>
+								<li><a class="dropdown-item" href="/settings" th:href="@{/settings}"><i
+											class="fa-solid fa-gear text-secondary"></i> Settings</a></li>
 								<li>
 									<hr class="dropdown-divider">
 								</li>
-								<li><a class="dropdown-item" href="/logout" th:href="@{/logout}">Log Out</a></li>
+								<li><a class="dropdown-item bg-warning" href="/logout" th:href="@{/logout}"><i
+											class="fa-solid fa-right-from-bracket text-danger"></i> Log Out</a></li>
+								</br>
 								<li><span th:text="${principal.getUsername()}"></span></li>
-								<li><span th:text="${principal.getAuthorities()}"></span></li>
-								
+								<li>Roles</span>
+
+									<div th:each="iter : ${principal.getAuthorities()}">
+										<p class="dropdown-item" th:text="${iter}"> </p>
+									</div>
+
+
+								</li>
 							</ul>
 						</div>
 
@@ -177,14 +187,14 @@
 		<div class="sidepanel-inner d-flex flex-column">
 			<a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 			<div class="app-branding text-center mb-5">
-				<a class="app-logo" href="/" th:href="@{/}"><img class="logo-icon" th:src="@{/img/brandlogo3.png}">
+				<div class="app-logo" href="/" th:href="@{/}"><img class="logo-icon" th:src="@{/img/brandlogo3.png}">
 					<div class="logo-text" th:text="${appname}">AppName</div>
-				</a>
-
+				</div>
+				<div class="user-name mt-3 text-success" th:text="${principal.getUsername()}">UserName</div>
 			</div>
 
 
-			<nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+			<nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1 mt-5">
 				<ul class="app-menu list-unstyled accordion" id="menu-accordion">
 					<li class="nav-item">
 
