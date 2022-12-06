@@ -45,7 +45,6 @@ public class AppUser implements Serializable {
 	@Column(name = "useremail", nullable = false, unique = true)
 	private String useremail;
 	
-	@Size(min = 8, max = 32, message = "{minmax.size.password}")
 	@Column(name = "userpassword", nullable = false)
 	private String userpassword;
 	

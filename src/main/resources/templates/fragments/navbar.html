@@ -156,6 +156,9 @@
 									<hr class="dropdown-divider">
 								</li>
 								<li><a class="dropdown-item" href="/logout" th:href="@{/logout}">Log Out</a></li>
+								<li><span th:text="${principal.getUsername()}"></span></li>
+								<li><span th:text="${principal.getAuthorities()}"></span></li>
+								
 							</ul>
 						</div>
 

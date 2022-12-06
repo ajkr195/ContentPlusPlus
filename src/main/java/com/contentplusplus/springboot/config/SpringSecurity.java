@@ -23,7 +23,7 @@ public class SpringSecurity {
 
 		http.authorizeHttpRequests()
 		.requestMatchers("/register/**").permitAll()
-		.requestMatchers("/listuser/**").hasAuthority("ADMIN")//.hasRole("ROLE_ADMIN")//.hasAuthority("ROLE_ADMIN")
+		.requestMatchers("/listuser/**").hasAnyAuthority("ADMIN", "EDITOR", "VIEWER")//.hasAuthority("ADMIN")//.hasRole("ROLE_ADMIN")//.hasAuthority("ROLE_ADMIN")
 		.requestMatchers("/login").permitAll()
 		.requestMatchers("/signup/**").permitAll()
 		.requestMatchers("/spring.svg/**").permitAll()

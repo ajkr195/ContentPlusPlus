@@ -54,14 +54,12 @@ INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirs
 INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('1', 'ADMIN');
 INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('2', 'EDITOR');
 INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('3', 'VIEWER');
-
+INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('4', 'GUEST');
 
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '1');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '2');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '3');
-INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('2', '1');
-INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('2', '2');
-INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('2', '3');
+INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('2', '4');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('3', '1');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('3', '2');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('3', '3');

@@ -1,5 +1,6 @@
 package com.contentplusplus.springboot.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -127,7 +129,7 @@ public class AppUserWebController {
 
 	@PostMapping("/signup/save")
 	public String registrationsignup(@Valid @ModelAttribute("user") AppUser user, BindingResult result, Model model) {
-		model.addAttribute("appname", "Content++");
+		model.addAttribute("appname", appname);
 		AppUser existing = userService.findByUseremailIgnoreCase(user.getUseremail());
 		if (existing != null) {
 			result.rejectValue("useremail", null, "This email id is associated with an account already.");
@@ -145,7 +147,7 @@ public class AppUserWebController {
 
 	@GetMapping("/login")
 	public String login(Model model, String error, String logout) {
-		model.addAttribute("appname", "Content++");
+		model.addAttribute("appname", appname);
 
 		if (error != null)
 			model.addAttribute("error", "Your username and password is invalid.");
@@ -166,6 +168,15 @@ public class AppUserWebController {
 			// session.invalidate();
 		}
 		return "redirect:login?logout";
+	}
+	
+	@ModelAttribute("principal")
+	public Object userName() {
+		return getPrincipal();
+	}
+
+	private Object getPrincipal() {
+		return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 	
 	
