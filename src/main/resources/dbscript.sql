@@ -101,6 +101,4 @@ INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('14',
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('15', '1');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('15', '2');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('15', '3');
-INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('16', '1');
-INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('16', '2');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('16', '3');

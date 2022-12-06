@@ -33,11 +33,6 @@ public class AppUserAddValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userfirstname", "NotEmpty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userlastname", "NotEmpty");
 
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
-//		if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
-//			errors.rejectValue("password", "minmax.size.password");
-//		}
-
 		if (!user.getPasswordConfirm().equals(user.getUserpassword())) {
 			errors.rejectValue("passwordConfirm", "password.passwordConfirm.mismatch");
 		}

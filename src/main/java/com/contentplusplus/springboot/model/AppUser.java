@@ -17,6 +17,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,7 +44,8 @@ public class AppUser implements Serializable {
 
 	@Column(name = "useremail", nullable = false, unique = true)
 	private String useremail;
-
+	
+	@Size(min = 8, max = 32, message = "{minmax.size.password}")
 	@Column(name = "userpassword", nullable = false)
 	private String userpassword;
 	
