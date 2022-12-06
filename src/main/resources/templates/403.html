@@ -3,24 +3,19 @@
 
 <div th:replace="~{fragments/head :: head}"></div>
 
-<body class="app app-404-page">
+<body class="app">
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
 	<div class="container mb-5">
 		<div class="row">
 			<div class="col-12 col-md-11 col-lg-7 col-xl-6 mx-auto">
-				<div class="app-branding text-center mb-5">
-					<a class="app-logo" href="/" th:href="@{/}"><img class="logo-icon me-2" th:src="@{/img/profile-1.png}"></a>
-					<br /><br />
-					<div class="logo-text" th:text="${appname}">AppName</div>
-
-				</div>
-				<br />
 				<div class="app-card p-5 text-center shadow-sm mt-5">
 					<h1 class="page-title mb-4">403<br><span class="font-weight-light text-danger">Access Denied !!</span></h1>
 					<div class="mb-4">
 						Sorry, you do not have permission for this operation.
 					</div>
-					<a class="btn app-btn-primary" href="/" th:href="@{/}">Go to home page</a>
+					<!-- class="btn app-btn-primary" href="/" th:href="@{/}">Go to home page</!-->
 				</div>
 			</div>
 		</div>
@@ -29,7 +24,9 @@
 
 	<div th:replace="~{fragments/footer :: footer}"></div>
 
-
+	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/webjars/font-awesome/js/all.js}"></script>
 
 </body>
 

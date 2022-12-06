@@ -170,14 +170,14 @@ public class AppUserWebController {
 		return "redirect:login?logout";
 	}
 	
-	@ModelAttribute("principal")
-	public Object userName() {
-		return getPrincipal();
-	}
-
-	private Object getPrincipal() {
-		return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	}
+//	@ModelAttribute("principal")
+//	public Object userName() {
+//		return getPrincipal();
+//	}
+//
+//	private Object getPrincipal() {
+//		return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//	}
 	
 	
 }

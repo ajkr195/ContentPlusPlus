@@ -40,10 +40,18 @@ public class AppErrorController implements ErrorController {
 
 	@GetMapping("/403")
 	String notFoundPage(Model model) {
+		model.addAttribute("pagename", "403");
 		model.addAttribute("appname", appname);
-		
 		return "403";
-//		 return "fragments/accessdenied :: accessdenied";
 	}
+	
+//	@ModelAttribute("principal")
+//	public Object userName() {
+//		return getPrincipal();
+//	}
+//
+//	private Object getPrincipal() {
+//		return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//	}
 
 }
