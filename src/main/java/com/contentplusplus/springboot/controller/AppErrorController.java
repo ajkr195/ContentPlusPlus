@@ -45,13 +45,4 @@ public class AppErrorController implements ErrorController {
 		return "403";
 	}
 	
-//	@ModelAttribute("principal")
-//	public Object userName() {
-//		return getPrincipal();
-//	}
-//
-//	private Object getPrincipal() {
-//		return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//	}
-
 }
