@@ -7,7 +7,9 @@ import com.contentplusplus.springboot.model.AppUser;
 public interface AppUserService {
     void saveUser(AppUser appuser);
 
-    AppUser findByEmail(String email);
+    AppUser findByUseremail(String email);
+    
+    AppUser findByUseremailIgnoreCase(String email);
 
     List<AppUser> findAllUsers();
 }

@@ -23,7 +23,7 @@ public class SpringSecurity {
 
 		http.authorizeHttpRequests()
 		.requestMatchers("/register/**").permitAll()
-		.requestMatchers("/users/**").hasAuthority("ROLE_ADMIN")
+		.requestMatchers("/listuser/**").hasAuthority("ADMIN")//.hasRole("ROLE_ADMIN")//.hasAuthority("ROLE_ADMIN")
 		.requestMatchers("/login").permitAll()
 		.requestMatchers("/signup/**").permitAll()
 		.requestMatchers("/spring.svg/**").permitAll()
@@ -36,7 +36,9 @@ public class SpringSecurity {
 		.formLogin()
 		.loginPage("/login").permitAll().defaultSuccessUrl("/index")
 		.and()
-		.logout().permitAll();
+		.logout().permitAll()
+		.and()
+		.csrf().disable().exceptionHandling().accessDeniedPage("/403");
 
 		http.headers().frameOptions().sameOrigin();
 

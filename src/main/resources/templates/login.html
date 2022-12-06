@@ -10,7 +10,7 @@
 				<div class="app-auth-body mx-auto">
 					<div class="app-auth-branding mb-4"><a class="app-logo" href="/" th:href="@{/}"><img
 								class="logo-icon me-2" th:src="@{/img/brandlogo.png}"></a></div>
-					<h2 class="auth-heading text-center mb-5">Log in to Content++</h2>
+					<h2 class="auth-heading text-center mb-5" th:text="${appname}">AppName</h2>
 					<div class="auth-form-container text-start">
 						<div th:if="${param.error}">
 							<div class="alert alert-danger">Invalid Email and Password.</div>

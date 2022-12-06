@@ -11,6 +11,9 @@ import com.contentplusplus.springboot.service.AppUserService;
 
 @Component
 public class AppUserAddValidator implements Validator {
+	
+	@Autowired 
+	AppUserService userService;
 
 	@Override
 	public boolean supports(Class<?> aClass) {
@@ -20,8 +23,13 @@ public class AppUserAddValidator implements Validator {
 	@Override
 	public void validate(Object o, Errors errors) {
 		AppUser user = (AppUser) o;
+		
+		if (userService.findByUseremailIgnoreCase(user.getUseremail().trim()) != null) {
+			errors.rejectValue("useremail", "duplicate.useremail.error");
+		}
 
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "useremail", "NotEmpty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userpassword", "NotEmpty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userfirstname", "NotEmpty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userlastname", "NotEmpty");
 

@@ -41,7 +41,7 @@ public class AppUserServiceImpl implements AppUserService {
 	}
 
 	@Override
-	public AppUser findByEmail(String email) {
+	public AppUser findByUseremail(String email) {
 		return userRepository.findByUseremail(email);
 	}
 
@@ -55,5 +55,10 @@ public class AppUserServiceImpl implements AppUserService {
 		AppRole role = new AppRole();
 		role.setName("ROLE_ADMIN");
 		return roleRepository.save(role);
+	}
+
+	@Override
+	public AppUser findByUseremailIgnoreCase(String email) {
+		return userRepository.findByUseremailIgnoreCase(email);
 	}
 }

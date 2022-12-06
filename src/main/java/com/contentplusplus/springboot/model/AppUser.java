@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,16 +35,16 @@ public class AppUser implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(name = "userfirstname", nullable = false)
 	private String userfirstname;
 	
-	@Column(nullable = false)
+	@Column(name = "userlastname", nullable = false)
 	private String userlastname;
 
-	@Column(nullable = false, unique = true)
+	@Column(name = "useremail", nullable = false, unique = true)
 	private String useremail;
 
-	@Column(nullable = false)
+	@Column(name = "userpassword", nullable = false)
 	private String userpassword;
 	
 	@Transient
@@ -51,8 +52,8 @@ public class AppUser implements Serializable {
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "app_user_role", joinColumns = {
-			@JoinColumn(name = "USER_ID", referencedColumnName = "ID") }, inverseJoinColumns = {
-					@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID") })
+			@JoinColumn(name = "userid", referencedColumnName = "ID") }, inverseJoinColumns = {
+					@JoinColumn(name = "roleid", referencedColumnName = "ID") })
 	private List<AppRole> roles = new ArrayList<>();
 
 }

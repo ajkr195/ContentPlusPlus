@@ -10,12 +10,11 @@
 				<div class="app-auth-body mx-auto">
 					<div class="app-auth-branding mb-4"><a class="app-logo" href="/" th:href="@{/}"><img
 								class="logo-icon me-2" th:src="@{/img/brandlogo.png}"></a></div>
-					<h2 class="auth-heading text-center mb-4">Sign up to Content++</h2>
+					<h2 class="auth-heading text-center mb-4" th:text="${appname}">AppName</h2>
 
 					<div class="auth-form-container text-start mx-auto">
 						<div th:if="${param.success}">
-							<div class="alert alert-info">You've successfully registered
-								to our app!</div>
+							<div class="alert alert-info">Registered successful for Content++</div>
 						</div>
 						<form class="auth-form auth-signup-form" th:action="@{/signup/save}" th:object="${user}"
 							method="post">
@@ -24,7 +23,7 @@
 								<input id="signup-userfirstname" name="userfirstname" type="text"
 									class="form-control signup-email" placeholder="First Name"
 									th:field="${user.userfirstname}" />
-								<p th:errors="*{userfirstname}" class="text-danger"
+								<p class="errorclass" th:errors="*{userfirstname}"
 									th:if="${#fields.hasErrors('userfirstname')}">
 							</div>
 							<div class="email mb-3">
@@ -32,7 +31,7 @@
 								<input id="signup-userlastname" name="userlastname" type="text"
 									class="form-control signup-email" placeholder="Last Name"
 									th:field="${user.userlastname}" />
-								<p th:errors="*{userlastname}" class="text-danger"
+								<p class="errorclass" th:errors="*{userlastname}"
 									th:if="${#fields.hasErrors('userlastname')}">
 								</p>
 							</div>
@@ -43,7 +42,7 @@
 								<input id="signup-email" name="signup-email" type="email"
 									class="form-control signup-email" placeholder="Email"
 									th:field="${user.useremail}" />
-								<p th:errors="*{useremail}" class="text-danger"
+								<p class="errorclass" th:errors="*{useremail}"
 									th:if="${#fields.hasErrors('useremail')}">
 								</p>
 							</div>
@@ -51,16 +50,16 @@
 								<label class="sr-only" for="signup-password">Password</label>
 								<input id="signup-password" name="signup-password" type="password"
 									class="form-control signup-password" th:field="${user.userpassword}"
-									placeholder="Create a password" />
+									placeholder="Password" />
 								<p class="errorclass" th:if="${#fields.hasErrors('userpassword')}"
 									th:errors="*{userpassword}" />
 							</div>
 
 							<div class="password mb-3">
-								<label class="sr-only" for="signup-password">Password</label>
+								<label class="sr-only" for="signup-password">Confirm Password</label>
 								<input id="signup-password" name="signup-password" type="password"
 									class="form-control signup-password" th:field="${user.passwordConfirm}"
-									placeholder="Create a password" />
+									placeholder="Repeat Password" />
 								<p class="errorclass" th:if="${#fields.hasErrors('passwordConfirm')}"
 									th:errors="*{passwordConfirm}" />
 							</div>
@@ -88,18 +87,6 @@
 									</label>
 								</div>
 							</div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 							<div class="text-center">
 								<button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Sign
