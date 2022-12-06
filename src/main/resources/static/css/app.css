@@ -199,7 +199,15 @@ button.close:focus {
 }
 
 .dropdown-menu {
-    border-color: #e7e9ed
+    border-color: rgb(18,112,112);
+    background-color: rgb(223, 252, 253);
+}
+
+.user-roles {
+	padding: 0 0 0 0 ;
+    text-decoration: none;
+    vertical-align: center;
+    text-align: center;
 }
 
 .dropdown-menu .dropdown-item {

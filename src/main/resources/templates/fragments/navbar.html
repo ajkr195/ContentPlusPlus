@@ -157,17 +157,14 @@
 								<li>
 									<hr class="dropdown-divider">
 								</li>
-								<li><a class="dropdown-item bg-warning" href="/logout" th:href="@{/logout}"><i
+								<li><a class="dropdown-item text-danger" href="/logout" th:href="@{/logout}"><i
 											class="fa-solid fa-right-from-bracket text-danger"></i> Log Out</a></li>
 								</br>
-								<li><span th:text="${principal.getUsername()}"></span></li>
-								<li>Roles</span>
-
-									<div th:each="iter : ${principal.getAuthorities()}">
-										<p class="dropdown-item" th:text="${iter}"> </p>
+								<!--li><span th:text="${principal.getAuthorities()}"></span></li-->
+								<li>
+									<div class="user-roles" th:each="iter : ${principal.getAuthorities()}">
+										<p class="role-item mt-0 mb-0" th:text="${iter}"> </p>
 									</div>
-
-
 								</li>
 							</ul>
 						</div>
