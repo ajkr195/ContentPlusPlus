@@ -1,15 +1,11 @@
 package com.contentplusplus.springboot.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +22,6 @@ import com.contentplusplus.springboot.repository.AppRoleRepository;
 import com.contentplusplus.springboot.service.AppUserService;
 import com.contentplusplus.springboot.validator.AppUserAddValidator;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -39,9 +34,6 @@ public class AppUserWebController {
 	@Autowired
 	AppRoleRepository appRoleRepository;
 
-	@Value("${app.name}")
-	private String appname;
-
 	@Autowired
 	private AppUserAddValidator appUserNewValidator;
 
@@ -53,7 +45,6 @@ public class AppUserWebController {
 
 	@GetMapping({ "/", "/index" })
 	public String home(Model model) {
-		model.addAttribute("appname", appname);
 		return "index";
 	}
 
@@ -68,55 +59,47 @@ public class AppUserWebController {
 
 	@GetMapping("/mydocuments")
 	String docsPage(Model model) {
-		model.addAttribute("appname", appname);
 		model.addAttribute("pagename", "mydocuments");
 		return "documentsuser";
 	}
 
 	@GetMapping("/documents")
 	String ordersPage(Model model) {
-		model.addAttribute("appname", appname);
 		model.addAttribute("pagename", "documents");
 		return "documents";
 	}
 
 	@GetMapping("/notifications")
 	String notificationsPage(Model model) {
-		model.addAttribute("appname", appname);
 		model.addAttribute("pagename", "notifications");
 		return "notifications";
 	}
 
 	@GetMapping("/account")
 	String accountPage(Model model) {
-		model.addAttribute("appname", appname);
 		model.addAttribute("pagename", "account");
 		return "account";
 	}
 
 	@GetMapping("/settings")
 	String settingsPage(Model model) {
-		model.addAttribute("appname", appname);
 		model.addAttribute("pagename", "settings");
 		return "settings";
 	}
 
 	@GetMapping("/resetpassword")
 	String resetpasswordPage(Model model) {
-		model.addAttribute("appname", appname);
 		return "reset-password";
 	}
 
 	@GetMapping("/help")
 	String helpPage(Model model) {
-		model.addAttribute("appname", appname);
 		model.addAttribute("pagename", "help");
 		return "help";
 	}
 
 	@GetMapping("/signup")
 	String singupPage(Model model) {
-		model.addAttribute("appname", appname);
 		AppUser user = new AppUser();
 		model.addAttribute("user", user);
 		return "signup";
@@ -129,7 +112,6 @@ public class AppUserWebController {
 
 	@PostMapping("/signup/save")
 	public String registrationsignup(@Valid @ModelAttribute("user") AppUser user, BindingResult result, Model model) {
-		model.addAttribute("appname", appname);
 		AppUser existing = userService.findByUseremailIgnoreCase(user.getUseremail());
 		if (existing != null) {
 			result.rejectValue("useremail", null, "This email id is associated with an account already.");
@@ -141,13 +123,14 @@ public class AppUserWebController {
 			model.addAttribute("user", user);
 			return "signup";
 		}
+		
 		userService.saveUser(user);
+		
 		return "redirect:/signup?success";
 	}
 
 	@GetMapping("/login")
 	public String login(Model model, String error, String logout) {
-		model.addAttribute("appname", appname);
 
 		if (error != null)
 			model.addAttribute("error", "Your username and password is invalid.");

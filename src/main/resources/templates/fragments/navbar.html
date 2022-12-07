@@ -157,8 +157,12 @@
 								<li>
 									<hr class="dropdown-divider">
 								</li>
-								<li><a class="dropdown-item text-danger" href="/logout" th:href="@{/logout}"><i
+								<li><a class="dropdown-item text-danger" href="#" onClick="logoutConfirmation()"><i
 											class="fa-solid fa-right-from-bracket text-danger"></i> Log Out</a></li>
+								<!--li><a class="dropdown-item text-danger" href="/logout" th:href="@{/logout}"><i
+											class="fa-solid fa-right-from-bracket text-danger"></i> Log Out</a></li>			
+											 href="#" onClick="logoutConfirmation()"
+											
 								</br>
 								<!--li><span th:text="${principal.getAuthorities()}"></span></li-->
 								<li>
@@ -210,7 +214,7 @@
 						<a class="nav-link" th:classappend="${pagename == 'mydocuments' ? 'active' : ''}"
 							href="/mydocuments" th:href="@{/mydocuments}">
 							<span class="nav-icon">
-								<i class="fa-solid fa-file-waveform fa-xl"></i>
+								<i class="fa-solid fa-heart-pulse fa-xl"></i>
 							</span>
 							<span class="nav-link-text">My Documents</span>
 						</a>
@@ -334,7 +338,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/logout" th:href="@{/logout}">
+							<a class="nav-link" href="#" onClick="logoutConfirmation()">
 								<span class="nav-icon">
 									<i class="fa-solid fa-right-from-bracket fa-2xl text-secondary"></i>
 								</span>

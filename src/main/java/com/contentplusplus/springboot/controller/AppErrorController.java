@@ -1,6 +1,5 @@
 package com.contentplusplus.springboot.controller;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
@@ -15,12 +14,9 @@ import jakarta.servlet.http.HttpServletRequest;
 @PropertySource(ignoreResourceNotFound = true, value = "classpath:messages.properties")
 public class AppErrorController implements ErrorController {
 
-	@Value("${app.name}")
-	private String appname;
-
 	@GetMapping("/error")
 	public String handleError(HttpServletRequest request, Model model) {
-		model.addAttribute("appname", appname);
+
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
 		if (status != null) {
@@ -41,8 +37,7 @@ public class AppErrorController implements ErrorController {
 	@GetMapping("/403")
 	String notFoundPage(Model model) {
 		model.addAttribute("pagename", "403");
-		model.addAttribute("appname", appname);
 		return "403";
 	}
-	
+
 }
