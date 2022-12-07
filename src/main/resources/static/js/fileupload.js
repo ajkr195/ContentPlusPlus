@@ -19,7 +19,7 @@ function uploadMultipleFiles(files) {
 	const fileField = document.querySelector('input[type="file"]');
 
 	//formData.append('filecusomName', 'abc123');
-	formData.append('files', fileField.files[0]);
+	//formData.append('files', fileField.files[0]);
 
 	fetch('/uploadMultipleFiles', {
 		method: 'POST',
