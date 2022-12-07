@@ -106,25 +106,7 @@ function switchTheme() {
 	}
 }
 
-function logoutConfirmation2() {
-	Swal.fire({
-		title: 'Are you sure?',
-		text: "You want to logout from Content++ ?!",
-		icon: 'warning',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Yes, delete it!'
-	}).then((result) => {
-		if (result.isConfirmed) {
-			Swal.fire(
-				'Deleted!',
-				'Your file has been deleted.',
-				'success'
-			)
-		}
-	})
-}
+
 
 function logoutConfirmation() {
 

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.contentplusplus.springboot.model.AppUserDocument;
 
 @Repository
-public interface AppUserDocumentRepository extends JpaRepository<AppUserDocument, String> {
+public interface AppUserDocumentRepository extends JpaRepository<AppUserDocument, Long> {
 
 }

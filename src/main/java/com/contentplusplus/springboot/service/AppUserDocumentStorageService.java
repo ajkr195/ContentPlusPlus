@@ -35,9 +35,9 @@ public class AppUserDocumentStorageService {
 		}
 	}
 
-	public AppUserDocument getFile(String fileId) {
-		return dbFileRepository.findById(fileId)
-				.orElseThrow(() -> new MyFileNotFoundException("File not found with id " + fileId));
+	public AppUserDocument getFile(Long id) {
+		return dbFileRepository.findById(id)
+				.orElseThrow(() -> new MyFileNotFoundException("File not found with id " + id));
 	}
 
 }

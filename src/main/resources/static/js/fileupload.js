@@ -47,6 +47,9 @@ function uploadMultipleFiles(files) {
 
 
 
+
+
+
 multipleUploadForm.addEventListener('submit', function(event) {
 	var files = multipleFileUploadInput.files;
 	if (files.length === 0) {
@@ -58,3 +61,71 @@ multipleUploadForm.addEventListener('submit', function(event) {
 }, true);
 
 
+
+function logoutConfirmation() {
+
+	Swal.fire({
+		title: '<strong>Delete File ?</strong>',
+		icon: 'question',
+		html:
+			'Are you sure, you want to Delete this file from Content++ ?',
+		showCloseButton: true,
+		showCancelButton: true,
+		focusConfirm: false,
+		confirmButtonText:
+			'<a class="text-white" href="/logout" th:href="@{/logout}" >Yes!</a> ',
+		confirmButtonColor: '#dc3545',
+		cancelButtonText:
+			'No',
+	}).then((result) => {
+		if (result.isConfirmed) {
+			Swal.fire(
+				'Deleted!',
+				'Your file has been deleted.',
+				'success'
+			)
+		}
+	})
+
+
+}
+
+function deletedbfile(id, Object) {
+	Swal.fire({
+		title: 'Are you sure?',
+		text: "You want to Delete this file from Content++ ?",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#d33',
+		cancelButtonColor: '#3085d6',
+		confirmButtonText: 'Yes, delete it!'
+	}).then((result) => {
+		if (result.isConfirmed) {
+			fetch('/deletedbfile/' + id, {
+				method: 'DELETE',
+			})
+			Swal.fire(
+				'Deleted!',
+				'Your file has been deleted.',
+				'success'
+			)
+			Object.closest('tr').remove();
+		}
+	})
+}
+
+function deletedbfileVanilla(id, Object) {
+	fetch('/deletedbfile/' + id, {
+		method: 'DELETE',
+	})
+		.then((response) => {
+			//alert(response.status);
+			if (response.status == 204) {
+				Object.closest('tr').remove();
+			}
+			console.log('Success:', response);
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+		});
+}

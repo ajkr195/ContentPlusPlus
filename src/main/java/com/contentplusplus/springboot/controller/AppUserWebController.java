@@ -63,7 +63,7 @@ public class AppUserWebController {
 		return "documentsuser";
 	}
 
-	@GetMapping("/documents")
+	@GetMapping("/documentsxx")
 	String ordersPage(Model model) {
 		model.addAttribute("pagename", "documents");
 		return "documents";
