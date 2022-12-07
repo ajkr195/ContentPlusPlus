@@ -56,4 +56,10 @@ Content Management Systems were supposed to:
 
 ![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/1.JPG)
 
+![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/4.JPG)
+
+![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/5.JPG)
+
+![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/3.JPG)
+
 UI is derived and heavily based on (if you want to support this project) - https://github.com/xriley/portal-theme-bs5 
