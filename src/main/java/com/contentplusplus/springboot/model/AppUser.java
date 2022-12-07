@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Basic;
+import org.hibernate.annotations.GenericGenerator;
+
+import com.contentplusplus.springboot.model.audit.Auditable;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +20,6 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,9 +29,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "AppUser")
 @Table(name = "app_user")
-public class AppUser implements Serializable {
+
+public class AppUser  extends Auditable<String> implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -47,6 +51,10 @@ public class AppUser implements Serializable {
 	
 	@Column(name = "userpassword", nullable = false)
 	private String userpassword;
+	
+	@Column(name = "useruuid", unique = true)
+	@GenericGenerator(name = "uuid", strategy = "uuid4")
+	private String useruuid;
 	
 	@Transient
 	private String passwordConfirm;

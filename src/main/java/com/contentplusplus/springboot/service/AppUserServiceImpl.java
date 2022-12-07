@@ -1,13 +1,12 @@
 package com.contentplusplus.springboot.service;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.contentplusplus.springboot.model.AppRole;
 import com.contentplusplus.springboot.model.AppUser;
 import com.contentplusplus.springboot.repository.AppRoleRepository;
 import com.contentplusplus.springboot.repository.AppUserRepository;
@@ -32,11 +31,8 @@ public class AppUserServiceImpl implements AppUserService {
 		user.setUserlastname(user.getUserlastname());
 		user.setUseremail(user.getUseremail());
 		user.setUserpassword(passwordEncoder.encode(user.getUserpassword()));
-		AppRole role = roleRepository.findByName("ROLE_ADMIN");
-		if (role == null) {
-			role = checkRoleExist();
-		}
-		user.setRoles(Arrays.asList(role));
+		user.setUseruuid(UUID.randomUUID().toString());
+		user.setRoles(user.getRoles());
 		userRepository.save(user);
 	}
 
@@ -49,12 +45,6 @@ public class AppUserServiceImpl implements AppUserService {
 	public List<AppUser> findAllUsers() {
 		List<AppUser> users = userRepository.findAll();
 		return users.stream().map((user) -> user).collect(Collectors.toList());
-	}
-
-	private AppRole checkRoleExist() {
-		AppRole role = new AppRole();
-		role.setName("ROLE_ADMIN");
-		return roleRepository.save(role);
 	}
 
 	@Override

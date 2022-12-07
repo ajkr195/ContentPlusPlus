@@ -791,6 +791,10 @@ button.close:focus {
     outline: 1px solid #046068;
 }
 
+.file-uploader-card {
+	border: none;
+}
+
 .app-card.border-left-decoration {
     border-left: 3px solid #046068
 }

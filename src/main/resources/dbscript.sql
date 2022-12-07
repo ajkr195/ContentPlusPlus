@@ -6,16 +6,36 @@ create table app_user(
 id BIGINT NOT NULL AUTO_INCREMENT,
 useremail VARCHAR(150) NOT NULL,
 userpassword VARCHAR(150) NOT NULL,
+useruuid VARCHAR(50) NOT NULL,
 userfirstname VARCHAR(150) NOT NULL,
 userlastname VARCHAR(150) NOT NULL,
+created_by VARCHAR(150) NOT NULL,
+created_date VARCHAR(150) NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date VARCHAR(150) NOT NULL,
 PRIMARY KEY (id),
-UNIQUE (useremail)) ENGINE=InnoDB;
+UNIQUE (useremail, useruuid)) ENGINE=InnoDB;
 
 create table app_role(
 id INT NOT NULL AUTO_INCREMENT,
 name VARCHAR(150) NOT NULL,
 PRIMARY KEY (id),
 UNIQUE (name)) ENGINE=InnoDB;
+
+create table app_db_files(
+id INT NOT NULL AUTO_INCREMENT,
+dbfileuuid VARCHAR(150),
+dbfilename VARCHAR(150) NOT NULL,
+dbfiletype VARCHAR(150) NOT NULL,
+dbfilesize VARCHAR(150) NOT NULL,
+dbfiledata longblob,
+created_by VARCHAR(150) NOT NULL,
+created_date VARCHAR(150) NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date VARCHAR(150) NOT NULL,
+optlock INT,
+PRIMARY KEY (id),
+UNIQUE (dbfileuuid)) ENGINE=InnoDB;
    
 CREATE TABLE app_user_role (
 id BIGINT NOT NULL AUTO_INCREMENT,
@@ -34,22 +54,22 @@ ALTER TABLE app_user_role ADD CONSTRAINT FK_AURUSERID FOREIGN KEY (userid) REFER
 ALTER TABLE app_user_role ADD CONSTRAINT FK_AURROLEID FOREIGN KEY (roleid) REFERENCES app_role (id); 
 
 
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin@admin', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin@admin', 'admin@admin');   
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin1@admin1', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin1@admin1', 'admin1@admin1');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin2@admin2', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin2@admin2', 'admin2@admin2');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin3@admin3', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin3@admin3', 'admin3@admin3');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin4@admin4', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin4@admin4', 'admin4@admin4');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin5@admin5', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin5@admin5', 'admin5@admin5');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin6@admin6', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin6@admin6', 'admin6@admin6');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin7@admin7', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin7@admin7', 'admin7@admin7');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin8@admin8', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin8@admin8', 'admin8@admin8');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin9@admin9', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin9@admin9', 'admin9@admin9');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin10@admin10', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin10@admin10', 'admin10@admin10');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin11@admin11', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin11@admin11', 'admin11@admin11');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin12@admin12', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin12@admin12', 'admin12@admin12');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin13@admin13', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin13@admin13', 'admin13@admin13');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin14@admin14', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin14@admin14', 'admin14@admin14');
-INSERT INTO `contentplusplus`.`app_user` (`useremail`, `userpassword`, `userfirstname`, `userlastname`) VALUES ('admin15@admin15', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin15@admin15', 'admin15@admin15');
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin@admin', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1273', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin@admin', 'admin@admin', 'System', CURDATE(), 'System', CURDATE());   
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin1@admin1', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1274', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin1@admin1', 'admin1@admin1', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin2@admin2', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1275', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin2@admin2', 'admin2@admin2', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin3@admin3', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1276', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin3@admin3', 'admin3@admin3', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin4@admin4', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1277', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin4@admin4', 'admin4@admin4', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin5@admin5', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1278', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin5@admin5', 'admin5@admin5', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin6@admin6', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1279', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin6@admin6', 'admin6@admin6', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin7@admin7', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1280', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin7@admin7', 'admin7@admin7', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin8@admin8', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1281', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin8@admin8', 'admin8@admin8', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin9@admin9', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1282', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin9@admin9', 'admin9@admin9', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin10@admin10', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1283', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin10@admin10', 'admin10@admin10', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin11@admin11', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1284', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin11@admin11', 'admin11@admin11', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin12@admin12', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1285', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin12@admin12', 'admin12@admin12', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin13@admin13', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1286', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin13@admin13', 'admin13@admin13', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin14@admin14', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1287', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin14@admin14', 'admin14@admin14', 'System', CURDATE(), 'System', CURDATE());
+INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin15@admin15', 'bd9f236d-d62a-49d4-a0a3-7dbe6d4e1288', '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin15@admin15', 'admin15@admin15', 'System', CURDATE(), 'System', CURDATE());
 
 INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('1', 'ADMIN');
 INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('2', 'EDITOR');
