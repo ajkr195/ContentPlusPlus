@@ -20,8 +20,6 @@
 						<div class="page-utilities">
 							<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
 
-
-
 								<div class="col-auto">
 									<div class="file-uploader-body">
 										<form id="multipleUploadForm" name="multipleUploadForm">
@@ -59,12 +57,21 @@
 
 									</select>
 								</div>
-								<div class="col-auto">
+								<div th:if="${!allfiles.empty}" class="col-auto">
 									<a class="btn app-btn-primary" href="#">
 										<i class="fa-solid fa-download"></i>
-										Download CSV
+										Export To CSV
 									</a>
 								</div>
+
+								<div th:if="${!allfiles.empty}" class="col-auto">
+									<a class="btn btn-sm btn-danger" id="deleteallfilesbtn" href="#"
+										th:onClick="deletealldbfiles()">
+										<i class="fa-solid fa-x"></i>
+										Delete All
+									</a>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -193,10 +200,15 @@
 													th:text="${myfile.lastModifiedBy}">None</span></td>
 											<td class="cell"><span class="note"
 													th:text="${myfile.lastModifiedDate}">None</span></td>
-											<td><a class="btn btn-sm app-btn-secondary"
-													th:href="@{/downloadFile/{id}(id=${myfile.id})}">Download</a></td>
-											<td><a class="btn btn-sm btn-danger"
-													th:onclick="deletedbfile([[${myfile.id}]], this);">Delete</a></td>
+											<td><a class="btn btn-sm app-btn-secondary mx-3"
+													th:href="@{/viewFile/{id}(id=${myfile.id})}" target="_blank"
+													title="View in browser's new tab"><i class="fa-solid fa-eye text-primary"></i></a><a
+													class="btn btn-sm app-btn-secondary"
+													th:href="@{/downloadFile/{id}(id=${myfile.id})}" title="Download this file"><i
+														class="fa-solid fa-download text-success"></i></a><a
+													class="btn btn-sm app-btn-secondary mx-3"
+													th:onclick="deletedbfile([[${myfile.id}]], this);" title="Delete this file"><i
+														class="fa-solid fa-x text-danger"></i> </a></td>
 										</tr>
 									</tbody>
 									<tfoot>

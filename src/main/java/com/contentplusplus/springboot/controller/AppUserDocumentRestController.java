@@ -29,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
+
 public class AppUserDocumentRestController {
 
 	@Autowired
@@ -51,8 +52,8 @@ public class AppUserDocumentRestController {
 	@PostMapping("/uploadMultipleFiles")
 	public List<AppUserDocumentUploadResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
 		return Arrays.asList(files).stream()
-				// .peek(fileBeingProcessed -> log.info("Processing File (PEEK2): {} ",
-				// fileBeingProcessed))
+				 .peek(fileBeingProcessed -> log.info("Processing File : {} ",
+				 fileBeingProcessed))
 				.map(file -> uploadFile(file)).collect(Collectors.toList());
 	}
 
@@ -66,11 +67,32 @@ public class AppUserDocumentRestController {
 						"attachment; filename=\"" + appUserDocument.getDbfileName() + "\"")
 				.body(new ByteArrayResource(appUserDocument.getDbfileData()));
 	}
+	
+	@GetMapping("/viewFile/{fileId}")
+	public ResponseEntity<Resource> viewFile(@PathVariable Long fileId) {
+		// Load file from database
+		AppUserDocument appUserDocument = appUserDocumentStorageService.getFile(fileId);
+
+		return ResponseEntity.ok().contentType(MediaType.parseMediaType(appUserDocument.getDbfileType()))
+				.header(HttpHeaders.CONTENT_DISPOSITION,
+						"inline; filename=\"" + appUserDocument.getDbfileName() + "\"")
+				.body(new ByteArrayResource(appUserDocument.getDbfileData()));
+	}
 
 	@DeleteMapping("/deletedbfile/{id}")
 	public ResponseEntity<HttpStatus> deletedbfile(@PathVariable("id") Long id) {
 		try {
 			appUserDocumentRepository.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@DeleteMapping("/deletealldbfiles")
+	public ResponseEntity<HttpStatus> deleteAlldbfiles() {
+		try {
+			appUserDocumentRepository.deleteAll();
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

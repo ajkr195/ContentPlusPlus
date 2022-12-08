@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.contentplusplus.springboot.model.AppRole;
 import com.contentplusplus.springboot.model.AppUser;
+import com.contentplusplus.springboot.model.AppUserDocument;
 import com.contentplusplus.springboot.repository.AppRoleRepository;
+import com.contentplusplus.springboot.repository.AppUserDocumentRepository;
 import com.contentplusplus.springboot.service.AppUserService;
 import com.contentplusplus.springboot.validator.AppUserAddValidator;
 
@@ -33,6 +35,9 @@ public class AppUserWebController {
 
 	@Autowired
 	AppRoleRepository appRoleRepository;
+	
+	@Autowired
+	AppUserDocumentRepository appUserDocumentRepository;
 
 	@Autowired
 	private AppUserAddValidator appUserNewValidator;
@@ -63,9 +68,11 @@ public class AppUserWebController {
 		return "documentsuser";
 	}
 
-	@GetMapping("/documentsxx")
+	@GetMapping("/documents")
 	String ordersPage(Model model) {
 		model.addAttribute("pagename", "documents");
+		List<AppUserDocument> allfiles = appUserDocumentRepository.findAll();
+		model.addAttribute("allfiles", allfiles);
 		return "documents";
 	}
 

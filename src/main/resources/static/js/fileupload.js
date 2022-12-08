@@ -29,13 +29,20 @@ function uploadMultipleFiles(files) {
 		.then((response) => {
 			console.log('Success:', response);
 			multipleFileUploadError.style.display = "none";
-			var content = "<p>All Files Uploaded Successfully</p>";
+			//var content = "<p>All Files Uploaded Successfully</p>";
 			document.getElementById("multipleFileUploadInput").value = null;
-			for (var i = 0; i < response.length; i++) {
-				content += "<p>DownloadUrl : <a href='" + response[i].fileDownloadUri + "' target='_blank'>" + response[i].fileDownloadUri + "</a></p>";
-			}
-			multipleFileUploadSuccess.innerHTML = content;
-			multipleFileUploadSuccess.style.display = "block";
+			//for (var i = 0; i < response.length; i++) {
+			//content += "<p>DownloadUrl : <a href='" + response[i].fileDownloadUri + "' target='_blank'>" + response[i].fileDownloadUri + "</a></p>";
+			//}
+			//multipleFileUploadSuccess.innerHTML = content;
+			//multipleFileUploadSuccess.style.display = "block";
+			Swal.fire(
+				'Uploaded!',
+				'All files uploaded successfully.',
+				'success'
+			).then(() => {
+				location.reload();
+			});
 		})
 		.catch((error) => {
 			multipleFileUploadSuccess.style.display = "none";
@@ -43,8 +50,6 @@ function uploadMultipleFiles(files) {
 			console.error('Error:', error);
 		});
 }
-
-
 
 
 
@@ -61,44 +66,47 @@ multipleUploadForm.addEventListener('submit', function(event) {
 }, true);
 
 
-
-function logoutConfirmation() {
-
+function deletealldbfiles() {
 	Swal.fire({
-		title: '<strong>Delete File ?</strong>',
-		icon: 'question',
-		html:
-			'Are you sure, you want to Delete this file from Content++ ?',
-		showCloseButton: true,
-		showCancelButton: true,
-		focusConfirm: false,
-		confirmButtonText:
-			'<a class="text-white" href="/logout" th:href="@{/logout}" >Yes!</a> ',
-		confirmButtonColor: '#dc3545',
-		cancelButtonText:
-			'No',
+		title: 'Are you sure?',
+		text: "You want to Delete em all from Content++ ? This operation is irreversible and all your files may not be recovered later.",
+		icon: 'warning',
+		showDenyButton: true,
+		confirmButtonColor: '#d33',
+		denyButtonColor: 'gray',
+		confirmButtonText: 'Yes, delete em all !',
+		denyButtonText: `Don't delete`,
 	}).then((result) => {
 		if (result.isConfirmed) {
+			fetch('/deletealldbfiles', {
+				method: 'DELETE',
+			})
 			Swal.fire(
 				'Deleted!',
-				'Your file has been deleted.',
+				'Your files have been deleted.',
 				'success'
-			)
+			).then(() => {
+				location.reload();
+			});
+
+		} else if (result.isDenied) {
+			Swal.fire('Great. Changes are not saved', 'Your important files are safe in Content++ :)', 'info')
 		}
+		//location.reload();
 	})
-
-
 }
+
 
 function deletedbfile(id, Object) {
 	Swal.fire({
 		title: 'Are you sure?',
-		text: "You want to Delete this file from Content++ ?",
+		text: "You want to Delete this file from Content++ ? This operation is irreversible and this file may not be recovered later.",
 		icon: 'warning',
-		showCancelButton: true,
+		showDenyButton: true,
 		confirmButtonColor: '#d33',
-		cancelButtonColor: '#3085d6',
-		confirmButtonText: 'Yes, delete it!'
+		denyButtonColor: 'gray',
+		confirmButtonText: 'Yes, delete it!',
+		denyButtonText: `Don't delete`,
 	}).then((result) => {
 		if (result.isConfirmed) {
 			fetch('/deletedbfile/' + id, {
@@ -110,6 +118,8 @@ function deletedbfile(id, Object) {
 				'success'
 			)
 			Object.closest('tr').remove();
+		} else if (result.isDenied) {
+			Swal.fire('Great. Changes are not saved', 'Your important file is safe in Content++ :)', 'info')
 		}
 	})
 }

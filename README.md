@@ -56,7 +56,7 @@ Content Management Systems were supposed to:
 
 ![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/1.JPG)
 
-![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/4.JPG)
+![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/7.JPG)
 
 ![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/5.JPG)
 
