@@ -52,8 +52,8 @@ public class AppUserDocumentRestController {
 	@PostMapping("/uploadMultipleFiles")
 	public List<AppUserDocumentUploadResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
 		return Arrays.asList(files).stream()
-				 .peek(fileBeingProcessed -> log.info("Processing File : {} ",
-				 fileBeingProcessed))
+				 //.peek(fileBeingProcessed -> log.info("Processing File : {} ",
+				 //fileBeingProcessed.getName()))
 				.map(file -> uploadFile(file)).collect(Collectors.toList());
 	}
 

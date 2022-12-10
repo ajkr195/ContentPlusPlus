@@ -10,6 +10,11 @@ body {
     font-size: .775rem;
 }
 
+body.swal2-shown > [aria-hidden="true"] {
+  transition: 0.1s filter;
+  filter: blur(4px);
+}
+
 h1,
 .h1,
 h2,
@@ -462,6 +467,10 @@ button.close:focus {
         padding: 0;
         height: 100vh;
         background: rgba(0, 0, 0, .5);
+        transition: all .4s ease-in-out
+    }
+    .table-col-hidden {
+        display: none;
         transition: all .4s ease-in-out
     }
 }

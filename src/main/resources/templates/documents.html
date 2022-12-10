@@ -20,20 +20,15 @@
 						<div class="page-utilities">
 							<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
 
-								<div class="col-auto">
-									<div class="file-uploader-body">
-										<form id="multipleUploadForm" name="multipleUploadForm">
-											<input id="multipleFileUploadInput" type="file" name="files"
-												class="file-input" multiple required />
-											<button type="submit" class="btn btn-primary submit-btn"><i
-													class="fa-solid fa-upload"></i> Upload</button>
-										</form>
+								<!--<div class="col-auto row gx-1">
+									<form id="multipleUploadForm" name="multipleUploadForm">
+										<input id="multipleFileUploadInput" type="file" name="files" class="file-input"
+											multiple required />
+										<button type="submit" class="btn btn-sm btn-success submit-btn"><i
+												class="fa-solid fa-upload"></i> Upload</button>
+									</form>
 
-									</div>
 								</div>
-
-
-
 
 								<div class="col-auto">
 									<form class="table-search-form row gx-1 align-items-center">
@@ -42,33 +37,39 @@
 												class="form-control search-orders" placeholder="Search">
 										</div>
 										<div class="col-auto">
-											<button type="submit" class="btn app-btn-secondary">Search</button>
+											<button type="submit" class="btn btn-sm app-btn-secondary">Search</button>
 										</div>
 									</form>
 
-								</div>
+								</div>-->
+								
 								<div class="col-auto">
-
 									<select class="form-select w-auto">
 										<option selected value="option-1">All</option>
 										<option value="option-2">This week</option>
 										<option value="option-3">This month</option>
 										<option value="option-4">Last 3 months</option>
-
 									</select>
 								</div>
+
 								<div th:if="${!allfiles.empty}" class="col-auto">
-									<a class="btn app-btn-primary" href="#">
-										<i class="fa-solid fa-download"></i>
+									<a class="btn app-btn-secondary" href="#">
+										<i class="fa-solid fa-download text-success"></i>
 										Export To CSV
 									</a>
 								</div>
 
 								<div th:if="${!allfiles.empty}" class="col-auto">
-									<a class="btn btn-sm btn-danger" id="deleteallfilesbtn" href="#"
+									<a class="btn btn-sm app-btn-secondary" id="deleteallfilesbtn" href="#"
 										th:onClick="deletealldbfiles()">
-										<i class="fa-solid fa-x"></i>
+										<i class="fa-solid fa-x text-danger"></i>
 										Delete All
+									</a>
+								</div>
+								
+								<div class="col-auto">
+									<a class="btn btn-sm btn-success" th:onClick="uploadMultipleUsingSwal()"><i
+											class="fa-solid fa-upload"></i> Upload
 									</a>
 								</div>
 
@@ -112,14 +113,14 @@
 									<thead>
 										<tr>
 											<th>#</th>
-											<!--th>Id</th-->
+											<th>Id</th>
 											<th>FileName</th>
 											<th>Type</th>
 											<th>Size</th>
-											<th>CreatedBy</th>
-											<th>DateCreated</th>
-											<th>ModifiedBy</th>
-											<th>LastModified</th>
+											<th class="table-col-hidden">CreatedBy</th>
+											<th class="table-col-hidden">DateCreated</th>
+											<th class="table-col-hidden">ModifiedBy</th>
+											<th class="table-col-hidden">LastModified</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
@@ -127,10 +128,12 @@
 
 										<tr th:each="myfile,rowStat : ${allfiles}">
 											<td class="cell" th:text="${rowStat.count}">1</td>
-											<!--td class="cell" th:text="${myfile.id}"></td-->
+											<td class="cell" th:text="${myfile.id}"></td>
 											<td class="cell"> <span class="truncate"
 													th:text="${myfile.dbfileName}">None</span></td>
 											<td th:switch="${myfile.dbfileType}">
+												<span th:case="'application/x-msdownload'"><i
+														class="fa-brands fa-windows text-primary fa-xl"></i></span>
 												<span th:case="'application/pdf'"><i
 														class="fas fa-file-pdf text-danger fa-2xl"></i></span>
 												<span th:case="'application/msword'"><i
@@ -159,7 +162,7 @@
 												<span th:case="'video/x-ms-wmv'"><i
 														class="fa-solid fa-play text-muted fa-2xl"></i></span>
 												<span th:case="'audio/mpeg'"><i
-														class="fa-solid fa-music text-muted fa-2xl"></i></span>
+														class="fa-solid fa-music text-muted fa-xl"></i></span>
 												<span th:case="'video/mp4'"><i
 														class="fa-solid fa-play text-lite fa-2xl"></i></span>
 												<span
@@ -188,40 +191,46 @@
 											</td>
 
 											<td th:switch="${myfile.dbfileSize gt 1024}">
-												<span th:case="true" th:text="${myfile.dbfileSize / 1024 + ' kb'}">NO
-													COURSES YET!</span>
+												<span th:case="true"
+													th:text="${myfile.dbfileSize / 1024 + ' kb'}"></span>
 												<span th:case="false" th:text="${myfile.dbfileSize + ' bytes'}"></span>
 											</td>
-											<td class="cell"><span class="note"
+											<td class="cell table-col-hidden"><span class="note"
 													th:text="${myfile.createdBy}">None</span></td>
-											<td class="cell"><span class="note"
+											<td class="cell table-col-hidden"><span class="note"
 													th:text="${myfile.createdDate}">None</span></td>
-											<td class="cell"><span class="note"
+											<td class="cell table-col-hidden"><span class="note"
 													th:text="${myfile.lastModifiedBy}">None</span></td>
-											<td class="cell"><span class="note"
+											<td class="cell table-col-hidden"><span class="note"
 													th:text="${myfile.lastModifiedDate}">None</span></td>
-											<td><a class="btn btn-sm app-btn-secondary mx-3"
+											<td><a class="btn btn-sm app-btn-secondary mx-1"
 													th:href="@{/viewFile/{id}(id=${myfile.id})}" target="_blank"
-													title="View in browser's new tab"><i class="fa-solid fa-eye text-primary"></i></a><a
-													class="btn btn-sm app-btn-secondary"
-													th:href="@{/downloadFile/{id}(id=${myfile.id})}" title="Download this file"><i
+													title="View in browser's new tab"><i
+														class="fa-solid fa-eye text-primary"></i></a><a
+													class="btn btn-sm app-btn-secondary mx-1"
+													th:onclick="showFileInfo([[${myfile}]]);" title="Details"><i
+														class="fa-solid fa-info text-info"></i></a><a
+													class="btn btn-sm app-btn-secondary mx-1"
+													th:href="@{/downloadFile/{id}(id=${myfile.id})}"
+													title="Download this file"><i
 														class="fa-solid fa-download text-success"></i></a><a
-													class="btn btn-sm app-btn-secondary mx-3"
-													th:onclick="deletedbfile([[${myfile.id}]], this);" title="Delete this file"><i
-														class="fa-solid fa-x text-danger"></i> </a></td>
+													class="btn btn-sm app-btn-secondary mx-1"
+													th:onclick="deletedbfile([[${myfile.id}]], this);"
+													title="Delete this file"><i class="fa-solid fa-x text-danger"></i>
+												</a></td>
 										</tr>
 									</tbody>
 									<tfoot>
 										<tr>
 											<th>#</th>
-											<!--th>Id</th-->
+											<th>Id</th>
 											<th>FileName</th>
 											<th>Type</th>
 											<th>Size</th>
-											<th>CreatedBy</th>
-											<th>DateCreated</th>
-											<th>ModifiedBy</th>
-											<th>LastModified</th>
+											<th class="table-col-hidden">CreatedBy</th>
+											<th class="table-col-hidden">DateCreated</th>
+											<th class="table-col-hidden">ModifiedBy</th>
+											<th class="table-col-hidden">LastModified</th>
 											<th>Actions</th>
 										</tr>
 									</tfoot>
