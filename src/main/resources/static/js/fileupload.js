@@ -7,7 +7,7 @@ function deletealldbfiles() {
 		text: "You want to Delete all files ? This operation is irreversible and all your files may not be recovered later.",
 		icon: 'warning',
 		showDenyButton: true,
-		confirmButtonColor: '#d33',
+		confirmButtonColor: '#dc3545',
 		denyButtonColor: '#28a745',
 		confirmButtonText: 'Yes, delete em all !',
 		denyButtonText: `Don't delete`,
@@ -38,7 +38,7 @@ function deletedbfile(id, Object) {
 		text: "You want to Delete this file? This operation is irreversible and this file may not be recovered later.",
 		icon: 'warning',
 		showDenyButton: true,
-		confirmButtonColor: '#d33',
+		confirmButtonColor: '#dc3545',
 		denyButtonColor: '#28a745',
 		confirmButtonText: 'Yes, delete it!',
 		denyButtonText: `Don't delete`,
@@ -130,6 +130,7 @@ function uploadMultipleUsingSwal() {
 		showConfirmButton: true,
 		confirmButtonText: 'Upload',
 		allowOutsideClick: false,
+		showLoaderOnConfirm: true,
 		preConfirm: () => {
 			const fileselector = Swal.getPopup().querySelector('#file-selector').value
 			if (!fileselector) {
@@ -149,7 +150,6 @@ function uploadMultipleUsingSwal() {
 				method: 'POST',
 				body: formData
 			}).then((response) => {
-				Swal.showLoading();
 				response.json();
 				Swal.fire(
 					'Uploaded!',

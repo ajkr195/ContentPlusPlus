@@ -12,4 +12,8 @@ public interface AppUserService {
     AppUser findByUseremailIgnoreCase(String email);
 
     List<AppUser> findAllUsers();
+    
+    List<AppUser> findAllActiveUsers();
+    
+    List<AppUser> findAllInActiveUsers();
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.contentplusplus.springboot.model.audit.Auditable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -56,9 +57,13 @@ public class AppUser  extends Auditable<String> implements Serializable {
 	@GenericGenerator(name = "uuid", strategy = "uuid4")
 	private String useruuid;
 	
+	@Column(name = "userenabled")
+	private boolean userenabled;
+	
 	@Transient
 	private String passwordConfirm;
-
+	
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "app_user_role", joinColumns = {
 			@JoinColumn(name = "userid", referencedColumnName = "ID") }, inverseJoinColumns = {

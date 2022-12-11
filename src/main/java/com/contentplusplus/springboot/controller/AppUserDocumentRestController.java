@@ -37,6 +37,8 @@ public class AppUserDocumentRestController {
 
 	@Autowired
 	AppUserDocumentRepository appUserDocumentRepository;
+	
+	
 
 	@PostMapping("/uploadFile")
 	public AppUserDocumentUploadResponse uploadFile(@RequestParam("file") MultipartFile file) {
@@ -44,6 +46,7 @@ public class AppUserDocumentRestController {
 
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/")
 				.path(dbFile.getId().toString()).toUriString();
+		log.info("Uploading file: {}", dbFile.getDbfileName());
 
 		return new AppUserDocumentUploadResponse(dbFile.getDbfileName(), fileDownloadUri, file.getContentType(),
 				file.getSize());

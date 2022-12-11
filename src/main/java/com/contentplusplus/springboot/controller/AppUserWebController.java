@@ -56,9 +56,11 @@ public class AppUserWebController {
 	@GetMapping("/listuser")
 	public String listRegisteredUsers(Model model) {
 		model.addAttribute("appname", "Content++");
-		List<AppUser> users = userService.findAllUsers();
+		//List<AppUser> users = userService.findAllUsers();
 		model.addAttribute("pagename", "listuser");
-		model.addAttribute("users", users);
+		model.addAttribute("users", userService.findAllUsers());
+		model.addAttribute("activeusers", userService.findAllActiveUsers());
+		model.addAttribute("inactiveusers", userService.findAllInActiveUsers());
 		return "list_user";
 	}
 

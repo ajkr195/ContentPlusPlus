@@ -62,3 +62,54 @@ multipleUploadForm.addEventListener('submit', function(event) {
 	uploadMultipleFiles(files);
 	event.preventDefault();
 }, true);
+
+
+function uploadMultipleUsingSwal() {
+	let htmlstring = '<input type="file" id="file-selector" multiple>';
+
+	Swal.fire({
+		html: htmlstring,
+		title: 'Do you want to get data from Github?',
+		text: "You won't be able to revert this!",
+		showDenyButton: true,
+		denyButtonText: 'Cancel',
+		showCloseButton: true,
+		showConfirmButton: true,
+		confirmButtonText: 'Upload',
+		showLoaderOnConfirm: true,
+		allowOutsideClick: () => !Swal.isLoading(),
+		preConfirm: async function() {
+			const fileselectorValid = Swal.getPopup().querySelector('#file-selector').value
+			if (fileselectorValid == "") {
+				Swal.showValidationMessage(`Please select at least one or more file(s). !`)
+			}
+			const fileselector = document.getElementById('file-selector');
+			
+			var files = fileselector.files;
+			var formData = new FormData();
+			for (var index = 0; index < files.length; index++) {
+				formData.append("files", files[index]);
+			}
+			return fetch('/uploadMultipleFiles', {
+				method: 'POST',
+				body: formData
+			}).then(() => {
+				//response.json();
+				Swal.fire(
+					'Uploaded!',
+					'All files uploaded successfully.',
+					//'All files uploaded successfully. Response Code: ' + response.status,
+					'success'
+				).then(() => {
+					location.reload();
+				});
+			}).catch((error) => {
+				Swal.fire(
+					'Upload Failed!',
+					error,
+					'error'
+				)
+			});
+		}
+	});
+}

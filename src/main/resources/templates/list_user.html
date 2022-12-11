@@ -78,6 +78,7 @@
 												<th class="cell">FirstName</th>
 												<th class="cell">LastName</th>
 												<th class="cell">Email</th>
+												<th class="cell">Active?</th>
 												<th class="cell">CreatedBy</th>
 												<th class="cell">DateCreated</th>
 												<th class="cell">ModifiedBy</th>
@@ -95,7 +96,16 @@
 														th:text="${user.userfirstname}"></span></td>
 												<td class="cell"><span class="note"
 														th:text="${user.userlastname}"></span> </td>
-												<td class="cell"><span class="badge bg-success"
+												<td class="cell"><span class="note"
+														th:text="${user.useremail}"></span>
+												</td>
+												<td th:if="${user.userenabled}"class="cell"><span class="badge bg-success"
+														th:text="Active"></span>
+												</td>
+												<td th:if="${!user.userenabled}"class="cell"><span class="badge bg-danger"
+														th:text="InActive"></span>
+												</td>
+												<td class="cell"><span class="note"
 														th:text="${user.useremail}"></span>
 												</td>
 												<td class="cell"><span class="note" th:text="${user.createdBy}"></span>
@@ -137,13 +147,14 @@
 							<div class="app-card-body">
 								<div class="table-responsive">
 
-									<table class="table mb-0 text-left">
+									<table class="table app-table-hover mb-0 text-left">
 										<thead>
 											<tr>
 												<th class="cell">Id</th>
 												<th class="cell">FirstName</th>
 												<th class="cell">LastName</th>
 												<th class="cell">Email</th>
+												<th class="cell">Active?</th>
 												<th class="cell">CreatedBy</th>
 												<th class="cell">DateCreated</th>
 												<th class="cell">ModifiedBy</th>
@@ -152,19 +163,40 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="user: ${users}">
+
+
+										<tbody>
+											<tr th:each="user: ${activeusers}">
 												<td class="cell" th:text="${user.id}"></td>
 												<td class="cell"> <span class="truncate"
 														th:text="${user.userfirstname}"></span></td>
 												<td class="cell"><span class="note"
 														th:text="${user.userlastname}"></span> </td>
-												<td class="cell"><span class="badge bg-success"
+												<td class="cell"><span class="note"
 														th:text="${user.useremail}"></span>
 												</td>
+												<td th:if="${user.userenabled}"class="cell"><span class="badge bg-success"
+														th:text="Active"></span>
+												</td>
+												<td th:if="${!user.userenabled}"class="cell"><span class="badge bg-danger"
+														th:text="InActive"></span>
+												</td>
+												<td class="cell"><span class="note"
+														th:text="${user.useremail}"></span>
+												</td>
+												<td class="cell"><span class="note" th:text="${user.createdBy}"></span>
+												</td>
+												<td class="cell"><span class="note"
+														th:text="${user.createdDate}"></span> </td>
+												<td class="cell"><span class="note"
+														th:text="${user.lastModifiedBy}"></span> </td>
+												<td class="cell"><span class="note"
+														th:text="${user.lastModifiedDate}"></span> </td>
 												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a>
 												</td>
 											</tr>
 										</tbody>
+
 									</table>
 								</div>
 							</div>
@@ -175,13 +207,14 @@
 						<div class="app-card app-card-orders-table mb-5">
 							<div class="app-card-body">
 								<div class="table-responsive">
-									<table class="table mb-0 text-left">
+									<table class="table app-table-hover mb-0 text-left">
 										<thead>
 											<tr>
 												<th class="cell">Id</th>
 												<th class="cell">FirstName</th>
 												<th class="cell">LastName</th>
 												<th class="cell">Email</th>
+												<th class="cell">Active?</th>
 												<th class="cell">CreatedBy</th>
 												<th class="cell">DateCreated</th>
 												<th class="cell">ModifiedBy</th>
@@ -190,19 +223,40 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="user: ${users}">
+
+
+										<tbody>
+											<tr th:each="user: ${inactiveusers}">
 												<td class="cell" th:text="${user.id}"></td>
 												<td class="cell"> <span class="truncate"
 														th:text="${user.userfirstname}"></span></td>
 												<td class="cell"><span class="note"
 														th:text="${user.userlastname}"></span> </td>
-												<td class="cell"><span class="badge bg-success"
+												<td class="cell"><span class="note"
 														th:text="${user.useremail}"></span>
 												</td>
+												<td th:if="${user.userenabled}"class="cell"><span class="badge bg-success"
+														th:text="Active"></span>
+												</td>
+												<td th:if="${!user.userenabled}"class="cell"><span class="badge bg-danger"
+														th:text="InActive"></span>
+												</td>
+												<td class="cell"><span class="note"
+														th:text="${user.useremail}"></span>
+												</td>
+												<td class="cell"><span class="note" th:text="${user.createdBy}"></span>
+												</td>
+												<td class="cell"><span class="note"
+														th:text="${user.createdDate}"></span> </td>
+												<td class="cell"><span class="note"
+														th:text="${user.lastModifiedBy}"></span> </td>
+												<td class="cell"><span class="note"
+														th:text="${user.lastModifiedDate}"></span> </td>
 												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a>
 												</td>
 											</tr>
 										</tbody>
+
 									</table>
 								</div>
 							</div>
