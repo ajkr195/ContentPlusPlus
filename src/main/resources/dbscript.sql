@@ -49,7 +49,14 @@ useremail varchar(64) not null,
 series varchar(64) primary key,
 token varchar(64) not null,
 last_used timestamp not null)ENGINE=InnoDB;
+
  
+create table aws_file_meta(
+id INT NOT NULL AUTO_INCREMENT,
+awsfilename VARCHAR(150),
+awsfilepath VARCHAR(150) NOT NULL,
+awsfileversion VARCHAR(150),
+PRIMARY KEY (id)) ENGINE=InnoDB;
 
 ALTER TABLE app_user_role ADD CONSTRAINT FK_AURUSERID FOREIGN KEY (userid) REFERENCES app_user (id);
 ALTER TABLE app_user_role ADD CONSTRAINT FK_AURROLEID FOREIGN KEY (roleid) REFERENCES app_role (id); 

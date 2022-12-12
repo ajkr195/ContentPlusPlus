@@ -1,7 +1,9 @@
 package com.contentplusplus.springboot.exception;
 
 public class FileStorageException extends RuntimeException {
-    public FileStorageException(String message) {
+    private static final long serialVersionUID = 1L;
+
+	public FileStorageException(String message) {
         super(message);
     }
 

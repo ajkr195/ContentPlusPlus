@@ -232,6 +232,19 @@
 						</a>
 
 					</li>
+					
+					<li class="nav-item">
+
+						<a class="nav-link" th:classappend="${pagename == 's3bucket' ? 'active' : ''}"
+							href="/s3bucket" th:href="@{/s3bucket}">
+							<span class="nav-icon">
+								<i class="fa-solid fa-file fa-xl"></i>
+							</span>
+							<span class="nav-link-text">AWS (S3) bucket</span>
+						</a>
+
+					</li>
+					
 
 					<li class="nav-item">
 

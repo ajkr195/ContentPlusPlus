@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class="app">
+
+	<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+	<div class="app-wrapper">
+
+		<div class="app-content pt-3 p-md-3 p-lg-4">
+			<div class="container-fluid">
+
+				<div class="position-relative mb-3">
+					<div class="row g-3 justify-content-between">
+						<div class="col-auto">
+							<h1 class="app-page-title mb-0">AWS S3 Bucket</h1>
+						</div>
+						<div class="col-auto">
+							<div class="page-utilities">
+								<select class="form-select form-select-sm w-auto">
+									<option selected value="option-1">All</option>
+									<option value="option-2">News</option>
+									<option value="option-3">Product</option>
+									<option value="option-4">Project</option>
+									<option value="option-4">Billing</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="app-card app-card-notification shadow-sm mb-4">
+					<div class="app-card-header px-4 py-3">
+						<div class="row g-3 align-items-center">
+							<div class="col-12 col-lg-auto text-center text-lg-start">
+								<i class="profile-image fa-brands fa-aws"></i>
+							</div>
+							<div class="col-12 col-lg-auto text-center text-lg-start">
+								<h4 class="notification-title mb-1">Upload File to AWS S3</h4>
+							</div>
+						</div>
+					</div>
+					<div class="app-card-body p-4">
+						<form id="awss3UploadForm" name="awss3UploadForm" method="POST" enctype="multipart/form-data"
+							th:action="s3bucketupload">
+							<input id="file" type="file" name="file" class="file-input" multiple required />
+							<button type="submit" class="btn btn-sm btn-success submit-btn"><i
+									class="fa-solid fa-upload"></i> Upload</button>
+						</form>
+					</div>
+				</div>
+
+
+				<div class="app-card app-card-notification shadow-sm mb-4">
+					<div class="app-card-header px-4 py-3">
+						<div class="row g-3 align-items-center">
+							<div class="col-12 col-lg-auto text-center text-lg-start">
+								<i class="profile-image fa-brands fa-aws"></i>
+							</div>
+							<div class="col-12 col-lg-auto text-center text-lg-start">
+								<h4 class="notification-title mb-1">Download files from AWS S3</h4>
+							</div>
+						</div>
+					</div>
+					<div class="app-card-body p-4">
+
+
+						<div class="app-card-body p-4" th:if="${#lists.isEmpty(files)}">
+							<div class="notification-content">
+								No Documents have been added yet to this repository. Upload content and try refreshing this page.
+							</div>
+						</div>
+
+						<table id="tableitemsprimary" class="table table-bordered table-hover" style="width: 100%"
+							th:if="${!files.empty}">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>File Path</th>
+									<th>File Name</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<th:block th:each="file,iter : ${files}">
+									<tr>
+										<th scope="row">1</th>
+										<td th:text="${file.filePath}"></td>
+										<td th:text="${file.fileName}"></td>
+										<td><a th:href="@{'/download/'+${file.id}}">Download</a></td>
+									</tr>
+								</th:block>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th>#</th>
+									<th>File Path</th>
+									<th>File Name</th>
+									<th>Action</th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div th:replace="~{fragments/footer :: footer}"></div>
+
+	</div>
+
+	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
+	<script th:src="@{/js/app.js}"></script>
+
+</body>
+
+</html>
