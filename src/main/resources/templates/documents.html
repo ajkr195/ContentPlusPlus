@@ -61,7 +61,7 @@
 
 								<div th:if="${!allfiles.empty}" class="col-auto">
 									<a class="btn btn-sm app-btn-secondary" id="deleteallfilesbtn" href="#"
-										th:onClick="deletealldbfiles()">
+										th:onClick="deleteallfiles()">
 										<i class="fa-solid fa-x text-danger"></i>
 										Delete All
 									</a>
@@ -130,8 +130,8 @@
 											<td class="cell" th:text="${rowStat.count}">1</td>
 											<td class="cell" th:text="${myfile.id}"></td>
 											<td class="cell"> <span class="truncate"
-													th:text="${myfile.dbfileName}">None</span></td>
-											<td th:switch="${myfile.dbfileType}">
+													th:text="${myfile.fileName}">None</span></td>
+											<td th:switch="${myfile.fileType}">
 												<span th:case="'application/x-msdownload'"><i
 														class="fa-brands fa-windows text-primary fa-xl"></i></span>
 												<span th:case="'application/pdf'"><i
@@ -190,10 +190,10 @@
 														class="fa-solid fa-file-excel text-success fa-2xl"></i></span>
 											</td>
 
-											<td th:switch="${myfile.dbfileSize gt 1024}">
+											<td th:switch="${myfile.fileSize gt 1024}">
 												<span th:case="true"
-													th:text="${myfile.dbfileSize / 1024 + ' kb'}"></span>
-												<span th:case="false" th:text="${myfile.dbfileSize + ' bytes'}"></span>
+													th:text="${myfile.fileSize / 1024 + ' kb'}"></span>
+												<span th:case="false" th:text="${myfile.fileSize + ' bytes'}"></span>
 											</td>
 											<td class="cell table-col-hidden"><span class="note"
 													th:text="${myfile.createdBy}">None</span></td>
@@ -215,7 +215,7 @@
 													title="Download this file"><i
 														class="fa-solid fa-download text-success"></i></a><a
 													class="btn btn-sm app-btn-secondary mx-1"
-													th:onclick="deletedbfile([[${myfile.id}]], this);"
+													th:onclick="deletefile([[${myfile.id}]], this);"
 													title="Delete this file"><i class="fa-solid fa-x text-danger"></i>
 												</a></td>
 										</tr>

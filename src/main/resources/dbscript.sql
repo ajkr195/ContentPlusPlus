@@ -23,21 +23,6 @@ name VARCHAR(150) NOT NULL,
 PRIMARY KEY (id),
 UNIQUE (name)) ENGINE=InnoDB;
 
-create table app_db_files(
-id INT NOT NULL AUTO_INCREMENT,
-dbfileuuid VARCHAR(150),
-dbfilename VARCHAR(150) NOT NULL,
-dbfiletype VARCHAR(150) NOT NULL,
-dbfilesize VARCHAR(150) NOT NULL,
-dbfiledata longblob,
-created_by VARCHAR(150) NOT NULL,
-created_date VARCHAR(150) NOT NULL,
-modified_by VARCHAR(150) NOT NULL,
-modified_date VARCHAR(150) NOT NULL,
-optlock INT,
-PRIMARY KEY (id),
-UNIQUE (dbfileuuid)) ENGINE=InnoDB;
-   
 CREATE TABLE app_user_role (
 id BIGINT NOT NULL AUTO_INCREMENT,
 userid BIGINT NOT NULL,
@@ -50,6 +35,20 @@ series varchar(64) primary key,
 token varchar(64) not null,
 last_used timestamp not null)ENGINE=InnoDB;
 
+create table app_content(
+id INT NOT NULL AUTO_INCREMENT,
+fileuuid VARCHAR(150),
+filename VARCHAR(150) NOT NULL,
+filetype VARCHAR(150) NOT NULL,
+filesize VARCHAR(150) NOT NULL,
+filedata longblob,
+created_by VARCHAR(150) NOT NULL,
+created_date VARCHAR(150) NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date VARCHAR(150) NOT NULL,
+optlock INT,
+PRIMARY KEY (id),
+UNIQUE (fileuuid)) ENGINE=InnoDB;
  
 create table aws_file_meta(
 id INT NOT NULL AUTO_INCREMENT,

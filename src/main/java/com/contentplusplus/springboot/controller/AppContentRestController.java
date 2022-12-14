@@ -20,82 +20,80 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.contentplusplus.springboot.model.AppUserDocument;
-import com.contentplusplus.springboot.payload.AppUserDocumentUploadResponse;
-import com.contentplusplus.springboot.repository.AppUserDocumentRepository;
-import com.contentplusplus.springboot.service.AppUserDocumentStorageService;
+import com.contentplusplus.springboot.model.AppContent;
+import com.contentplusplus.springboot.payload.AppContentUploadResponse;
+import com.contentplusplus.springboot.repository.AppContentRepository;
+import com.contentplusplus.springboot.service.AppContentStorageService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
 
-public class AppUserDocumentRestController {
+public class AppContentRestController {
 
 	@Autowired
-	private AppUserDocumentStorageService appUserDocumentStorageService;
+	private AppContentStorageService appContentStorageService;
 
 	@Autowired
-	AppUserDocumentRepository appUserDocumentRepository;
-	
-	
+	AppContentRepository appContentRepository;
 
 	@PostMapping("/uploadFile")
-	public AppUserDocumentUploadResponse uploadFile(@RequestParam("file") MultipartFile file) {
-		AppUserDocument dbFile = appUserDocumentStorageService.storeFile(file);
+	public AppContentUploadResponse uploadFile(@RequestParam("file") MultipartFile file) {
+		AppContent appFile = appContentStorageService.storeFileInDB(file);
 
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/")
-				.path(dbFile.getId().toString()).toUriString();
-		log.info("Uploading file: {}", dbFile.getDbfileName());
-
-		return new AppUserDocumentUploadResponse(dbFile.getDbfileName(), fileDownloadUri, file.getContentType(),
+				.path(appFile.getId().toString()).toUriString();
+		log.info("Uploading file: {}", appFile.getFileName());
+		appContentStorageService.storeFileInFileSystemStorage(file);
+		return new AppContentUploadResponse(appFile.getFileName(), fileDownloadUri, file.getContentType(),
 				file.getSize());
 	}
 
 	@PostMapping("/uploadMultipleFiles")
-	public List<AppUserDocumentUploadResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+	public List<AppContentUploadResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+
 		return Arrays.asList(files).stream()
-				 //.peek(fileBeingProcessed -> log.info("Processing File : {} ",
-				 //fileBeingProcessed.getName()))
+				// .peek(fileBeingProcessed -> log.info("Processing File : {} ",
+				// fileBeingProcessed.getName()))
 				.map(file -> uploadFile(file)).collect(Collectors.toList());
 	}
 
 	@GetMapping("/downloadFile/{fileId}")
 	public ResponseEntity<Resource> downloadFile(@PathVariable Long fileId) {
 		// Load file from database
-		AppUserDocument appUserDocument = appUserDocumentStorageService.getFile(fileId);
+		AppContent appContent = appContentStorageService.getFile(fileId);
 
-		return ResponseEntity.ok().contentType(MediaType.parseMediaType(appUserDocument.getDbfileType()))
-				.header(HttpHeaders.CONTENT_DISPOSITION,
-						"attachment; filename=\"" + appUserDocument.getDbfileName() + "\"")
-				.body(new ByteArrayResource(appUserDocument.getDbfileData()));
+		return ResponseEntity.ok().contentType(MediaType.parseMediaType(appContent.getFileType()))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + appContent.getFileName() + "\"")
+				.body(new ByteArrayResource(appContent.getFileData()));
 	}
-	
+
 	@GetMapping("/viewFile/{fileId}")
 	public ResponseEntity<Resource> viewFile(@PathVariable Long fileId) {
 		// Load file from database
-		AppUserDocument appUserDocument = appUserDocumentStorageService.getFile(fileId);
+		AppContent appContent = appContentStorageService.getFile(fileId);
 
-		return ResponseEntity.ok().contentType(MediaType.parseMediaType(appUserDocument.getDbfileType()))
-				.header(HttpHeaders.CONTENT_DISPOSITION,
-						"inline; filename=\"" + appUserDocument.getDbfileName() + "\"")
-				.body(new ByteArrayResource(appUserDocument.getDbfileData()));
+		return ResponseEntity.ok().contentType(MediaType.parseMediaType(appContent.getFileType()))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + appContent.getFileName() + "\"")
+				.body(new ByteArrayResource(appContent.getFileData()));
 	}
 
 	@DeleteMapping("/deletedbfile/{id}")
 	public ResponseEntity<HttpStatus> deletedbfile(@PathVariable("id") Long id) {
 		try {
-			appUserDocumentRepository.deleteById(id);
+			appContentRepository.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@DeleteMapping("/deletealldbfiles")
 	public ResponseEntity<HttpStatus> deleteAlldbfiles() {
 		try {
-			appUserDocumentRepository.deleteAll();
+			appContentRepository.deleteAll();
+			appContentStorageService.deleteAllFromFileSystemStorage();
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

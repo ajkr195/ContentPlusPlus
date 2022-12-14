@@ -1,7 +1,7 @@
 'use strict';
 
 
-function deletealldbfiles() {
+function deleteallfiles() {
 	Swal.fire({
 		title: 'Are you sure?',
 		text: "You want to Delete all files ? This operation is irreversible and all your files may not be recovered later.",
@@ -32,7 +32,7 @@ function deletealldbfiles() {
 }
 
 
-function deletedbfile(id, Object) {
+function deletefile(id, Object) {
 	Swal.fire({
 		title: 'Are you sure?',
 		text: "You want to Delete this file? This operation is irreversible and this file may not be recovered later.",
@@ -44,7 +44,7 @@ function deletedbfile(id, Object) {
 		denyButtonText: `Don't delete`,
 	}).then((result) => {
 		if (result.isConfirmed) {
-			fetch('/deletedbfile/' + id, {
+			fetch('/deletefile/' + id, {
 				method: 'DELETE',
 			})
 			Swal.fire(
@@ -59,8 +59,8 @@ function deletedbfile(id, Object) {
 	})
 }
 
-function deletedbfileVanilla(id, Object) {
-	fetch('/deletedbfile/' + id, {
+function deletefileVanilla(id, Object) {
+	fetch('/deletefile/' + id, {
 		method: 'DELETE',
 	})
 		.then((response) => {

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AppUserDocumentUploadResponse {
+public class AppContentUploadResponse {
     private String fileName;
     private String fileDownloadUri;
     private String fileType;
