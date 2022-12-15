@@ -77,21 +77,21 @@ function deletefileVanilla(id, Object) {
 
 
 
-function showFileInfo(myfile) {
+function showFSFileInfo(myfile) {
 
 	let htmlstring = '<div class="row m-0"><div class="text-end col-4 mb-2"><b>Id: </b></div> <div class="text-start col-8">' + myfile.id + '</div></div>' +
-		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>File Size: </b></div> <div class="text-start col-8">' + myfile.dbfileSize + '</div></div>' +
+		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>File Size: </b></div> <div class="text-start col-8">' + myfile.filesize + '</div></div>' +
 		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Creator: </b></div> <div class="text-start col-8">' + myfile.createdBy + '</div></div>' +
 		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>created Date: </b></div> <div class="text-start col-8">' + myfile.createdDate + '</div></div>' +
 		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Modifier: </b></div> <div class="text-start col-8">' + myfile.lastModifiedBy + '</div></div>' +
 		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Modified Date: </b></div> <div class="text-start col-8">' + myfile.lastModifiedDate + '</div></div>' +
-		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>MimeType: </b></div> <div class="text-start col-8">' + myfile.dbfileType + '</div></div>' +
+		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>MimeType: </b></div> <div class="text-start col-8">' + myfile.filetype + '</div></div>' +
 		'</br>Auto closing in <b><timer></timer></b> milliseconds.';
 
 	let timerInterval;
 
 	Swal.fire({
-		title: myfile.dbfileName,
+		title: myfile.fileName,
 		icon: 'info',
 		html: htmlstring,
 		showCloseButton: true,
@@ -115,6 +115,49 @@ function showFileInfo(myfile) {
 		}
 	})
 }
+
+
+
+
+function showDBFileInfo(myfile) {
+
+	let htmlstring = '<div class="row m-0"><div class="text-end col-4 mb-2"><b>Id: </b></div> <div class="text-start col-8">' + myfile.id + '</div></div>' +
+		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>File Size: </b></div> <div class="text-start col-8">' + myfile.fileSize + '</div></div>' +
+		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Creator: </b></div> <div class="text-start col-8">' + myfile.createdBy + '</div></div>' +
+		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>created Date: </b></div> <div class="text-start col-8">' + myfile.createdDate + '</div></div>' +
+		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Modifier: </b></div> <div class="text-start col-8">' + myfile.lastModifiedBy + '</div></div>' +
+		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Modified Date: </b></div> <div class="text-start col-8">' + myfile.lastModifiedDate + '</div></div>' +
+		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>MimeType: </b></div> <div class="text-start col-8">' + myfile.fileType + '</div></div>' +
+		'</br>Auto closing in <b><timer></timer></b> milliseconds.';
+
+	let timerInterval;
+
+	Swal.fire({
+		title: myfile.filename,
+		icon: 'info',
+		html: htmlstring,
+		showCloseButton: true,
+		showConfirmButton: false,
+		showCancelButton: true,
+		cancelButtonText: 'Close',
+		cancelButtonColor: '#28a745',
+		//allowOutsideClick: false,
+		timer: 10000,
+		timerProgressBar: true,
+
+		didOpen: () => {
+			//Swal.showLoading()
+			const b = Swal.getHtmlContainer().querySelector('timer')
+			timerInterval = setInterval(() => {
+				b.textContent = Swal.getTimerLeft()
+			}, 100)
+		},
+		willClose: () => {
+			clearInterval(timerInterval)
+		}
+	})
+}
+
 
 function uploadMultipleInDbUsingSwal() {
 
