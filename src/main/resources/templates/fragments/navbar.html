@@ -223,28 +223,52 @@
 
 					<li class="nav-item">
 
-						<a class="nav-link" th:classappend="${pagename == 'documents' ? 'active' : ''}"
-							href="/documents" th:href="@{/documents}">
+						<a class="nav-link" th:classappend="${pagename == 'documentsdb' ? 'active' : ''}"
+							href="/documentsdb" th:href="@{/documentsdb}">
 							<span class="nav-icon">
-								<i class="fa-solid fa-file fa-xl"></i>
+								<i class="fa-solid fa-database fa-xl"></i>
 							</span>
-							<span class="nav-link-text">Documents</span>
+							<span class="nav-link-text">DB Documents</span>
 						</a>
 
 					</li>
-					
+
 					<li class="nav-item">
 
-						<a class="nav-link" th:classappend="${pagename == 's3bucket' ? 'active' : ''}"
-							href="/s3bucket" th:href="@{/s3bucket}">
+						<a class="nav-link" th:classappend="${pagename == 'documentsfs' ? 'active' : ''}"
+							href="/documentsfs" th:href="@{/documentsfs}">
 							<span class="nav-icon">
 								<i class="fa-solid fa-file fa-xl"></i>
 							</span>
-							<span class="nav-link-text">AWS (S3) bucket</span>
+							<span class="nav-link-text">FS Documents</span>
 						</a>
 
 					</li>
-					
+
+					<li class="nav-item">
+
+						<a class="nav-link" th:classappend="${pagename == 's3bucket' ? 'active' : ''}" href="/s3bucket"
+							th:href="@{/s3bucket}">
+							<span class="nav-icon">
+								<i class="fa-brands fa-aws fa-xl"></i>
+							</span>
+							<span class="nav-link-text">S3 Documents</span>
+						</a>
+
+					</li>
+
+					<li class="nav-item">
+
+						<a class="nav-link" th:classappend="${pagename == 'documentsalf' ? 'active' : ''}"
+							href="#">
+							<span class="nav-icon">
+								<i class="fa-solid fa-dharmachakra fa-xl"></i>
+							</span>
+							<span class="nav-link-text">Alfresco Documents</span>
+						</a>
+
+					</li>
+
 
 					<li class="nav-item">
 

@@ -35,7 +35,7 @@ series varchar(64) primary key,
 token varchar(64) not null,
 last_used timestamp not null)ENGINE=InnoDB;
 
-create table app_content(
+create table app_db_content(
 id INT NOT NULL AUTO_INCREMENT,
 fileuuid VARCHAR(150),
 filename VARCHAR(150) NOT NULL,
@@ -49,6 +49,19 @@ modified_date VARCHAR(150) NOT NULL,
 optlock INT,
 PRIMARY KEY (id),
 UNIQUE (fileuuid)) ENGINE=InnoDB;
+
+create table app_fs_content(
+id INT NOT NULL AUTO_INCREMENT,
+filename VARCHAR(150) NOT NULL,
+fileurl VARCHAR(150) NOT NULL,
+filetype VARCHAR(150) NOT NULL,
+filesize VARCHAR(150) NOT NULL,
+created_by VARCHAR(150) NOT NULL,
+created_date VARCHAR(150) NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date VARCHAR(150) NOT NULL,
+optlock INT,
+PRIMARY KEY (id)) ENGINE=InnoDB;
  
 create table aws_file_meta(
 id INT NOT NULL AUTO_INCREMENT,

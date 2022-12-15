@@ -20,32 +20,32 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.contentplusplus.springboot.model.AppContent;
+import com.contentplusplus.springboot.model.AppDBContent;
 import com.contentplusplus.springboot.payload.AppContentUploadResponse;
-import com.contentplusplus.springboot.repository.AppContentRepository;
-import com.contentplusplus.springboot.service.AppContentStorageService;
+import com.contentplusplus.springboot.repository.AppDBContentRepository;
+import com.contentplusplus.springboot.service.AppDBContentStorageService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
 
-public class AppContentRestController {
+public class AppDBContentRestController {
 
 	@Autowired
-	private AppContentStorageService appContentStorageService;
+	private AppDBContentStorageService appContentStorageService;
 
 	@Autowired
-	AppContentRepository appContentRepository;
+	AppDBContentRepository appContentRepository;
 
 	@PostMapping("/uploadFile")
 	public AppContentUploadResponse uploadFile(@RequestParam("file") MultipartFile file) {
-		AppContent appFile = appContentStorageService.storeFileInDB(file);
+		AppDBContent appFile = appContentStorageService.storeFileInDB(file);
 
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/")
 				.path(appFile.getId().toString()).toUriString();
 		log.info("Uploading file: {}", appFile.getFileName());
-		appContentStorageService.storeFileInFileSystemStorage(file);
+		
 		return new AppContentUploadResponse(appFile.getFileName(), fileDownloadUri, file.getContentType(),
 				file.getSize());
 	}
@@ -62,7 +62,7 @@ public class AppContentRestController {
 	@GetMapping("/downloadFile/{fileId}")
 	public ResponseEntity<Resource> downloadFile(@PathVariable Long fileId) {
 		// Load file from database
-		AppContent appContent = appContentStorageService.getFile(fileId);
+		AppDBContent appContent = appContentStorageService.getFile(fileId);
 
 		return ResponseEntity.ok().contentType(MediaType.parseMediaType(appContent.getFileType()))
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + appContent.getFileName() + "\"")
@@ -72,7 +72,7 @@ public class AppContentRestController {
 	@GetMapping("/viewFile/{fileId}")
 	public ResponseEntity<Resource> viewFile(@PathVariable Long fileId) {
 		// Load file from database
-		AppContent appContent = appContentStorageService.getFile(fileId);
+		AppDBContent appContent = appContentStorageService.getFile(fileId);
 
 		return ResponseEntity.ok().contentType(MediaType.parseMediaType(appContent.getFileType()))
 				.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + appContent.getFileName() + "\"")
@@ -93,7 +93,7 @@ public class AppContentRestController {
 	public ResponseEntity<HttpStatus> deleteAlldbfiles() {
 		try {
 			appContentRepository.deleteAll();
-			appContentStorageService.deleteAllFromFileSystemStorage();
+			
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

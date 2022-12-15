@@ -33,5 +33,5 @@ build/
 .vscode/
 
 .temp*
-/logs/
+logs/
 *.log

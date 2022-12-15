@@ -20,9 +20,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "app_content")
-@Table(name = "app_content")
-public class AppContent extends Auditable<String>  {
+@Entity(name = "app_db_content")
+@Table(name = "app_db_content")
+public class AppDBContent extends Auditable<String>  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -49,7 +49,7 @@ public class AppContent extends Auditable<String>  {
     private Integer version;
 
 
-	public AppContent(String fileName, String fileType, long fileSize, byte[] fileData) {
+	public AppDBContent(String fileName, String fileType, long fileSize, byte[] fileData) {
 		super();
 		this.fileName = fileName;
 		this.fileType = fileType;
@@ -57,7 +57,7 @@ public class AppContent extends Auditable<String>  {
 		this.fileData = fileData;
 	}
 	
-	public AppContent(String fileuuid, String fileName, String fileType, long fileSize, byte[] fileData) {
+	public AppDBContent(String fileuuid, String fileName, String fileType, long fileSize, byte[] fileData) {
 		super();
 		this.fileName = fileName;
 		this.fileType = fileType;

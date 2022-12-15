@@ -116,7 +116,7 @@ function showFileInfo(myfile) {
 	})
 }
 
-function uploadMultipleUsingSwal() {
+function uploadMultipleInDbUsingSwal() {
 
 	let htmlstring = '<input type="file" id="file-selector" multiple>';
 
@@ -151,14 +151,106 @@ function uploadMultipleUsingSwal() {
 				body: formData
 			}).then((response) => {
 				response.json();
+				if (response.status == 200) {
+					Swal.fire(
+						'Uploaded!',
+						'All files uploaded successfully.',
+						//'All files uploaded successfully. Response Code: ' + response.status,
+						'success'
+					).then(() => {
+						location.reload();
+					});
+				} else if (response.status == 405) {
+					Swal.fire(
+						'Upload failed!',
+						'File(s) already exist(s). ',
+						'error'
+					).then(() => {
+						location.reload();
+					});
+				}else {
+					Swal.fire(
+						'Upload Failed!',
+						error,
+						'error'
+					)
+				}
+
+			}).catch((error) => {
 				Swal.fire(
-					'Uploaded!',
-					'All files uploaded successfully.',
-					//'All files uploaded successfully. Response Code: ' + response.status,
-					'success'
-				).then(() => {
-					location.reload();
-				});
+					'Upload Failed!',
+					error,
+					'error'
+				)
+			});
+
+		} else if (result.isDenied) {
+			Swal.fire('No file uploaded', 'Try again to upload files  !!  ', 'info')
+		}
+	})
+
+}
+
+function uploadMultipleInFsUsingSwal() {
+
+	let htmlstring = '<input type="file" id="file-selector" multiple>';
+
+	Swal.fire({
+		title: 'Upload File(s)',
+		icon: 'info',
+		html: htmlstring,
+		showDenyButton: true,
+		denyButtonText: 'Cancel',
+		showCloseButton: true,
+		showConfirmButton: true,
+		confirmButtonText: 'Upload',
+		allowOutsideClick: false,
+		showLoaderOnConfirm: true,
+		preConfirm: () => {
+			const fileselector = Swal.getPopup().querySelector('#file-selector').value
+			if (!fileselector) {
+				Swal.showValidationMessage(`Please select at least one or more file(s). !`)
+			}
+		}
+	}).then((result) => {
+
+		if (result.isConfirmed) {
+			const fileselector = document.getElementById('file-selector');
+			var files = fileselector.files;
+			var formData = new FormData();
+			for (var index = 0; index < files.length; index++) {
+				formData.append("files", files[index]);
+			}
+			fetch('/fsupload', {
+				method: 'POST',
+				body: formData
+			}).then((response) => {
+				response.json();
+				if (response.status == 200) {
+					Swal.fire(
+						'Uploaded!',
+						'All files uploaded successfully.',
+						//'All files uploaded successfully. Response Code: ' + response.status,
+						'success'
+					).then(() => {
+						location.reload();
+					});
+				} else if (response.status == 405) {
+					Swal.fire(
+						'Upload failed!',
+						'File(s) already exist(s). ',
+						'error'
+					).then(() => {
+						location.reload();
+					});
+				}else {
+					Swal.fire(
+						'Upload Failed!',
+						error,
+						'error'
+					)
+				}
+
 			}).catch((error) => {
 				Swal.fire(
 					'Upload Failed!',

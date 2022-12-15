@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.contentplusplus.springboot.model.AppDBContent;
+import com.contentplusplus.springboot.model.AppFSContent;
 import com.contentplusplus.springboot.model.AppRole;
 import com.contentplusplus.springboot.model.AppUser;
-import com.contentplusplus.springboot.model.AppContent;
+import com.contentplusplus.springboot.repository.AppDBContentRepository;
+import com.contentplusplus.springboot.repository.AppFSContentRepository;
 import com.contentplusplus.springboot.repository.AppRoleRepository;
-import com.contentplusplus.springboot.repository.AppContentRepository;
 import com.contentplusplus.springboot.service.AppUserService;
 import com.contentplusplus.springboot.validator.AppUserAddValidator;
 
@@ -37,7 +39,10 @@ public class AppUserWebController {
 	AppRoleRepository appRoleRepository;
 	
 	@Autowired
-	AppContentRepository appUserDocumentRepository;
+	AppDBContentRepository appUserDocumentRepository;
+	
+	@Autowired
+	AppFSContentRepository appFSContentRepository;
 
 	@Autowired
 	private AppUserAddValidator appUserNewValidator;
@@ -70,12 +75,20 @@ public class AppUserWebController {
 		return "documentsuser";
 	}
 
-	@GetMapping("/documents")
-	String ordersPage(Model model) {
-		model.addAttribute("pagename", "documents");
-		List<AppContent> allfiles = appUserDocumentRepository.findAll();
+	@GetMapping("/documentsdb")
+	String dbDocs(Model model) {
+		model.addAttribute("pagename", "documentsdb");
+		List<AppDBContent> allfiles = appUserDocumentRepository.findAll();
 		model.addAttribute("allfiles", allfiles);
-		return "documents";
+		return "documents_db";
+	}
+	
+	@GetMapping("/documentsfs")
+	String fsDocs(Model model) {
+		model.addAttribute("pagename", "documentsfs");
+		List<AppFSContent> allfiles = appFSContentRepository.findAll();
+		model.addAttribute("allfiles", allfiles);
+		return "documents_fs";
 	}
 
 	@GetMapping("/notifications")
