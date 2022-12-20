@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.contentplusplus.springboot.model.AppDBContent;
+import com.contentplusplus.springboot.exception.ResourceNotFoundException;
 import com.contentplusplus.springboot.model.AppFSContent;
 import com.contentplusplus.springboot.payload.AppContentUploadResponse;
 import com.contentplusplus.springboot.payload.ResponseMessage;
@@ -124,6 +124,31 @@ public class AppFSContentRestController {
 		return ResponseEntity.ok()
 				.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
 				.body(file);
+	}
+	
+	@DeleteMapping("/fsdelfile/{id}")
+	  public ResponseEntity<HttpStatus> delFSFile(@PathVariable("id") long id) {
+	    try {
+	    	
+	    	AppFSContent fsRecord = appFSContentRepository.findById(id).orElseThrow();
+	    	
+	    	appFSContentRepository.deleteById(id);
+	    	storageService.deleteFSfile(fsRecord.getFilename());
+	      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	    } catch (Exception e) {
+	      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	  }
+	
+	@DeleteMapping("/deleteAllFSfiles")
+	public ResponseEntity<HttpStatus> deleteAlldbfiles() {
+		try {
+			appFSContentRepository.deleteAll();
+			storageService.deleteAll();
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 }

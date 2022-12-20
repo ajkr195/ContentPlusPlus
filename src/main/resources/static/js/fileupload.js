@@ -1,7 +1,7 @@
 'use strict';
 
 
-function deleteallfiles() {
+function deleteallDBfiles() {
 	Swal.fire({
 		title: 'Are you sure?',
 		text: "You want to Delete all files ? This operation is irreversible and all your files may not be recovered later.",
@@ -14,6 +14,36 @@ function deleteallfiles() {
 	}).then((result) => {
 		if (result.isConfirmed) {
 			fetch('/deletealldbfiles', {
+				method: 'DELETE',
+			})
+			Swal.fire(
+				'Deleted!',
+				'Your files have been deleted.',
+				'success'
+			).then(() => {
+				location.reload();
+			});
+
+		} else if (result.isDenied) {
+			Swal.fire('Great. Changes are not saved.', 'Your important files are safe  !!', 'info')
+		}
+		//location.reload();
+	})
+}
+
+function deleteallFSfiles() {
+	Swal.fire({
+		title: 'Are you sure?',
+		text: "You want to Delete all files ? This operation is irreversible and all your files may not be recovered later.",
+		icon: 'warning',
+		showDenyButton: true,
+		confirmButtonColor: '#dc3545',
+		denyButtonColor: '#28a745',
+		confirmButtonText: 'Yes, delete em all !',
+		denyButtonText: `Don't delete`,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			fetch('/deleteAllFSfiles', {
 				method: 'DELETE',
 			})
 			Swal.fire(
@@ -73,6 +103,33 @@ function deletefileVanilla(id, Object) {
 		.catch((error) => {
 			console.error('Error:', error);
 		});
+}
+
+function deleteFSfile(id, Object) {
+	Swal.fire({
+		title: 'Are you sure?',
+		text: "You want to Delete this file? This operation is irreversible and this file may not be recovered later.",
+		icon: 'warning',
+		showDenyButton: true,
+		confirmButtonColor: '#dc3545',
+		denyButtonColor: '#28a745',
+		confirmButtonText: 'Yes, delete it!',
+		denyButtonText: `Don't delete`,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			fetch('/fsdelfile/' + id, {
+				method: 'DELETE',
+			})
+			Swal.fire(
+				'Deleted!',
+				'Your file has been deleted.',
+				'success'
+			)
+			Object.closest('tr').remove();
+		} else if (result.isDenied) {
+			Swal.fire('Great. Changes are not saved.', 'Your important file is safe  !!  ', 'info')
+		}
+	})
 }
 
 

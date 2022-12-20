@@ -16,6 +16,10 @@ public interface AppFilesSystemStorageService {
 	public Resource load(String filename);
 
 	public void deleteAll();
+	
+	
+	public void deleteFSfile(String filename);
+	
 
 	public Stream<Path> loadAll();
 }

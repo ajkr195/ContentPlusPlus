@@ -61,7 +61,7 @@
 
 								<div th:if="${!allfiles.empty}" class="col-auto">
 									<a class="btn btn-sm app-btn-secondary" id="deleteallfilesbtn" href="#"
-										th:onClick="deleteallfiles()">
+										th:onClick="deleteallFSfiles()">
 										<i class="fa-solid fa-x text-danger"></i>
 										Delete All
 									</a>
@@ -215,7 +215,7 @@
 													title="Download this file"><i
 														class="fa-solid fa-download text-success"></i></a><a
 													class="btn btn-sm app-btn-secondary mx-1"
-													th:onclick="deletefile([[${myfile.id}]], this);"
+													th:onclick="deleteFSfile([[${myfile.id}]], this);"
 													title="Delete this file"><i class="fa-solid fa-x text-danger"></i>
 												</a></td>
 										</tr>

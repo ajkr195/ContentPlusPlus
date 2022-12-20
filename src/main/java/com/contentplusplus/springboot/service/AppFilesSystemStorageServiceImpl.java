@@ -108,6 +108,7 @@ public class AppFilesSystemStorageServiceImpl implements AppFilesSystemStorageSe
 			e.printStackTrace();
 		}
 	}
+	
 
 	@Override
 	public Stream<Path> loadAll() {
@@ -116,5 +117,23 @@ public class AppFilesSystemStorageServiceImpl implements AppFilesSystemStorageSe
 		} catch (IOException e) {
 			throw new RuntimeException("Could not load the files!");
 		}
+	}
+
+	@Override
+	public void deleteFSfile(String filename) {
+		try {
+			 boolean result = Files.deleteIfExists(Paths.get(root.toAbsolutePath().toString() + File.separator +filename));
+	            if (result) {
+	                System.out.println("File is deleted!");
+	            } else {
+	                System.out.println("Sorry, unable to delete the file.");
+	            }
+	            appFSContentRepository.deleteByFilename(filename);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			log.error("Error deleting files from : {}", root.toAbsolutePath().toString());
+			e.printStackTrace();
+		}
+		
 	}
 }
