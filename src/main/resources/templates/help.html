@@ -1,217 +1,264 @@
-<!DOCTYPE html>
-<html data-theme="dark" lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="~{fragments/head :: head}"></div>
 
-<body class="app">
-
-	<div th:replace="~{fragments/navbar :: navbar}"></div>
-
-	<div class="app-wrapper">
-
-		<div class="app-content pt-3 p-md-3 p-lg-4">
-			<div class="container-fluid">
-
-				<h1 class="app-page-title">Help Center</h1>
-				<div class="app-card app-card-accordion shadow-sm mb-4">
-					<div class="app-card-header p-4 pb-2  border-0">
-						<h4 class="app-card-title">Product</h4>
-					</div>
-					<div class="app-card-body p-4 pt-0">
-						<div id="faq1-accordion" class="faq1-accordion faq-accordion accordion">
-
-							<div class="accordion-item">
-								<h2 class="accordion-header" id="faq1-heading-1">
-									<button class="accordion-button btn btn-link" type="button"
-										data-bs-toggle="collapse" data-bs-target="#faq1-1" aria-expanded="false"
-										aria-controls="faq1-1">
-										Can I viverra sit amet quam eget lacinia?
-									</button>
-								</h2>
-								<div id="faq1-1" class="accordion-collapse collapse border-0"
-									aria-labelledby="faq1-heading-1">
-									<div class="accordion-body text-start p4">
-										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-										Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-										unknown printer took a galley of type and scrambled it to make a type specimen
-										book. It has survived not only five centuries, but also the leap into electronic
-										typesetting, remaining essentially unchanged. It was popularised in the 1960s
-										with the release of Letraset sheets containing Lorem Ipsum passages, and more
-										recently with desktop publishing software like Aldus PageMaker including
-										versions of Lorem Ipsum.
-									</div>
-								</div>
+<body class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<!-- Page header -->
+			<div class="page-header d-print-none">
+				<div class="container-xl">
+					<div class="row g-2 align-items-center">
+						<div class="col">
+							<!-- Page pre-title -->
+							<div class="page-pretitle">
+								Help Center
 							</div>
-
-							<div class="accordion-item">
-								<h2 class="accordion-header" id="faq1-heading-2">
-									<button class="accordion-button btn btn-link" type="button"
-										data-bs-toggle="collapse" data-bs-target="#faq1-2" aria-expanded="false"
-										aria-controls="faq1-2">
-										What anim pariatur cliche reprehenderit?
-									</button>
-								</h2>
-								<div id="faq1-2" class="accordion-collapse collapse border-0"
-									aria-labelledby="faq1-heading-2">
-									<div class="accordion-body text-start p4">
-										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-										Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-										unknown printer took a galley of type and scrambled it to make a type specimen
-										book. It has survived not only five centuries, but also the leap into electronic
-										typesetting, remaining essentially unchanged. It was popularised in the 1960s
-										with the release of Letraset sheets containing Lorem Ipsum passages, and more
-										recently with desktop publishing software like Aldus PageMaker including
-										versions of Lorem Ipsum.
-									</div>
-								</div>
-							</div>
-
+							<h2 class="page-title">
+								Information
+							</h2>
 						</div>
 					</div>
 				</div>
-				<div class="app-card app-card-accordion shadow-sm mb-4">
-					<div class="app-card-header p-3">
-						<h4 class="app-card-title">Account</h4>
-					</div>
-					<div class="app-card-body p-4 pt-0">
-						<div id="faq2-accordion" class="faq2-accordion faq-accordion accordion">
-							<div class="accordion-item">
-								<h2 class="accordion-header" id="faq2-heading-1">
-									<button class="accordion-button btn btn-link" type="button"
-										data-bs-toggle="collapse" data-bs-target="#faq2-1" aria-expanded="false"
-										aria-controls="faq2-1">
-										How can I sit amet quam eget lacinia?
-									</button>
-								</h2>
-								<div id="faq2-1" class="accordion-collapse collapse border-0"
-									aria-labelledby="faq2-heading-1">
-									<div class="accordion-body text-start p4">
-										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-										Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-										unknown printer took a galley of type and scrambled it to make a type specimen
-										book. It has survived not only five centuries, but also the leap into electronic
-										typesetting, remaining essentially unchanged. It was popularised in the 1960s
-										with the release of Letraset sheets containing Lorem Ipsum passages, and more
-										recently with desktop publishing software like Aldus PageMaker including
-										versions of Lorem Ipsum.
-									</div>
-								</div>
-							</div>
-
-							<div class="accordion-item">
-								<h2 class="accordion-header" id="faq2-heading-2">
-									<button class="accordion-button btn btn-link" type="button"
-										data-bs-toggle="collapse" data-bs-target="#faq2-2" aria-expanded="false"
-										aria-controls="faq2-2">
-										Where to cliche reprehenderit?
-									</button>
-								</h2>
-								<div id="faq2-2" class="accordion-collapse collapse border-0"
-									aria-labelledby="faq2-heading-2">
-									<div class="accordion-body text-start p4">
-										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-										Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-										unknown printer took a galley of type and scrambled it to make a type specimen
-										book. It has survived not only five centuries, but also the leap into electronic
-										typesetting, remaining essentially unchanged. It was popularised in the 1960s
-										with the release of Letraset sheets containing Lorem Ipsum passages, and more
-										recently with desktop publishing software like Aldus PageMaker including
-										versions of Lorem Ipsum.
-									</div>
-								</div>
-							</div>
-
-
-						</div>
-					</div>
-				</div>
-
-				<div class="row g-4">
-					<div class="col-12 col-md-6">
-						<div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
-							<div class="app-card-header p-3 border-bottom-0">
-								<div class="row align-items-center gx-3">
-									<div class="col-auto">
-										<div class="app-icon-holder icon-holder-mono">
-											<i class="fa-solid fa-headset"></i>
-										</div>
-
-									</div>
-									<div class="col-auto">
-										<h4 class="app-card-title">Need more help?</h4>
-									</div>
-								</div>
-							</div>
-							<div class="app-card-body px-4">
-
-								<div class="intro mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-									aliquet eros vel diam semper mollis.</div>
-								<ul class="list-unstyled">
-									<li><strong>Tel:</strong> 0800 1234 5678</li>
-									<li><strong>Email:</strong> <a href="#">support@website.com</a></li>
-								</ul>
-							</div>
-							<div class="app-card-footer p-4 mt-auto">
-								<a class="btn app-btn-primary" href="#">Start Live Chat</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-12 col-md-6">
-						<div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
-							<div class="app-card-header p-3 border-bottom-0">
-								<div class="row align-items-center gx-3">
-									<div class="col-auto">
-										<div class="app-icon-holder icon-holder-mono">
-											<i class="fa-solid fa-life-ring"></i>
-										</div>
-
-									</div>
-									<div class="col-auto">
-										<h4 class="app-card-title">Want to upgrade?</h4>
-									</div>
-								</div>
-							</div>
-							<div class="app-card-body px-4">
-
-								<div class="intro mb-3">Quisque non nisi odio. Proin at viverra enim. Ut vitae ligula
-									neque. Praesent id ligula ut sem suscipit eleifend id vel ex.</div>
-								<ul class="list-unstyled">
-									<li>
-										<i class="fa-solid fa-check"></i>
-										Phasellus varius vel risus vel aliquam.
-									</li>
-									<li>
-										<i class="fa-solid fa-check"></i>
-										Maecenas varius nulla.
-									</li>
-									<li>
-										<i class="fa-solid fa-check"></i>
-										Lorem ipsum dolor sit amet.
-									</li>
-
-								</ul>
-							</div>
-							<div class="app-card-footer p-4 mt-auto">
-								<a class="btn app-btn-primary" href="#">Upgrade Now</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
 			</div>
+			<!-- Page body -->
+			<div class="page-body">
+				<div class="container-fluid">
+
+					<div class="app-card app-card-accordion shadow-sm mb-4">
+						<div class="app-card-header p-4 pb-2  border-0">
+							<h4 class="app-card-title">Information1</h4>
+						</div>
+						<div class="app-card-body p-4 pt-0">
+							<div class="accordion" id="accordionExample">
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="headingOne">
+										<button class="accordion-button" type="button" data-bs-toggle="collapse"
+											data-bs-target="#collapseOne" aria-expanded="true"
+											aria-controls="collapseOne">
+											Accordion Item #1
+										</button>
+									</h2>
+									<div id="collapseOne" class="accordion-collapse collapse show"
+										aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+										<div class="accordion-body">
+											<strong>This is the first item's accordion body.</strong> It is shown by
+											default, until the collapse plugin adds the appropriate classes that we use
+											to style each element. These classes control the overall appearance, as well
+											as the showing and hiding via CSS transitions. You can modify any of this
+											with custom CSS or overriding our default variables. It's also worth noting
+											that just about any HTML can go within the <code>.accordion-body</code>,
+											though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="headingTwo">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+											aria-expanded="false" aria-controls="collapseTwo">
+											Accordion Item #2
+										</button>
+									</h2>
+									<div id="collapseTwo" class="accordion-collapse collapse"
+										aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+										<div class="accordion-body">
+											<strong>This is the second item's accordion body.</strong> It is hidden by
+											default, until the collapse plugin adds the appropriate classes that we use
+											to style each element. These classes control the overall appearance, as well
+											as the showing and hiding via CSS transitions. You can modify any of this
+											with custom CSS or overriding our default variables. It's also worth noting
+											that just about any HTML can go within the <code>.accordion-body</code>,
+											though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="headingThree">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseThree"
+											aria-expanded="false" aria-controls="collapseThree">
+											Accordion Item #3
+										</button>
+									</h2>
+									<div id="collapseThree" class="accordion-collapse collapse"
+										aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+										<div class="accordion-body">
+											<strong>This is the third item's accordion body.</strong> It is hidden by
+											default, until the collapse plugin adds the appropriate classes that we use
+											to style each element. These classes control the overall appearance, as well
+											as the showing and hiding via CSS transitions. You can modify any of this
+											with custom CSS or overriding our default variables. It's also worth noting
+											that just about any HTML can go within the <code>.accordion-body</code>,
+											though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="app-card app-card-accordion shadow-sm mb-4">
+						<div class="app-card-header p-4 pb-2  border-0">
+							<h4 class="app-card-title">Information1</h4>
+						</div>
+						<div class="app-card-body p-4 pt-0">
+							<div class="accordion" id="accordionExample2">
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="headingOne">
+										<button class="accordion-button" type="button" data-bs-toggle="collapse"
+											data-bs-target="#collapseOne2" aria-expanded="true"
+											aria-controls="collapseOne2">
+											Accordion Item #1
+										</button>
+									</h2>
+									<div id="collapseOne2" class="accordion-collapse collapse show"
+										aria-labelledby="headingOne2" data-bs-parent="#accordionExample2">
+										<div class="accordion-body">
+											<strong>This is the first item's accordion body.</strong> It is shown by
+											default, until the collapse plugin adds the appropriate classes that we use
+											to style each element. These classes control the overall appearance, as well
+											as the showing and hiding via CSS transitions. You can modify any of this
+											with custom CSS or overriding our default variables. It's also worth noting
+											that just about any HTML can go within the <code>.accordion-body</code>,
+											though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="headingTwo">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseTwo2"
+											aria-expanded="false" aria-controls="collapseTwo">
+											Accordion Item #2
+										</button>
+									</h2>
+									<div id="collapseTwo2" class="accordion-collapse collapse"
+										aria-labelledby="headingTwo2" data-bs-parent="#accordionExample2">
+										<div class="accordion-body">
+											<strong>This is the second item's accordion body.</strong> It is hidden by
+											default, until the collapse plugin adds the appropriate classes that we use
+											to style each element. These classes control the overall appearance, as well
+											as the showing and hiding via CSS transitions. You can modify any of this
+											with custom CSS or overriding our default variables. It's also worth noting
+											that just about any HTML can go within the <code>.accordion-body</code>,
+											though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="headingThree">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseThree2"
+											aria-expanded="false" aria-controls="collapseThree">
+											Accordion Item #3
+										</button>
+									</h2>
+									<div id="collapseThree2" class="accordion-collapse collapse"
+										aria-labelledby="headingThree2" data-bs-parent="#accordionExample2">
+										<div class="accordion-body">
+											<strong>This is the third item's accordion body.</strong> It is hidden by
+											default, until the collapse plugin adds the appropriate classes that we use
+											to style each element. These classes control the overall appearance, as well
+											as the showing and hiding via CSS transitions. You can modify any of this
+											with custom CSS or overriding our default variables. It's also worth noting
+											that just about any HTML can go within the <code>.accordion-body</code>,
+											though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row g-4">
+						<div class="col-12 col-md-6">
+							<div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+								<div class="app-card-header p-3 border-bottom-0">
+									<div class="row align-items-center gx-3">
+										<div class="col-auto">
+											<div class="app-icon-holder icon-holder-mono">
+												<i class="fa-solid fa-headset"></i>
+											</div>
+
+										</div>
+										<div class="col-auto">
+											<h4 class="app-card-title">Need more help?</h4>
+										</div>
+									</div>
+								</div>
+								<div class="app-card-body px-4">
+
+									<div class="intro mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+										Etiam
+										aliquet eros vel diam semper mollis.</div>
+									<ul class="list-unstyled">
+										<li><strong>Tel:</strong> 0800 1234 5678</li>
+										<li><strong>Email:</strong> <a href="#">support@website.com</a></li>
+									</ul>
+								</div>
+								<div class="app-card-footer p-4 mt-auto">
+									<a class="btn app-btn-primary" href="#">Start Live Chat</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-md-6">
+							<div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+								<div class="app-card-header p-3 border-bottom-0">
+									<div class="row align-items-center gx-3">
+										<div class="col-auto">
+											<div class="app-icon-holder icon-holder-mono">
+												<i class="fa-solid fa-life-ring"></i>
+											</div>
+
+										</div>
+										<div class="col-auto">
+											<h4 class="app-card-title">Want to upgrade?</h4>
+										</div>
+									</div>
+								</div>
+								<div class="app-card-body px-4">
+
+									<div class="intro mb-3">Quisque non nisi odio. Proin at viverra enim. Ut vitae
+										ligula
+										neque. Praesent id ligula ut sem suscipit eleifend id vel ex.</div>
+									<ul class="list-unstyled">
+										<li>
+											<i class="fa-solid fa-check"></i>
+											Phasellus varius vel risus vel aliquam.
+										</li>
+										<li>
+											<i class="fa-solid fa-check"></i>
+											Maecenas varius nulla.
+										</li>
+										<li>
+											<i class="fa-solid fa-check"></i>
+											Lorem ipsum dolor sit amet.
+										</li>
+
+									</ul>
+								</div>
+								<div class="app-card-footer p-4 mt-auto">
+									<a class="btn app-btn-primary" href="#">Upgrade Now</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div th:replace="~{fragments/footer :: footer}"></div>
+
 		</div>
-
-
-		<div th:replace="~{fragments/footer :: footer}"></div>
-
 	</div>
 
-	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-	<script th:src="@{/webjars/font-awesome/js/all.js}"></script>
-	<script th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
-	<script th:src="@{/js/app.js}"></script>
-
+	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
 </body>
 
 </html>

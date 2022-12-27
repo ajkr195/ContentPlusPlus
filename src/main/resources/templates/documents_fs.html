@@ -1,115 +1,86 @@
-<!DOCTYPE html>
-<html data-theme="dark" lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="~{fragments/head :: head}"></div>
 
-<body class="app">
-
-	<div th:replace="~{fragments/navbar :: navbar}"></div>
-
-	<div class="app-wrapper">
-
-		<div class="app-content pt-3 p-md-3 p-lg-4">
-			<div class="container-fluid">
-
-				<div class="row g-3 mb-4 align-items-center justify-content-between">
-					<div class="col-auto">
-						<h1 class="app-page-title mb-0">Documents</h1>
-					</div>
-					<div class="col-auto">
-						<div class="page-utilities">
-							<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
-
-								<!--<div class="col-auto row gx-1">
-									<form id="multipleUploadForm" name="multipleUploadForm">
-										<input id="multipleFileUploadInput" type="file" name="files" class="file-input"
-											multiple required />
-										<button type="submit" class="btn btn-sm btn-success submit-btn"><i
-												class="fa-solid fa-upload"></i> Upload</button>
-									</form>
-
-								</div>
-
-								<div class="col-auto">
-									<form class="table-search-form row gx-1 align-items-center">
-										<div class="col-auto">
-											<input type="text" id="search-orders" name="searchorders"
-												class="form-control search-orders" placeholder="Search">
-										</div>
-										<div class="col-auto">
-											<button type="submit" class="btn btn-sm app-btn-secondary">Search</button>
-										</div>
-									</form>
-
-								</div>-->
-								
-								<div class="col-auto">
-									<select class="form-select w-auto">
-										<option selected value="option-1">All</option>
-										<option value="option-2">This week</option>
-										<option value="option-3">This month</option>
-										<option value="option-4">Last 3 months</option>
-									</select>
-								</div>
-
-								<div th:if="${!allfiles.empty}" class="col-auto">
-									<a class="btn app-btn-secondary" href="#">
-										<i class="fa-solid fa-download text-success"></i>
-										Export To CSV
+<body class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<!-- Page header -->
+			<div class="page-header d-print-none">
+				<div class="container-xl">
+					<div class="row g-2 align-items-center">
+						<div class="col">
+							<!-- Page pre-title -->
+							<div class="page-pretitle">
+								Manage FS Files
+							</div>
+							<h2 class="page-title">
+								FS Files
+							</h2>
+						</div>
+						<!-- Page title actions -->
+						<div class="col-auto ms-auto d-print-none">
+							<div class="btn-list">
+								<span th:if="${!allfiles.empty}" class="d-none d-sm-inline">
+									<a href="#" class="btn" th:onClick="deleteallFSfiles()">
+										<i class="fa-solid fa-trash-can text-danger me-1"> </i>DeleteAll
 									</a>
-								</div>
-
-								<div th:if="${!allfiles.empty}" class="col-auto">
-									<a class="btn btn-sm app-btn-secondary" id="deleteallfilesbtn" href="#"
-										th:onClick="deleteallFSfiles()">
-										<i class="fa-solid fa-x text-danger"></i>
-										Delete All
-									</a>
-								</div>
-								
-								<div class="col-auto">
-									<a class="btn btn-sm btn-success" th:onClick="uploadMultipleInFsUsingSwal()"><i
-											class="fa-solid fa-upload"></i> Upload
-									</a>
-								</div>
-
+								</span>
+								<!--							 data-bs-toggle="modal" data-bs-target="#modal-report"-->
+								<a href="#" class="btn btn-teal d-none d-sm-inline-block"
+									th:onClick="uploadMultipleInFsUsingSwal()">
+									<i class="fa-solid fa-plus fa-xl"></i>
+									Upload
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
-
-
-				<nav id="orders-table-tab"
-					class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-					<a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab"
-						href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</a>
-					<a class="flex-sm-fill text-sm-center nav-link" id="orders-paid-tab" data-bs-toggle="tab"
-						href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Published</a>
-					<a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab"
-						href="#orders-pending" role="tab" aria-controls="orders-pending"
-						aria-selected="false">Pending</a>
-					<a class="flex-sm-fill text-sm-center nav-link" id="orders-cancelled-tab" data-bs-toggle="tab"
-						href="#orders-cancelled" role="tab" aria-controls="orders-cancelled"
-						aria-selected="false">Checked-Out</a>
-				</nav>
-
-
-				<div class="tab-content" id="orders-table-tab-content">
-					<div class="tab-pane fade show active" id="orders-all" role="tabpanel"
-						aria-labelledby="orders-all-tab">
-						<div class="app-card app-card-orders-table shadow-sm mb-5">
-							<div class="app-card-body">
-
-								<div class="app-card-body p-4" th:if="${#lists.isEmpty(allfiles)}">
-									<div class="notification-content">
-										No Documents have been added yet to this repository. Click "Choose Files" button
-										above and select files using your file browser and click "Upload" button.
+			</div>
+			<!-- Page body -->
+			<div class="page-body">
+				<div class="container-xl">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Manage FS Files</h3>
+							</div>
+							<div class="card-body border-bottom py-3">
+								<div class="d-flex">
+									<div class="text-muted">
+										Show
+										<div class="mx-2 d-inline-block">
+											<input type="text" class="form-control form-control-sm" value="8" size="3"
+												aria-label="Invoices count">
+										</div>
+										entries
+									</div>
+									<div class="ms-auto text-muted">
+										Search:
+										<div class="ms-2 d-inline-block">
+											<input type="text" class="form-control form-control-sm"
+												aria-label="Search invoice">
+										</div>
 									</div>
 								</div>
+							</div>
 
 
-								<table id="tableitemsprimary" class="table table-bordered table-hover"
-									style="width: 100%" th:if="${!allfiles.empty}">
+							<div class="app-card-body p-4" th:if="${#lists.isEmpty(allfiles)}">
+								<div>
+									No Documents have been added yet to this repository. Click "Choose Files" button
+									above and select files using your file browser and click "Upload" button.
+								</div>
+							</div>
+
+
+							<div class="table-responsive">
+								<table class="table card-table table-vcenter text-nowrap datatable"
+									th:if="${!allfiles.empty}">
 									<thead>
 										<tr>
 											<th>#</th>
@@ -191,8 +162,7 @@
 											</td>
 
 											<td th:switch="${myfile.filesize gt 1024}">
-												<span th:case="true"
-													th:text="${myfile.filesize / 1024 + ' kb'}"></span>
+												<span th:case="true" th:text="${myfile.filesize / 1024 + ' kb'}"></span>
 												<span th:case="false" th:text="${myfile.filesize + ' bytes'}"></span>
 											</td>
 											<td class="cell table-col-hidden"><span class="note"
@@ -204,8 +174,8 @@
 											<td class="cell table-col-hidden"><span class="note"
 													th:text="${myfile.lastModifiedDate}">None</span></td>
 											<td><a class="btn btn-sm app-btn-secondary mx-1"
-													th:href="@{/fsviewfile/{filename}(filename=${myfile.filename})}" target="_blank"
-													title="View in browser's new tab"><i
+													th:href="@{/fsviewfile/{filename}(filename=${myfile.filename})}"
+													target="_blank" title="View in browser's new tab"><i
 														class="fa-solid fa-eye text-primary"></i></a><a
 													class="btn btn-sm app-btn-secondary mx-1"
 													th:onclick="showFSFileInfo([[${myfile}]]);" title="Details"><i
@@ -220,7 +190,7 @@
 												</a></td>
 										</tr>
 									</tbody>
-									<tfoot>
+									<thead>
 										<tr>
 											<th>#</th>
 											<th>Id</th>
@@ -233,202 +203,154 @@
 											<th class="table-col-hidden">LastModified</th>
 											<th>Actions</th>
 										</tr>
-									</tfoot>
+									</thead>
 								</table>
+
 							</div>
-						</div>
-						<nav class="app-pagination">
-							<ul class="pagination justify-content-center">
-								<li class="page-item disabled">
-									<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-								</li>
-								<li class="page-item active"><a class="page-link" href="#">1</a></li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
-								<li class="page-item"><a class="page-link" href="#">3</a></li>
-								<li class="page-item">
-									<a class="page-link" href="#">Next</a>
-								</li>
-							</ul>
-						</nav>
-
-					</div>
-
-					<div class="tab-pane fade" id="orders-paid" role="tabpanel" aria-labelledby="orders-paid-tab">
-						<div class="app-card app-card-orders-table mb-5">
-							<div class="app-card-body">
-								<div class="table-responsive">
-
-									<table class="table mb-0 text-left">
-										<thead>
-											<tr>
-												<th class="cell">Id</th>
-												<th class="cell">DocumentTitle</th>
-												<th class="cell">CreatedBy</th>
-												<th class="cell">Date</th>
-												<th class="cell">Status</th>
-												<th class="cell">Size</th>
-												<th class="cell"></th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="cell">#15346</td>
-												<td class="cell"><span class="truncate">Document title goes
-														here.ext</span></td>
-												<td class="cell">John Sanders</td>
-												<td class="cell"><span>17 Oct</span><span class="note">2:16 PM</span>
-												</td>
-												<td class="cell"><span class="badge bg-success">Published</span></td>
-												<td class="cell">59kb</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a>
-												</td>
-											</tr>
-
-											<tr>
-												<td class="cell">#15344</td>
-												<td class="cell"><span class="truncate">Document title goes
-														here.ext</span></td>
-												<td class="cell">Teresa Holland</td>
-												<td class="cell"><span class="cell-data">16 Oct</span><span
-														class="note">01:16 AM</span></td>
-												<td class="cell"><span class="badge bg-success">Published</span></td>
-												<td class="cell">59kb</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a>
-												</td>
-											</tr>
-
-											<tr>
-												<td class="cell">#15343</td>
-												<td class="cell"><span class="truncate">Document title goes
-														here.ext</span></td>
-												<td class="cell">Jayden Massey</td>
-												<td class="cell"><span class="cell-data">15 Oct</span><span
-														class="note">8:07 PM</span></td>
-												<td class="cell"><span class="badge bg-success">Published</span></td>
-												<td class="cell">59kb</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a>
-												</td>
-											</tr>
-
-
-											<tr>
-												<td class="cell">#15341</td>
-												<td class="cell"><span class="truncate">Document title goes
-														here.ext</span></td>
-												<td class="cell">Raymond Atkins</td>
-												<td class="cell"><span class="cell-data">11 Oct</span><span
-														class="note">11:18 AM</span></td>
-												<td class="cell"><span class="badge bg-success">Published</span></td>
-												<td class="cell">59kb</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a>
-												</td>
-											</tr>
-
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="tab-pane fade" id="orders-pending" role="tabpanel" aria-labelledby="orders-pending-tab">
-						<div class="app-card app-card-orders-table mb-5">
-							<div class="app-card-body">
-								<div class="table-responsive">
-									<table class="table mb-0 text-left">
-										<thead>
-											<tr>
-												<th class="cell">Id</th>
-												<th class="cell">DocumentTitle</th>
-												<th class="cell">CreatedBy</th>
-												<th class="cell">Date</th>
-												<th class="cell">Status</th>
-												<th class="cell">Size</th>
-												<th class="cell"></th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="cell">#15345</td>
-												<td class="cell"><span class="truncate">Document title goes
-														here.ext</span></td>
-												<td class="cell">Dylan Ambrose</td>
-												<td class="cell"><span class="cell-data">16 Oct</span><span
-														class="note">03:16 AM</span></td>
-												<td class="cell"><span class="badge bg-warning">Pending</span></td>
-												<td class="cell">59kb</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane fade" id="orders-cancelled" role="tabpanel"
-						aria-labelledby="orders-cancelled-tab">
-						<div class="app-card app-card-orders-table mb-5">
-							<div class="app-card-body">
-								<div class="table-responsive">
-									<table class="table mb-0 text-left">
-										<thead>
-											<tr>
-												<th class="cell">Id</th>
-												<th class="cell">DocumentTitle</th>
-												<th class="cell">CreatedBy</th>
-												<th class="cell">Date</th>
-												<th class="cell">Status</th>
-												<th class="cell">Size</th>
-												<th class="cell"></th>
-											</tr>
-										</thead>
-										<tbody>
-
-											<tr>
-												<td class="cell">#15342</td>
-												<td class="cell"><span class="truncate">Document title goes
-														here.ext</span></td>
-												<td class="cell">Reina Brooks</td>
-												<td class="cell"><span class="cell-data">12 Oct</span><span
-														class="note">04:23 PM</span></td>
-												<td class="cell"><span class="badge bg-danger">Checked-Out</span></td>
-												<td class="cell">59kb</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a>
-												</td>
-											</tr>
-
-										</tbody>
-									</table>
-								</div>
+							<div class="card-footer d-flex align-items-center">
+								<p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of
+									<span>16</span> entries
+								</p>
+								<ul class="pagination m-0 ms-auto">
+									<li class="page-item disabled">
+										<a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+											<i class="fa-solid fa-chevron-left icon"></i>
+											prev
+										</a>
+									</li>
+									<li class="page-item"><a class="page-link" href="#">1</a></li>
+									<li class="page-item active"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item"><a class="page-link" href="#">4</a></li>
+									<li class="page-item"><a class="page-link" href="#">5</a></li>
+									<li class="page-item">
+										<a class="page-link" href="#">
+											next
+											<i class="fa-solid fa-chevron-right icon"></i>
+										</a>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="card bg-lite file-uploader-card mb-5">
-				<div class="file-uploader-card-body">
-					<div class="upload-response">
-						<div id="multipleFileUploadError"></div>
-						<div id="multipleFileUploadSuccess"></div>
+			<div class="modal modal-blur fade" id="modal-reportx" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">New User</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-3">
+								<label class="form-label">Name</label>
+								<input type="text" class="form-control" name="example-text-input"
+									placeholder="Email-id">
+							</div>
+							<label class="form-label">User type</label>
+							<div class="form-selectgroup-boxes row mb-3">
+								<div class="col-lg-6">
+									<label class="form-selectgroup-item">
+										<input type="radio" name="report-type" value="1" class="form-selectgroup-input"
+											checked>
+										<span class="form-selectgroup-label d-flex align-items-center p-3">
+											<span class="me-3">
+												<span class="form-selectgroup-check"></span>
+											</span>
+											<span class="form-selectgroup-label-content">
+												<span class="form-selectgroup-title strong mb-1">Activated</span>
+												<span class="d-block text-muted">Set user as Active</span>
+											</span>
+										</span>
+									</label>
+								</div>
+								<div class="col-lg-6">
+									<label class="form-selectgroup-item">
+										<input type="radio" name="report-type" value="1" class="form-selectgroup-input">
+										<span class="form-selectgroup-label d-flex align-items-center p-3">
+											<span class="me-3">
+												<span class="form-selectgroup-check"></span>
+											</span>
+											<span class="form-selectgroup-label-content">
+												<span class="form-selectgroup-title strong mb-1">DeActivated</span>
+												<span class="d-block text-muted">Set user as DeActivated</span>
+											</span>
+										</span>
+									</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-8">
+									<div class="mb-3">
+										<label class="form-label">Report url</label>
+										<div class="input-group input-group-flat">
+											<span class="input-group-text">
+												https://github.com/ajkr195/ContentPlusPlus
+											</span>
+											<!--<input type="text" class="form-control ps-0" value="report-01" autocomplete="off">-->
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<div class="mb-3">
+										<label class="form-label">Roles</label>
+										<select class="form-select">
+											<option value="1" selected>Private</option>
+											<option value="2">Public</option>
+											<option value="3">Hidden</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="mb-3">
+										<label class="form-label">Department</label>
+										<input type="text" class="form-control">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="mb-3">
+										<label class="form-label">Reporting period</label>
+										<input type="date" class="form-control">
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div>
+										<label class="form-label">Additional information</label>
+										<textarea class="form-control" rows="3"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+								Cancel
+							</a>
+							<a href="#" class="btn btn-teal ms-auto" data-bs-dismiss="modal">
+								<i class="fa-solid fa-plus fa-lg me-2"></i>
+								Submit
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
+
+			<div th:replace="~{fragments/footer :: footer}"></div>
+
 		</div>
-
-		<div th:replace="~{fragments/footer :: footer}"></div>
-
 	</div>
 
-	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-	<script th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
 	<script th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
-	<script th:src="@{/js/app.js}"></script>
-	<script th:src="@{/js/fileupload.js}"></script>
-
-
+	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/js/fileupload.js}"></script>
 
 </body>
 

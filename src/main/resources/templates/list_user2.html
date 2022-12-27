@@ -53,8 +53,12 @@
 									<div class="text-muted">
 										Show
 										<div class="mx-2 d-inline-block">
-											<input type="text" class="form-control form-control-sm" value="8" size="3"
-												aria-label="Invoices count">
+											<select class="dropdown-toggle" id="pageSizeSelect">
+												<option selected disabled value="itemsperpage">PageSize</option>
+												<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
+													th:value="${pageSize}">
+												</option>
+											</select>
 										</div>
 										entries
 									</div>
@@ -89,7 +93,8 @@
 									<tbody>
 										<tr th:each="user: ${users}">
 											<td><input class="form-check-input m-0 align-middle border border-success"
-													type="checkbox" aria-label="Select user"></td>
+													type="checkbox" aria-label="Select user" th:id="check_+ ${user.id}">
+											</td>
 											<td th:text="${user.id}"></td>
 											<td> <span class="text-muted" th:text="${user.userfirstname}"></span></td>
 											<td><span class="note" th:text="${user.userlastname}"></span>
@@ -117,6 +122,35 @@
 									</tbody>
 
 								</table>
+							</div>
+							<div class="card-footer d-flex align-items-center">
+								<p class="m-0 text-muted">Total records:<span th:text="${totalusers}"></span> </p>
+								<ul class="pagination m-0 ms-auto">
+									<li class="page-item" th:classappend="${users.number == 0 ? 'disabled' : ''}">
+										<a class="page-link"
+											th:href="@{/listuser2(pageSize=${selectedPageSize}, page=1)}" tabindex="-1"
+											aria-disabled="true">
+											First <i class="fa-solid fa-chevron-left icon"></i>
+
+										</a>
+									</li>
+									<li class="page-item" th:classappend="${users.number == (page - 1) ? 'active' : ''}"
+										th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+										<a class="page-link"
+											th:href="@{/listuser2(pageSize=${selectedPageSize}, page=${page})}"
+											th:text="${page}"></a>
+									</li>
+									<li class="page-item"
+										th:classappend="${users.number +1 == users.totalPages ? 'disabled' : ''}">
+										<a class="page-link"
+											th:href="@{/listuser2(pageSize=${selectedPageSize}, page=${users.totalPages})}"
+											tabindex="-1" aria-disabled="true">
+											<i class="fa-solid fa-chevron-right icon"></i>
+											Last
+										</a>
+									</li>
+
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -227,6 +261,10 @@
 				</div>
 			</div>
 
+
+
+			<!-- Modal -->
+
 			<div th:replace="~{fragments/footer :: footer}"></div>
 
 		</div>
@@ -236,6 +274,19 @@
 	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
 	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script>
+
+		var select_element = document.getElementById('pageSizeSelect');
+
+		select_element.onchange = function () {
+			var elem = (typeof this.selectedIndex === "undefined" ? window.event.srcElement : this);
+			var value = elem.value || elem.options[elem.selectedIndex].value;
+			//alert(value);
+			window.location.replace("/listuser2?pageSize=" + value
+				+ "&page=1");
+		}
+
+	</script>
 	<script type="text/javascript">
 		function getSelectedCheckBoxes() {
 

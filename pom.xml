@@ -6,14 +6,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.0</version>
+		<version>3.0.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>com.springboot</groupId>
 	<artifactId>ContentPlusPlus</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ContentPlusPlus</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Content++ using Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -94,9 +94,9 @@
 			<version>11.6.15</version>
 		</dependency>
 		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>webjars-locator</artifactId>
-			<version>0.46</version>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>htmx.org</artifactId>
+			<version>1.8.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>

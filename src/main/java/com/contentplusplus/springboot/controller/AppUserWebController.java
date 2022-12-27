@@ -1,9 +1,14 @@
 package com.contentplusplus.springboot.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -15,14 +20,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.contentplusplus.springboot.model.AppDBContent;
 import com.contentplusplus.springboot.model.AppFSContent;
+import com.contentplusplus.springboot.model.AppPaginationModel;
 import com.contentplusplus.springboot.model.AppRole;
 import com.contentplusplus.springboot.model.AppUser;
 import com.contentplusplus.springboot.repository.AppDBContentRepository;
 import com.contentplusplus.springboot.repository.AppFSContentRepository;
 import com.contentplusplus.springboot.repository.AppRoleRepository;
+import com.contentplusplus.springboot.repository.AppUserRepository;
 import com.contentplusplus.springboot.service.AppUserService;
 import com.contentplusplus.springboot.validator.AppUserAddValidator;
 
@@ -37,10 +45,13 @@ public class AppUserWebController {
 
 	@Autowired
 	AppRoleRepository appRoleRepository;
-	
+
+	@Autowired
+	AppUserRepository appUserRepository;
+
 	@Autowired
 	AppDBContentRepository appUserDocumentRepository;
-	
+
 	@Autowired
 	AppFSContentRepository appFSContentRepository;
 
@@ -53,20 +64,44 @@ public class AppUserWebController {
 		this.userService = userService;
 	}
 
-	@GetMapping({ "/", "/index" })
+	@GetMapping({ "/index" })
 	public String home(Model model) {
-		return "index";
+		model.addAttribute("pagename", "index");
+		return "dashboard";
 	}
 
 	@GetMapping("/listuser")
 	public String listRegisteredUsers(Model model) {
 		model.addAttribute("appname", "Content++");
-		//List<AppUser> users = userService.findAllUsers();
+		// List<AppUser> users = userService.findAllUsers();
 		model.addAttribute("pagename", "listuser");
 		model.addAttribute("users", userService.findAllUsers());
 		model.addAttribute("activeusers", userService.findAllActiveUsers());
 		model.addAttribute("inactiveusers", userService.findAllInActiveUsers());
 		return "list_user";
+	}
+
+	@RequestMapping(value = { "/listuser2" }, method = RequestMethod.GET, produces = "text/html")
+	public String showuserList(@RequestParam("pageSize") Optional<Integer> pageSize,
+			@RequestParam("page") Optional<Integer> page, Model model) {
+
+		int BUTTONS_TO_SHOW = 9;
+		int INITIAL_PAGE = 0;
+		int INITIAL_PAGE_SIZE = 8;
+		int[] PAGE_SIZES = { 5, 8, 10, 15, 20, 25, 50, 100 };
+		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+		Page<AppUser> users = appUserRepository
+				.findAll(PageRequest.of(evalPage, evalPageSize, Sort.by(Order.asc("id"))));
+		AppPaginationModel pager = new AppPaginationModel(users.getTotalPages(), users.getNumber(), BUTTONS_TO_SHOW);
+		model.addAttribute("users", users);
+		model.addAttribute("selectedPageSize", evalPageSize);
+		model.addAttribute("totalusers", appUserRepository.count());
+		model.addAttribute("pageSizes", PAGE_SIZES);
+		model.addAttribute("pager", pager);
+		model.addAttribute("pagename", "listuser2");
+		return "list_user2";
 	}
 
 	@GetMapping("/mydocuments")
@@ -82,7 +117,7 @@ public class AppUserWebController {
 		model.addAttribute("allfiles", allfiles);
 		return "documents_db";
 	}
-	
+
 	@GetMapping("/documentsfs")
 	String fsDocs(Model model) {
 		model.addAttribute("pagename", "documentsfs");
@@ -119,6 +154,11 @@ public class AppUserWebController {
 		model.addAttribute("pagename", "help");
 		return "help";
 	}
+	
+	@GetMapping({ "/", "/home" })
+	String homePage(Model model) {
+		return "home";
+	}
 
 	@GetMapping("/signup")
 	String singupPage(Model model) {
@@ -132,7 +172,7 @@ public class AppUserWebController {
 		return (List<AppRole>) appRoleRepository.findAll();
 	}
 
-	@PostMapping("/signup/save")
+	@PostMapping("/signup")
 	public String registrationsignup(@Valid @ModelAttribute("user") AppUser user, BindingResult result, Model model) {
 		AppUser existing = userService.findByUseremailIgnoreCase(user.getUseremail());
 		if (existing != null) {
@@ -145,9 +185,9 @@ public class AppUserWebController {
 			model.addAttribute("user", user);
 			return "signup";
 		}
-		
+
 		userService.saveUser(user);
-		
+
 		return "redirect:/signup?success";
 	}
 
@@ -160,7 +200,7 @@ public class AppUserWebController {
 		if (logout != null)
 			model.addAttribute("logout", "You have been logged out successfully.");
 
-		return "login";
+		return "signin";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -174,6 +214,5 @@ public class AppUserWebController {
 		}
 		return "redirect:login?logout";
 	}
-	
-	
+
 }

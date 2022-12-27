@@ -1,394 +1,362 @@
-<header class="app-header fixed-top" th:fragment="navbar">
-	<div class="app-header-inner">
-		<div class="container-fluid py-2">
-			<div class="app-header-content">
-				<div class="row justify-content-between align-items-center">
-
-					<div class="col-auto">
-						<a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
-							<i class="fa-solid fa-bars fa-xl"></i>
+<div class="nonsticky-top" th:fragment="navbar">
+	<header class="navbar navbar-expand-md navbar-light d-print-none">
+		<div class="container-xl">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
+				aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<h1 class="navbar-brand d-none-navbar-horizontal pe-0 pe-md-3">
+				<a href="/index" th:href="@{/index}">
+					<img src="img/brand.png" width="110" height="32" alt="Content++" class="navbar-brand-image">
+					Content++</a>
+			</h1>
+			<div class="navbar-nav flex-row order-md-last">
+				<div class="d-none d-md-flex">
+					<div class="nav-item dropdown d-none d-md-flex me-3">
+						<a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1"
+							aria-label="Show notifications">
+							<i class="fa-regular fa-bell fa-lg text-muted"></i>
+							<span class="badge bg-red"></span>
 						</a>
-					</div>
-
-					<div class="search-mobile-trigger d-sm-none col">
-						<i class="search-mobile-trigger-icon fas fa-search"></i>
-					</div>
-
-					<div class="app-search-box col">
-						<form class="app-search-form">
-							<input type="text" placeholder="Search..." name="search" class="form-control search-input">
-							<button type="submit" class="btn search-btn btn-primary" value="Search"><i
-									class="fas fa-search"></i></button>
-						</form>
-					</div>
-
-
-
-					<div class="app-utilities col-auto">
-						<div class="app-utility-item app-notifications-dropdown dropdown">
-							<a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle"
-								data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"
-								title="Notifications">
-								<i class="fa-regular fa-bell fa-xl"></i>
-								<span class="icon-badge">3</span>
-							</a>
-
-
-							<div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
-								<div class="dropdown-menu-header p-3">
-									<h5 class="dropdown-menu-title mb-0">Notifications</h5>
+						<div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Last updates</h3>
 								</div>
-
-								<div class="dropdown-menu-content">
-									<div class="item p-3">
-										<div class="row gx-2 justify-content-between align-items-center">
+								<div class="list-group list-group-flush list-group-hoverable">
+									<div class="list-group-item">
+										<div class="row align-items-center">
+											<div class="col-auto"><span
+													class="status-dot status-dot-animated bg-red d-block"></span>
+											</div>
+											<div class="col text-truncate">
+												<a href="#" class="text-body d-block">Example 1</a>
+												<div class="d-block text-muted text-truncate mt-n1">
+													Some Super Long Text Will Be Truncated...
+												</div>
+											</div>
 											<div class="col-auto">
-												<i class="fa-regular fa-user"></i>
+												<a href="#" class="list-group-item-actions">
+													<i class="fa-regular fa-star icon text-muted"></i>
+												</a>
 											</div>
-
-											<div class="col">
-												<div class="info">
-													<div class="desc">Amy shared a file with you. Lorem ipsum dolor
-														sit amet, consectetur adipiscing elit. </div>
-													<div class="meta"> 2 hrs ago</div>
+										</div>
+									</div>
+									<div class="list-group-item">
+										<div class="row align-items-center">
+											<div class="col-auto"><span class="status-dot d-block"></span></div>
+											<div class="col text-truncate">
+												<a href="#" class="text-body d-block">Example 2</a>
+												<div class="d-block text-muted text-truncate mt-n1">
+													Some Text Goes Here
 												</div>
 											</div>
-
-										</div>
-
-										<a class="link-mask" href="/notifications" th:href="@{/notifications}"></a>
-									</div>
-
-									<div class="item p-3">
-										<div class="row gx-2 justify-content-between align-items-center">
 											<div class="col-auto">
-												<div class="app-icon-holder">
-													<i class="fa-solid fa-file-invoice"></i>
-												</div>
+												<a href="#" class="list-group-item-actions show">
+													<i class="fa-regular fa-star icon text-yellow"></i>
+												</a>
 											</div>
-
-											<div class="col">
-												<div class="info">
-													<div class="desc">You have a new invoice. Proin venenatis
-														interdum est.</div>
-													<div class="meta"> 1 day ago</div>
-												</div>
-											</div>
-
 										</div>
-
-										<a class="link-mask" href="/notifications" th:href="@{/notifications}"></a>
 									</div>
-
-									<div class="item p-3">
-										<div class="row gx-2 justify-content-between align-items-center">
+									<div class="list-group-item">
+										<div class="row align-items-center">
+											<div class="col-auto"><span class="status-dot d-block"></span></div>
+											<div class="col text-truncate">
+												<a href="#" class="text-body d-block">Example 3</a>
+												<div class="d-block text-muted text-truncate mt-n1">
+													Some Text Goes Here
+												</div>
+											</div>
 											<div class="col-auto">
-												<div class="app-icon-holder icon-holder-mono">
-													<i class="fa-regular fa-chart-bar"></i>
-												</div>
+												<a href="#" class="list-group-item-actions">
+													<i class="fa-regular fa-star icon text-muted"></i>
+												</a>
 											</div>
-
-											<div class="col">
-												<div class="info">
-													<div class="desc">Your report is ready. Proin venenatis interdum
-														est.</div>
-													<div class="meta"> 3 days ago</div>
-												</div>
-											</div>
-
 										</div>
-
-										<a class="link-mask" href="/notifications" th:href="@{/notifications}"></a>
 									</div>
-
-									<div class="item p-3">
-										<div class="row gx-2 justify-content-between align-items-center">
+									<div class="list-group-item">
+										<div class="row align-items-center">
+											<div class="col-auto"><span
+													class="status-dot status-dot-animated bg-green d-block"></span>
+											</div>
+											<div class="col text-truncate">
+												<a href="#" class="text-body d-block">Example 4</a>
+												<div class="d-block text-muted text-truncate mt-n1">
+													Some Text Goes Here
+												</div>
+											</div>
 											<div class="col-auto">
-												<i class="fa-regular fa-comment"></i>
+												<a href="#" class="list-group-item-actions">
+													<i class="fa-regular fa-star icon text-muted"></i>
+												</a>
 											</div>
-
-											<div class="col">
-												<div class="info">
-													<div class="desc">James sent you a new message.</div>
-													<div class="meta"> 7 days ago</div>
-												</div>
-											</div>
-
 										</div>
-
-										<a class="link-mask" href="/notifications" th:href="@{/notifications}"></a>
 									</div>
-
 								</div>
-
-
-								<div class="dropdown-menu-footer p-2 text-center">
-									<a href="/notifications" th:href="@{/notifications}">View all</a>
-								</div>
-
 							</div>
-
 						</div>
-
-						<div class="app-utility-item">
-							<a id="theme-switcher" href="#" title="DarkMode" onclick="switchTheme()">
-								<i class="fa-solid fa-sun fa-xl"></i>
-							</a>
-							<!--onclick="switchTheme()"-->
-						</div>
-
-
-						<div class="app-utility-item">
-							<a href="/settings" th:href="@{/settings}" title="Settings">
-								<i class="fa-solid fa-gear fa-xl"></i>
-							</a>
-						</div>
-
-
-						<div class="app-utility-item app-user-dropdown dropdown">
-							<a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#"
-								role="button" aria-expanded="false"><img class="profile-image"
-									th:src="@{/img/profile-1.png}" alt=""></a>
-							<ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-								<li><a class="dropdown-item" href="/account" th:href="@{/account}"><i
-											class="fa-solid fa-user text-secondary"></i> Account</a></li>
-								<li><a class="dropdown-item" href="/settings" th:href="@{/settings}"><i
-											class="fa-solid fa-gear text-secondary"></i> Settings</a></li>
-								<li>
-									<hr class="dropdown-divider">
-								</li>
-								<li><a class="dropdown-item text-danger" href="#" onClick="logoutConfirmation()"><i
-											class="fa-solid fa-right-from-bracket text-danger"></i> Log Out</a></li>
-								<!--li><a class="dropdown-item text-danger" href="/logout" th:href="@{/logout}"><i
-											class="fa-solid fa-right-from-bracket text-danger"></i> Log Out</a></li>			
-											 href="#" onClick="logoutConfirmation()"
-											
-								</br>
-								<!--li><span th:text="${principal.getAuthorities()}"></span></li-->
-								<li>
-									<div class="user-roles" th:each="iter : ${principal.getAuthorities()}">
-										<p class="role-item mt-0 mb-0" th:text="${iter}"> </p>
-									</div>
-								</li>
-							</ul>
-						</div>
-
 					</div>
-
 				</div>
-
-			</div>
-
-		</div>
-
-	</div>
-
-	<div id="app-sidepanel" class="app-sidepanel">
-		<div id="sidepanel-drop" class="sidepanel-drop"></div>
-		<div class="sidepanel-inner d-flex flex-column">
-			<a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
-			<div class="app-branding text-center mb-5">
-				<div class="app-logo" href="/" th:href="@{/}"><img class="logo-icon" th:src="@{/img/brandlogo3.png}">
-					<div class="logo-text" th:text="${appname}">AppName</div>
+				<div class="nav-item dropdown">
+					<a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+						aria-label="Open user menu">
+						<span class="avatar avatar-sm text-danger"
+							th:style="'background-image: url(/img/avatar.svg)'"></span>
+						<div class="d-none d-xl-block ps-2">
+							<div th:text="${principal.Username}">Admin</div>
+							<!--<div class="mt-1 small text-muted" th:text="${principal.getAuthorities()}">UI Design</div>-->
+						</div>
+					</a>
+					<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+						<a href="#" class="dropdown-item"><i class="fa-regular fa-user text-muted me-1"></i> Profile</a>
+						<div class="dropdown-divider"></div>
+						<a href="./settings.html" class="dropdown-item"><i class="fa-solid fa-cog text-muted me-1"></i>
+							Settings</a>
+						<a href="/logout" th:href="@{/logout}" class="dropdown-item"><i
+								class="fa-solid fa-right-from-bracket text-muted me-1"></i> <span class="me-1"
+								th:text="${principal.Username}"></span></a>
+						<div><span th:text="${principal.getAuthorities()}"></span></div>
+					</div>
 				</div>
-				<div class="user-name mt-3 text-success" th:text="${principal.getUsername()}">UserName</div>
 			</div>
-
-
-			<nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1 mt-5">
-				<ul class="app-menu list-unstyled accordion" id="menu-accordion">
-					<li class="nav-item">
-
-						<a class="nav-link" th:classappend="${pagename == 'home'  OR pagename == null ? 'active' : ''}"
-							href="/" th:href="@{/}">
-							<span class="nav-icon">
-								<i class="fa-solid fa-gauge-simple-high fa-xl"></i>
-							</span>
-							<span class="nav-link-text">Dashboard</span>
-						</a>
-
-					</li>
-
-					<li class="nav-item">
-
-						<a class="nav-link" th:classappend="${pagename == 'mydocuments' ? 'active' : ''}"
-							href="/mydocuments" th:href="@{/mydocuments}">
-							<span class="nav-icon">
-								<i class="fa-solid fa-heart-pulse fa-xl"></i>
-							</span>
-							<span class="nav-link-text">My Documents</span>
-						</a>
-
-					</li>
-
-					<li class="nav-item">
-
-						<a class="nav-link" th:classappend="${pagename == 'documentsdb' ? 'active' : ''}"
-							href="/documentsdb" th:href="@{/documentsdb}">
-							<span class="nav-icon">
-								<i class="fa-solid fa-database fa-xl"></i>
-							</span>
-							<span class="nav-link-text">DB Documents</span>
-						</a>
-
-					</li>
-
-					<li class="nav-item">
-
-						<a class="nav-link" th:classappend="${pagename == 'documentsfs' ? 'active' : ''}"
-							href="/documentsfs" th:href="@{/documentsfs}">
-							<span class="nav-icon">
-								<i class="fa-solid fa-file fa-xl"></i>
-							</span>
-							<span class="nav-link-text">FS Documents</span>
-						</a>
-
-					</li>
-
-					<li class="nav-item">
-
-						<a class="nav-link" th:classappend="${pagename == 's3bucket' ? 'active' : ''}" href="/s3bucket"
-							th:href="@{/s3bucket}">
-							<span class="nav-icon">
-								<i class="fa-brands fa-aws fa-xl"></i>
-							</span>
-							<span class="nav-link-text">S3 Documents</span>
-						</a>
-
-					</li>
-
-					<li class="nav-item">
-
-						<a class="nav-link" th:classappend="${pagename == 'documentsalf' ? 'active' : ''}"
-							href="#">
-							<span class="nav-icon">
-								<i class="fa-solid fa-dharmachakra fa-xl"></i>
-							</span>
-							<span class="nav-link-text">Alfresco Documents</span>
-						</a>
-
-					</li>
-
-
-					<li class="nav-item">
-
-						<a class="nav-link" th:classappend="${pagename == 'listuser' ? 'active' : ''}" href="/listuser"
-							th:href="@{/listuser}">
-							<span class="nav-icon">
-								<i class="fa-solid fa-file-waveform fa-xl"></i>
-							</span>
-							<span class="nav-link-text">Users</span>
-						</a>
-
-					</li>
-
-
-					<li class="nav-item has-submenu">
-
-						<a class="nav-link submenu-toggle"
-							th:classappend="${pagename == 'account' OR pagename == 'settings' OR pagename == 'notifications' ? 'active' : ''}"
-							href="#" data-bs-toggle="collapse" data-bs-target="#submenu-1" aria-expanded="false"
-							aria-controls="submenu-1">
-							<span class="nav-icon">
-								<i class="fa-solid fa-clone fa-xl"></i>
-							</span>
-							<span class="nav-link-text">Pages</span>
-							<span class="submenu-arrow">
-								<i class="fa-solid fa-chevron-down"></i>
-							</span>
-
-						</a>
-
-						<div id="submenu-1" class="collapse submenu submenu-1"
-							th:classappend="${pagename == 'account' OR pagename == 'settings' OR pagename == 'notifications' ? 'show' : ''}"
-							data-bs-parent="#menu-accordion">
-							<ul class="submenu-list list-unstyled">
-								<li class="submenu-item"><a class="submenu-link"
-										th:classappend="${pagename == 'notifications' ? 'active' : ''}"
-										href="/notifications" th:href="@{/notifications}">Notifications</a></li>
-								<li class="submenu-item"><a class="submenu-link"
-										th:classappend="${pagename == 'account' ? 'active' : ''}" href="/account"
-										th:href="@{/account}">Account</a>
-								</li>
-								<li class="submenu-item"><a class="submenu-link"
-										th:classappend="${pagename == 'settings' ? 'active' : ''}" href="/settings"
-										th:href="@{/settings}">Settings</a>
-								</li>
-							</ul>
-						</div>
-					</li>
-
-					<li class="nav-item has-submenu">
-
-						<a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse"
-							data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
-							<span class="nav-icon">
-								<i class="fa-brands fa-hive fa-xl"></i>
-							</span>
-							<span class="nav-link-text">External</span>
-							<span class="submenu-arrow">
-								<i class="fa-solid fa-chevron-down"></i>
-							</span>
-
-						</a>
-
-						<div id="submenu-2" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
-							<ul class="submenu-list list-unstyled">
-								<li class="submenu-item"><a class="submenu-link" href="/login"
-										th:href="@{/login}">Login</a></li>
-								<li class="submenu-item"><a class="submenu-link" href="/signup"
-										th:href="@{/signup}">Signup</a></li>
-								<li class="submenu-item"><a class="submenu-link" href="/resetpassword"
-										th:href="@{/resetpassword}">Reset
-										password</a></li>
-								<li class="submenu-item"><a class="submenu-link" href="/404" th:href="@{/404}">404
-										page</a></li>
-							</ul>
-						</div>
-					</li>
-
-					<li class="nav-item">
-
-						<a class="nav-link" th:classappend="${pagename == 'help' ? 'active' : ''}" href="/help"
-							th:href="@{/help}">
-							<span class="nav-icon">
-								<i class="fa-regular fa-life-ring fa-xl"></i>
-							</span>
-							<span class="nav-link-text">Help</span>
-						</a>
-
-					</li>
-
-				</ul>
-
-			</nav>
-
-			<div class="app-sidepanel-footer">
-				<nav class="app-nav app-nav-footer">
-					<ul class="app-menu footer-menu list-unstyled">
-						<li class="nav-item">
-							<a class="nav-link" href="/settings" th:href="@{/settings}">
-								<span class="nav-icon">
-									<i class="fa-solid fa-cog fa-2xl text-secondary"></i>
+			<div class="collapse navbar-collapse" id="navbar-menu">
+				<div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
+					<ul class="navbar-nav">
+						<li class="nav-item" th:classappend="${pagename == 'index' ? 'active' : ''}">
+							<a class="nav-link" href="/index" th:href="@{/index}">
+								<span class="nav-link-icon d-md-none d-lg-inline-block">
+									<i class="fa-solid fa-house-user"></i>
 								</span>
-								<span class="nav-link-text mx-2">Settings</span>
+								<span class="nav-link-title">
+									Dashboard
+								</span>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#" onClick="logoutConfirmation()">
-								<span class="nav-icon">
-									<i class="fa-solid fa-right-from-bracket fa-2xl text-secondary"></i>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
+								data-bs-auto-close="outside" role="button" aria-expanded="false">
+								<span class="nav-link-icon d-md-none d-lg-inline-block">
+									<i class="fa-solid fa-circle-nodes"></i>
 								</span>
-								<span class="nav-link-text mx-2">Logout</span>
+								<span class="nav-link-title">
+									Interface
+								</span>
 							</a>
+							<div class="dropdown-menu">
+								<div class="dropdown-menu-columns">
+									<div class="dropdown-menu-column">
+										<a class="dropdown-item" href="/documentsfs">
+											Documents FS <span
+												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">FileSystem</span>
+										</a>
+										<a class="dropdown-item" href="/documentsdb">
+											Documents DB <span
+												class="badge badge-sm bg-success-lt text-uppercase ms-auto">RDBMS</span>
+										</a>
+
+										<a class="dropdown-item" href="/documentsfs">
+											Documents FS <span
+												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">FileSystem</span>
+										</a>
+										<a class="dropdown-item" href="/documentsdb">
+											Documents DB <span
+												class="badge badge-sm bg-success-lt text-uppercase ms-auto">RDBMS</span>
+										</a>
+
+
+										<div class="dropend">
+											<a class="dropdown-item dropdown-toggle" href="#sidebar-cards"
+												data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
+												aria-expanded="false">
+												Preferences
+												<span
+													class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+											</a>
+											<div class="dropdown-menu">
+												<a class="dropdown-item" href="?appView=fluid" title="FullScreen View"
+													data-bs-toggle="tooltip" data-bs-placement="bottom">
+													<i class="fa-solid fa-expand text-muted me-2"></i> Layout 1<span
+														class="badge badge-sm bg-primary-lt text-uppercase ms-auto">
+														FLUID</span>
+												</a>
+												<a class="dropdown-item" href="?appView=boxed" title="Reading View"
+													data-bs-toggle="tooltip" data-bs-placement="bottom">
+													<i class="fa-solid fa-box fa-lg text-muted me-2"></i> Layout 2
+													<span class="badge badge-sm bg-green-lt text-uppercase ms-auto">
+														BOXED</span>
+												</a>
+
+												<a href="?theme=dark" class="dropdown-item hide-theme-dark"
+													title="Enable dark mode" data-bs-toggle="tooltip"
+													data-bs-placement="bottom">
+													<i class="fa-regular fa-moon fa-lg text-muted"></i>
+													<span class="badge badge-sm bg-green-lt text-uppercase ms-auto">
+														Dark-Mode</span>
+												</a>
+												<a href="?theme=light"
+													class="dropdown-item hide-theme-light text-yellow"
+													title="Enable light mode" data-bs-toggle="tooltip"
+													data-bs-placement="bottom">
+													<i class="fa-solid fa-sun fa-lg"></i>
+													<span class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">
+														Light-Mode</span>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="dropdown-menu-column">
+										<a class="dropdown-item" href="?appView=fluid" title="FullScreen View"
+											data-bs-toggle="tooltip" data-bs-placement="bottom">
+											<i class="fa-solid fa-expand text-muted me-2"></i> Layout 1<span
+												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">
+												FLUID</span>
+										</a>
+										<a class="dropdown-item" href="?appView=boxed" title="Reading View"
+											data-bs-toggle="tooltip" data-bs-placement="bottom">
+											<i class="fa-solid fa-box fa-lg text-muted me-2"></i> Layout 2
+											<span class="badge badge-sm bg-green-lt text-uppercase ms-auto">
+												BOXED</span>
+										</a>
+
+										<a href="?theme=dark" class="dropdown-item hide-theme-dark"
+											title="Enable dark mode" data-bs-toggle="tooltip"
+											data-bs-placement="bottom">
+											<i class="fa-regular fa-moon fa-lg text-muted"></i>
+											<span class="badge badge-sm bg-green-lt text-uppercase ms-auto">
+												Dark-Mode</span>
+										</a>
+										<a href="?theme=light" class="dropdown-item hide-theme-light text-yellow"
+											title="Enable light mode" data-bs-toggle="tooltip"
+											data-bs-placement="bottom">
+											<i class="fa-solid fa-sun fa-lg"></i>
+											<span class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">
+												Light-Mode</span>
+										</a>
+									</div>
+								</div>
+							</div>
 						</li>
+						<li class="nav-item dropdown"
+							th:classappend="${pagename == 'documentsdb' OR pagename == 'documentsfs' ? 'active' : ''}">
+							<a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown"
+								data-bs-auto-close="outside" role="button" aria-expanded="false">
+								<span class="nav-link-icon d-md-none d-lg-inline-block">
+									<i class="fa-regular fa-star"></i>
+								</span>
+								<span class="nav-link-title">
+									Repositories
+								</span>
+							</a>
+							<div class="dropdown-menu">
+								<div class="dropdown-menu-columns">
+									<div class="dropdown-menu-column">
+										<a class="dropdown-item" href="/documentsdb">
+											Documents DB <span
+												class="badge badge-sm bg-success-lt text-uppercase ms-auto">RDBMS</span>
+										</a>
+										<a class="dropdown-item" href="/documentsfs">
+											Documents FS <span
+												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">FileSystem</span>
+										</a>
+									</div>
+									<div class="dropdown-menu-column">
+										<a class="dropdown-item" href="/documentsfs">
+											Documents FS <span
+												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">FileSystem</span>
+										</a>
+										<a class="dropdown-item" href="/documentsdb">
+											Documents DB <span
+												class="badge badge-sm bg-success-lt text-uppercase ms-auto">RDBMS</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
+								data-bs-auto-close="outside" role="button" aria-expanded="false">
+								<span class="nav-link-icon d-md-none d-lg-inline-block">
+									<i class="fa-solid fa-border-all"></i>
+								</span>
+								<span class="nav-link-title">
+									Preferences
+								</span>
+							</a>
+							<div class="dropdown-menu">
+								<div class="dropdown-menu-columns">
+									<div class="dropdown-menu-column">
+
+										<a class="dropdown-item" href="?appView=fluid" title="FullScreen View"
+											data-bs-toggle="tooltip" data-bs-placement="bottom">
+											<i class="fa-solid fa-expand text-muted me-2"></i> Layout 1<span
+												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">
+												FLUID</span>
+										</a>
+										<a class="dropdown-item" href="?appView=boxed" title="Reading View"
+											data-bs-toggle="tooltip" data-bs-placement="bottom">
+											<i class="fa-solid fa-box fa-lg text-muted me-2"></i> Layout 2
+											<span class="badge badge-sm bg-green-lt text-uppercase ms-auto">
+												BOXED</span>
+										</a>
+
+										<a href="?theme=dark" class="dropdown-item hide-theme-dark"
+											title="Enable dark mode" data-bs-toggle="tooltip"
+											data-bs-placement="bottom">
+											<i class="fa-regular fa-moon fa-lg text-muted"></i>
+											<span class="badge badge-sm bg-green-lt text-uppercase ms-auto">
+												Dark-Mode</span>
+										</a>
+										<a href="?theme=light" class="dropdown-item hide-theme-light text-yellow"
+											title="Enable light mode" data-bs-toggle="tooltip"
+											data-bs-placement="bottom">
+											<i class="fa-solid fa-sun fa-lg"></i>
+											<span class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">
+												Light-Mode</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="nav-item dropdown"
+							th:classappend="${pagename == 'listuser' OR pagename == 'listuser2' ? 'active' : ''}">
+							<a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
+								data-bs-auto-close="outside" role="button" aria-expanded="false">
+								<span class="nav-link-icon d-md-none d-lg-inline-block">
+									<i class="fa-solid fa-user-group icon"></i>
+								</span>
+								<span class="nav-link-title">
+									Users
+								</span>
+							</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="/listuser">
+									User List1
+								</a>
+								<a class="dropdown-item" href="/listuser2">
+									User List2
+								</a>
+							</div>
+						</li>
+						<li class="nav-item dropdown" th:classappend="${pagename == 'help' ? 'active' : ''}">
+							<a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
+								data-bs-auto-close="outside" role="button" aria-expanded="false">
+								<span class="nav-link-icon d-md-none d-lg-inline-block">
+									<i class="fa-regular fa-life-ring"></i>
+								</span>
+								<span class="nav-link-title">
+									Help
+								</span>
+							</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="/help">
+									Information
+								</a>
+							</div>
+						</li>
+
 					</ul>
-				</nav>
+				</div>
 			</div>
-
-
 		</div>
-
-	</div>
-
-</header>
+	</header>
+</div>

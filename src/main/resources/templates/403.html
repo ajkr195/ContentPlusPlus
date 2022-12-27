@@ -1,36 +1,35 @@
-<!DOCTYPE html>
-<html data-theme="dark" lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="~{fragments/head :: head}"></div>
 
-<body class="app">
-
-	<div th:replace="~{fragments/navbar :: navbar}"></div>
-
-	<div class="container mb-5">
-		<div class="row">
-			<div class="col-12 col-md-11 col-lg-7 col-xl-6 mx-auto">
-				<div class="app-card p-5 text-center shadow-sm mt-5">
-					<h1 class="page-title mb-4">403<br><span class="font-weight-light text-danger">Access Denied
-							!!</span></h1>
-					<div class="mb-4">
-						Sorry, you do not have permission for this operation.
+<body class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page page-center">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<div class="container-xl py-4 errorpage">
+				<div class="empty">
+					<div class="empty-header">Access Denied !</div>
+					<p class="empty-title">Sorry you do not have acccess to the requested resource.</p>
+					<p class="empty-subtitle text-muted">
+						Please go back to the previous page or try going to Home page
+					</p>
+					<div class="empty-action">
+						<a href="/" class="btn btn-primary">
+							<!-- Download SVG icon from http://tabler-icons.io/i/arrow-left -->
+							<i class="fa-solid fa-house-user me-2"></i> Go home
+						</a>
 					</div>
-					<!-- class="btn app-btn-primary" href="/" th:href="@{/}">Go to home page</!-->
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-	<div th:replace="~{fragments/footer :: footer}"></div>
-
-	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-	<script th:src="@{/webjars/font-awesome/js/all.js}"></script>
-	<script th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
-	<script th:src="@{/js/app.js}"></script>
-
+	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
 </body>
 
 </html>

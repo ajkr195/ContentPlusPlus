@@ -8,7 +8,7 @@ function deleteallDBfiles() {
 		icon: 'warning',
 		showDenyButton: true,
 		confirmButtonColor: '#dc3545',
-		denyButtonColor: '#28a745',
+		denyButtonColor: 'gray',
 		confirmButtonText: 'Yes, delete em all !',
 		denyButtonText: `Don't delete`,
 	}).then((result) => {
@@ -38,7 +38,7 @@ function deleteallFSfiles() {
 		icon: 'warning',
 		showDenyButton: true,
 		confirmButtonColor: '#dc3545',
-		denyButtonColor: '#28a745',
+		denyButtonColor: 'gray',
 		confirmButtonText: 'Yes, delete em all !',
 		denyButtonText: `Don't delete`,
 	}).then((result) => {
@@ -62,19 +62,19 @@ function deleteallFSfiles() {
 }
 
 
-function deletefile(id, Object) {
+function deletedbfile(id, Object) {
 	Swal.fire({
 		title: 'Are you sure?',
 		text: "You want to Delete this file? This operation is irreversible and this file may not be recovered later.",
 		icon: 'warning',
 		showDenyButton: true,
-		confirmButtonColor: '#dc3545',
-		denyButtonColor: '#28a745',
+		confirmButtonColor: '#006666',
+		denyButtonColor: 'gray',
 		confirmButtonText: 'Yes, delete it!',
 		denyButtonText: `Don't delete`,
 	}).then((result) => {
 		if (result.isConfirmed) {
-			fetch('/deletefile/' + id, {
+			fetch('/deletedbfile/' + id, {
 				method: 'DELETE',
 			})
 			Swal.fire(
@@ -112,7 +112,7 @@ function deleteFSfile(id, Object) {
 		icon: 'warning',
 		showDenyButton: true,
 		confirmButtonColor: '#dc3545',
-		denyButtonColor: '#28a745',
+		denyButtonColor: 'gray',
 		confirmButtonText: 'Yes, delete it!',
 		denyButtonText: `Don't delete`,
 	}).then((result) => {

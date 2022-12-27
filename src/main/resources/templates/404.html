@@ -1,35 +1,35 @@
-<!DOCTYPE html>
-<html data-theme="dark" lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="~{fragments/head :: head}"></div>
 
-<body class="app app-404-page">
-
-	<div class="container mb-5">
-		<div class="row">
-			<div class="col-12 col-md-11 col-lg-7 col-xl-6 mx-auto">
-				<div class="app-branding text-center mb-5">
-					<a class="app-logo" href="/" th:href="@{/}"><img class="logo-icon me-2" th:src="@{/img/profile-1.png}"></a>
-					<br /><br />
-					<div class="logo-text" th:text="${appname}">AppName</div>
-				</div>
-				<br />
-				<div class="app-card p-5 text-center shadow-sm mt-5">
-					<h1 class="page-title mb-4">404<br><span class="font-weight-light text-danger">Page Not Found</span></h1>
-					<div class="mb-4">
-						Sorry, the page you're looking for do not exist.
+<body class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page page-center">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<div class="container-xl py-4 errorpage">
+				<div class="empty">
+					<div class="empty-header">Page Not Found !</div>
+					<p class="empty-title">Sorry the requested resource could not be found.</p>
+					<p class="empty-subtitle text-muted">
+						Please go back to the previous page or try going to Home page
+					</p>
+					<div class="empty-action">
+						<a href="/" class="btn btn-primary">
+							<!-- Download SVG icon from http://tabler-icons.io/i/arrow-left -->
+							<i class="fa-solid fa-house-user me-2"></i> Go home
+						</a>
 					</div>
-					<a class="btn app-btn-primary" href="/" th:href="@{/}">Go to home page</a>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-	<div th:replace="~{fragments/footer :: footer}"></div>
-
-
-
+	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
 </body>
 
 </html>

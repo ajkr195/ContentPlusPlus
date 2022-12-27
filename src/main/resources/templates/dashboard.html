@@ -1,0 +1,1229 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<!-- Page header -->
+			<div class="page-header d-print-none">
+				<div class="container-xl">
+					<div class="row g-2 align-items-center">
+						<div class="col">
+							<!-- Page pre-title -->
+							<div class="page-pretitle">
+								Overview
+							</div>
+							<h2 class="page-title">
+								Dashboard
+							</h2>
+						</div>
+						<!-- Page title actions -->
+						<div class="col-auto ms-auto d-print-none">
+							<div class="btn-list">
+								<span class="d-none d-sm-inline">
+									<a href="#" class="btn">
+										New view
+									</a>
+								</span>
+								<a href="#" class="btn btn-teal d-none d-sm-inline-block" data-bs-toggle="modal"
+									data-bs-target="#modal-report">
+									<i class="fa-solid fa-plus fa-xl"></i>
+									Create new report
+								</a>
+								<a href="#" class="btn btn-teal d-sm-none btn-icon" data-bs-toggle="modal"
+									data-bs-target="#modal-report" aria-label="Create new report">
+									<i class="fa-solid fa-plus fa-xl"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Page body -->
+			<div class="page-body">
+				<div class="container-xl">
+					<div class="row row-deck row-cards">
+						<div class="col-12">
+							<div class="card card-md">
+								<div class="card-stamp card-stamp-lg">
+									<div class="card-stamp-icon bg-primary">
+										<i class="fa-solid fa-file-shield"></i>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="row align-items-center">
+										<div class="col-10">
+											<h3 class="h1">Content++</h3>
+											<div class="markdown text-muted">
+												All you see here is open source and are MIT-licensed. Visit
+												<a href="https://github.com/ajkr195/ContentPlusPlus" target="_blank"
+													rel="noopener">ContentPlusPlus</a>.
+												Download, fork, modify, customize the Content++ Repo and use it
+												the way you like it.<a
+													href="https://github.com/ajkr195/?tab=repositories"
+													class="btn btn-teal ms-2 text-white" target="_blank"
+													rel="noopener">Download
+													Now</a>
+											</div>
+											<!--											<div class="mt-3">-->
+											<!--												-->
+											<!--											</div>-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-sm-6 col-lg-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<div class="subheader">Sales</div>
+										<div class="ms-auto lh-1">
+											<div class="dropdown">
+												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
+													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+												<div class="dropdown-menu dropdown-menu-end">
+													<a class="dropdown-item active" href="#">Last 7 days</a>
+													<a class="dropdown-item" href="#">Last 30 days</a>
+													<a class="dropdown-item" href="#">Last 3 months</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="h1 mb-3">75%</div>
+									<div class="d-flex mb-2">
+										<div>Conversion rate</div>
+										<div class="ms-auto">
+											<span class="text-green d-inline-flex align-items-center lh-1">
+												7%
+												<i class="fa-solid fa-arrow-trend-up ms-1"></i>
+											</span>
+										</div>
+									</div>
+									<div class="progress progress-sm">
+										<div class="progress-bar bg-primary" style="width: 75%" role="progressbar"
+											aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+											aria-label="75% Complete">
+											<span class="visually-hidden">75% Complete</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<div class="subheader">Revenue</div>
+										<div class="ms-auto lh-1">
+											<div class="dropdown">
+												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
+													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+												<div class="dropdown-menu dropdown-menu-end">
+													<a class="dropdown-item active" href="#">Last 7 days</a>
+													<a class="dropdown-item" href="#">Last 30 days</a>
+													<a class="dropdown-item" href="#">Last 3 months</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-baseline">
+										<div class="h1 mb-0 me-2">$4,300</div>
+										<div class="me-auto">
+											<span class="text-green d-inline-flex align-items-center lh-1">
+												8%
+												<i class="fa-solid fa-arrow-trend-up ms-1"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div id="chart-revenue-bg" class="chart-sm"></div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<div class="subheader">New clients</div>
+										<div class="ms-auto lh-1">
+											<div class="dropdown">
+												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
+													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+												<div class="dropdown-menu dropdown-menu-end">
+													<a class="dropdown-item active" href="#">Last 7 days</a>
+													<a class="dropdown-item" href="#">Last 30 days</a>
+													<a class="dropdown-item" href="#">Last 3 months</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-baseline">
+										<div class="h1 mb-3 me-2">6,782</div>
+										<div class="me-auto">
+											<span class="text-yellow d-inline-flex align-items-center lh-1">
+												10%
+												<i class="fa-solid fa-arrow-trend-down ms-1"></i>
+											</span>
+										</div>
+									</div>
+									<div id="chart-new-clients" class="chart-sm"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<div class="subheader">Active users</div>
+										<div class="ms-auto lh-1">
+											<div class="dropdown">
+												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
+													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+												<div class="dropdown-menu dropdown-menu-end">
+													<a class="dropdown-item active" href="#">Last 7 days</a>
+													<a class="dropdown-item" href="#">Last 30 days</a>
+													<a class="dropdown-item" href="#">Last 3 months</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-baseline">
+										<div class="h1 mb-3 me-2">2,986</div>
+										<div class="me-auto">
+											<span class="text-green d-inline-flex align-items-center lh-1">
+												4%
+												<i class="fa-solid fa-arrow-trend-up ms-1"></i>
+											</span>
+										</div>
+									</div>
+									<div id="chart-active-users" class="chart-sm"></div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-12">
+							<div class="row row-cards">
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-primary text-white avatar">
+														<i class="fa-solid fa-dollar-sign"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														132 Sales
+													</div>
+													<div class="text-muted">
+														12 waiting payments
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-green text-white avatar">
+														<i class="fa-solid fa-cart-shopping"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														78 Orders
+													</div>
+													<div class="text-muted">
+														32 shipped
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-primary text-white avatar">
+														<i class="fa-solid fa-share-nodes"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														623 Shares
+													</div>
+													<div class="text-muted">
+														16 today
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-green text-white avatar">
+														<i class="fa-regular fa-thumbs-up"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														132 Likes
+													</div>
+													<div class="text-muted">
+														21 today
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+						<div class="col-sm-6 col-lg-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<div class="subheader">Sales</div>
+										<div class="ms-auto lh-1">
+											<div class="dropdown">
+												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
+													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+												<div class="dropdown-menu dropdown-menu-end">
+													<a class="dropdown-item active" href="#">Last 7 days</a>
+													<a class="dropdown-item" href="#">Last 30 days</a>
+													<a class="dropdown-item" href="#">Last 3 months</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="h1 mb-3">75%</div>
+									<div class="d-flex mb-2">
+										<div>Conversion rate</div>
+										<div class="ms-auto">
+											<span class="text-green d-inline-flex align-items-center lh-1">
+												7%
+												<i class="fa-solid fa-arrow-trend-up ms-1"></i>
+											</span>
+										</div>
+									</div>
+									<div class="progress progress-sm">
+										<div class="progress-bar bg-primary" style="width: 75%" role="progressbar"
+											aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+											aria-label="75% Complete">
+											<span class="visually-hidden">75% Complete</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<div class="subheader">Revenue</div>
+										<div class="ms-auto lh-1">
+											<div class="dropdown">
+												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
+													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+												<div class="dropdown-menu dropdown-menu-end">
+													<a class="dropdown-item active" href="#">Last 7 days</a>
+													<a class="dropdown-item" href="#">Last 30 days</a>
+													<a class="dropdown-item" href="#">Last 3 months</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-baseline">
+										<div class="h1 mb-0 me-2">$4,300</div>
+										<div class="me-auto">
+											<span class="text-green d-inline-flex align-items-center lh-1">
+												8%
+												<i class="fa-solid fa-arrow-trend-up ms-1"></i>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div id="chart-revenue-bg" class="chart-sm"></div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<div class="subheader">New clients</div>
+										<div class="ms-auto lh-1">
+											<div class="dropdown">
+												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
+													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+												<div class="dropdown-menu dropdown-menu-end">
+													<a class="dropdown-item active" href="#">Last 7 days</a>
+													<a class="dropdown-item" href="#">Last 30 days</a>
+													<a class="dropdown-item" href="#">Last 3 months</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-baseline">
+										<div class="h1 mb-3 me-2">6,782</div>
+										<div class="me-auto">
+											<span class="text-yellow d-inline-flex align-items-center lh-1">
+												10%
+												<i class="fa-solid fa-arrow-trend-down ms-1"></i>
+											</span>
+										</div>
+									</div>
+									<div id="chart-new-clients" class="chart-sm"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<div class="subheader">Active users</div>
+										<div class="ms-auto lh-1">
+											<div class="dropdown">
+												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
+													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+												<div class="dropdown-menu dropdown-menu-end">
+													<a class="dropdown-item active" href="#">Last 7 days</a>
+													<a class="dropdown-item" href="#">Last 30 days</a>
+													<a class="dropdown-item" href="#">Last 3 months</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-baseline">
+										<div class="h1 mb-3 me-2">2,986</div>
+										<div class="me-auto">
+											<span class="text-green d-inline-flex align-items-center lh-1">
+												4%
+												<i class="fa-solid fa-arrow-trend-up ms-1"></i>
+											</span>
+										</div>
+									</div>
+									<div id="chart-active-users" class="chart-sm"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="row row-cards">
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-primary text-white avatar">
+														<i class="fa-solid fa-dollar-sign"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														132 Sales
+													</div>
+													<div class="text-muted">
+														12 waiting payments
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-green text-white avatar">
+														<i class="fa-solid fa-cart-shopping"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														78 Orders
+													</div>
+													<div class="text-muted">
+														32 shipped
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-primary text-white avatar">
+														<i class="fa-solid fa-share-nodes"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														623 Shares
+													</div>
+													<div class="text-muted">
+														16 today
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-green text-white avatar">
+														<i class="fa-regular fa-thumbs-up"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														132 Likes
+													</div>
+													<div class="text-muted">
+														21 today
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="row row-cards">
+								<div class="col-12">
+									<div class="card">
+										<div class="card-body">
+											<p class="mb-3">Using Storage <strong>6854.45 TB </strong> of <strong> 888
+													PB </strong> </p>
+											<div class="progress progress-separated mb-3">
+												<div class="progress-bar bg-primary" role="progressbar"
+													style="width: 44%" aria-label="Regular"></div>
+												<div class="progress-bar bg-info" role="progressbar" style="width: 19%"
+													aria-label="System"></div>
+												<div class="progress-bar bg-success" role="progressbar"
+													style="width: 9%" aria-label="Shared"></div>
+											</div>
+											<div class="row">
+												<div class="col-auto d-flex align-items-center pe-2">
+													<span class="legend me-2 bg-primary"></span>
+													<span>Regular</span>
+													<span
+														class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">915TB</span>
+												</div>
+												<div class="col-auto d-flex align-items-center px-2">
+													<span class="legend me-2 bg-info"></span>
+													<span>System</span>
+													<span
+														class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">415TB</span>
+												</div>
+												<div class="col-auto d-flex align-items-center px-2">
+													<span class="legend me-2 bg-success"></span>
+													<span>Shared</span>
+													<span
+														class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">201TB</span>
+												</div>
+												<div class="col-auto d-flex align-items-center ps-2">
+													<span class="legend me-2"></span>
+													<span>Free</span>
+													<span
+														class="d-none d-md-inline d-lg-none d-xxl-inline ms-2 text-muted">612TB</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6 col-lg-4">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Social Media Traffic</h3>
+								</div>
+								<table class="table card-table table-vcenter">
+									<thead>
+										<tr>
+											<th>Network</th>
+											<th colspan="2">Visitors</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Instagram</td>
+											<td>3,550</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 71.0%"></div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Twitter</td>
+											<td>1,798</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 35.96%"></div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Facebook</td>
+											<td>1,245</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 24.9%"></div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>TikTok</td>
+											<td>986</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 19.72%"></div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Pinterest</td>
+											<td>854</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 17.08%"></div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>VK</td>
+											<td>650</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 13.0%"></div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Pinterest</td>
+											<td>420</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 8.4%"></div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="col-md-6 col-lg-8">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Tasks</h3>
+								</div>
+								<div class="table-responsive">
+									<table class="table card-table table-vcenter">
+										<tr>
+											<td class="w-1 pe-0">
+												<input type="checkbox"
+													class="form-check-input m-0 align-middle border border-success"
+													aria-label="Select task" checked>
+											</td>
+											<td class="w-100">
+												<a href="#" class="text-reset">Extend the data model.</a>
+											</td>
+											<td class="text-nowrap text-muted">
+												<i class="fa-regular fa-calendar-xmark"></i>
+												August 04, 2021
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-solid fa-check"></i>
+													2/7
+												</a>
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-regular fa-message"></i>
+													3
+												</a>
+											</td>
+											<td>
+												<span class="avatar avatar-sm"
+													style="background-image: url(img/profile-1.png)"></span>
+											</td>
+										</tr>
+										<tr>
+											<td class="w-1 pe-0">
+												<input type="checkbox"
+													class="form-check-input m-0 align-middle border border-success"
+													aria-label="Select task">
+											</td>
+											<td class="w-100">
+												<a href="#" class="text-reset">Verify the event flow.</a>
+											</td>
+											<td class="text-nowrap text-muted">
+												<i class="fa-regular fa-calendar-xmark"></i>
+												January 03, 2019
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-solid fa-check"></i>
+													3/10
+												</a>
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-regular fa-message"></i>
+													6
+												</a>
+											</td>
+											<td>
+												<span class="avatar avatar-sm">JL</span>
+											</td>
+										</tr>
+										<tr>
+											<td class="w-1 pe-0">
+												<input type="checkbox"
+													class="form-check-input m-0 align-middle border border-success"
+													aria-label="Select task">
+											</td>
+											<td class="w-100">
+												<a href="#" class="text-reset">Database backup and maintenance</a>
+											</td>
+											<td class="text-nowrap text-muted">
+												<i class="fa-regular fa-calendar-xmark"></i>
+												December 28, 2018
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-solid fa-check"></i>
+													10/6
+												</a>
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-regular fa-message"></i>
+													1
+												</a>
+											</td>
+											<td>
+												<span class="avatar avatar-sm"
+													style="background-image: url(img/profile-1.png)"></span>
+											</td>
+										</tr>
+										<tr>
+											<td class="w-1 pe-0">
+												<input type="checkbox"
+													class="form-check-input m-0 align-middle border border-success"
+													aria-label="Select task" checked>
+											</td>
+											<td class="w-100">
+												<a href="#" class="text-reset">Identify the implementation team.</a>
+											</td>
+											<td class="text-nowrap text-muted">
+												<i class="fa-regular fa-calendar-xmark"></i>
+												November 07, 2020
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-solid fa-check"></i>
+													6/10
+												</a>
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-regular fa-message"></i>
+													12
+												</a>
+											</td>
+											<td>
+												<span class="avatar avatar-sm"
+													style="background-image: url(img/profile-1.png)"></span>
+											</td>
+										</tr>
+										<tr>
+											<td class="w-1 pe-0">
+												<input type="checkbox"
+													class="form-check-input m-0 align-middle border border-success"
+													aria-label="Select task">
+											</td>
+											<td class="w-100">
+												<a href="#" class="text-reset">Define users and workflow</a>
+											</td>
+											<td class="text-nowrap text-muted">
+												<i class="fa-regular fa-calendar-xmark"></i>
+												November 23, 2021
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-solid fa-check"></i>
+													3/7
+												</a>
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-regular fa-message"></i>
+													5
+												</a>
+											</td>
+											<td>
+												<span class="avatar avatar-sm"
+													style="background-image: url(img/profile-1.png)"></span>
+											</td>
+										</tr>
+										<tr>
+											<td class="w-1 pe-0">
+												<input type="checkbox"
+													class="form-check-input m-0 align-middle border border-success"
+													aria-label="Select task" checked>
+											</td>
+											<td class="w-100">
+												<a href="#" class="text-reset">Check Pull Requests</a>
+											</td>
+											<td class="text-nowrap text-muted">
+												<i class="fa-regular fa-calendar-xmark"></i>
+												January 14, 2021
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-solid fa-check"></i>
+													2/9
+												</a>
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-regular fa-message"></i>
+													3
+												</a>
+											</td>
+											<td>
+												<span class="avatar avatar-sm"
+													style="background-image: url(img/profile-1.png)"></span>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-md-6 col-lg-8">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Tasks</h3>
+								</div>
+								<div class="table-responsive">
+									<table class="table card-table table-vcenter">
+										<tr>
+											<td class="w-1 pe-0">
+												<input type="checkbox"
+													class="form-check-input m-0 align-middle border border-success"
+													aria-label="Select task" checked>
+											</td>
+											<td class="w-100">
+												<a href="#" class="text-reset">Extend the data model.</a>
+											</td>
+											<td class="text-nowrap text-muted">
+												<i class="fa-regular fa-calendar-xmark"></i>
+												August 04, 2021
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-solid fa-check"></i>
+													2/7
+												</a>
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-regular fa-message"></i>
+													3
+												</a>
+											</td>
+											<td>
+												<span class="avatar avatar-sm"
+													style="background-image: url(img/profile-1.png)"></span>
+											</td>
+										</tr>
+										<tr>
+											<td class="w-1 pe-0">
+												<input type="checkbox"
+													class="form-check-input m-0 align-middle border border-success"
+													aria-label="Select task">
+											</td>
+											<td class="w-100">
+												<a href="#" class="text-reset">Verify the event flow.</a>
+											</td>
+											<td class="text-nowrap text-muted">
+												<i class="fa-regular fa-calendar-xmark"></i>
+												January 03, 2019
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-solid fa-check"></i>
+													3/10
+												</a>
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-regular fa-message"></i>
+													6
+												</a>
+											</td>
+											<td>
+												<span class="avatar avatar-sm">JL</span>
+											</td>
+										</tr>
+										<tr>
+											<td class="w-1 pe-0">
+												<input type="checkbox"
+													class="form-check-input m-0 align-middle border border-success"
+													aria-label="Select task">
+											</td>
+											<td class="w-100">
+												<a href="#" class="text-reset">Database backup and maintenance</a>
+											</td>
+											<td class="text-nowrap text-muted">
+												<i class="fa-regular fa-calendar-xmark"></i>
+												December 28, 2018
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-solid fa-check"></i>
+													10/6
+												</a>
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-regular fa-message"></i>
+													1
+												</a>
+											</td>
+											<td>
+												<span class="avatar avatar-sm"
+													style="background-image: url(img/profile-1.png)"></span>
+											</td>
+										</tr>
+										<tr>
+											<td class="w-1 pe-0">
+												<input type="checkbox"
+													class="form-check-input m-0 align-middle border border-success"
+													aria-label="Select task" checked>
+											</td>
+											<td class="w-100">
+												<a href="#" class="text-reset">Identify the implementation team.</a>
+											</td>
+											<td class="text-nowrap text-muted">
+												<i class="fa-regular fa-calendar-xmark"></i>
+												November 07, 2020
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-solid fa-check"></i>
+													6/10
+												</a>
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-regular fa-message"></i>
+													12
+												</a>
+											</td>
+											<td>
+												<span class="avatar avatar-sm"
+													style="background-image: url(img/profile-1.png)"></span>
+											</td>
+										</tr>
+										<tr>
+											<td class="w-1 pe-0">
+												<input type="checkbox"
+													class="form-check-input m-0 align-middle border border-success"
+													aria-label="Select task">
+											</td>
+											<td class="w-100">
+												<a href="#" class="text-reset">Define users and workflow</a>
+											</td>
+											<td class="text-nowrap text-muted">
+												<i class="fa-regular fa-calendar-xmark"></i>
+												November 23, 2021
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-solid fa-check"></i>
+													3/7
+												</a>
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-regular fa-message"></i>
+													5
+												</a>
+											</td>
+											<td>
+												<span class="avatar avatar-sm"
+													style="background-image: url(img/profile-1.png)"></span>
+											</td>
+										</tr>
+										<tr>
+											<td class="w-1 pe-0">
+												<input type="checkbox"
+													class="form-check-input m-0 align-middle border border-success"
+													aria-label="Select task" checked>
+											</td>
+											<td class="w-100">
+												<a href="#" class="text-reset">Check Pull Requests</a>
+											</td>
+											<td class="text-nowrap text-muted">
+												<i class="fa-regular fa-calendar-xmark"></i>
+												January 14, 2021
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-solid fa-check"></i>
+													2/9
+												</a>
+											</td>
+											<td class="text-nowrap">
+												<a href="#" class="text-muted">
+													<i class="fa-regular fa-message"></i>
+													3
+												</a>
+											</td>
+											<td>
+												<span class="avatar avatar-sm"
+													style="background-image: url(img/profile-1.png)"></span>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-md-6 col-lg-4">
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Social Media Traffic</h3>
+								</div>
+								<table class="table card-table table-vcenter">
+									<thead>
+										<tr>
+											<th>Network</th>
+											<th colspan="2">Visitors</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Instagram</td>
+											<td>3,550</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 71.0%"></div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Twitter</td>
+											<td>1,798</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 35.96%"></div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Facebook</td>
+											<td>1,245</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 24.9%"></div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>TikTok</td>
+											<td>986</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 19.72%"></div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Pinterest</td>
+											<td>854</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 17.08%"></div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>VK</td>
+											<td>650</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 13.0%"></div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>Pinterest</td>
+											<td>420</td>
+											<td class="w-50">
+												<div class="progress progress-xs">
+													<div class="progress-bar bg-primary" style="width: 8.4%"></div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+			<div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">New report</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-3">
+								<label class="form-label">Name</label>
+								<input type="text" class="form-control" name="example-text-input"
+									placeholder="Your report name">
+							</div>
+							<label class="form-label">Report type</label>
+							<div class="form-selectgroup-boxes row mb-3">
+								<div class="col-lg-6">
+									<label class="form-selectgroup-item">
+										<input type="radio" name="report-type" value="1" class="form-selectgroup-input"
+											checked>
+										<span class="form-selectgroup-label d-flex align-items-center p-3">
+											<span class="me-3">
+												<span class="form-selectgroup-check"></span>
+											</span>
+											<span class="form-selectgroup-label-content">
+												<span class="form-selectgroup-title strong mb-1">Simple</span>
+												<span class="d-block text-muted">Provide only basic data needed for the
+													report</span>
+											</span>
+										</span>
+									</label>
+								</div>
+								<div class="col-lg-6">
+									<label class="form-selectgroup-item">
+										<input type="radio" name="report-type" value="1" class="form-selectgroup-input">
+										<span class="form-selectgroup-label d-flex align-items-center p-3">
+											<span class="me-3">
+												<span class="form-selectgroup-check"></span>
+											</span>
+											<span class="form-selectgroup-label-content">
+												<span class="form-selectgroup-title strong mb-1">Advanced</span>
+												<span class="d-block text-muted">Insert charts and additional advanced
+													analyses
+													to be inserted in the report</span>
+											</span>
+										</span>
+									</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-8">
+									<div class="mb-3">
+										<label class="form-label">Report url</label>
+										<div class="input-group input-group-flat">
+											<span class="input-group-text">
+												https://github.com/ajkr195/ContentPlusPlus
+											</span>
+											<!--<input type="text" class="form-control ps-0" value="report-01" autocomplete="off">-->
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<div class="mb-3">
+										<label class="form-label">Visibility</label>
+										<select class="form-select">
+											<option value="1" selected>Private</option>
+											<option value="2">Public</option>
+											<option value="3">Hidden</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="mb-3">
+										<label class="form-label">Client name</label>
+										<input type="text" class="form-control">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="mb-3">
+										<label class="form-label">Reporting period</label>
+										<input type="date" class="form-control">
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div>
+										<label class="form-label">Additional information</label>
+										<textarea class="form-control" rows="3"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+								Cancel
+							</a>
+							<a href="#" class="btn btn-teal ms-auto" data-bs-dismiss="modal">
+								<i class="fa-solid fa-plus fa-lg me-2"></i>
+								Create new report
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div th:replace="~{fragments/footer :: footer}"></div>
+
+		</div>
+	</div>
+
+
+	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	
+</body>
+
+</html>

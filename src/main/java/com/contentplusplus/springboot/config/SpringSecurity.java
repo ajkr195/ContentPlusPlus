@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 //@EnableWebSecurity
@@ -24,6 +25,8 @@ public class SpringSecurity {
 		http.authorizeHttpRequests()
 		.requestMatchers("/register/**").permitAll()
 		.requestMatchers("/listuser/**").hasAnyAuthority("ADMIN", "EDITOR", "VIEWER")//.hasAuthority("ADMIN")//.hasRole("ROLE_ADMIN")//.hasAuthority("ROLE_ADMIN")
+		.requestMatchers("/index/**").hasAuthority("ADMIN")
+		.requestMatchers("/home").permitAll()
 		.requestMatchers("/login").permitAll()
 		.requestMatchers("/signup/**").permitAll()
 		.requestMatchers("/spring.svg/**").permitAll()
@@ -37,6 +40,10 @@ public class SpringSecurity {
 		.loginPage("/login").permitAll().defaultSuccessUrl("/index")
 		.and()
 		.logout().permitAll()
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))  //new
+        .clearAuthentication(true) //new
+        .invalidateHttpSession(true) //new
+        .deleteCookies("JSESSIONID")//new
 		.and()
 		.csrf().disable().exceptionHandling().accessDeniedPage("/403");
 
