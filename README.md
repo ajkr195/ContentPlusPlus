@@ -52,16 +52,4 @@ Content Management Systems were supposed to:
   - A quick overview is here - https://github.com/ajkr195/CaseManager
 
 
-![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/2.JPG)
-
-![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/1.JPG)
-
-![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/7.JPG)
-
-![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/5.JPG)
-
-![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/6.JPG)
-
-![springbootrocks](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/3.JPG)
-
-UI is derived and heavily based on (if you want to support this project) - https://github.com/xriley/portal-theme-bs5 
+UI is derived and heavily based on (if you want to support this project) - https://github.com/tabler/tabler 
