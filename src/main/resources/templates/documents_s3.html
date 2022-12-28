@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<!-- Page header -->
+			<div class="page-header d-print-none">
+				<div class="container-xl">
+					<div class="row g-2 align-items-center">
+						<div class="col">
+							<!-- Page pre-title -->
+							<div class="page-pretitle">
+								Manage S3 Files
+							</div>
+							<h2 class="page-title">
+								S3 Files
+							</h2>
+						</div>
+						<!-- Page title actions -->
+						<div class="col-auto ms-auto d-print-none">
+							<div class="btn-list">
+								<span th:if="${!files.empty}" class="d-none d-sm-inline">
+									<a href="#" class="btn" th:onClick="deleteallDBfiles()">
+										<i class="fa-solid fa-trash-can text-danger me-1"> </i>DeleteAll
+									</a>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Page body -->
+			<div class="page-body">
+				<div class="container-xl">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Manage S3 Bucket Files</h3>
+							</div>
+							<div class="card-body border-bottom py-3">
+								<div class="d-flex">
+									<div class="text-muted">
+										Show
+										<div class="mx-2 d-inline-block">
+											<input type="text" class="form-control form-control-sm" value="8" size="3"
+												aria-label="Invoices count">
+										</div>
+										entries
+									</div>
+									<div class="ms-auto text-muted">
+										Search:
+										<div class="ms-2 d-inline-block">
+											<input type="text" class="form-control form-control-sm"
+												aria-label="Search invoice">
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="app-card app-card-notification shadow-sm mb-4">
+								<div class="app-card-header px-4 py-3">
+									<div class="row g-3 align-items-center">
+										<div class="col-12 col-lg-auto text-center text-lg-start">
+											<i class="profile-image fa-brands fa-aws fa-3x"></i>
+										</div>
+										<div class="col-12 col-lg-auto text-center text-lg-start">
+											<h4 class="notification-title mb-1">Upload File to AWS S3</h4>
+										</div>
+									</div>
+								</div>
+								<div class="app-card-body p-4">
+									<form id="awss3UploadForm" name="awss3UploadForm" method="POST"
+										enctype="multipart/form-data" th:action="s3bucketupload">
+										<input id="file" type="file" name="file" class="file-input" multiple required />
+										<button type="submit" class="btn btn-sm btn-success submit-btn"><i
+												class="fa-solid fa-upload"></i> Upload</button>
+									</form>
+								</div>
+							</div>
+
+
+							<div class="app-card app-card-notification shadow-sm mb-4">
+								<div class="app-card-header px-4 py-3">
+									<div class="row g-3 align-items-center">
+										<div class="col-12 col-lg-auto text-center text-lg-start">
+											<i class="profile-image fa-brands fa-aws fa-3x"></i>
+										</div>
+										<div class="col-12 col-lg-auto text-center text-lg-start">
+											<h4 class="notification-title mb-1">Download files from AWS S3</h4>
+										</div>
+									</div>
+								</div>
+								<div class="app-card-body p-4">
+
+
+									<div class="app-card-body p-4" th:if="${#lists.isEmpty(files)}">
+										<div class="notification-content">
+											No Documents have been added yet to this repository. Upload content and try
+											refreshing this page.
+										</div>
+									</div>
+
+									<table id="tableitemsprimary" class="table table-bordered table-hover"
+										style="width: 100%" th:if="${!files.empty}">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>File Path</th>
+												<th>File Name</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<th:block th:each="file,iter : ${files}">
+												<tr>
+													<th scope="row">1</th>
+													<td th:text="${file.filePath}"></td>
+													<td th:text="${file.fileName}"></td>
+													<td><a th:href="@{'/download/'+${file.id}}">Download</a></td>
+												</tr>
+											</th:block>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>#</th>
+												<th>File Path</th>
+												<th>File Name</th>
+												<th>Action</th>
+											</tr>
+										</tfoot>
+									</table>
+
+								</div>
+								<div class="card-footer d-flex align-items-center">
+									<p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of
+										<span>16</span> entries
+									</p>
+									<ul class="pagination m-0 ms-auto">
+										<li class="page-item disabled">
+											<a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+												<i class="fa-solid fa-chevron-left icon"></i>
+												prev
+											</a>
+										</li>
+										<li class="page-item"><a class="page-link" href="#">1</a></li>
+										<li class="page-item active"><a class="page-link" href="#">2</a></li>
+										<li class="page-item"><a class="page-link" href="#">3</a></li>
+										<li class="page-item"><a class="page-link" href="#">4</a></li>
+										<li class="page-item"><a class="page-link" href="#">5</a></li>
+										<li class="page-item">
+											<a class="page-link" href="#">
+												next
+												<i class="fa-solid fa-chevron-right icon"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal modal-blur fade" id="modal-reportx" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title">New User</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div class="mb-3">
+									<label class="form-label">Name</label>
+									<input type="text" class="form-control" name="example-text-input"
+										placeholder="Email-id">
+								</div>
+								<label class="form-label">User type</label>
+								<div class="form-selectgroup-boxes row mb-3">
+									<div class="col-lg-6">
+										<label class="form-selectgroup-item">
+											<input type="radio" name="report-type" value="1"
+												class="form-selectgroup-input" checked>
+											<span class="form-selectgroup-label d-flex align-items-center p-3">
+												<span class="me-3">
+													<span class="form-selectgroup-check"></span>
+												</span>
+												<span class="form-selectgroup-label-content">
+													<span class="form-selectgroup-title strong mb-1">Activated</span>
+													<span class="d-block text-muted">Set user as Active</span>
+												</span>
+											</span>
+										</label>
+									</div>
+									<div class="col-lg-6">
+										<label class="form-selectgroup-item">
+											<input type="radio" name="report-type" value="1"
+												class="form-selectgroup-input">
+											<span class="form-selectgroup-label d-flex align-items-center p-3">
+												<span class="me-3">
+													<span class="form-selectgroup-check"></span>
+												</span>
+												<span class="form-selectgroup-label-content">
+													<span class="form-selectgroup-title strong mb-1">DeActivated</span>
+													<span class="d-block text-muted">Set user as DeActivated</span>
+												</span>
+											</span>
+										</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-8">
+										<div class="mb-3">
+											<label class="form-label">Report url</label>
+											<div class="input-group input-group-flat">
+												<span class="input-group-text">
+													https://github.com/ajkr195/ContentPlusPlus
+												</span>
+												<!--<input type="text" class="form-control ps-0" value="report-01" autocomplete="off">-->
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="mb-3">
+											<label class="form-label">Roles</label>
+											<select class="form-select">
+												<option value="1" selected>Private</option>
+												<option value="2">Public</option>
+												<option value="3">Hidden</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="mb-3">
+											<label class="form-label">Department</label>
+											<input type="text" class="form-control">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="mb-3">
+											<label class="form-label">Reporting period</label>
+											<input type="date" class="form-control">
+										</div>
+									</div>
+									<div class="col-lg-12">
+										<div>
+											<label class="form-label">Additional information</label>
+											<textarea class="form-control" rows="3"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+									Cancel
+								</a>
+								<a href="#" class="btn btn-teal ms-auto" data-bs-dismiss="modal">
+									<i class="fa-solid fa-plus fa-lg me-2"></i>
+									Submit
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div th:replace="~{fragments/footer :: footer}"></div>
+
+			</div>
+		</div>
+
+		<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+		<script th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+		<script type="text/javascript" th:src="@{/js/app.js}"></script>
+		<script type="text/javascript" th:src="@{/js/fileupload.js}"></script>
+
+</body>
+
+</html>

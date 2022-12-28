@@ -32,14 +32,14 @@ public class AwsS3Controller {
 		model.addAttribute("files", files);
 		model.addAttribute("pagename", "s3bucket");
 
-		return "s3bucket";
+		return "documents_s3";
 
 	}
 
 	@PostMapping("/s3bucketupload")
 	public String upload(@RequestParam("file") MultipartFile file) throws IOException {
 		metadataService.upload(file);
-		return "redirect:/s3bucket";
+		return "redirect:/documents_s3";
 	}
 
 	@GetMapping("download/{id}")

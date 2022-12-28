@@ -155,8 +155,13 @@ public class AppUserWebController {
 		return "help";
 	}
 	
-	@GetMapping({ "/", "/home" })
+	@GetMapping({ "/" })
 	String homePage(Model model) {
+		return "redirect:/home";
+	}
+	
+	@GetMapping({ "/home" })
+	String home2Page(Model model) {
 		return "home";
 	}
 
