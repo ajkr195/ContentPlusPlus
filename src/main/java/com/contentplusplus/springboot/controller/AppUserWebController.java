@@ -63,6 +63,11 @@ public class AppUserWebController {
 	public AppUserWebController(AppUserService userService) {
 		this.userService = userService;
 	}
+	
+	@ModelAttribute("roles")
+	public List<AppRole> initializeRoles() {
+		return (List<AppRole>) appRoleRepository.findAll();
+	}
 
 	@GetMapping({ "/index" })
 	public String home(Model model) {
@@ -164,17 +169,12 @@ public class AppUserWebController {
 	String home2Page(Model model) {
 		return "home";
 	}
-
+	
 	@GetMapping("/signup")
 	String singupPage(Model model) {
 		AppUser user = new AppUser();
 		model.addAttribute("user", user);
 		return "signup";
-	}
-
-	@ModelAttribute("roles")
-	public List<AppRole> initializeRoles() {
-		return (List<AppRole>) appRoleRepository.findAll();
 	}
 
 	@PostMapping("/signup")

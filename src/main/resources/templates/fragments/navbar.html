@@ -113,8 +113,8 @@
 						<a href="./settings.html" class="dropdown-item"><i class="fa-solid fa-cog text-muted me-1"></i>
 							Settings</a>
 						<a href="/logout" th:href="@{/logout}" class="dropdown-item"><i
-								class="fa-solid fa-right-from-bracket text-muted me-1"></i> <span class="me-1"
-								th:text="${principal.Username}"></span></a>
+								class="fa-solid fa-right-from-bracket text-muted me-1"></i> Logout</a>
+						<!--<span class="me-1" th:text="${principal.Username}"></span>-->
 						<div><span th:text="${principal.getAuthorities()}"></span></div>
 					</div>
 				</div>
@@ -154,15 +154,10 @@
 												class="badge badge-sm bg-success-lt text-uppercase ms-auto">RDBMS</span>
 										</a>
 
-										<a class="dropdown-item" href="/documentsfs">
-											Documents FS <span
-												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">FileSystem</span>
+										<a class="dropdown-item" href="/s3bucket">
+											Documents S3 <span
+												class="badge badge-sm bg-success-lt text-uppercase ms-auto">S3Bucket</span>
 										</a>
-										<a class="dropdown-item" href="/documentsdb">
-											Documents DB <span
-												class="badge badge-sm bg-success-lt text-uppercase ms-auto">RDBMS</span>
-										</a>
-
 
 										<div class="dropend">
 											<a class="dropdown-item dropdown-toggle" href="#sidebar-cards"
@@ -205,33 +200,8 @@
 										</div>
 									</div>
 									<div class="dropdown-menu-column">
-										<a class="dropdown-item" href="?appView=fluid" title="FullScreen View"
-											data-bs-toggle="tooltip" data-bs-placement="bottom">
-											<i class="fa-solid fa-expand text-muted me-2"></i> Layout 1<span
-												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">
-												FLUID</span>
-										</a>
-										<a class="dropdown-item" href="?appView=boxed" title="Reading View"
-											data-bs-toggle="tooltip" data-bs-placement="bottom">
-											<i class="fa-solid fa-box fa-lg text-muted me-2"></i> Layout 2
-											<span class="badge badge-sm bg-green-lt text-uppercase ms-auto">
-												BOXED</span>
-										</a>
-
-										<a href="?theme=dark" class="dropdown-item hide-theme-dark"
-											title="Enable dark mode" data-bs-toggle="tooltip"
-											data-bs-placement="bottom">
-											<i class="fa-regular fa-moon fa-lg text-muted"></i>
-											<span class="badge badge-sm bg-green-lt text-uppercase ms-auto">
-												Dark-Mode</span>
-										</a>
-										<a href="?theme=light" class="dropdown-item hide-theme-light text-yellow"
-											title="Enable light mode" data-bs-toggle="tooltip"
-											data-bs-placement="bottom">
-											<i class="fa-solid fa-sun fa-lg"></i>
-											<span class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">
-												Light-Mode</span>
-										</a>
+										<a class="dropdown-item" href="#">Link1</a>
+										<a class="dropdown-item" href="#">Link2</a>
 									</div>
 								</div>
 							</div>
@@ -264,14 +234,8 @@
 											Documents S3 <span
 												class="badge badge-sm bg-success-lt text-uppercase ms-auto">S3Bucket</span>
 										</a>
-										<a class="dropdown-item" href="/documentsfs">
-											Documents FS <span
-												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">FileSystem</span>
-										</a>
-										<a class="dropdown-item" href="/documentsdb">
-											Documents DB <span
-												class="badge badge-sm bg-success-lt text-uppercase ms-auto">RDBMS</span>
-										</a>
+										<a class="dropdown-item" href="#">Link1</a>
+										<a class="dropdown-item" href="#">Link2</a>
 									</div>
 								</div>
 							</div>
@@ -333,11 +297,15 @@
 								</span>
 							</a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="/listuser">
-									User List1
-								</a>
+<!--								<a class="dropdown-item" href="/listuser">-->
+<!--									<i class="fa-solid fa-user-group icon me-1"></i> <span-->
+<!--										class="badge badge-sm bg-success-lt text-uppercase ms-auto">-->
+<!--										User List1</span>-->
+<!--								</a>-->
 								<a class="dropdown-item" href="/listuser2">
-									User List2
+									<i class="fa-solid fa-user-group icon me-1"></i> <span
+										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
+										User List</span>
 								</a>
 							</div>
 						</li>

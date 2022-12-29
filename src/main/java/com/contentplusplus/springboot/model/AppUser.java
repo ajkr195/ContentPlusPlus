@@ -64,7 +64,7 @@ public class AppUser  extends Auditable<String> implements Serializable {
 	private String passwordConfirm;
 	
 	@JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "app_user_role", joinColumns = {
 			@JoinColumn(name = "userid", referencedColumnName = "ID") }, inverseJoinColumns = {
 					@JoinColumn(name = "roleid", referencedColumnName = "ID") })

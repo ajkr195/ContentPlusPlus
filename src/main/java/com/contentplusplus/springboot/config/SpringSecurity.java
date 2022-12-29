@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 @Configuration
 //@EnableWebSecurity
@@ -25,6 +26,7 @@ public class SpringSecurity {
 		http.authorizeHttpRequests()
 		.requestMatchers("/register/**").permitAll()
 		.requestMatchers("/listuser/**").hasAnyAuthority("ADMIN", "EDITOR", "VIEWER")//.hasAuthority("ADMIN")//.hasRole("ROLE_ADMIN")//.hasAuthority("ROLE_ADMIN")
+		.requestMatchers("/listuser2/**").hasAuthority("ADMIN")
 		.requestMatchers("/index/**").hasAuthority("ADMIN")
 		.requestMatchers("/home").permitAll()
 		.requestMatchers("/login").permitAll()
@@ -61,4 +63,5 @@ public class SpringSecurity {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
+	
 }
