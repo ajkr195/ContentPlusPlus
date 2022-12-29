@@ -162,12 +162,17 @@ public class AppUserWebController {
 	
 	@GetMapping({ "/" })
 	String homePage(Model model) {
-		return "redirect:/home";
+		return "redirect:/index";
 	}
 	
-	@GetMapping({ "/home" })
-	String home2Page(Model model) {
-		return "home";
+	@GetMapping({ "/steps" })
+	String stepsPage(Model model) {
+		return "steps";
+	}
+	
+	@GetMapping({ "/activity" })
+	String activityPage(Model model) {
+		return "activity";
 	}
 	
 	@GetMapping("/signup")

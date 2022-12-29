@@ -5,13 +5,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
+import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 
 @Configuration
 //@EnableWebSecurity
@@ -27,8 +26,8 @@ public class SpringSecurity {
 		.requestMatchers("/register/**").permitAll()
 		.requestMatchers("/listuser/**").hasAnyAuthority("ADMIN", "EDITOR", "VIEWER")//.hasAuthority("ADMIN")//.hasRole("ROLE_ADMIN")//.hasAuthority("ROLE_ADMIN")
 		.requestMatchers("/listuser2/**").hasAuthority("ADMIN")
-		.requestMatchers("/index/**").hasAuthority("ADMIN")
-		.requestMatchers("/home").permitAll()
+		.requestMatchers("/index/**").permitAll()
+		.requestMatchers("/home/**").permitAll()
 		.requestMatchers("/login").permitAll()
 		.requestMatchers("/signup/**").permitAll()
 		.requestMatchers("/spring.svg/**").permitAll()
@@ -63,5 +62,10 @@ public class SpringSecurity {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
+	
+	@Bean
+    public SpringSecurityDialect springSecurityDialect(){
+        return new SpringSecurityDialect();
+    }
 	
 }

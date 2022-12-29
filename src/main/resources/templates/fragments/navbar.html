@@ -103,7 +103,7 @@
 						<span class="avatar avatar-sm text-danger"
 							th:style="'background-image: url(/img/avatar.svg)'"></span>
 						<div class="d-none d-xl-block ps-2">
-							<div th:text="${principal.Username}">Admin</div>
+							<div sec:authorize="isAuthenticated()" th:text="${principal.Username}">Admin</div>
 							<!--<div class="mt-1 small text-muted" th:text="${principal.getAuthorities()}">UI Design</div>-->
 						</div>
 					</a>
@@ -112,10 +112,12 @@
 						<div class="dropdown-divider"></div>
 						<a href="./settings.html" class="dropdown-item"><i class="fa-solid fa-cog text-muted me-1"></i>
 							Settings</a>
-						<a href="/logout" th:href="@{/logout}" class="dropdown-item"><i
-								class="fa-solid fa-right-from-bracket text-muted me-1"></i> Logout</a>
+						<a sec:authorize="isAuthenticated()" href="/logout" th:href="@{/logout}"
+							class="dropdown-item"><i class="fa-solid fa-right-from-bracket text-muted me-1"></i>
+							Logout</a>
 						<!--<span class="me-1" th:text="${principal.Username}"></span>-->
-						<div><span th:text="${principal.getAuthorities()}"></span></div>
+						<div sec:authorize="isAuthenticated()"><span th:text="${principal.getAuthorities()}"></span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -145,18 +147,18 @@
 							<div class="dropdown-menu">
 								<div class="dropdown-menu-columns">
 									<div class="dropdown-menu-column">
-										<a class="dropdown-item" href="/documentsfs">
-											Documents FS <span
-												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">FileSystem</span>
+										<a class="dropdown-item" href="#">
+											Link1 <span
+												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">Link1</span>
 										</a>
-										<a class="dropdown-item" href="/documentsdb">
-											Documents DB <span
-												class="badge badge-sm bg-success-lt text-uppercase ms-auto">RDBMS</span>
+										<a class="dropdown-item" href="#">
+											Link2 <span
+												class="badge badge-sm bg-success-lt text-uppercase ms-auto">Link2</span>
 										</a>
 
-										<a class="dropdown-item" href="/s3bucket">
-											Documents S3 <span
-												class="badge badge-sm bg-success-lt text-uppercase ms-auto">S3Bucket</span>
+										<a class="dropdown-item" href="#">
+											Link3 <span
+												class="badge badge-sm bg-success-lt text-uppercase ms-auto">Link3</span>
 										</a>
 
 										<div class="dropend">
@@ -200,8 +202,14 @@
 										</div>
 									</div>
 									<div class="dropdown-menu-column">
-										<a class="dropdown-item" href="#">Link1</a>
-										<a class="dropdown-item" href="#">Link2</a>
+										<a class="dropdown-item" href="/activity" th:href="@{/activity}">
+											Activity <span
+												class="badge badge-sm bg-success-lt text-uppercase ms-auto">Activity</span>
+										</a>
+										<a class="dropdown-item" href="/steps" th:href="@{/steps}">
+											Steps <span
+												class="badge badge-sm bg-success-lt text-uppercase ms-auto">Steps</span>
+										</a>
 									</div>
 								</div>
 							</div>
@@ -285,7 +293,7 @@
 								</div>
 							</div>
 						</li>
-						<li class="nav-item dropdown"
+						<li sec:authorize="hasAuthority('ADMIN')" class="nav-item dropdown"
 							th:classappend="${pagename == 'listuser' OR pagename == 'listuser2' ? 'active' : ''}">
 							<a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
 								data-bs-auto-close="outside" role="button" aria-expanded="false">
@@ -297,11 +305,11 @@
 								</span>
 							</a>
 							<div class="dropdown-menu">
-<!--								<a class="dropdown-item" href="/listuser">-->
-<!--									<i class="fa-solid fa-user-group icon me-1"></i> <span-->
-<!--										class="badge badge-sm bg-success-lt text-uppercase ms-auto">-->
-<!--										User List1</span>-->
-<!--								</a>-->
+								<!--								<a class="dropdown-item" href="/listuser">-->
+								<!--									<i class="fa-solid fa-user-group icon me-1"></i> <span-->
+								<!--										class="badge badge-sm bg-success-lt text-uppercase ms-auto">-->
+								<!--										User List1</span>-->
+								<!--								</a>-->
 								<a class="dropdown-item" href="/listuser2">
 									<i class="fa-solid fa-user-group icon me-1"></i> <span
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
