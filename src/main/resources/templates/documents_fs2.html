@@ -53,7 +53,7 @@
 								<div class="d-flex">
 									<div class="text-muted">
 										Show
-										<div class="mx-2 d-inline-block">
+										<div class="mx-2 d-inline-block" th:if="${!allfiles.empty}">
 											<select class="dropdown-toggle" id="pageSizeSelect">
 												<option selected disabled value="itemsperpage">PageSize</option>
 												<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
@@ -63,21 +63,13 @@
 										</div>
 										entries
 									</div>
-									<div class="ms-auto text-muted">
+									<div class="ms-auto text-muted" th:if="${!allfiles.empty}">
 										Search:
 										<div class="ms-2 d-inline-block">
 											<input type="text" class="form-control form-control-sm"
 												aria-label="Search invoice">
 										</div>
 									</div>
-								</div>
-							</div>
-
-
-							<div class="app-card-body p-4" th:if="${#lists.isEmpty(allfiles)}">
-								<div>
-									No Documents have been added yet to this repository. Click "Choose Files" button
-									above and select files using your file browser and click "Upload" button.
 								</div>
 							</div>
 
@@ -211,6 +203,14 @@
 								</table>
 
 							</div>
+							
+							<div class="app-card-body p-4" th:if="${allfiles.empty}">
+								<div>
+									No Documents have been added yet to this repository. Click Upload then "Choose
+									Files" from the pop-up and click "Upload" button.
+								</div>
+							</div>
+							
 							<div class="card-footer d-flex align-items-center" th:if="${!allfiles.empty}">
 								<p class="m-0 text-muted">Total records:<span th:text="${totalfiles}"></span> </p>
 								<ul class="pagination m-0 ms-auto">
