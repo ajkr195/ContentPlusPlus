@@ -16,23 +16,23 @@
 						<div class="col">
 							<!-- Page pre-title -->
 							<div class="page-pretitle">
-								Manage FS Files
+								Manage DB Files
 							</div>
 							<h2 class="page-title">
-								FS Files
+								DB Files
 							</h2>
 						</div>
 						<!-- Page title actions -->
 						<div class="col-auto ms-auto d-print-none">
 							<div class="btn-list">
 								<span th:if="${!allfiles.empty}" class="d-none d-sm-inline">
-									<a href="#" class="btn" th:onClick="deleteallFSfiles()">
+									<a href="#" class="btn" th:onClick="deleteallDBfiles()">
 										<i class="fa-solid fa-trash-can text-danger me-1"> </i>DeleteAll
 									</a>
 								</span>
 								<!--							 data-bs-toggle="modal" data-bs-target="#modal-report"-->
 								<a href="#" class="btn btn-teal d-none d-sm-inline-block"
-									th:onClick="uploadMultipleInFsUsingSwal()">
+									th:onClick="uploadMultipleInDbUsingSwal()">
 									<i class="fa-solid fa-plus fa-xl"></i>
 									Upload
 								</a>
@@ -47,18 +47,22 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">Manage FS Files</h3>
+								<h3 class="card-title">Manage DB Files</h3>
 							</div>
 							<div class="card-body border-bottom py-3">
 								<div class="d-flex">
-									<!--div class="text-muted">
+									<div class="text-muted">
 										Show
 										<div class="mx-2 d-inline-block">
-											<input type="text" class="form-control form-control-sm" value="8" size="3"
-												aria-label="Invoices count">
+											<select class="dropdown-toggle" id="pageSizeSelect">
+												<option selected disabled value="itemsperpage">PageSize</option>
+												<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
+													th:value="${pageSize}">
+												</option>
+											</select>
 										</div>
 										entries
-									</!div-->
+									</div>
 									<div class="ms-auto text-muted">
 										Search:
 										<div class="ms-2 d-inline-block">
@@ -101,8 +105,8 @@
 											<td class="cell" th:text="${rowStat.count}">1</td>
 											<td class="cell" th:text="${myfile.id}"></td>
 											<td class="cell"> <span class="truncate"
-													th:text="${myfile.filename}">None</span></td>
-											<td th:switch="${myfile.filetype}">
+													th:text="${myfile.fileName}">None</span></td>
+											<td th:switch="${myfile.fileType}">
 												<span th:case="'application/x-msdownload'"><i
 														class="fa-brands fa-windows text-primary fa-xl"></i></span>
 												<span th:case="'application/pdf'"><i
@@ -161,9 +165,9 @@
 														class="fa-solid fa-file-excel text-success fa-2xl"></i></span>
 											</td>
 
-											<td th:switch="${myfile.filesize gt 1024}">
-												<span th:case="true" th:text="${myfile.filesize / 1024 + ' kb'}"></span>
-												<span th:case="false" th:text="${myfile.filesize + ' bytes'}"></span>
+											<td th:switch="${myfile.fileSize gt 1024}">
+												<span th:case="true" th:text="${myfile.fileSize / 1024 + ' kb'}"></span>
+												<span th:case="false" th:text="${myfile.fileSize + ' bytes'}"></span>
 											</td>
 											<td class="cell table-col-hidden"><span class="note"
 													th:text="${myfile.createdBy}">None</span></td>
@@ -174,18 +178,18 @@
 											<td class="cell table-col-hidden"><span class="note"
 													th:text="${myfile.lastModifiedDate}">None</span></td>
 											<td><a class="btn btn-sm app-btn-secondary mx-1"
-													th:href="@{/fsviewfile/{filename}(filename=${myfile.filename})}"
-													target="_blank" title="View in browser's new tab"><i
+													th:href="@{/viewFile/{id}(id=${myfile.id})}" target="_blank"
+													title="View in browser's new tab"><i
 														class="fa-solid fa-eye text-primary"></i></a><a
 													class="btn btn-sm app-btn-secondary mx-1"
-													th:onclick="showFSFileInfo([[${myfile}]]);" title="Details"><i
+													th:onclick="showDBFileInfo([[${myfile}]]);" title="Details"><i
 														class="fa-solid fa-info text-info"></i></a><a
 													class="btn btn-sm app-btn-secondary mx-1"
-													th:href="@{/fsfile/{filename}(filename=${myfile.filename})}"
+													th:href="@{/downloadFile/{id}(id=${myfile.id})}"
 													title="Download this file"><i
 														class="fa-solid fa-download text-success"></i></a><a
 													class="btn btn-sm app-btn-secondary mx-1"
-													th:onclick="deleteFSfile([[${myfile.id}]], this);"
+													th:onclick="deletedbfile([[${myfile.id}]], this);"
 													title="Delete this file"><i class="fa-solid fa-x text-danger"></i>
 												</a></td>
 										</tr>
@@ -207,30 +211,37 @@
 								</table>
 
 							</div>
-							<!--div class="card-footer d-flex align-items-center">
-								<p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of
-									<span>16</span> entries
-								</p>
+							<div class="card-footer d-flex align-items-center" th:if="${!allfiles.empty}">
+								<p class="m-0 text-muted">Total records:<span th:text="${totalfiles}"></span> </p>
 								<ul class="pagination m-0 ms-auto">
-									<li class="page-item disabled">
-										<a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-											<i class="fa-solid fa-chevron-left icon"></i>
-											prev
+									<li class="page-item" th:classappend="${allfiles.number == 0 ? 'disabled' : ''}">
+										<a class="page-link"
+											th:href="@{/documentsdb2(pageSize=${selectedPageSize}, page=1)}"
+											tabindex="-1" aria-disabled="true">
+											First <i class="fa-solid fa-chevron-left icon"></i>
+
 										</a>
 									</li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item active"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">4</a></li>
-									<li class="page-item"><a class="page-link" href="#">5</a></li>
-									<li class="page-item">
-										<a class="page-link" href="#">
-											next
+									<li class="page-item"
+										th:classappend="${allfiles.number == (page - 1) ? 'active' : ''}"
+										th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+										<a class="page-link"
+											th:href="@{/documentsdb2(pageSize=${selectedPageSize}, page=${page})}"
+											th:text="${page}"></a>
+									</li>
+									<li class="page-item"
+										th:classappend="${allfiles.number +1 == allfiles.totalPages ? 'disabled' : ''}">
+										<a class="page-link"
+											th:href="@{/documentsdb2(pageSize=${selectedPageSize}, page=${allfiles.totalPages})}"
+											tabindex="-1" aria-disabled="true">
 											<i class="fa-solid fa-chevron-right icon"></i>
+											Last
 										</a>
 									</li>
+
 								</ul>
-							</div-->
+							</div>
+
 						</div>
 					</div>
 				</div>
@@ -351,6 +362,17 @@
 	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
 	<script type="text/javascript" th:src="@{/js/app.js}"></script>
 	<script type="text/javascript" th:src="@{/js/fileupload.js}"></script>
+	<script>
+		var select_element = document.getElementById('pageSizeSelect');
+		select_element.onchange = function () {
+			var elem = (typeof this.selectedIndex === "undefined" ? window.event.srcElement : this);
+			var value = elem.value || elem.options[elem.selectedIndex].value;
+			//alert(value);
+			window.location.replace("/documentsdb2?pageSize=" + value
+				+ "&page=1");
+		}
+
+	</script>
 
 </body>
 

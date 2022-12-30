@@ -19,6 +19,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
@@ -54,8 +55,12 @@ public class AppUser  extends Auditable<String> implements Serializable {
 	private String userpassword;
 	
 	@Column(name = "useruuid", unique = true)
-	@GenericGenerator(name = "uuid", strategy = "uuid4")
 	private String useruuid;
+	
+	@PrePersist
+	protected void onCreate() {
+		setUseruuid(java.util.UUID.randomUUID().toString());
+	}
 	
 	@Column(name = "userenabled")
 	private boolean userenabled;

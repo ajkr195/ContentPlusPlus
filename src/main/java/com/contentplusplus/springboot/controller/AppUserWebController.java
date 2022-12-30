@@ -122,6 +122,29 @@ public class AppUserWebController {
 		model.addAttribute("allfiles", allfiles);
 		return "documents_db";
 	}
+	
+	@RequestMapping(value = { "/documentsdb2" }, method = RequestMethod.GET, produces = "text/html")
+	public String documentsdbList(@RequestParam("pageSize") Optional<Integer> pageSize,
+			@RequestParam("page") Optional<Integer> page, Model model) {
+
+		int BUTTONS_TO_SHOW = 9;
+		int INITIAL_PAGE = 0;
+		int INITIAL_PAGE_SIZE = 8;
+		int[] PAGE_SIZES = { 5, 8, 10, 15, 20, 25, 50, 100 };
+		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+		Page<AppDBContent> allfiles = appUserDocumentRepository
+				.findAll(PageRequest.of(evalPage, evalPageSize, Sort.by(Order.asc("id"))));
+		AppPaginationModel pager = new AppPaginationModel(allfiles.getTotalPages(), allfiles.getNumber(), BUTTONS_TO_SHOW);
+		model.addAttribute("allfiles", allfiles);
+		model.addAttribute("selectedPageSize", evalPageSize);
+		model.addAttribute("totalfiles", appUserDocumentRepository.count());
+		model.addAttribute("pageSizes", PAGE_SIZES);
+		model.addAttribute("pager", pager);
+		model.addAttribute("pagename", "documentsdb");
+		return "documents_db2";
+	}
 
 	@GetMapping("/documentsfs")
 	String fsDocs(Model model) {
@@ -129,6 +152,29 @@ public class AppUserWebController {
 		List<AppFSContent> allfiles = appFSContentRepository.findAll();
 		model.addAttribute("allfiles", allfiles);
 		return "documents_fs";
+	}
+	
+	@RequestMapping(value = { "/documentsfs2" }, method = RequestMethod.GET, produces = "text/html")
+	public String documentsfsList(@RequestParam("pageSize") Optional<Integer> pageSize,
+			@RequestParam("page") Optional<Integer> page, Model model) {
+
+		int BUTTONS_TO_SHOW = 9;
+		int INITIAL_PAGE = 0;
+		int INITIAL_PAGE_SIZE = 8;
+		int[] PAGE_SIZES = { 5, 8, 10, 15, 20, 25, 50, 100 };
+		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+		Page<AppFSContent> allfiles = appFSContentRepository
+				.findAll(PageRequest.of(evalPage, evalPageSize, Sort.by(Order.asc("id"))));
+		AppPaginationModel pager = new AppPaginationModel(allfiles.getTotalPages(), allfiles.getNumber(), BUTTONS_TO_SHOW);
+		model.addAttribute("allfiles", allfiles);
+		model.addAttribute("selectedPageSize", evalPageSize);
+		model.addAttribute("totalfiles", appFSContentRepository.count());
+		model.addAttribute("pageSizes", PAGE_SIZES);
+		model.addAttribute("pager", pager);
+		model.addAttribute("pagename", "documentsfs");
+		return "documents_fs2";
 	}
 
 	@GetMapping("/notifications")

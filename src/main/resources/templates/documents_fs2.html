@@ -51,14 +51,18 @@
 							</div>
 							<div class="card-body border-bottom py-3">
 								<div class="d-flex">
-									<!--div class="text-muted">
+									<div class="text-muted">
 										Show
 										<div class="mx-2 d-inline-block">
-											<input type="text" class="form-control form-control-sm" value="8" size="3"
-												aria-label="Invoices count">
+											<select class="dropdown-toggle" id="pageSizeSelect">
+												<option selected disabled value="itemsperpage">PageSize</option>
+												<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
+													th:value="${pageSize}">
+												</option>
+											</select>
 										</div>
 										entries
-									</!div-->
+									</div>
 									<div class="ms-auto text-muted">
 										Search:
 										<div class="ms-2 d-inline-block">
@@ -207,30 +211,36 @@
 								</table>
 
 							</div>
-							<!--div class="card-footer d-flex align-items-center">
-								<p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of
-									<span>16</span> entries
-								</p>
+							<div class="card-footer d-flex align-items-center" th:if="${!allfiles.empty}">
+								<p class="m-0 text-muted">Total records:<span th:text="${totalfiles}"></span> </p>
 								<ul class="pagination m-0 ms-auto">
-									<li class="page-item disabled">
-										<a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-											<i class="fa-solid fa-chevron-left icon"></i>
-											prev
+									<li class="page-item" th:classappend="${allfiles.number == 0 ? 'disabled' : ''}">
+										<a class="page-link"
+											th:href="@{/documentsfs2(pageSize=${selectedPageSize}, page=1)}"
+											tabindex="-1" aria-disabled="true">
+											First <i class="fa-solid fa-chevron-left icon"></i>
+
 										</a>
 									</li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item active"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#">4</a></li>
-									<li class="page-item"><a class="page-link" href="#">5</a></li>
-									<li class="page-item">
-										<a class="page-link" href="#">
-											next
+									<li class="page-item"
+										th:classappend="${allfiles.number == (page - 1) ? 'active' : ''}"
+										th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+										<a class="page-link"
+											th:href="@{/documentsfs2(pageSize=${selectedPageSize}, page=${page})}"
+											th:text="${page}"></a>
+									</li>
+									<li class="page-item"
+										th:classappend="${allfiles.number +1 == allfiles.totalPages ? 'disabled' : ''}">
+										<a class="page-link"
+											th:href="@{/documentsfs2(pageSize=${selectedPageSize}, page=${allfiles.totalPages})}"
+											tabindex="-1" aria-disabled="true">
 											<i class="fa-solid fa-chevron-right icon"></i>
+											Last
 										</a>
 									</li>
+
 								</ul>
-							</div-->
+							</div>
 						</div>
 					</div>
 				</div>
@@ -351,6 +361,17 @@
 	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
 	<script type="text/javascript" th:src="@{/js/app.js}"></script>
 	<script type="text/javascript" th:src="@{/js/fileupload.js}"></script>
+	<script>
+		var select_element = document.getElementById('pageSizeSelect');
+		select_element.onchange = function () {
+			var elem = (typeof this.selectedIndex === "undefined" ? window.event.srcElement : this);
+			var value = elem.value || elem.options[elem.selectedIndex].value;
+			//alert(value);
+			window.location.replace("/documentsfs2?pageSize=" + value
+				+ "&page=1");
+		}
+
+	</script>
 
 </body>
 

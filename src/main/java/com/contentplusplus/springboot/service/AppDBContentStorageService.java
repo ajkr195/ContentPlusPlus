@@ -30,7 +30,7 @@ public class AppDBContentStorageService {
 			if (fileName.contains("..")) {
 				throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
 			}
-			AppDBContent appFile = new AppDBContent(UUID.randomUUID().toString(), fileName, file.getContentType(),
+			AppDBContent appFile = new AppDBContent(fileName, file.getContentType(),
 					file.getSize(), file.getBytes());
 
 			return appContentRepository.save(appFile);
