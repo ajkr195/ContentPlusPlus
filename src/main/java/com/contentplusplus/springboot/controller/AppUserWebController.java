@@ -114,6 +114,12 @@ public class AppUserWebController {
 		model.addAttribute("pagename", "mydocuments");
 		return "documentsuser";
 	}
+	
+	@GetMapping("/documentsworkflow")
+	String documentsworkflowPage(Model model) {
+		model.addAttribute("pagename", "documentsworkflow");
+		return "documents_workflow";
+	}
 
 	@GetMapping("/documentsdb")
 	String dbDocs(Model model) {
@@ -182,12 +188,13 @@ public class AppUserWebController {
 		model.addAttribute("pagename", "notifications");
 		return "notifications";
 	}
-
-	@GetMapping("/account")
-	String accountPage(Model model) {
-		model.addAttribute("pagename", "account");
-		return "account";
+	
+	@GetMapping("/home")
+	String home2Page(Model model) {
+		model.addAttribute("pagename", "home");
+		return "home";
 	}
+
 
 	@GetMapping("/settings")
 	String settingsPage(Model model) {
@@ -208,16 +215,18 @@ public class AppUserWebController {
 	
 	@GetMapping({ "/" })
 	String homePage(Model model) {
-		return "redirect:/index";
+		return "redirect:/home";
 	}
 	
 	@GetMapping({ "/steps" })
 	String stepsPage(Model model) {
+		model.addAttribute("pagename", "steps");
 		return "steps";
 	}
 	
 	@GetMapping({ "/activity" })
 	String activityPage(Model model) {
+		model.addAttribute("pagename", "activity");
 		return "activity";
 	}
 	

@@ -14,77 +14,79 @@
 
 	<div class="page page-center">
 		<div class="container container-tight py-4">
-			<div class="text-center mb-2">
-				<a href="/" th:href="@{/}" class="navbar-brand"><img src="img/brand.png" height="60" alt=""></a>
-			</div>
+			<h1 class="text-center mb-2">
+				<img src="img/brand.png" height="80" alt=""><br /><a href="/" th:href="@{/}" class="navbar-brand"
+					th:text="${appname}"></a>
+			</h1>
 			<div class="card card-md">
 				<div class="card-body">
 					<h2 class="card-title text-center mb-4">Create new account</h2>
 					<div th:if="${param.success}">
 						<div class="alert alert-info">Registered successful for Content++</div>
 					</div>
-					<form class="auth-form auth-signup-form" th:action="@{/signup}" th:object="${user}"
-							method="post">
-					<div class="mb-3">
-						<label class="form-label" for="userfirstname">FirstName</label>
-						<input id="signup-userfirstname" name="userfirstname" type="text" class="form-control"
-							placeholder="First Name" th:field="${user.userfirstname}" />
-						<p class="errorclass" th:errors="*{userfirstname}" th:if="${#fields.hasErrors('userfirstname')}">
-					</div>
+					<form class="auth-form auth-signup-form" th:action="@{/signup}" th:object="${user}" method="post">
+						<div class="mb-3">
+							<label class="form-label" for="userfirstname">FirstName</label>
+							<input id="signup-userfirstname" name="userfirstname" type="text" class="form-control"
+								placeholder="First Name" th:field="${user.userfirstname}" />
+							<p class="errorclass" th:errors="*{userfirstname}"
+								th:if="${#fields.hasErrors('userfirstname')}">
+						</div>
 
-					<div class="mb-3">
-						<label class="form-label" for="userlastname">LastName</label>
-						<input id="signup-userlastname" name="userlastname" type="text" class="form-control"
-							placeholder="Last Name" th:field="${user.userlastname}" />
-						<p class="errorclass" th:errors="*{userlastname}" th:if="${#fields.hasErrors('userlastname')}">
-						</p>
-					</div>
+						<div class="mb-3">
+							<label class="form-label" for="userlastname">LastName</label>
+							<input id="signup-userlastname" name="userlastname" type="text" class="form-control"
+								placeholder="Last Name" th:field="${user.userlastname}" />
+							<p class="errorclass" th:errors="*{userlastname}"
+								th:if="${#fields.hasErrors('userlastname')}">
+							</p>
+						</div>
 
-					<div class="mb-3">
-						<label class="form-label" for="signup-email">Your Email</label>
-						<input id="signup-email" name="signup-email" type="email" class="form-control signup-email"
-							placeholder="Email" th:field="${user.useremail}" />
-						<p class="errorclass" th:errors="*{useremail}" th:if="${#fields.hasErrors('useremail')}">
-						</p>
-					</div>
-					<div class="mb-3">
-						<label class="form-label" for="signup-password">Password</label>
-						<input id="signup-password" name="signup-password" type="password"
-							class="form-control signup-password" th:field="${user.userpassword}"
-							placeholder="Password" />
-						<p class="errorclass" th:if="${#fields.hasErrors('userpassword')}"
-							th:errors="*{userpassword}" />
-					</div>
+						<div class="mb-3">
+							<label class="form-label" for="signup-email">Your Email</label>
+							<input id="signup-email" name="signup-email" type="email" class="form-control signup-email"
+								placeholder="Email" th:field="${user.useremail}" />
+							<p class="errorclass" th:errors="*{useremail}" th:if="${#fields.hasErrors('useremail')}">
+							</p>
+						</div>
+						<div class="mb-3">
+							<label class="form-label" for="signup-password">Password</label>
+							<input id="signup-password" name="signup-password" type="password"
+								class="form-control signup-password" th:field="${user.userpassword}"
+								placeholder="Password" />
+							<p class="errorclass" th:if="${#fields.hasErrors('userpassword')}"
+								th:errors="*{userpassword}" />
+						</div>
 
-					<div class="mb-3">
-						<label class="form-label" for="signup-password">Confirm Password</label>
-						<input id="signup-passwordcnfrm" name="signup-passwordcnfrm" type="password"
-							class="form-control signup-password" th:field="${user.passwordConfirm}"
-							placeholder="Repeat Password" />
-						<p class="errorclass" th:if="${#fields.hasErrors('passwordConfirm')}"
-							th:errors="*{passwordConfirm}" />
-					</div>
-					<div class="mb-3">
-						<label class="form-label" for="signup-userroles">Select Role(s)</label>
-						<select class="form-select form-select-sm" id="userroles" th:field="${user.roles}" multiple>
-							<option value="" selected>-- Select Role --</option>
-							<option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">Role
-							</option>
-						</select>
-						<p class="errorclass" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" />
-					</div>
+						<div class="mb-3">
+							<label class="form-label" for="signup-password">Confirm Password</label>
+							<input id="signup-passwordcnfrm" name="signup-passwordcnfrm" type="password"
+								class="form-control signup-password" th:field="${user.passwordConfirm}"
+								placeholder="Repeat Password" />
+							<p class="errorclass" th:if="${#fields.hasErrors('passwordConfirm')}"
+								th:errors="*{passwordConfirm}" />
+						</div>
+						<div class="mb-3">
+							<label class="form-label" for="signup-userroles">Select Role(s)</label>
+							<select class="form-select form-select-sm" id="userroles" th:field="${user.roles}" multiple>
+								<option value="" selected>-- Select Role --</option>
+								<option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">Role
+								</option>
+							</select>
+							<p class="errorclass" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" />
+						</div>
 
 
-					<div class="mb-3">
-						<label class="form-check">
-							<input type="checkbox" class="form-check-input" />
-							<span class="form-check-label">Agree the <a href="./terms-of-service.html"
-									tabindex="-1">terms and policy</a>.</span>
-						</label>
-					</div>
-					<div class="form-footer">
-						<button type="submit" class="btn btn-primary w-100">Create new account</button>
-					</div>
+						<div class="mb-3">
+							<label class="form-check">
+								<input type="checkbox" class="form-check-input" />
+								<span class="form-check-label">Agree the <a href="./terms-of-service.html"
+										tabindex="-1">terms and policy</a>.</span>
+							</label>
+						</div>
+						<div class="form-footer">
+							<button type="submit" class="btn btn-primary w-100">Create new account</button>
+						</div>
 				</div>
 				</form>
 				<div class="text-center text-muted mt-3">

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<!-- Page header -->
+			<div class="page-header d-print-none">
+				<div class="container-xl">
+					<div class="row g-2 align-items-center">
+						<div class="col">
+							<!-- Page pre-title -->
+							<div class="page-pretitle">
+								Documents
+							</div>
+							<h2 class="page-title">
+								Workflow
+							</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Page body -->
+			<div class="page-body">
+				<div class="container-fluid">
+
+					<div class="card">
+						<div class="card-header">
+							<ul class="nav nav-tabs card-header-tabs nav-fill" data-bs-toggle="tabs">
+								<li class="nav-item">
+									<a href="#tabs-home-1" class="nav-link active" data-bs-toggle="tab">
+										<i class="fa-solid fa-bars-staggered me-2"></i>
+										Draft
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="#tabs-profile-2" class="nav-link" data-bs-toggle="tab">
+										<i class="fa-regular fa-file-lines me-2"></i>
+										Review
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="#tabs-activity-3" class="nav-link" data-bs-toggle="tab">
+										<i class="fa-solid fa-check me-2"></i>
+										Approval
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="#tabs-activity-4" class="nav-link" data-bs-toggle="tab">
+										<i class="fa-regular fa-square-check me-2"></i>
+										Finalize
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="#tabs-activity-5" class="nav-link" data-bs-toggle="tab">
+										<i class="fa-solid fa-check-double me-2"></i>
+										Complete
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="#tabs-activity-6" class="nav-link" data-bs-toggle="tab">
+										<i class="fa-solid fa-circle-check me-2"></i>
+										Publish
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="card-body">
+							<div class="tab-content">
+								<div class="tab-pane active show" id="tabs-home-1">
+									<h4>Draft</h4>
+									<div>Cursus turpis vestibulum, dui in pharetra vulputate id sed non turpis ultricies
+										fringilla at sed facilisis lacus pellentesque purus nibh</div>
+								</div>
+								<div class="tab-pane" id="tabs-profile-2">
+									<h4>Review</h4>
+									<div>Fringilla egestas nunc quis tellus diam rhoncus ultricies tristique enim at
+										diam, sem nunc amet, pellentesque id egestas velit sed</div>
+								</div>
+								<div class="tab-pane" id="tabs-activity-3">
+									<h4>Approval</h4>
+									<div>Donec ac vitae diam amet vel leo egestas consequat rhoncus in luctus amet,
+										facilisi sit mauris accumsan nibh habitant senectus</div>
+								</div>
+								<div class="tab-pane" id="tabs-activity-4">
+									<h4>Finalize</h4>
+									<div>Ut enim ad minim veniam, quis
+										nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+										Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+										fugiat nulla pariatur. </div>
+								</div>
+								<div class="tab-pane" id="tabs-activity-5">
+									<h4>Complete</h4>
+									<div>The passage experienced a surge in popularity during the 1960s when Letraset
+										used it on their dry-transfer sheets, and again during the 90s as desktop
+										publishers bundled the text with their software. </div>
+								</div>
+								<div class="tab-pane" id="tabs-activity-6">
+									<h4>Publish</h4>
+									<div>Today it's seen all around the
+										web; on templates, websites, and stock designs. Use our generator to get your
+										own, or read on for the authoritative history of lorem ipsum.</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div th:replace="~{fragments/footer :: footer}"></div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+</body>
+
+</html>

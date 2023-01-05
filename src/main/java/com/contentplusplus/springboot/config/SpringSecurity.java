@@ -24,8 +24,10 @@ public class SpringSecurity {
 
 		http.authorizeHttpRequests()
 		.requestMatchers("/register/**").permitAll()
-		.requestMatchers("/listuser/**").hasAnyAuthority("ADMIN", "EDITOR", "VIEWER")//.hasAuthority("ADMIN")//.hasRole("ROLE_ADMIN")//.hasAuthority("ROLE_ADMIN")
+		//.requestMatchers("/listuser/**").hasAnyAuthority("ADMIN", "EDITOR", "VIEWER")//.hasAuthority("ADMIN")//.hasRole("ROLE_ADMIN")//.hasAuthority("ROLE_ADMIN")
 		.requestMatchers("/listuser2/**").hasAuthority("ADMIN")
+		.requestMatchers("/listuser/**").hasAuthority("ADMIN")
+		.requestMatchers("/home/**").permitAll()
 		.requestMatchers("/index/**").permitAll()
 		.requestMatchers("/home/**").permitAll()
 		.requestMatchers("/login").permitAll()
@@ -38,7 +40,7 @@ public class SpringSecurity {
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
-		.loginPage("/login").permitAll().defaultSuccessUrl("/index")
+		.loginPage("/login").permitAll().defaultSuccessUrl("/home")
 		.and()
 		.logout().permitAll()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))  //new

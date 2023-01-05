@@ -14,9 +14,10 @@
 
 	<div class="page page-center">
 		<div class="container container-tight py-4">
-			<div class="text-center mb-2">
-				<a href="/" th:href="@{/}" class="navbar-brand"><img src="img/brand.png" height="80" alt=""></a>
-			</div>
+			<h1 class="text-center mb-2">
+				<img src="img/brand.png" height="80" alt=""><br /><a href="/" th:href="@{/}" class="navbar-brand"
+					th:text="${appname}"></a>
+			</h1>
 			<div class="card card-md">
 				<div class="card-body">
 					<h2 class="h2 text-center mb-4">Login to your account</h2>
@@ -26,11 +27,11 @@
 					<div th:if="${param.logout}">
 						<div class="alert alert-success">You have been logged out.</div>
 					</div>
-					<form method="post" th:action="@{/login}" role="form" autocomplete="off" novalidate>
+					<form method="post" th:action="@{/login}" role="form" autocomplete="off">
 						<div class="mb-3">
 							<label class="form-label">Email address</label>
 							<input type="text" class="form-control" id="username" name="username"
-								placeholder="Your email-id" autocomplete="off">
+								placeholder="Your email-id" autocomplete="off"  th:required="required">
 						</div>
 						<div class="mb-4">
 							<label class="form-label">
@@ -41,7 +42,7 @@
 							</label>
 							<div class="input-group input-group-flat">
 								<input type="password" class="form-control" placeholder="Your password" id="password"
-									name="password" autocomplete="off">
+									name="password" autocomplete="off"  th:required="required">
 								<span class="input-group-text">
 									<a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
 										<i class="fa-regular fa-eye" onclick="showPassword()"></i>
