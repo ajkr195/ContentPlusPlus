@@ -5,7 +5,7 @@ body {
 }
 
 .errorclass {
-	color: red;
+	color: #d63939;
 	padding: 0 .5rem;
     font-size: .775rem;
 }
@@ -13,6 +13,8 @@ body {
 body.swal2-shown > [aria-hidden="true"] {
   transition: 0.1s filter;
   filter: blur(4px);
+  height:99vh;
+  display: flex;
 }
 
 h1,
@@ -158,8 +160,9 @@ button.close:focus {
 .app-btn-primary:hover,
 .app-btn-primary:active {
     color: #fff;
-    background: #318ce7;
-    border-color: #318ce7
+    background: linear-gradient(90deg,  #206bc4 0%, rgb(0, 0, 64)  100%);
+    border-color: #318ce7;
+    animation: 1s ease;
 }
 
 .app-btn-secondary {

@@ -8,24 +8,26 @@
 	<title>Content++</title>
 	<link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}" />
 	<link th:rel="stylesheet" th:href="@{/css/main.css}" />
+	<link th:rel="stylesheet" th:href="@{/css/app.css}" />
 </head>
 
 <body class=" border-top-wide border-primary d-flex flex-column">
 
 	<div class="page page-center">
 		<div class="container container-tight py-4">
-			<h1 class="text-center mb-2">
-				<img src="img/brand.png" height="80" alt=""><br /><a href="/" th:href="@{/}" class="navbar-brand"
-					th:text="${appname}"></a>
-			</h1>
+
 			<div class="card card-md">
 				<div class="card-body">
-					<h2 class="card-title text-center mb-4">Create new account</h2>
+					<h2 class="text-center">
+						<img src="img/brand.png" height="80" alt=""><br /><a href="/" th:href="@{/}"
+							class="navbar-brand" th:text="${appname}"></a>
+					</h2>
+					<h2 class="card-title text-center mb-2">Create new account</h2>
 					<div th:if="${param.success}">
 						<div class="alert alert-info">Registered successful for Content++</div>
 					</div>
 					<form class="auth-form auth-signup-form" th:action="@{/signup}" th:object="${user}" method="post">
-						<div class="mb-3">
+						<div class="mb-1">
 							<label class="form-label" for="userfirstname">FirstName</label>
 							<input id="signup-userfirstname" name="userfirstname" type="text" class="form-control"
 								placeholder="First Name" th:field="${user.userfirstname}" />
@@ -33,7 +35,7 @@
 								th:if="${#fields.hasErrors('userfirstname')}">
 						</div>
 
-						<div class="mb-3">
+						<div class="mb-1">
 							<label class="form-label" for="userlastname">LastName</label>
 							<input id="signup-userlastname" name="userlastname" type="text" class="form-control"
 								placeholder="Last Name" th:field="${user.userlastname}" />
@@ -42,14 +44,14 @@
 							</p>
 						</div>
 
-						<div class="mb-3">
+						<div class="mb-1">
 							<label class="form-label" for="signup-email">Your Email</label>
 							<input id="signup-email" name="signup-email" type="email" class="form-control signup-email"
 								placeholder="Email" th:field="${user.useremail}" />
 							<p class="errorclass" th:errors="*{useremail}" th:if="${#fields.hasErrors('useremail')}">
 							</p>
 						</div>
-						<div class="mb-3">
+						<div class="mb-1">
 							<label class="form-label" for="signup-password">Password</label>
 							<input id="signup-password" name="signup-password" type="password"
 								class="form-control signup-password" th:field="${user.userpassword}"
@@ -58,7 +60,7 @@
 								th:errors="*{userpassword}" />
 						</div>
 
-						<div class="mb-3">
+						<div class="mb-1">
 							<label class="form-label" for="signup-password">Confirm Password</label>
 							<input id="signup-passwordcnfrm" name="signup-passwordcnfrm" type="password"
 								class="form-control signup-password" th:field="${user.passwordConfirm}"
@@ -66,7 +68,7 @@
 							<p class="errorclass" th:if="${#fields.hasErrors('passwordConfirm')}"
 								th:errors="*{passwordConfirm}" />
 						</div>
-						<div class="mb-3">
+						<div class="mb-1">
 							<label class="form-label" for="signup-userroles">Select Role(s)</label>
 							<select class="form-select form-select-sm" id="userroles" th:field="${user.roles}" multiple>
 								<option value="" selected>-- Select Role --</option>
@@ -77,7 +79,7 @@
 						</div>
 
 
-						<div class="mb-3">
+						<div class="mb-1">
 							<label class="form-check">
 								<input type="checkbox" class="form-check-input" />
 								<span class="form-check-label">Agree the <a href="./terms-of-service.html"
@@ -89,7 +91,7 @@
 						</div>
 				</div>
 				</form>
-				<div class="text-center text-muted mt-3">
+				<div class="text-center text-muted mt-2">
 					Already have account? <a href="/login" th:href="@{/login}" tabindex="-1">Sign in</a>
 				</div>
 				<div class="text-center text-muted mt-2">

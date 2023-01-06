@@ -34,4 +34,5 @@ build/
 
 .temp*
 logs/
+logsrolling/
 *.log

@@ -36,7 +36,7 @@ public class AppUserAddValidator implements Validator {
 		if (!user.getPasswordConfirm().equals(user.getUserpassword())) {
 			errors.rejectValue("passwordConfirm", "password.passwordConfirm.mismatch");
 		}
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "roles", "NotEmpty");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "roles", "NotEmpty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "roles", "not.empty.multi.roles");
 
 		

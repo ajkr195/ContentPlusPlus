@@ -10,6 +10,8 @@
 		<div th:replace="~{fragments/navbar :: navbar}"></div>
 		<div class="page-wrapper">
 			<!-- Page header -->
+
+
 			<div class="page-header d-print-none">
 				<div class="container-xl">
 					<div class="row g-2 align-items-center">
@@ -22,9 +24,27 @@
 								Workflow
 							</h2>
 						</div>
+						<!-- Page title actions -->
+						<div class="col-auto ms-auto d-print-none">
+							<div class="btn-list">
+								<span th:if="${!allfiles.empty}" class="d-none d-sm-inline">
+									<a href="#" class="btn" th:onClick="deleteallWFfiles()">
+										<i class="fa-solid fa-trash-can text-danger me-1"> </i>DeleteAll
+									</a>
+								</span>
+								<!--							 data-bs-toggle="modal" data-bs-target="#modal-report"-->
+								<a href="#" class="btn btn-teal d-none d-sm-inline-block"
+									th:onClick="uploadMultipleInDocFlowUsingSwal()">
+									<i class="fa-solid fa-plus fa-xl"></i>
+									Upload
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+
+
 			<!-- Page body -->
 			<div class="page-body">
 				<div class="container-fluid">
@@ -59,12 +79,6 @@
 								<li class="nav-item">
 									<a href="#tabs-activity-5" class="nav-link" data-bs-toggle="tab">
 										<i class="fa-solid fa-check-double me-2"></i>
-										Complete
-									</a>
-								</li>
-								<li class="nav-item">
-									<a href="#tabs-activity-6" class="nav-link" data-bs-toggle="tab">
-										<i class="fa-solid fa-circle-check me-2"></i>
 										Publish
 									</a>
 								</li>
@@ -73,9 +87,224 @@
 						<div class="card-body">
 							<div class="tab-content">
 								<div class="tab-pane active show" id="tabs-home-1">
-									<h4>Draft</h4>
-									<div>Cursus turpis vestibulum, dui in pharetra vulputate id sed non turpis ultricies
-										fringilla at sed facilisis lacus pellentesque purus nibh</div>
+									<!--<h4>Draft</h4>-->
+									<div class="card">
+										<div class="card-header">
+											<h3 class="card-title">Draft Documents</h3>
+										</div>
+										<div class="card-body border-bottom py-3">
+											<div class="d-flex">
+												<div class="text-muted" th:if="${!allfiles.empty}">
+													Show
+													<div class="mx-2 d-inline-block">
+														<select class="dropdown-toggle" id="pageSizeSelect">
+															<option selected disabled value="itemsperpage">PageSize
+															</option>
+															<option th:each="pageSize : ${pageSizes}"
+																th:text="${pageSize}" th:value="${pageSize}">
+															</option>
+														</select>
+													</div>
+													entries
+												</div>
+												<div class="ms-auto text-muted" th:if="${!allfiles.empty}">
+													Search:
+													<div class="ms-2 d-inline-block">
+														<input type="text" class="form-control form-control-sm"
+															aria-label="Search invoice">
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="table-responsive">
+											<table class="table card-table table-vcenter text-nowrap datatable"
+												th:if="${!allfiles.empty}">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th>Id</th>
+														<th>FileName</th>
+														<th>Type</th>
+														<th>Size</th>
+														<th>Status</th>
+														<th class="table-col-hidden">CreatedBy</th>
+														<th class="table-col-hidden">DateCreated</th>
+														<th class="table-col-hidden">ModifiedBy</th>
+														<th class="table-col-hidden">LastModified</th>
+														<th>Actions</th>
+													</tr>
+												</thead>
+												<tbody>
+
+													<tr th:each="myfile,rowStat : ${allfiles}">
+														<td class="cell" th:text="${rowStat.count}">1</td>
+														<td class="cell" th:text="${myfile.id}"></td>
+														<td class="cell"> <span class="truncate"
+																th:text="${myfile.fileName}">None</span></td>
+														<td th:switch="${myfile.fileType}">
+															<span th:case="'application/x-msdownload'"><i
+																	class="fa-brands fa-windows text-primary fa-xl"></i></span>
+															<span th:case="'application/pdf'"><i
+																	class="fas fa-file-pdf text-danger fa-2xl"></i></span>
+															<span th:case="'application/msword'"><i
+																	class="fa-solid fa-file-word text-primary fa-2xl"></i></span>
+															<span
+																th:case="'application/vnd.openxmlformats-officedocument.wordprocessingml.document'"><i
+																	class="fa-solid fa-file-word text-primary fa-2xl"></i></span>
+															<span th:case="'multipart/related'"><i
+																	class="fa-regular fa-file-code text-secondary fa-2xl"></i></span>
+															<span th:case="'application/vnd.oasis.opendocument.text'"><i
+																	class="fa-solid fa-file-word text-primary fa-2xl"></i></span>
+															<span th:case="'text/plain'"><i
+																	class="fa-regular fa-file-lines text-secondary fa-2xl"></i></span>
+															<span th:case="'text/xml'"><i
+																	class="fa-solid fa-file-code text-secondary fa-2xl"></i></span>
+															<span th:case="'image/png'"><i
+																	class="fa-solid fa-file-image text-info fa-2xl"></i></span>
+															<span th:case="'image/jpeg'"><i
+																	class="fa-solid fa-file-image text-info fa-2xl"></i></span>
+															<span th:case="'image/tiff'"><i
+																	class="fa-solid fa-file-image text-info fa-2xl"></i></span>
+															<span th:case="'image/bmp'"><i
+																	class="fa-solid fa-file-image text-info fa-2xl"></i></span>
+															<span th:case="'image/gif'"><i
+																	class="fa-solid fa-file-image text-info fa-2xl"></i></span>
+															<span th:case="'video/x-ms-wmv'"><i
+																	class="fa-solid fa-play text-muted fa-2xl"></i></span>
+															<span th:case="'audio/mpeg'"><i
+																	class="fa-solid fa-music text-muted fa-xl"></i></span>
+															<span th:case="'video/mp4'"><i
+																	class="fa-solid fa-play text-lite fa-2xl"></i></span>
+															<span
+																th:case="'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'"><i
+																	class="fa-solid fa-file-excel text-success fa-2xl"></i></span>
+															<span th:case="'application/vnd.ms-excel'"><i
+																	class="fa-solid fa-file-excel text-success fa-2xl"></i></span>
+															<span
+																th:case="'application/vnd.oasis.opendocument.spreadsheet'"><i
+																	class="fa-solid fa-file-excel text-success fa-2xl"></i></span>
+															<span
+																th:case="'application/vnd.openxmlformats-officedocument.presentationml.slideshow'"><i
+																	class="fa-solid fa-file-powerpoint text-warning fa-2xl"></i></span>
+															<span th:case="'application/vnd.ms-powerpoint'"><i
+																	class="fa-solid fa-file-powerpoint text-warning fa-2xl"></i></span>
+															<span
+																th:case="'application/vnd.openxmlformats-officedocument.presentationml.presentation'"><i
+																	class="fa-solid fa-file-powerpoint text-warning fa-2xl"></i></span>
+															<span th:case="'text/html'"><i
+																	class="fa-solid fa-file-code text-secondary fa-2xl"></i></span>
+															<span th:case="'application/octet-stream'"><i
+																	class="fa-regular fa-file text-primary fa-2xl"></i></span>
+															<span th:case="'text/csv'"><i
+																	class="fa-solid fa-file-excel text-success fa-2xl"></i></span>
+															<span th:case="'*'"><i
+																	class="fa-solid fa-file-excel text-success fa-2xl"></i></span>
+														</td>
+
+														<td th:switch="${myfile.fileSize gt 1024}">
+															<span th:case="true"
+																th:text="${myfile.fileSize / 1024 + ' kb'}"></span>
+															<span th:case="false"
+																th:text="${myfile.fileSize + ' bytes'}"></span>
+														</td>
+
+														<td class="cell" th:text="${myfile.workflowstatus}"></td>
+
+														<td class="cell table-col-hidden"><span class="note"
+																th:text="${myfile.createdBy}">None</span></td>
+														<td class="cell table-col-hidden"><span class="note"
+																th:text="${myfile.createdDate}">None</span></td>
+														<td class="cell table-col-hidden"><span class="note"
+																th:text="${myfile.lastModifiedBy}">None</span></td>
+														<td class="cell table-col-hidden"><span class="note"
+																th:text="${myfile.lastModifiedDate}">None</span></td>
+														<td><a class="btn btn-sm btn-outline-default"
+																th:href="@{/viewWFFile/{id}(id=${myfile.id})}"
+																target="_blank" title="View in browser's new tab"><i
+																	class="fa-solid fa-eye text-primary"></i></a>
+															<a class="btn btn-sm btn-outline-default"
+																th:onclick="showWFFileInfo([[${myfile}]]);"
+																title="Details"><i
+																	class="fa-solid fa-info text-info"></i></a>
+															<a class="btn btn-sm btn-outline-default"
+																th:onclick="updateWFDocumentContent([[${myfile.id}]])"
+																title="Upload new content"><i
+																	class="fa-solid fa-upload text-warning"></i>
+															</a>
+															<a class="btn btn-sm btn-outline-default"
+																th:href="@{/downloadWFFile/{id}(id=${myfile.id})}"
+																title="Download this file"><i
+																	class="fa-solid fa-download text-success"></i></a>
+															<a class="btn btn-sm btn-outline-default"
+																th:onclick="deleteWFfile([[${myfile.id}]], this);"
+																title="Delete this file"><i
+																	class="fa-solid fa-x text-danger"></i>
+															</a>
+														</td>
+													</tr>
+												</tbody>
+												<thead>
+													<tr>
+														<th>#</th>
+														<th>Id</th>
+														<th>FileName</th>
+														<th>Type</th>
+														<th>Size</th>
+														<th>Status</th>
+														<th class="table-col-hidden">CreatedBy</th>
+														<th class="table-col-hidden">DateCreated</th>
+														<th class="table-col-hidden">ModifiedBy</th>
+														<th class="table-col-hidden">LastModified</th>
+														<th>Actions</th>
+													</tr>
+												</thead>
+											</table>
+
+										</div>
+
+										<div class="app-card-body p-4" th:if="${allfiles.empty}">
+											<div>
+												No Draft Documents have been added yet for the Workflow. Click Upload
+												then
+												"Choose
+												Files" from the pop-up and click "Upload" button.
+											</div>
+										</div>
+
+										<div class="card-footer d-flex align-items-center" th:if="${!allfiles.empty}">
+											<p class="m-0">Total records: <span
+													th:text="${totalfiles}"></span> </p>
+											<ul class="pagination m-0 ms-auto">
+												<li class="page-item"
+													th:classappend="${allfiles.number == 0 ? 'disabled' : ''}">
+													<a class="page-link"
+														th:href="@{/documentsworkflow(pageSize=${selectedPageSize}, page=1)}"
+														tabindex="-1" aria-disabled="true">
+														First <i class="fa-solid fa-chevron-left icon"></i>
+
+													</a>
+												</li>
+												<li class="page-item"
+													th:classappend="${allfiles.number == (page - 1) ? 'active' : ''}"
+													th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+													<a class="page-link"
+														th:href="@{/documentsworkflow(pageSize=${selectedPageSize}, page=${page})}"
+														th:text="${page}"></a>
+												</li>
+												<li class="page-item"
+													th:classappend="${allfiles.number +1 == allfiles.totalPages ? 'disabled' : ''}">
+													<a class="page-link"
+														th:href="@{/documentsworkflow(pageSize=${selectedPageSize}, page=${allfiles.totalPages})}"
+														tabindex="-1" aria-disabled="true">
+														<i class="fa-solid fa-chevron-right icon"></i>
+														Last
+													</a>
+												</li>
+
+											</ul>
+										</div>
+									</div>
 								</div>
 								<div class="tab-pane" id="tabs-profile-2">
 									<h4>Review</h4>
@@ -100,12 +329,6 @@
 										used it on their dry-transfer sheets, and again during the 90s as desktop
 										publishers bundled the text with their software. </div>
 								</div>
-								<div class="tab-pane" id="tabs-activity-6">
-									<h4>Publish</h4>
-									<div>Today it's seen all around the
-										web; on templates, websites, and stock designs. Use our generator to get your
-										own, or read on for the authoritative history of lorem ipsum.</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -120,8 +343,21 @@
 
 	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
 	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
 	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/js/workflowdocupload.js}"></script>
+	<script>
+		var select_element = document.getElementById('pageSizeSelect');
+		select_element.onchange = function () {
+			var elem = (typeof this.selectedIndex === "undefined" ? window.event.srcElement : this);
+			var value = elem.value || elem.options[elem.selectedIndex].value;
+			//alert(value);
+			window.location.replace("/documentsworkflow?pageSize=" + value
+				+ "&page=1");
+		}
+
+	</script>
 </body>
 
 </html>

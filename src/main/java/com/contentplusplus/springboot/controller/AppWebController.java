@@ -27,10 +27,13 @@ import com.contentplusplus.springboot.model.AppFSContent;
 import com.contentplusplus.springboot.model.AppPaginationModel;
 import com.contentplusplus.springboot.model.AppRole;
 import com.contentplusplus.springboot.model.AppUser;
+import com.contentplusplus.springboot.model.AppWorkFlowDocumentStatus;
+import com.contentplusplus.springboot.model.AppWorkflowDocument;
 import com.contentplusplus.springboot.repository.AppDBContentRepository;
 import com.contentplusplus.springboot.repository.AppFSContentRepository;
 import com.contentplusplus.springboot.repository.AppRoleRepository;
 import com.contentplusplus.springboot.repository.AppUserRepository;
+import com.contentplusplus.springboot.repository.AppWorkflowDocumentRepository;
 import com.contentplusplus.springboot.service.AppUserService;
 import com.contentplusplus.springboot.validator.AppUserAddValidator;
 
@@ -41,7 +44,7 @@ import jakarta.validation.Valid;
 
 @Controller
 @PropertySource(ignoreResourceNotFound = true, value = "classpath:messages.properties")
-public class AppUserWebController {
+public class AppWebController {
 
 	@Autowired
 	AppRoleRepository appRoleRepository;
@@ -51,6 +54,9 @@ public class AppUserWebController {
 
 	@Autowired
 	AppDBContentRepository appUserDocumentRepository;
+	
+	@Autowired
+	AppWorkflowDocumentRepository appWorkflowDocumentRepository;
 
 	@Autowired
 	AppFSContentRepository appFSContentRepository;
@@ -60,7 +66,7 @@ public class AppUserWebController {
 
 	private AppUserService userService;
 
-	public AppUserWebController(AppUserService userService) {
+	public AppWebController(AppUserService userService) {
 		this.userService = userService;
 	}
 	
@@ -115,11 +121,60 @@ public class AppUserWebController {
 		return "documentsuser";
 	}
 	
-	@GetMapping("/documentsworkflow")
-	String documentsworkflowPage(Model model) {
+//	@GetMapping("/documentsworkflow")
+//	String documentsworkflowList(Model model) {
+//		model.addAttribute("pagename", "documentsworkflow");
+//		model.addAttribute("allfiles", appWorkflowDocumentRepository.findAll());
+//		return "documents_workflow";
+//	}
+	
+	@RequestMapping(value = { "/documentsworkflow" }, method = RequestMethod.GET, produces = "text/html")
+	public String documentsworkflowList2(@RequestParam("pageSize") Optional<Integer> pageSize,
+			@RequestParam("page") Optional<Integer> page, Model model) {
+
+		int BUTTONS_TO_SHOW = 9;
+		int INITIAL_PAGE = 0;
+		int INITIAL_PAGE_SIZE = 8;
+		int[] PAGE_SIZES = { 5, 8, 10, 15, 20, 25, 50, 100 };
+		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+		Page<AppWorkflowDocument> allfiles = appWorkflowDocumentRepository
+				.findAll(PageRequest.of(evalPage, evalPageSize, Sort.by(Order.asc("id"))));
+		AppPaginationModel pager = new AppPaginationModel(allfiles.getTotalPages(), allfiles.getNumber(), BUTTONS_TO_SHOW);
+		model.addAttribute("allfiles", allfiles);
+		model.addAttribute("selectedPageSize", evalPageSize);
+		model.addAttribute("totalfiles", appWorkflowDocumentRepository.count());
+		model.addAttribute("pageSizes", PAGE_SIZES);
+		model.addAttribute("pager", pager);
 		model.addAttribute("pagename", "documentsworkflow");
 		return "documents_workflow";
 	}
+	
+	@RequestMapping(value = { "/documentsworkflowdraft" }, method = RequestMethod.GET, produces = "text/html")
+	public String documentsworkflowListdraft(@RequestParam("pageSize") Optional<Integer> pageSize,
+			@RequestParam("page") Optional<Integer> page, Model model) {
+
+		int BUTTONS_TO_SHOW = 9;
+		int INITIAL_PAGE = 0;
+		int INITIAL_PAGE_SIZE = 8;
+		int[] PAGE_SIZES = { 5, 8, 10, 15, 20, 25, 50, 100 };
+		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+
+		Page<AppWorkflowDocument> allfiles = appWorkflowDocumentRepository
+				.findByWorkflowstatus(AppWorkFlowDocumentStatus.DRAFT, PageRequest.of(evalPage, evalPageSize, Sort.by(Order.asc("id"))));
+		AppPaginationModel pager = new AppPaginationModel(allfiles.getTotalPages(), allfiles.getNumber(), BUTTONS_TO_SHOW);
+		model.addAttribute("allfiles", allfiles);
+		model.addAttribute("selectedPageSize", evalPageSize);
+		model.addAttribute("totalfiles", appWorkflowDocumentRepository.count());
+		model.addAttribute("pageSizes", PAGE_SIZES);
+		model.addAttribute("pager", pager);
+		model.addAttribute("pagename", "documentsworkflow");
+		return "documents_workflow";
+	}
+	
+	
 
 	@GetMapping("/documentsdb")
 	String dbDocs(Model model) {

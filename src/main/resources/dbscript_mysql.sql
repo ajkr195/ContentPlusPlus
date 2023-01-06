@@ -51,6 +51,23 @@ PRIMARY KEY (id),
 UNIQUE KEY(fileuuid),
 UNIQUE (fileuuid)) ENGINE=InnoDB;
 
+create table app_workflow_document(
+id INT NOT NULL AUTO_INCREMENT,
+fileuuid VARCHAR(150),
+filename VARCHAR(150) NOT NULL,
+filetype VARCHAR(150) NOT NULL,
+filesize VARCHAR(150) NOT NULL,
+filedata longblob,
+created_by VARCHAR(150) NOT NULL,
+created_date VARCHAR(150) NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date VARCHAR(150) NOT NULL,
+optlock INT,
+workflowstatus VARCHAR(150) NOT NULL,
+PRIMARY KEY (id),
+UNIQUE KEY(fileuuid),
+UNIQUE (fileuuid)) ENGINE=InnoDB;
+
 create table app_fs_content(
 id INT NOT NULL AUTO_INCREMENT,
 fileuuid VARCHAR(150),

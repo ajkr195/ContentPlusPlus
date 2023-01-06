@@ -169,18 +169,18 @@
 													th:text="${myfile.lastModifiedBy}">None</span></td>
 											<td class="cell table-col-hidden"><span class="note"
 													th:text="${myfile.lastModifiedDate}">None</span></td>
-											<td><a class="btn btn-sm app-btn-secondary mx-1"
+											<td><a class="btn btn-sm btn-outline-default"
 													th:href="@{/fsviewfile/{filename}(filename=${myfile.filename})}"
 													target="_blank" title="View in browser's new tab"><i
 														class="fa-solid fa-eye text-primary"></i></a><a
-													class="btn btn-sm app-btn-secondary mx-1"
+													class="btn btn-sm btn-outline-default"
 													th:onclick="showFSFileInfo([[${myfile}]]);" title="Details"><i
 														class="fa-solid fa-info text-info"></i></a><a
-													class="btn btn-sm app-btn-secondary mx-1"
+													class="btn btn-sm btn-outline-default"
 													th:href="@{/fsfile/{filename}(filename=${myfile.filename})}"
 													title="Download this file"><i
 														class="fa-solid fa-download text-success"></i></a><a
-													class="btn btn-sm app-btn-secondary mx-1"
+													class="btn btn-sm btn-outline-default"
 													th:onclick="deleteFSfile([[${myfile.id}]], this);"
 													title="Delete this file"><i class="fa-solid fa-x text-danger"></i>
 												</a></td>
