@@ -52,7 +52,7 @@ public class AppWorkflowDocument extends Auditable<String> {
 	@Column(name = "optlock")
 	private Integer version;
 	
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	@Column(name = "workflowstatus")
     private AppWorkFlowDocumentStatus workflowstatus;
 

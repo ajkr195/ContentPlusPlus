@@ -56,35 +56,44 @@
 
 							<div class="card-body border-bottom py-3">
 								<form th:action="@{/documentsworkflow}" id="searchForm">
+									<div class="row">
 
-									<div class="d-flex justify-content-between">
-										<div>
-											<div class="mx-2 d-inline-block">
-												<select class="form-select h-100 w-100" form="searchForm" name="size"
-													th:value="${pageSize}" onchange="changePageSize()" id="pageSize">
-													<option value="" selected>-PageSize-</option>
-													<option th:each="s : ${ {10, 20, 50, 100} }" th:value="${s}"
-														th:text="${s}"></option>
-												</select>
+										<div class="col">
+											<div class="text-muted">
+												Show
+												<div class="mx-2 d-inline-block">
+													<select form="searchForm" name="size" th:value="${pageSize}"
+														onchange="changePageSize()" class="size-select" id="pageSize">
+														<option th:each="s : ${ {10, 20, 50, 100} }" th:value="${s}"
+															th:text="${s}" th:selected="${s == pageSize}"></option>
+													</select>
+												</div>
+												entries
 											</div>
 										</div>
-										<div>
-											<select class="form-select h-100 w-100" form="searchForm" name="flowStatus"
-												th:value="${flowStatus}" onchange="filterByStatus()" id="flowStatus">
-												<option value="" selected>-Status-</option>
-												<option
-													th:each="fs : ${T(com.contentplusplus.springboot.model.AppWorkFlowDocumentStatus).values()}"
-													th:value="${fs}" th:text="${fs}" th:selected="${fs == flowStatus}">
-												</option>
-											</select>
+										<div class="col">
+											<div class="text-muted">
+												<!--Filter-->
+												<div class="mx-2 d-inline-block">
+													<select form="searchForm" name="flowStatus" th:value="${flowStatus}"
+														onchange="filterByStatus()" class="size-select" id="flowStatus">
+														<option value="" selected> --Filter By Status--</option>
+														<option
+															th:each="fs : ${T(com.contentplusplus.springboot.model.AppWorkFlowDocumentStatus).values()}"
+															th:value="${fs}" th:text="${fs}"
+															th:selected="${fs == flowStatus}"></option>
+													</select>
+												</div>
+												<!--Status-->
+											</div>
 										</div>
-										<div>
+										<div class="col">
 											<div class="input-group">
 												<input type="text" class="form-control" id="keyword" name="keyword"
 													placeholder="Search Filename..."
 													aria-label="Recipient's username with two button addons"
 													th:value="${keyword}">
-												<button class="btn btn-primary" type="submit">Search</button>
+												<button class="btn app-btn-primary" type="submit">Search</button>
 												<button class="btn app-btn-secondary" id="btnClear"
 													th:onClick="clearInputKeyword()" type="button">Clear</button>
 											</div>
@@ -92,40 +101,6 @@
 									</div>
 								</form>
 
-							</div>
-
-
-							<div class="d-flex justify-content-between">
-								<div>
-									<a class="btn btn-sm btn-teal" href="/documentsworkflowall"
-										th:href="@{/documentsworkflowall}"><i
-											class="fa-solid fa-list-ul text-white mx-2"></i>All</a>
-								</div>
-								<div>
-									<a class="btn btn-sm btn-teal" href="/documentsworkflowall"
-										th:href="@{/documentsworkflow?flowStatus=DRAFT&page=1&size=10&sort=id,asc}"><i
-											class="fa-regular fa-file-lines text-white mx-2"></i>DRAFT</a>
-								</div>
-								<div>
-									<a class="btn btn-sm btn-teal" href="/documentsworkflowall"
-										th:href="@{/documentsworkflow?flowStatus=REVIEW&page=1&size=10&sort=id,asc}"><i
-											class="fa-solid fa-magnifying-glass text-white mx-2"></i>REVIEW</a>
-								</div>
-								<div>
-									<a class="btn btn-sm btn-teal" href="/documentsworkflowall"
-										th:href="@{/documentsworkflow?flowStatus=APPROVED&page=1&size=10&sort=id,asc}"><i
-											class="fa-solid fa-check text-white mx-2"></i>APPROVED</a>
-								</div>
-								<div>
-									<a class="btn btn-sm btn-teal" href="/documentsworkflowall"
-										th:href="@{/documentsworkflow?flowStatus=FINALIZED&page=1&size=10&sort=id,asc}"><i
-											class="fa-solid fa-check-double text-white mx-2"></i>FINALIZED</a>
-								</div>
-								<div>
-									<a class="btn btn-sm btn-teal" href="/documentsworkflowall"
-										th:href="@{/documentsworkflow?flowStatus=PUBLISHED&page=1&size=10&sort=id,asc}"><i
-											class="fa-solid fa-file-circle-check text-white mx-2"></i>PUBLISHED</a>
-								</div>
 							</div>
 
 
@@ -218,53 +193,54 @@
 
 											<td class="cell" th:text="${myfile.workflowstatus}"></td>
 
-											<td><a class="dropdown text-primary" href="#" role="button"
-													data-bs-toggle="dropdown" aria-expanded="false">
-													<i class="fa-solid fa-circle-question fa-xl text-primary"></i>
-													<!--<i class="fa-solid fa-ellipsis-vertical"></i>-->
-													<ul class="dropdown-menu">
-														<li><a class="dropdown-item" href="#"
-																th:if="${myfile.workflowstatus.toString() != 'PUBLISHED'}"
-																th:onclick="nextStepDocWorkflow([[${myfile.id}]], this);"
-																title="Forward"><i
-																	class="fa-solid fa-circle-arrow-right text-success fa-xl mx-2"></i>
-																Forward</a></li>
-														<li><a class="dropdown-item" href="#"
-																th:href="@{/viewWFFile/{id}(id=${myfile.id})}"
-																target="_blank" title="View in browser's new tab"><i
-																	class="fa-solid fa-eye text-purple fa-xl mx-2"></i>
-																View File</a></li>
-														<li><a class="dropdown-item" href="#"
-																th:onclick="showWFFileInfo([[${myfile}]]);"
-																title="Details"><i
-																	class="fa-solid fa-circle-info text-info fa-xl mx-2"></i>
-																Details</a></li>
-														<li><a class="dropdown-item" href="#"
-																th:if="${myfile.workflowstatus.toString() == 'DRAFT'}"
-																th:onclick="updateWFDocumentContent([[${myfile.id}]])"
-																title="Upload new content"><i
-																	class="fa-solid fa-upload text-warning fa-xl mx-2"></i>
-																Upload New Content</a></li>
-														<li><a class="dropdown-item" href="#"
-																th:href="@{/downloadWFFile/{id}(id=${myfile.id})}"
-																title="Download this file"><i
-																	class="fa-solid fa-download text-success fa-xl mx-2"></i>Download
-																Content</a></li>
-
-														<li><a class="dropdown-item" href="#"
-																th:if="${myfile.workflowstatus.toString() == 'DRAFT'}"
-																th:onclick="deleteWFfile([[${myfile.id}]], this);"
-																title="Delete this file"><i
-																	class="fa-regular fa-trash-can text-danger fa-xl mx-2"></i>Delete</a>
-														</li>
-														<li><a class="dropdown-item" href="#"
-																th:unless="${myfile.workflowstatus.toString() == 'DRAFT' OR myfile.workflowstatus.toString() == 'PUBLISHED'}"
-																th:onclick="previousStepDocWorkflow([[${myfile.id}]], this);"
-																title="Reject"><i
-																	class="fa-solid fa-circle-arrow-left text-danger fa-xl mx-2">
-																</i>Reject</a></li>
-													</ul>
+											<td><a class="btn btn-sm btn-outline-default"
+													th:if="${myfile.workflowstatus.toString() != 'PUBLISHED'}"
+													th:onclick="nextStepDocWorkflow([[${myfile.id}]], this);"
+													title="Forward"><i
+														class="fa-solid fa-circle-arrow-right text-success"></i></a>
+												<a class="btn btn-sm btn-outline-default"
+													th:href="@{/viewWFFile/{id}(id=${myfile.id})}" target="_blank"
+													title="View in browser's new tab"><i
+														class="fa-solid fa-eye text-primary"></i></a>
+												<a class="btn btn-sm btn-outline-default"
+													th:onclick="showWFFileInfo([[${myfile}]]);" title="Details"><i
+														class="fa-solid fa-info text-info"></i></a>
+												<a class="btn btn-sm btn-outline-default"
+													th:if="${myfile.workflowstatus.toString() == 'DRAFT'}"
+													th:onclick="updateWFDocumentContent([[${myfile.id}]])"
+													title="Upload new content"><i
+														class="fa-solid fa-upload text-warning"></i>
 												</a>
+												<a class="btn btn-sm btn-outline-default"
+													th:href="@{/downloadWFFile/{id}(id=${myfile.id})}"
+													title="Download this file"><i
+														class="fa-solid fa-download text-success"></i></a>
+												<a class="btn btn-sm btn-outline-default"
+													th:if="${myfile.workflowstatus.toString() == 'DRAFT'}"
+													th:onclick="deleteWFfile([[${myfile.id}]], this);"
+													title="Delete this file"><i class="fa-solid fa-x text-danger"></i>
+												</a>
+												<a class="btn btn-sm btn-outline-default"
+													th:unless="${myfile.workflowstatus.toString() == 'DRAFT' OR myfile.workflowstatus.toString() == 'PUBLISHED'}"
+													th:onclick="previousStepDocWorkflow([[${myfile.id}]], this);"
+													title="Reject"><i
+														class="fa-solid fa-circle-arrow-left text-danger"></i>
+												</a>
+													<a class="dropdown" href="#" role="button"
+														data-bs-toggle="dropdown" aria-expanded="false">
+														<i class="fa-solid fa-ellipsis-vertical"></i>
+														<ul class="dropdown-menu">
+														<li><a class="dropdown-item" href="#">Action</a></li>
+														<li><a class="dropdown-item" href="#">Another action</a></li>
+														<li><a class="dropdown-item" href="#"
+													th:if="${myfile.workflowstatus.toString() == 'DRAFT'}"
+													th:onclick="deleteWFfile([[${myfile.id}]], this);"
+													title="Delete this file"><i class="fa-regular fa-trash-can fa-xl text-danger me-2"></i>Delete</a>
+														</li>
+													</ul>
+													</a>
+
+													
 
 
 											</td>
@@ -352,7 +328,6 @@
 		function clearInputKeyword() {
 			document.getElementById("keyword").value = "";
 			window.location = "[[@{/documentsworkflow}]]";
-			//location.reload();
 		}
 	</script>
 

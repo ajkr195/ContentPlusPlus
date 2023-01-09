@@ -1,5 +1,6 @@
 package com.contentplusplus.springboot.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -54,7 +57,7 @@ public class AppWebController {
 
 	@Autowired
 	AppDBContentRepository appUserDocumentRepository;
-	
+
 	@Autowired
 	AppWorkflowDocumentRepository appWorkflowDocumentRepository;
 
@@ -69,7 +72,7 @@ public class AppWebController {
 	public AppWebController(AppUserService userService) {
 		this.userService = userService;
 	}
-	
+
 	@ModelAttribute("roles")
 	public List<AppRole> initializeRoles() {
 		return (List<AppRole>) appRoleRepository.findAll();
@@ -120,61 +123,99 @@ public class AppWebController {
 		model.addAttribute("pagename", "mydocuments");
 		return "documentsuser";
 	}
-	
+
 //	@GetMapping("/documentsworkflow")
 //	String documentsworkflowList(Model model) {
 //		model.addAttribute("pagename", "documentsworkflow");
 //		model.addAttribute("allfiles", appWorkflowDocumentRepository.findAll());
 //		return "documents_workflow";
 //	}
-	
-	@RequestMapping(value = { "/documentsworkflow" }, method = RequestMethod.GET, produces = "text/html")
-	public String documentsworkflowList2(@RequestParam("pageSize") Optional<Integer> pageSize,
-			@RequestParam("page") Optional<Integer> page, Model model) {
 
-		int BUTTONS_TO_SHOW = 9;
-		int INITIAL_PAGE = 0;
-		int INITIAL_PAGE_SIZE = 8;
-		int[] PAGE_SIZES = { 5, 8, 10, 15, 20, 25, 50, 100 };
-		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+	@GetMapping("/documentsworkflow")
+	public String documentsworkflowPagenew(Model model, @RequestParam(required = false) String keyword,
+			@RequestParam(required = false, defaultValue = "DRAFT") String flowStatus,
+			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "id,asc") String[] sort) {
+		try {
+			List<AppWorkflowDocument> allfiles = new ArrayList<AppWorkflowDocument>();
 
-		Page<AppWorkflowDocument> allfiles = appWorkflowDocumentRepository
-				.findAll(PageRequest.of(evalPage, evalPageSize, Sort.by(Order.asc("id"))));
-		AppPaginationModel pager = new AppPaginationModel(allfiles.getTotalPages(), allfiles.getNumber(), BUTTONS_TO_SHOW);
-		model.addAttribute("allfiles", allfiles);
-		model.addAttribute("selectedPageSize", evalPageSize);
-		model.addAttribute("totalfiles", appWorkflowDocumentRepository.count());
-		model.addAttribute("pageSizes", PAGE_SIZES);
-		model.addAttribute("pager", pager);
-		model.addAttribute("pagename", "documentsworkflow");
+			String sortField = sort[0];
+			String sortDirection = sort[1];
+
+			Direction direction = sortDirection.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+			Order order = new Order(direction, sortField);
+
+			Pageable pageable = PageRequest.of(page - 1, size, Sort.by(order));
+
+			Page<AppWorkflowDocument> pageTuts = null;
+
+			if (keyword == null && flowStatus == null) {
+				pageTuts = appWorkflowDocumentRepository.findAll(pageable);
+			} else if (keyword != null && flowStatus == null) {
+				pageTuts = appWorkflowDocumentRepository.findByFileNameContainingIgnoreCase(keyword, pageable);
+				model.addAttribute("keyword", keyword);
+			} else if (keyword == null && flowStatus != null) {
+				pageTuts = appWorkflowDocumentRepository
+						.findByWorkflowstatus(AppWorkFlowDocumentStatus.valueOf(flowStatus), pageable);
+				model.addAttribute("flowStatus", flowStatus);
+			} else if (keyword != null && flowStatus != null) {
+				pageTuts = appWorkflowDocumentRepository.findByWorkflowstatusAndFileNameContainingIgnoreCase(
+						AppWorkFlowDocumentStatus.valueOf(flowStatus), keyword, pageable);
+				model.addAttribute("keyword", keyword);
+				model.addAttribute("flowStatus", flowStatus);
+			}
+
+			allfiles = pageTuts.getContent();
+
+			model.addAttribute("allfiles", allfiles);
+			model.addAttribute("currentPage", pageTuts.getNumber() + 1);
+			model.addAttribute("totalItems", pageTuts.getTotalElements());
+			model.addAttribute("totalPages", pageTuts.getTotalPages());
+			model.addAttribute("pageSize", size);
+			model.addAttribute("sortField", sortField);
+			model.addAttribute("sortDirection", sortDirection);
+			model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
+		} catch (Exception e) {
+			model.addAttribute("message", e.getMessage());
+		}
+
 		return "documents_workflow";
 	}
-	
-	@RequestMapping(value = { "/documentsworkflowdraft" }, method = RequestMethod.GET, produces = "text/html")
-	public String documentsworkflowListdraft(@RequestParam("pageSize") Optional<Integer> pageSize,
-			@RequestParam("page") Optional<Integer> page, Model model) {
 
-		int BUTTONS_TO_SHOW = 9;
-		int INITIAL_PAGE = 0;
-		int INITIAL_PAGE_SIZE = 8;
-		int[] PAGE_SIZES = { 5, 8, 10, 15, 20, 25, 50, 100 };
-		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+	@GetMapping("/documentsworkflowall")
+	public String documentsworkflowPageAll(Model model, @RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id,asc") String[] sort) {
+		try {
+			List<AppWorkflowDocument> allfiles = new ArrayList<AppWorkflowDocument>();
 
-		Page<AppWorkflowDocument> allfiles = appWorkflowDocumentRepository
-				.findByWorkflowstatus(AppWorkFlowDocumentStatus.DRAFT, PageRequest.of(evalPage, evalPageSize, Sort.by(Order.asc("id"))));
-		AppPaginationModel pager = new AppPaginationModel(allfiles.getTotalPages(), allfiles.getNumber(), BUTTONS_TO_SHOW);
-		model.addAttribute("allfiles", allfiles);
-		model.addAttribute("selectedPageSize", evalPageSize);
-		model.addAttribute("totalfiles", appWorkflowDocumentRepository.count());
-		model.addAttribute("pageSizes", PAGE_SIZES);
-		model.addAttribute("pager", pager);
-		model.addAttribute("pagename", "documentsworkflow");
+			String sortField = sort[0];
+			String sortDirection = sort[1];
+
+			Direction direction = sortDirection.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+			Order order = new Order(direction, sortField);
+
+			Pageable pageable = PageRequest.of(page - 1, size, Sort.by(order));
+
+			Page<AppWorkflowDocument> pageTuts = null;
+
+			pageTuts = appWorkflowDocumentRepository.findAll(pageable);
+
+			allfiles = pageTuts.getContent();
+
+			model.addAttribute("allfiles", allfiles);
+			model.addAttribute("currentPage", pageTuts.getNumber() + 1);
+			model.addAttribute("totalItems", pageTuts.getTotalElements());
+			model.addAttribute("totalPages", pageTuts.getTotalPages());
+			model.addAttribute("pageSize", size);
+			model.addAttribute("sortField", sortField);
+			model.addAttribute("sortDirection", sortDirection);
+			model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
+		} catch (Exception e) {
+			model.addAttribute("message", e.getMessage());
+		}
+
 		return "documents_workflow";
 	}
-	
-	
 
 	@GetMapping("/documentsdb")
 	String dbDocs(Model model) {
@@ -183,7 +224,7 @@ public class AppWebController {
 		model.addAttribute("allfiles", allfiles);
 		return "documents_db";
 	}
-	
+
 	@RequestMapping(value = { "/documentsdb2" }, method = RequestMethod.GET, produces = "text/html")
 	public String documentsdbList(@RequestParam("pageSize") Optional<Integer> pageSize,
 			@RequestParam("page") Optional<Integer> page, Model model) {
@@ -197,7 +238,8 @@ public class AppWebController {
 
 		Page<AppDBContent> allfiles = appUserDocumentRepository
 				.findAll(PageRequest.of(evalPage, evalPageSize, Sort.by(Order.asc("id"))));
-		AppPaginationModel pager = new AppPaginationModel(allfiles.getTotalPages(), allfiles.getNumber(), BUTTONS_TO_SHOW);
+		AppPaginationModel pager = new AppPaginationModel(allfiles.getTotalPages(), allfiles.getNumber(),
+				BUTTONS_TO_SHOW);
 		model.addAttribute("allfiles", allfiles);
 		model.addAttribute("selectedPageSize", evalPageSize);
 		model.addAttribute("totalfiles", appUserDocumentRepository.count());
@@ -214,7 +256,7 @@ public class AppWebController {
 		model.addAttribute("allfiles", allfiles);
 		return "documents_fs";
 	}
-	
+
 	@RequestMapping(value = { "/documentsfs2" }, method = RequestMethod.GET, produces = "text/html")
 	public String documentsfsList(@RequestParam("pageSize") Optional<Integer> pageSize,
 			@RequestParam("page") Optional<Integer> page, Model model) {
@@ -228,7 +270,8 @@ public class AppWebController {
 
 		Page<AppFSContent> allfiles = appFSContentRepository
 				.findAll(PageRequest.of(evalPage, evalPageSize, Sort.by(Order.asc("id"))));
-		AppPaginationModel pager = new AppPaginationModel(allfiles.getTotalPages(), allfiles.getNumber(), BUTTONS_TO_SHOW);
+		AppPaginationModel pager = new AppPaginationModel(allfiles.getTotalPages(), allfiles.getNumber(),
+				BUTTONS_TO_SHOW);
 		model.addAttribute("allfiles", allfiles);
 		model.addAttribute("selectedPageSize", evalPageSize);
 		model.addAttribute("totalfiles", appFSContentRepository.count());
@@ -243,13 +286,12 @@ public class AppWebController {
 		model.addAttribute("pagename", "notifications");
 		return "notifications";
 	}
-	
+
 	@GetMapping("/home")
 	String home2Page(Model model) {
 		model.addAttribute("pagename", "home");
 		return "home";
 	}
-
 
 	@GetMapping("/settings")
 	String settingsPage(Model model) {
@@ -267,24 +309,24 @@ public class AppWebController {
 		model.addAttribute("pagename", "help");
 		return "help";
 	}
-	
+
 	@GetMapping({ "/" })
 	String homePage(Model model) {
 		return "redirect:/home";
 	}
-	
+
 	@GetMapping({ "/steps" })
 	String stepsPage(Model model) {
 		model.addAttribute("pagename", "steps");
 		return "steps";
 	}
-	
+
 	@GetMapping({ "/activity" })
 	String activityPage(Model model) {
 		model.addAttribute("pagename", "activity");
 		return "activity";
 	}
-	
+
 	@GetMapping("/signup")
 	String singupPage(Model model) {
 		AppUser user = new AppUser();

@@ -1,6 +1,68 @@
 'use strict';
 
 
+
+function nextStepDocWorkflow(id, Object) {
+	Swal.fire({
+		title: 'Are you sure?',
+		text: "You want to Foraward this to Next Step?",
+		icon: 'warning',
+		showDenyButton: true,
+		confirmButtonColor: '#006666',
+		denyButtonColor: 'gray',
+		confirmButtonText: 'Yes, forward it!',
+		denyButtonText: `Don't forward`,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			fetch('/nextStepDocWorkflow/' + id, {
+				method: 'PUT',
+			})
+			Swal.fire(
+				'Forwarded!',
+				'Your file has been forwarded to next step.',
+				'success'
+			)
+			Object.closest('tr').remove();
+		} else if (result.isDenied) {
+			Swal.fire('No changes made.', 'Your file is at same step as it was before !!  ', 'info')
+		}
+	})
+}
+
+function nextStepDocWorkflowxx(id, Object) {
+	fetch('/nextStepDocWorkflow/' + id, {
+		method: 'PUT',
+	})
+		.then((response) => {
+			//alert(response.status);
+			if (response.status == 204) {
+				Object.closest('tr').remove();
+			}
+			//alert(response.status);
+			//alert('Success:', response);
+		})
+		.catch((error) => {
+			alert('Error:', error);
+		});
+}
+
+function previousStepDocWorkflow(id, Object) {
+	fetch('/previousStepDocWorkflow/' + id, {
+		method: 'PUT',
+	})
+		.then((response) => {
+			//alert(response.status);
+			if (response.status == 204) {
+				Object.closest('tr').remove();
+			}
+			//alert(response.status);
+			//alert('Success:', response);
+		})
+		.catch((error) => {
+			alert('Error:', error);
+		});
+}
+
 function deleteallWFfiles() {
 	Swal.fire({
 		title: 'Are you sure?',
@@ -78,8 +140,9 @@ function deleteWFfileVanilla(id, Object) {
 
 
 function showWFFileInfo(myfile) {
-
+	
 	let htmlstring = '<div class="row m-0"><div class="text-end col-4 mb-2"><b>Id: </b></div> <div class="text-start col-8">' + myfile.id + '</div></div>' +
+		'<div class="row m-0" ><div class="text-end col-4 mb-2"><b>Status: </b></div> <div class="text-start col-8 fs-2 fw-bolder">' + myfile.workflowstatus + '</div></div > ' +
 		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Unique Id: </b></div> <div class="text-start col-8">' + myfile.fileuuid + '</div></div>' +
 		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>File Size: </b></div> <div class="text-start col-8">' + myfile.fileSize + '</div></div>' +
 		'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Creator: </b></div> <div class="text-start col-8">' + myfile.createdBy + '</div></div>' +

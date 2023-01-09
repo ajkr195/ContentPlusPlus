@@ -6,20 +6,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @ControllerAdvice(annotations = Controller.class)
 public class GetPrincipalController {
 
 	@Value("${app.name}")
 	private String appname;
-	
+
 	@ModelAttribute("principal")
 	public Object getCurrentUser() {
 		return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
-	
+
 	@ModelAttribute("appname")
 	public String globalAppName() {
 		return appname;
 	}
-	
+
+	@ModelAttribute("servletPath")
+	String getRequestServletPath(HttpServletRequest request) {
+		return request.getServletPath();
+	}
+
 }

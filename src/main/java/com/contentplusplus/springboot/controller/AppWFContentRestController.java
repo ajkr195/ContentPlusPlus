@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.contentplusplus.springboot.model.AppWorkFlowDocumentStatus;
 import com.contentplusplus.springboot.model.AppWorkflowDocument;
 import com.contentplusplus.springboot.payload.AppContentUploadResponse;
 import com.contentplusplus.springboot.repository.AppWorkflowDocumentRepository;
@@ -87,6 +87,7 @@ public class AppWFContentRestController {
 	public ResponseEntity<HttpStatus> deletedbfile(@PathVariable("id") Long id) {
 		try {
 			appWorkflowDocumentRepository.deleteById(id);
+			log.info("Deleted Workflow file with Id: {}", id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -104,6 +105,49 @@ public class AppWFContentRestController {
 		
 		return new AppContentUploadResponse(appFile.getFileName(), fileDownloadUri, file.getContentType(),
 				file.getSize());
+	}
+	
+	
+	@PutMapping("/nextStepDocWorkflow/{id}")
+	public ResponseEntity<AppWorkflowDocument> forwardWFlow(@PathVariable Long id) {
+
+		AppWorkflowDocument appWorkflowDocument = appWorkflowDocumentRepository.findById(id).get();
+
+		System.out.println("Moving forward this Workflow Doc Id: " + id);
+
+		if (appWorkflowDocument == null)
+			return ResponseEntity.notFound().build();
+
+		try {
+			appWorkflowDocument.setWorkflowstatus(
+					AppWorkFlowDocumentStatus.values()[appWorkflowDocument.getWorkflowstatus().ordinal() + 1]);
+		} catch (java.lang.ArrayIndexOutOfBoundsException ex) {
+			System.out.println("Reached Last step already...");
+		}
+		appWorkflowDocumentRepository.save(appWorkflowDocument);
+
+		return ResponseEntity.noContent().build();
+	}
+
+	@PutMapping("/previousStepDocWorkflow/{id}")
+	public ResponseEntity<AppWorkflowDocument> backwordWFlow(@PathVariable Long id) {
+
+		AppWorkflowDocument appWorkflowDocument = appWorkflowDocumentRepository.findById(id).get();
+
+		System.out.println("Moving backward this Workflow Doc Id: " + id);
+
+		if (appWorkflowDocument == null)
+			return ResponseEntity.notFound().build();
+
+		try {
+			appWorkflowDocument.setWorkflowstatus(
+					AppWorkFlowDocumentStatus.values()[appWorkflowDocument.getWorkflowstatus().ordinal() - 1]);
+		} catch (java.lang.ArrayIndexOutOfBoundsException ex) {
+			System.out.println("Reached first step...");
+		}
+		appWorkflowDocumentRepository.save(appWorkflowDocument);
+
+		return ResponseEntity.noContent().build();
 	}
 	
 	
