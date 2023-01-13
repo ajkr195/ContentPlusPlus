@@ -23,6 +23,21 @@ name VARCHAR(150) NOT NULL,
 PRIMARY KEY (id),
 UNIQUE (name)) ENGINE=InnoDB;
 
+CREATE TABLE app_department (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  departmentuuid VARCHAR(150),
+  departmentheadname varchar(255) NOT NULL,
+  departmentheademail varchar(255) NOT NULL,
+  departmentname varchar(255) NOT NULL,
+  PRIMARY KEY (id)) ENGINE=InnoDB;
+  
+CREATE TABLE app_user_department (
+  userid BIGINT NOT NULL,
+  departmentid BIGINT NOT NULL
+) ENGINE=InnoDB;
+ALTER TABLE app_user_department ADD CONSTRAINT FK_AURPAREAUSERID FOREIGN KEY (userid) REFERENCES app_user (id);
+ALTER TABLE app_user_department ADD CONSTRAINT FK_AURUSRPAREAID FOREIGN KEY (departmentid) REFERENCES app_department (id); 
+
 CREATE TABLE app_user_role (
 id BIGINT NOT NULL AUTO_INCREMENT,
 userid BIGINT NOT NULL,
@@ -160,3 +175,165 @@ INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('15',
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('15', '2');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('15', '3');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('16', '3');
+
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department1', 'Department1HeadName1', 'Department1Head1@email.com');
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department2', 'Department2HeadName1', 'Department2Head2@email.com');
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department3', 'Department3HeadName3', 'Department3Head3@email.com');
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department4', 'Department4HeadName4', 'Department4Head4@email.com');
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department5', 'Department5HeadName5', 'Department5Head5@email.com');
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department6', 'Department6HeadName6', 'Department6Head1@email.com');
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department7', 'Department7HeadName7', 'Department7Head7@email.com');
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department8', 'Department8HeadName8', 'Department8Head8@email.com');
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department9', 'Department9HeadName9', 'Department9Head9@email.com');
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department10', 'Department10HeadName10', 'Department10Head10@email.com');
+
+INSERT INTO app_user_department (userid, departmentid) VALUES ('1', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('1', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('2', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('2', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('3', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('3', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('3', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('3', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('3', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('3', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('3', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('3', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('3', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('3', '10');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('4', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('4', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('4', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('4', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('4', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('4', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('4', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('4', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('4', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('4', '10');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('5', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('5', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('5', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('5', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('5', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('5', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('5', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('5', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('5', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('5', '10');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('6', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('6', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('6', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('6', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('6', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('6', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('6', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('6', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('6', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('6', '10');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('7', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('7', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('7', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('7', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('7', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('7', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('7', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('7', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('7', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('7', '10');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('8', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('8', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('8', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('8', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('8', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('8', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('8', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('8', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('8', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('8', '10');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('9', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('9', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('9', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('9', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('9', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('9', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('9', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('9', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('9', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('9', '10');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('10', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('10', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('10', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('10', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('10', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('10', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('10', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('10', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('10', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('10', '10');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('11', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('11', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('11', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('11', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('11', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('11', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('11', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('11', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('11', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('11', '10');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('12', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('12', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('12', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('12', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('12', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('12', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('12', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('12', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('12', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('12', '10');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('13', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('13', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('13', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('13', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('13', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('13', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('13', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('13', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('13', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('13', '10');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('14', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('14', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('14', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('14', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('14', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('14', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('14', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('14', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('14', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('14', '10');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('15', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('15', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('15', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('15', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('15', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('15', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('15', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('15', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('15', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('15', '10');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('16', '1');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('16', '2');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('16', '3');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('16', '4');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('16', '5');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('16', '6');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('16', '7');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('16', '8');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('16', '9');
+INSERT INTO app_user_department (userid, departmentid) VALUES ('16', '10');
+
+
+
+
+
+

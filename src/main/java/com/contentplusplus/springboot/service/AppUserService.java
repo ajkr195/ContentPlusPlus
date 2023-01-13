@@ -19,4 +19,6 @@ public interface AppUserService {
     List<AppUser> findAllActiveUsers();
     
     List<AppUser> findAllInActiveUsers();
+
+	AppUser updateUser(AppUser user);
 }

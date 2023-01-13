@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ import com.contentplusplus.springboot.repository.AppUserRepository;
 
 @Service
 public class AppUserServiceImpl implements AppUserService {
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	private AppUserRepository userRepository;
 	private AppRoleRepository roleRepository;
@@ -33,8 +38,25 @@ public class AppUserServiceImpl implements AppUserService {
 		user.setUserpassword(passwordEncoder.encode(user.getUserpassword()));
 		user.setUseruuid(UUID.randomUUID().toString());
 		user.setRoles(user.getRoles());
+		user.setDepartments(user.getDepartments());
 		userRepository.save(user);
 	}
+	
+	 @Override
+	    public AppUser updateUser(AppUser user) {
+	    	AppUser entity = userRepository.findById(user.getId()).orElse(null);
+			if (null != entity) {
+				entity.setUserfirstname(user.getUserfirstname());
+				entity.setUserlastname(user.getUserlastname());
+				entity.setUseremail(entity.getUseremail());
+				entity.setUserpassword(entity.getUserpassword());
+				entity.setUseruuid(entity.getUseruuid());
+				entity.setRoles(user.getRoles());
+				entity.setDepartments(user.getDepartments());
+			}
+			return userRepository.save(entity);
+	        
+	    }
 
 	@Override
 	public AppUser findByUseremail(String email) {

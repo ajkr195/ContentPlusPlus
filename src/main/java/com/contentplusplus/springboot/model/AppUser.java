@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import org.hibernate.annotations.GenericGenerator;
-
 import com.contentplusplus.springboot.model.audit.Auditable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,7 +20,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -76,5 +72,12 @@ public class AppUser  extends Auditable<String> implements Serializable {
 			@JoinColumn(name = "userid", referencedColumnName = "ID") }, inverseJoinColumns = {
 					@JoinColumn(name = "roleid", referencedColumnName = "ID") })
 	private List<AppRole> roles = new ArrayList<>();
+	
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "app_user_department", joinColumns = { @JoinColumn(name = "userid") }, inverseJoinColumns = {
+			@JoinColumn(name = "departmentid") })
+	private List<AppDepartment> departments;
+
 
 }

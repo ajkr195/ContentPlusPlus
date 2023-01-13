@@ -5,3 +5,11 @@
   th:title="${tooltip}" rel="tooltip">
   [[${label}]]
 </a>
+
+<a th:fragment="userpaging(pageNum, label, tooltip)" class="page-link"
+  th:href="@{ ${servletPath} +'?'+ ${userStatus!=null && userStatus!=''? 'userStatus=' + userStatus + '&' : ''} + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''}
+                           + 'page=' + ${pageNum} + '&size=' + ${pageSize}
+                           + ${sortField!=null ? '&sort=' + sortField + ',' + sortDirection : ''}}"
+  th:title="${tooltip}" rel="tooltip">
+  [[${label}]]
+</a>

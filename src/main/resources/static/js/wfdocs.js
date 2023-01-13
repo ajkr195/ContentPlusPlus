@@ -47,6 +47,33 @@ function nextStepDocWorkflowxx(id, Object) {
 }
 
 function previousStepDocWorkflow(id, Object) {
+	Swal.fire({
+		title: 'Are you sure?',
+		text: "You want to Reject this to Previous Step?",
+		icon: 'warning',
+		showDenyButton: true,
+		confirmButtonColor: '#006666',
+		denyButtonColor: 'gray',
+		confirmButtonText: 'Yes, reject it!',
+		denyButtonText: `Don't reject`,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			fetch('/previousStepDocWorkflow/' + id, {
+				method: 'PUT',
+			})
+			Swal.fire(
+				'Rejected !',
+				'Your file has been rejected to previous step.',
+				'success'
+			)
+			Object.closest('tr').remove();
+		} else if (result.isDenied) {
+			Swal.fire('No changes made.', 'Your file is at same step as it was before !!  ', 'info')
+		}
+	})
+}
+
+function previousStepDocWorkflowxx(id, Object) {
 	fetch('/previousStepDocWorkflow/' + id, {
 		method: 'PUT',
 	})

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.contentplusplus.springboot.model.AppUser;
+import com.contentplusplus.springboot.model.AppWorkFlowDocumentStatus;
+import com.contentplusplus.springboot.model.AppWorkflowDocument;
 import com.contentplusplus.springboot.repository.AppRoleRepository;
 import com.contentplusplus.springboot.repository.AppUserRepository;
 import com.contentplusplus.springboot.service.AppUserService;
@@ -87,11 +89,11 @@ public class AppUserRestController {
 		appUserRepository.setAppUserAsActiveById(id);
 		return appUser;
 	}
-
+	
 	@PostMapping(value = "/deActivateUser/{id}")
 	public AppUser deActivateUser(@PathVariable Long id) {
 		AppUser appUser = appUserRepository.findById(id).get();
-		log.info("Activating User :: " + id);
+		log.info("Activating User with Id - {}", id);
 		appUserRepository.setAppUserAsInActiveById(id);
 		return appUser;
 	}
@@ -100,6 +102,7 @@ public class AppUserRestController {
 	public AppUser deleteUser(@PathVariable Long id) throws ResourceNotFoundException {
 		AppUser appUser = appUserRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("AppUser not found for this id :: " + id));
+		log.info("Deleting User with Id - {} ", id);
 		appUserRepository.deleteById(id);
 		return appUser;
 	}

@@ -30,11 +30,8 @@
 									<i class="fa-solid fa-plus fa-xl"></i>
 									Add User
 								</a>
-								<a href="#" class="btn app-btn-primary d-none d-sm-inline-block"
-									th:onClick="getSelectedCheckBoxes()">
-									<i class="fa-solid fa-minus fa-xl"></i>
-									Get Selected
-								</a>
+								<a href="#" class="btn app-btn-secondary d-none d-sm-inline-block"
+									th:onClick="getSelectedCheckBoxes()"> Get Selected </a>
 							</div>
 						</div>
 					</div>
@@ -83,15 +80,17 @@
 											<th>LastName</th>
 											<th>Email</th>
 											<th>Active?</th>
-											<!--											<th>CreatedBy</th>-->
-											<!--											<th>DateCreated</th>-->
-											<!--											<th>ModifiedBy</th>-->
-											<!--											<th>DateModified</th>-->
+											<!--<th>CreatedBy</th>-->
+											<!--<th>DateCreated</th>-->
+											<!--<th>ModifiedBy</th>-->
+											<!--<th>DateModified</th>
+											<th>Roles</th>
+											<th>Departments</th>-->
 											<th>Action</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="user: ${users}">
+										<tr th:id="@{|user_${user.id}|}" th:each="user: ${users}">
 											<td><input class="form-check-input m-0 align-middle border border-success"
 													type="checkbox" aria-label="Select user" th:id="check_+ ${user.id}">
 											</td>
@@ -109,14 +108,63 @@
 												<span class="badge bg-danger me-1"></span> <span
 													th:text="InActive"></span>
 											</td>
-											<!--											<td><span class="note" th:text="${user.createdBy}"></span>-->
-											<!--											</td>-->
-											<!--											<td><span class="note" th:text="${user.createdDate}"></span>-->
-											<!--											</td>-->
-											<!--											<td><span class="note" th:text="${user.lastModifiedBy}"></span>-->
-											<!--											</td>-->
-											<!--											<td><span class="note" th:text="${user.lastModifiedDate}"></span> </td>-->
-											<td><a class="btn" href="#">View</a>
+											<!--<td><span class="note" th:text="${user.createdBy}"></span>-->
+											<!--</td>-->
+											<!--<td><span class="note" th:text="${user.createdDate}"></span>-->
+											<!--</td>-->
+											<!--<td><span class="note" th:text="${user.lastModifiedBy}"></span>-->
+											<!--</td>-->
+											<!--<td><span class="note" th:text="${user.lastModifiedDate}"></span> </td>
+											<td>
+
+												<th:block th:each="role: ${user.roles}">
+													<p th:text="${role.id + ':' + role.name}"></p>
+												</th:block>
+											</td>
+											<td>
+
+												<th:block th:each="dept: ${user.departments}">
+													<p th:text="${dept.id + ':' + dept.departmentname}"></p>
+												</th:block>
+											</td>-->
+											</span>
+											<td><a class="dropdown text-primary" href="#" role="button"
+													data-bs-toggle="dropdown" aria-expanded="false">
+													<i class="fa-solid fa-user-gear fa-xl text-teal"></i>
+													<!--<i class="fa-solid fa-ellipsis-vertical"></i>-->
+													<ul class="dropdown-menu">
+														<li><a class="dropdown-item" href="#"
+																th:onclick="showUserInfo([[${user}]]);"
+																title="User Details"><i
+																	class="fa-solid fa-circle-info text-info fa-xl mx-2"></i>
+																Details</a></li>
+														<li><a class="dropdown-item" href="#"
+																th:if="${! user.userenabled}"
+																th:onclick="activateUser([[${user.id}]], this);"
+																title="Activate this User"><i
+																	class="fa-solid fa-check text-success fa-xl mx-2"></i>
+																Activate</a></li>
+														<li><a class="dropdown-item" href="#"
+																th:href="@{/signup/{id}(id=${user.id})}"
+																title="Edit this user"><i
+																	class="fa-solid fa-user-pen text-warning fa-xl mx-2"></i>Edit
+																User</a></li>
+														<li><a class="dropdown-item" href="#"
+																th:if="${user.userenabled}"
+																th:onclick="deActivateUser([[${user.id}]], this);"
+																title="De-Activate this User"><i
+																	class="fa-solid fa-x text-danger fa-xl mx-2"></i>
+																De-Activate</a></li>
+
+														<li><a class="nav-item dropdown dropdown-item" href="#"
+																th:onclick="deleteUser([[${user.id}]], this);"
+																title="Delete this user"><i
+																	class="fa-regular fa-trash-can text-danger fa-xl mx-2"></i>Delete</a>
+														</li>
+													</ul>
+												</a>
+
+
 											</td>
 										</tr>
 									</tbody>
@@ -128,7 +176,7 @@
 								<ul class="pagination m-0 ms-auto">
 									<li class="page-item" th:classappend="${users.number == 0 ? 'disabled' : ''}">
 										<a class="page-link"
-											th:href="@{/listuser2(pageSize=${selectedPageSize}, page=1)}" tabindex="-1"
+											th:href="@{/listuser(pageSize=${selectedPageSize}, page=1)}" tabindex="-1"
 											aria-disabled="true">
 											First <i class="fa-solid fa-chevron-left icon"></i>
 
@@ -137,13 +185,13 @@
 									<li class="page-item" th:classappend="${users.number == (page - 1) ? 'active' : ''}"
 										th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
 										<a class="page-link"
-											th:href="@{/listuser2(pageSize=${selectedPageSize}, page=${page})}"
+											th:href="@{/listuser(pageSize=${selectedPageSize}, page=${page})}"
 											th:text="${page}"></a>
 									</li>
 									<li class="page-item"
 										th:classappend="${users.number +1 == users.totalPages ? 'disabled' : ''}">
 										<a class="page-link"
-											th:href="@{/listuser2(pageSize=${selectedPageSize}, page=${users.totalPages})}"
+											th:href="@{/listuser(pageSize=${selectedPageSize}, page=${users.totalPages})}"
 											tabindex="-1" aria-disabled="true">
 											<i class="fa-solid fa-chevron-right icon"></i>
 											Last
@@ -272,8 +320,10 @@
 
 	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
 	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
 	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/js/userdata.js}"></script>
 	<script>
 
 		var select_element = document.getElementById('pageSizeSelect');
@@ -282,7 +332,7 @@
 			var elem = (typeof this.selectedIndex === "undefined" ? window.event.srcElement : this);
 			var value = elem.value || elem.options[elem.selectedIndex].value;
 			//alert(value);
-			window.location.replace("/listuser2?pageSize=" + value
+			window.location.replace("/listuser?pageSize=" + value
 				+ "&page=1");
 		}
 
