@@ -1,6 +1,5 @@
 package com.contentplusplus.springboot.controller;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -149,8 +148,6 @@ public class AppUserWebController {
 		return "documentsuser";
 	}
 
-
-
 	@RequestMapping(value = { "/signup", "/signup/{id}" }, method = RequestMethod.GET)
 	public String userRegistrationsd(Model model, @PathVariable(required = false, name = "id") Long id) {
 
@@ -195,6 +192,5 @@ public class AppUserWebController {
 			return "redirect:/login?regnsuccess";
 		}
 	}
-
 
 }
