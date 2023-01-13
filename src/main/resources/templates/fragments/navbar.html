@@ -126,7 +126,7 @@
 						<li class="nav-item" th:classappend="${pagename == 'home' ? 'active' : ''}">
 							<a class="nav-link" href="/home" th:href="@{/home}">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
-									<i class="fa-solid fa-house-user"></i>
+									<i class="fa-solid fa-house-user text-teal"></i>
 								</span>
 								<span class="nav-link-title"
 									th:classappend="${pagename == 'home' ? 'fs-3 fw-bolder text-primary' : ''}">
@@ -137,7 +137,7 @@
 						<li class="nav-item" th:classappend="${pagename == 'index' ? 'active' : ''}">
 							<a class="nav-link" href="/index" th:href="@{/index}">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
-									<i class="fa-solid fa-gauge-high"></i>
+									<i class="fa-solid fa-gauge-high text-teal"></i>
 								</span>
 								<span class="nav-link-title"
 									th:classappend="${pagename == 'index' ? 'fs-3 fw-bolder text-primary' : ''}">
@@ -150,7 +150,7 @@
 							<a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
 								data-bs-auto-close="outside" role="button" aria-expanded="false">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
-									<i class="fa-solid fa-circle-nodes"></i>
+									<i class="fa-solid fa-arrows-turn-to-dots text-teal"></i>
 								</span>
 								<span class="nav-link-title"
 									th:classappend="${pagename == 'documentsworkflow' OR pagename == 'activity' OR pagename == 'steps' ? 'fs-3 fw-bolder text-primary' : ''}">
@@ -162,7 +162,7 @@
 									<div class="dropdown-menu-column">
 										<a class="dropdown-item" href="/documentsworkflow"
 											th:href="@{/documentsworkflow}">
-											Documents Workflow
+											<i class="fa-solid fa-arrows-split-up-and-left me-2 text-primary"></i> Documents Workflow
 										</a>
 										<a class="dropdown-item" href="#">
 											Link1 <span
@@ -236,7 +236,7 @@
 							<a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown"
 								data-bs-auto-close="outside" role="button" aria-expanded="false">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
-									<i class="fa-regular fa-star"></i>
+									<i class="fa-brands fa-hive text-teal"></i>
 								</span>
 								<span class="nav-link-title"
 									th:classappend="${pagename == 'documentsfs' OR pagename == 'documentsdb' OR pagename == 's3bucket' ? 'fs-3 fw-bolder text-primary' : ''}">
@@ -247,17 +247,17 @@
 								<div class="dropdown-menu-columns">
 									<div class="dropdown-menu-column">
 										<a class="dropdown-item" href="/documentsdb">
-											Documents DB <span
-												class="badge badge-sm bg-success-lt text-uppercase ms-auto">RDBMS</span>
+											<i class="fa-solid fa-database me-2 text-danger"></i> Documents <span
+												class="badge badge-sm bg-danger-lt text-uppercase ms-auto">RDBMS</span>
 										</a>
 										<a class="dropdown-item" href="/documentsfs">
-											Documents FS <span
+											<i class="fa-solid fa-hard-drive me-2 text-primary"></i> Documents <span
 												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">FileSystem</span>
 										</a>
 									</div>
 									<div class="dropdown-menu-column">
 										<a class="dropdown-item" href="/s3bucket">
-											Documents S3 <span
+											<i class="fa-brands fa-aws fa-xl me-2 text-success"></i> Documents <span
 												class="badge badge-sm bg-success-lt text-uppercase ms-auto">S3Bucket</span>
 										</a>
 										<a class="dropdown-item" href="#">Link1</a>
@@ -270,7 +270,7 @@
 							<a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
 								data-bs-auto-close="outside" role="button" aria-expanded="false">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
-									<i class="fa-solid fa-border-all"></i>
+									<i class="fa-solid fa-sliders text-teal"></i>
 								</span>
 								<span class="nav-link-title">
 									Preferences
@@ -316,7 +316,7 @@
 							<a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
 								data-bs-auto-close="outside" role="button" aria-expanded="false">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
-									<i class="fa-solid fa-user-group icon"></i>
+									<i class="fa-solid fa-user-group icon text-teal"></i>
 								</span>
 								<span class="nav-link-title"
 									th:classappend="${pagename == 'listuser' ? 'fs-3 fw-bolder text-primary' : ''}">
@@ -325,7 +325,7 @@
 							</a>
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="/listuser">
-									<i class="fa-solid fa-user-group icon me-1"></i> <span
+									<i class="fa-solid fa-user-group icon text-teal me-1"></i> <span
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
 										User List</span>
 								</a>
@@ -335,7 +335,7 @@
 							<a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
 								data-bs-auto-close="outside" role="button" aria-expanded="false">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
-									<i class="fa-regular fa-life-ring"></i>
+									<i class="fa-regular fa-life-ring text-teal"></i>
 								</span>
 								<span class="nav-link-title"
 									th:classappend="${pagename == 'help' ? 'fs-3 fw-bolder text-primary' : ''}">
