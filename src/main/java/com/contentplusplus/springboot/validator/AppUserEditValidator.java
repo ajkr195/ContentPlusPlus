@@ -22,8 +22,8 @@ public class AppUserEditValidator implements Validator {
 
 	@Override
 	public void validate(Object o, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userfirstname", "NotEmpty");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userlastname", "NotEmpty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userfirstname", "not.empty.userfirstname");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userlastname", "not.empty.userlastname");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "roles", "not.empty.multi.roles");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "departments", "not.empty.multi.departments");
 

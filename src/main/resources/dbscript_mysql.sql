@@ -127,13 +127,31 @@ INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword
 INSERT INTO `contentplusplus`.`app_user` (`useremail`, `useruuid`, `userpassword`, `userfirstname`, `userlastname`,`userenabled`,  `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES ('admin15@admin15', uuid(), '$2a$10$kq8mcIw34jxCEHKEukfHs.PtvADISIhLUk29BtK0NZf8HK7fKdCqS', 'admin15@admin15', 'admin15@admin15', TRUE, 'System', CURDATE(), 'System', CURDATE());
 
 INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('1', 'ADMIN');
-INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('2', 'EDITOR');
-INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('3', 'VIEWER');
-INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('4', 'GUEST');
+INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('2', 'GUEST');
+INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('3', 'DOCWFDRAFTER');
+INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('4', 'DOCWFREVIEWER');
+INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('5', 'DOCWFAPPROVER');
+INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('6', 'DOCWFFINALIZER');
+INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('7', 'CASEWORKER');
+INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('8', 'CASEEDITOR');
+INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('9', 'CASEVIEWER');
+INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('10', 'CASEREVIEWER');
+INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('11', 'CASEDOCUPLOADER');
+INSERT INTO `contentplusplus`.`app_role` (`id`, `name`) VALUES ('12', 'CASEDOCREMOVER');
 
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '1');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '2');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '3');
+INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '3');
+INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '4');
+INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '5');
+INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '6');
+INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '7');
+INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '8');
+INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '9');
+INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '10');
+INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '11');
+INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('1', '12');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('2', '4');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('3', '1');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('3', '2');

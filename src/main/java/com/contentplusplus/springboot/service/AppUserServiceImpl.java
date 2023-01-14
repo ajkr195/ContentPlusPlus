@@ -37,8 +37,7 @@ public class AppUserServiceImpl implements AppUserService {
 		user.setUseremail(user.getUseremail());
 		user.setUserpassword(passwordEncoder.encode(user.getUserpassword()));
 		user.setUseruuid(UUID.randomUUID().toString());
-		user.setRoles(user.getRoles());
-		user.setDepartments(user.getDepartments());
+		user.setUserenabled(false);
 		userRepository.save(user);
 	}
 	
@@ -51,6 +50,7 @@ public class AppUserServiceImpl implements AppUserService {
 				entity.setUseremail(entity.getUseremail());
 				entity.setUserpassword(entity.getUserpassword());
 				entity.setUseruuid(entity.getUseruuid());
+				entity.setUserenabled(user.isUserenabled());
 				entity.setRoles(user.getRoles());
 				entity.setDepartments(user.getDepartments());
 			}

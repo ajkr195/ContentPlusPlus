@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,6 +79,33 @@ public class AppUserWebController {
 	public List<AppDepartment> initializeDepartments() {
 		return (List<AppDepartment>) appDepartmentRepository.findAll();
 	}
+	
+	
+	@RequestMapping(value = { "/adminuseredit", "/adminuseredit/{id}" }, method = RequestMethod.GET)
+	public String adminusereditRegistrationsd(Model model, @PathVariable(required = false, name = "id") Long id) {
+
+			String editinguser = "editinguser";
+			model.addAttribute("editinguser", editinguser);
+			model.addAttribute("user", appUserRepository.findById(id));
+		return "user_edit";
+	}
+
+	@RequestMapping(value = "/adminuseredit", method = RequestMethod.POST)
+	public String adminusereditRegistration(@Valid @ModelAttribute("user") AppUser user, BindingResult bindingResult,
+			HttpServletRequest request, Model model) {
+
+		// log.info("User ID is :: " + user.getId());
+
+			String editinguser = "creatinguser";
+			model.addAttribute("editinguser", editinguser);
+			model.addAttribute("user", user);
+			appUserEditValidator.validate(user, bindingResult);
+			if (bindingResult.hasErrors()) {
+				return "user_edit";
+			}
+			userService.updateUser(user);
+			return "redirect:/listuser";
+	}
 
 	@GetMapping("/listuser")
 	public String userPaginatedFiltered(Model model, @RequestParam(required = false) String keyword,
@@ -106,22 +134,22 @@ public class AppUserWebController {
 			}
 
 			if (keyword == null && userStatus == null) {
-				log.info("Inside keyword ==  null  userStatus==  null");
+				//log.info("Inside keyword ==  null  userStatus==  null");
 				pageTuts = appUserRepository.findAll(pageable);
 			} else if (keyword == "" && userStatus == "") {
-				log.info("Inside keyword ==  AND  userStatus==  condition");
+				//log.info("Inside keyword ==  AND  userStatus==  condition");
 				pageTuts = appUserRepository.findAll(pageable);
 			} else if (keyword != null && userStatus.equalsIgnoreCase("active")) {
-				log.info("Inside keyword != null AND  userStatus== active condition");
+				//log.info("Inside keyword != null AND  userStatus== active condition");
 				pageTuts = appUserRepository.findByUserenabledTrueAndUseremailContainingIgnoreCase(keyword, pageable);
 			} else if (keyword != null && userStatus.equalsIgnoreCase("inactive")) {
 				log.info("Inside keyword != null AND  userStatus== inactive condition");
 				pageTuts = appUserRepository.findByUserenabledFalseAndUseremailContainingIgnoreCase(keyword, pageable);
 			} else if (keyword == null && userStatus.equalsIgnoreCase("active")) {
-				log.info("Inside keyword == null AND  userStatus== active condition");
+				//log.info("Inside keyword == null AND  userStatus== active condition");
 				pageTuts = appUserRepository.findByUserenabledTrue(pageable);
 			} else if (keyword == null && userStatus.equalsIgnoreCase("inactive")) {
-				log.info("Inside keyword == null AND  userStatus== inactive condition");
+				//log.info("Inside keyword == null AND  userStatus== inactive condition");
 				pageTuts = appUserRepository.findByUserenabledFalse(pageable);
 			}
 
@@ -139,7 +167,7 @@ public class AppUserWebController {
 			model.addAttribute("message", e.getMessage());
 		}
 
-		return "list_user";
+		return "user_list";
 	}
 
 	@GetMapping("/mydocuments")
@@ -148,39 +176,18 @@ public class AppUserWebController {
 		return "documentsuser";
 	}
 
-	@RequestMapping(value = { "/signup", "/signup/{id}" }, method = RequestMethod.GET)
-	public String userRegistrationsd(Model model, @PathVariable(required = false, name = "id") Long id) {
-
-		if (id != null) {
-			String editinguser = "editinguser";
-			model.addAttribute("editinguser", editinguser);
-			model.addAttribute("user", appUserRepository.findById(id));
-		} else {
+	@GetMapping("/signup")
+	public String userRegistrationsd(Model model) {
 			String creatinguser = "creatinguser";
 			model.addAttribute("creatinguser", creatinguser);
 			model.addAttribute("user", new AppUser());
-		}
 		return "signup";
 	}
 
-	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	@PostMapping("/signup")
 	public String userRegistration(@Valid @ModelAttribute("user") AppUser user, BindingResult bindingResult,
 			HttpServletRequest request, Model model) {
 
-		// log.info("User ID is :: " + user.getId());
-
-		if (null != user.getId()) {
-			String editinguser = "creatinguser";
-			model.addAttribute("editinguser", editinguser);
-			model.addAttribute("user", user);
-			appUserEditValidator.validate(user, bindingResult);
-			if (bindingResult.hasErrors()) {
-				return "signup";
-			}
-			userService.updateUser(user);
-			return "redirect:/listuser";
-
-		} else {
 			model.addAttribute("user", user);
 			String creatinguser = "creatinguser";
 			model.addAttribute("creatinguser", creatinguser);
@@ -190,7 +197,6 @@ public class AppUserWebController {
 			}
 			userService.saveUser(user);
 			return "redirect:/login?regnsuccess";
-		}
 	}
 
 }

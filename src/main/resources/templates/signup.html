@@ -31,32 +31,29 @@
 
 						<input th:type="hidden" id="id" name="id" th:field="${user.id}" />
 
-						<div class="mb-4">
-							<label class="form-label" for="userfirstname">FirstName</label>
-							<input id="signup-userfirstname" name="userfirstname" type="text" class="form-control"
-								placeholder="First Name" th:field="${user.userfirstname}" />
+						<div class="mt-2 mb-2">
+							<label class="form-label" for="signup-userfirstname">FirstName</label>
+							<input type="text" class="form-control" placeholder="Your First Name"
+								aria-label="userfirstname" name="userfirstname" th:field="${user.userfirstname}" />
 							<p class="errorclass" th:errors="*{userfirstname}"
 								th:if="${#fields.hasErrors('userfirstname')}">
 						</div>
-
 						<div class="mt-2 mb-2">
-							<label class="form-label" for="userlastname">LastName</label>
-							<input id="signup-userlastname" name="userlastname" type="text" class="form-control"
-								placeholder="Last Name" th:field="${user.userlastname}" />
+							<label class="form-label" for="signup-userlastname">LastName</label>
+							<input type="text" class="form-control" placeholder="Your Last Name"
+								aria-label="userlastname" name="userlastname" th:field="${user.userlastname}" />
 							<p class="errorclass" th:errors="*{userlastname}"
 								th:if="${#fields.hasErrors('userlastname')}">
-							</p>
 						</div>
-
 						<div class="mt-2 mb-2" th:if="${#strings.isEmpty(editinguser)}">
-							<label class="form-label" for="signup-email">Your Email</label>
+							<label class="form-label" for="signup-userlastname">Email</label>
 							<input id="signup-email" name="signup-email" type="email" class="form-control signup-email"
-								placeholder="Email" th:field="${user.useremail}" />
+								placeholder="Your Email-Id" th:field="${user.useremail}" />
 							<p class="errorclass" th:errors="*{useremail}" th:if="${#fields.hasErrors('useremail')}">
 							</p>
 						</div>
 						<div class="mt-2 mb-2" th:if="${#strings.isEmpty(editinguser)}">
-							<label class="form-label" for="signup-password">Password</label>
+							<label class="form-label" for="signup-userlastname">Password</label>
 							<input id="signup-password" name="signup-password" type="password"
 								class="form-control signup-password" th:field="${user.userpassword}"
 								placeholder="Password" />
@@ -65,14 +62,14 @@
 						</div>
 
 						<div class="mt-2 mb-2" th:if="${#strings.isEmpty(editinguser)}">
-							<label class="form-label" for="signup-password">Confirm Password</label>
+						<label class="form-label" for="signup-userlastname">ConfirmPassword</label>
 							<input id="signup-passwordcnfrm" name="signup-passwordcnfrm" type="password"
 								class="form-control signup-password" th:field="${user.passwordConfirm}"
-								placeholder="Repeat Password" />
+								placeholder="Repeat/Confirm Password" />
 							<p class="errorclass" th:if="${#fields.hasErrors('passwordConfirm')}"
 								th:errors="*{passwordConfirm}" />
 						</div>
-						<div class="mt-2 mb-2">
+						<!--div class="mt-2 mb-2"> 
 							<label class="form-label" for="signup-userdepartments">Select Department(s)</label>
 							<th:block th:each="department: ${departments}">
 								<input type="checkbox" th:field="${user.departments}" th:value="${department.id}"
@@ -88,7 +85,28 @@
 									th:text="${role.name}" class="me-1 ms-3" />
 							</th:block>
 							<p class="errorclass" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" />
+						</div
+						<div class="mt-2 mb-3">
+							<label class="form-label" for="signup-userroles">Select Department(s)</label>
+							<select class="form-select form-select-sm" id="userdepartments"
+								th:field="${user.departments}" multiple>
+								<option value="" selected>-- Select Department --</option>
+								<option th:each="department : ${departments}" th:value="${department.id}"
+									th:text="${department.departmentname}">Department
+								</option>
+							</select>
+							<p class="errorclass" th:if="${#fields.hasErrors('departments')}"
+								th:errors="*{departments}" />
 						</div>
+						<div class="mt-2 mb-3">
+							<label class="form-label" for="signup-userroles">Select Role(s)</label>
+							<select class="form-select form-select-sm" id="userroles" th:field="${user.roles}" multiple>
+								<option value="" selected>-- Select Role --</option>
+								<option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">Role
+								</option>
+							</select>
+							<p class="errorclass" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" />
+						</div>-->
 
 						<div class="mb-1">
 							<label class="form-check">
@@ -100,8 +118,8 @@
 						<div class="form-footer">
 							<button type="submit" class="btn btn-primary w-100">Create new account</button>
 						</div>
-				</div>
 				</form>
+				</div>
 				<div class="text-center text-muted mt-2">
 					Already have account? <a href="/login" th:href="@{/login}" tabindex="-1">Sign in</a>
 				</div>

@@ -33,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @CrossOrigin("*")
-public class AppWFContentRestController {
+public class AppDocWorkFlowRestController {
 
 	@Autowired
 	private AppWFContentStorageService appWFContentStorageService;
@@ -113,7 +113,7 @@ public class AppWFContentRestController {
 
 		AppWorkflowDocument appWorkflowDocument = appWorkflowDocumentRepository.findById(id).get();
 
-		System.out.println("Moving forward this Workflow Doc Id: " + id);
+		log.info("Moving forward this Workflow Doc Id: {}", id);
 
 		if (appWorkflowDocument == null)
 			return ResponseEntity.notFound().build();
@@ -122,7 +122,7 @@ public class AppWFContentRestController {
 			appWorkflowDocument.setWorkflowstatus(
 					AppWorkFlowDocumentStatus.values()[appWorkflowDocument.getWorkflowstatus().ordinal() + 1]);
 		} catch (java.lang.ArrayIndexOutOfBoundsException ex) {
-			System.out.println("Reached Last step already...");
+			log.info("Reached Last step already...");
 		}
 		appWorkflowDocumentRepository.save(appWorkflowDocument);
 
@@ -134,7 +134,7 @@ public class AppWFContentRestController {
 
 		AppWorkflowDocument appWorkflowDocument = appWorkflowDocumentRepository.findById(id).get();
 
-		System.out.println("Moving backward this Workflow Doc Id: " + id);
+		log.info("Moving backward this Workflow Doc Id: {}", id);
 
 		if (appWorkflowDocument == null)
 			return ResponseEntity.notFound().build();
@@ -143,7 +143,7 @@ public class AppWFContentRestController {
 			appWorkflowDocument.setWorkflowstatus(
 					AppWorkFlowDocumentStatus.values()[appWorkflowDocument.getWorkflowstatus().ordinal() - 1]);
 		} catch (java.lang.ArrayIndexOutOfBoundsException ex) {
-			System.out.println("Reached first step...");
+			log.info("Reached first step...No more backward movement");
 		}
 		appWorkflowDocumentRepository.save(appWorkflowDocument);
 
