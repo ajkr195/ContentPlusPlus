@@ -52,18 +52,17 @@
 										<div class="row d-flex justify-content-between">
 											<div class="col-sm-6 col-lg-3 mt-2 mb-2 mx-2">
 												<select class="form-select h-100 w-100" form="searchForm" name="size"
-													th:value="${pageSize}" onchange="changePageSize()"
-													id="pageSizeSelect">
+													th:value="${pageSize}" onchange="changePageSize()" id="pageSize">
 													<option class="text-center" value="" disabled selected>-- PageSize
 														(Items per
 														Page) --</option>
-													<option class="text-center" th:each="s : ${ {5, 10, 20, 50, 100} }"
+													<option class="text-center" th:each="s : ${ {10, 20, 50, 100} }"
 														th:value="${s}" th:text="${s}"></option>
 												</select>
 											</div>
 											<div class="col-sm-6 col-lg-3 mt-2 mb-2 mx-2">
 												<select class="form-select h-100 w-100" form="searchForm"
-													name="userStatus" th:value="${userStatus}" id="userStatus">
+													name="userStatus" th:value="${userStatus}" id="userStatus" required>
 													<option class="text-center" value="" disabled selected>-- Filter by
 														Active
 														Status --</option>
@@ -88,60 +87,63 @@
 
 
 
-							</div>
-							<div class="table-responsive">
-								<table class="table card-table table-vcenter text-nowrap datatable">
-									<thead>
-										<tr>
-											<th class="w-1"><input class="form-check-input border border-warning"
-													type="checkbox" id="checkAllUsers"></th>
-											<th th:replace="~{fragments/sorting :: sorting('id','Id')}"></th>
-											<th
-												th:replace="~{fragments/sorting :: sorting('userfirstname','userfirstname')}">
-											</th>
-											<th
-												th:replace="~{fragments/sorting :: sorting('userlastname','userlastname')}">
-											</th>
-											<th th:replace="~{fragments/sorting :: sorting('useremail','useremail')}">
-											</th>
 
-											<th>Active?</th>
-											<!--<th>CreatedBy</th>-->
-											<!--<th>DateCreated</th>-->
-											<!--<th>ModifiedBy</th>-->
-											<!--<th>DateModified</th>
+								<div class="table-responsive">
+									<table class="table card-table table-vcenter text-nowrap datatable">
+										<thead>
+											<tr>
+												<th class="w-1"><input class="form-check-input border border-warning"
+														type="checkbox" id="checkAllUsers"></th>
+												<th th:replace="~{fragments/sorting :: sorting('id','Id')}"></th>
+												<th
+													th:replace="~{fragments/sorting :: sorting('userfirstname','userfirstname')}">
+												</th>
+												<th
+													th:replace="~{fragments/sorting :: sorting('userlastname','userlastname')}">
+												</th>
+												<th
+													th:replace="~{fragments/sorting :: sorting('useremail','useremail')}">
+												</th>
+
+												<th>Active?</th>
+												<!--<th>CreatedBy</th>-->
+												<!--<th>DateCreated</th>-->
+												<!--<th>ModifiedBy</th>-->
+												<!--<th>DateModified</th>
 											<th>Roles</th>
 											<th>Departments</th>-->
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:id="@{|user_${user.id}|}" th:each="user: ${users}">
-											<td><input
-													class="form-check-input m-0 border border-success selectusercheck"
-													type="checkbox" aria-label="Select user" th:id="check_+ ${user.id}">
-											</td>
-											<td th:text="${user.id}"></td>
-											<td> <span class="text-muted" th:text="${user.userfirstname}"></span></td>
-											<td><span class="note" th:text="${user.userlastname}"></span>
-											</td>
-											<td><span class="note" th:text="${user.useremail}"></span>
-											</td>
-											<td th:if="${user.userenabled}">
-												<span class="badge bg-success me-1"></span> <span
-													th:text="Active"></span>
-											</td>
-											<td th:if="${!user.userenabled}">
-												<span class="badge bg-danger me-1"></span> <span
-													th:text="InActive"></span>
-											</td>
-											<!--<td><span class="note" th:text="${user.createdBy}"></span>-->
-											<!--</td>-->
-											<!--<td><span class="note" th:text="${user.createdDate}"></span>-->
-											<!--</td>-->
-											<!--<td><span class="note" th:text="${user.lastModifiedBy}"></span>-->
-											<!--</td>-->
-											<!--<td><span class="note" th:text="${user.lastModifiedDate}"></span> </td>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:id="@{|user_${user.id}|}" th:each="user: ${users}">
+												<td><input
+														class="form-check-input m-0 border border-success selectusercheck"
+														type="checkbox" aria-label="Select user"
+														th:id="check_+ ${user.id}">
+												</td>
+												<td th:text="${user.id}"></td>
+												<td> <span class="text-muted" th:text="${user.userfirstname}"></span>
+												</td>
+												<td><span class="note" th:text="${user.userlastname}"></span>
+												</td>
+												<td><span class="note" th:text="${user.useremail}"></span>
+												</td>
+												<td th:if="${user.userenabled}">
+													<span class="badge bg-success me-1"></span> <span
+														th:text="Active"></span>
+												</td>
+												<td th:if="${!user.userenabled}">
+													<span class="badge bg-danger me-1"></span> <span
+														th:text="InActive"></span>
+												</td>
+												<!--<td><span class="note" th:text="${user.createdBy}"></span>-->
+												<!--</td>-->
+												<!--<td><span class="note" th:text="${user.createdDate}"></span>-->
+												<!--</td>-->
+												<!--<td><span class="note" th:text="${user.lastModifiedBy}"></span>-->
+												<!--</td>-->
+												<!--<td><span class="note" th:text="${user.lastModifiedDate}"></span> </td>
 											<td>
 
 												<th:block th:each="role: ${user.roles}">
@@ -154,84 +156,88 @@
 													<p th:text="${dept.id + ':' + dept.departmentname}"></p>
 												</th:block>
 											</td>-->
-											</span>
-											<td><a class="dropdown text-primary" href="#" role="button"
-													data-bs-toggle="dropdown" aria-expanded="false">
-													<i class="fa-solid fa-user-gear fa-xl text-primary"></i>
-													<!--<i class="fa-solid fa-ellipsis-vertical"></i>-->
-													<ul class="dropdown-menu">
-														<li><a class="dropdown-item" href="#"
-																th:onclick="showUserInfo([[${user}]]);"
-																title="User Details"><i
-																	class="fa-solid fa-circle-info text-info fa-xl mx-2"></i>
-																Details</a></li>
-														<li><a class="dropdown-item" href="#"
-																th:if="${! user.userenabled}"
-																th:onclick="activateUser([[${user.id}]], this);"
-																title="Activate this User"><i
-																	class="fa-solid fa-check text-success fa-xl mx-2"></i>
-																Activate</a></li>
-														<li><a class="dropdown-item" href="#"
-																th:href="@{/adminuseredit/{id}(id=${user.id})}"
-																title="Edit this user"><i
-																	class="fa-solid fa-user-pen text-warning fa-xl mx-2"></i>Edit
-																User</a></li>
-														<li><a class="dropdown-item" href="#"
-																th:if="${user.userenabled}"
-																th:onclick="deActivateUser([[${user.id}]], this);"
-																title="De-Activate this User"><i
-																	class="fa-solid fa-x text-danger fa-xl mx-2"></i>
-																De-Activate</a></li>
+												</span>
+												<td><a class="dropdown text-primary" href="#" role="button"
+														data-bs-toggle="dropdown" aria-expanded="false">
+														<i class="fa-solid fa-user-gear fa-xl text-primary"></i>
+														<!--<i class="fa-solid fa-ellipsis-vertical"></i>-->
+														<ul class="dropdown-menu">
+															<li><a class="dropdown-item" href="#"
+																	th:onclick="showUserInfo([[${user}]]);"
+																	title="User Details"><i
+																		class="fa-solid fa-circle-info text-info fa-xl mx-2"></i>
+																	Details</a></li>
+															<li><a class="dropdown-item" href="#"
+																	th:if="${! user.userenabled}"
+																	th:onclick="activateUser([[${user.id}]], this);"
+																	title="Activate this User"><i
+																		class="fa-solid fa-check text-success fa-xl mx-2"></i>
+																	Activate</a></li>
+															<li><a class="dropdown-item" href="#"
+																	th:href="@{/adminuseredit/{id}(id=${user.id})}"
+																	title="Edit this user"><i
+																		class="fa-solid fa-user-pen text-warning fa-xl mx-2"></i>Edit
+																	User</a></li>
+															<li><a class="dropdown-item" href="#"
+																	th:if="${user.userenabled}"
+																	th:onclick="deActivateUser([[${user.id}]], this);"
+																	title="De-Activate this User"><i
+																		class="fa-solid fa-x text-danger fa-xl mx-2"></i>
+																	De-Activate</a></li>
 
-														<li><a class="nav-item dropdown dropdown-item" href="#"
-																th:onclick="deleteUser([[${user.id}]], this);"
-																title="Delete this user"><i
-																	class="fa-regular fa-trash-can text-danger fa-xl mx-2"></i>Delete</a>
-														</li>
-													</ul>
-												</a>
+															<li><a class="nav-item dropdown dropdown-item" href="#"
+																	th:onclick="deleteUser([[${user.id}]], this);"
+																	title="Delete this user"><i
+																		class="fa-regular fa-trash-can text-danger fa-xl mx-2"></i>Delete</a>
+															</li>
+														</ul>
+													</a>
 
 
-											</td>
-										</tr>
-									</tbody>
+												</td>
+											</tr>
+										</tbody>
 
-								</table>
+									</table>
+								</div>
 							</div>
-								<nav aria-label="Pagination" th:if="${totalPages > 0}">
-									<ul class="pagination justify-content-center">
-										<li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
-											<a
-												th:replace="~{fragments/paging :: userpaging(1, '< First ', 'First Page')}"></a>
-										</li>
-										<li class="page-item font-weight-bold"
-											th:classappend="${currentPage == 1} ? 'disabled'">
-											<a
-												th:replace="~{fragments/paging :: userpaging(${currentPage - 1}, 'Prev', 'Previous Page')}"></a>
-										</li>
-										<li class="page-item disabled" th:if="${currentPage - 2 > 1}"><i
-												class="fa-solid fa-ellipsis fa-xl text-primary mt-1 mx-2"></i>
-										</li>
-										<li class="page-item" th:classappend="${page == currentPage} ? 'active'"
-											th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
-											<a
-												th:replace="~{fragments/paging :: userpaging(${page}, ${page}, 'Page ' + ${page})}"></a>
-										</li>
-										<li class="page-item disabled" th:if="${currentPage + 2 < totalPages}"><i
-												class="fa-solid fa-ellipsis fa-xl text-primary mt-1 mx-2"></i>
-										</li>
-										<li class="page-item font-weight-bold"
-											th:classappend="${currentPage == totalPages} ? 'disabled'">
-											<a
-												th:replace="~{fragments/paging :: userpaging(${currentPage + 1},'Next', 'Next Page')}"></a>
-										</li>
-										<li class="page-item"
-											th:classappend="${currentPage == totalPages} ? 'disabled'">
-											<a
-												th:replace="~{fragments/paging :: userpaging(${totalPages}, ' Last >', 'Last Page')}"></a>
-										</li>
-									</ul>
-								</nav>
+
+
+							<div class="card-footer d-flex align-items-center" th:if="${!users.empty}">
+								<p class="m-0">Showing: <span th:text="${totalItems}"></span> from total: <span
+										th:text="${totalusers}"></span> </p>
+								<ul class="pagination m-0 ms-auto" th:if="${totalPages > 0}">
+									<li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+										<a
+											th:replace="~{fragments/paging :: userpaging(1, '< First ', 'First Page')}"></a>
+									</li>
+									<li class="page-item font-weight-bold"
+										th:classappend="${currentPage == 1} ? 'disabled'">
+										<a
+											th:replace="~{fragments/paging :: userpaging(${currentPage - 1}, 'Prev', 'Previous Page')}"></a>
+									</li>
+									<li class="page-item disabled" th:if="${currentPage - 2 > 1}"><i
+											class="fa-solid fa-ellipsis fa-xl text-primary mt-1 mx-2"></i>
+									</li>
+									<li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+										th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+										<a
+											th:replace="~{fragments/paging :: userpaging(${page}, ${page}, 'Page ' + ${page})}"></a>
+									</li>
+									<li class="page-item disabled" th:if="${currentPage + 2 < totalPages}"><i
+											class="fa-solid fa-ellipsis fa-xl text-primary mt-1 mx-2"></i>
+									</li>
+									<li class="page-item font-weight-bold"
+										th:classappend="${currentPage == totalPages} ? 'disabled'">
+										<a
+											th:replace="~{fragments/paging :: userpaging(${currentPage + 1},'Next', 'Next Page')}"></a>
+									</li>
+									<li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+										<a
+											th:replace="~{fragments/paging :: userpaging(${totalPages}, ' Last >', 'Last Page')}"></a>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>

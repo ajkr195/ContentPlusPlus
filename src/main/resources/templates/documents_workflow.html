@@ -331,8 +331,11 @@
 								</div>
 							</div>
 
-							<nav aria-label="Pagination" th:if="${totalPages > 0}">
-								<ul class="pagination justify-content-center">
+
+							<div class="card-footer d-flex align-items-center" th:if="${!allfiles.empty}">
+								<p class="m-0">Showing: <span th:text="${totalItems}"></span> from total: <span
+										th:text="${totalfiles}"></span> </p>
+								<ul class="pagination m-0 ms-auto" th:if="${totalPages > 0}">
 									<li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
 										<a th:replace="~{fragments/paging :: paging(1, '< First ', 'First Page')}"></a>
 									</li>
@@ -362,7 +365,8 @@
 											th:replace="~{fragments/paging :: paging(${totalPages}, ' Last >', 'Last Page')}"></a>
 									</li>
 								</ul>
-							</nav>
+							</div>
+
 						</div>
 					</div>
 				</div>

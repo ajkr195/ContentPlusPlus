@@ -2,6 +2,8 @@ package com.contentplusplus.springboot.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,5 +23,7 @@ public interface AppDepartmentRepository extends JpaRepository<AppDepartment, Lo
 	
 	@Query( "select apa from AppDepartment apa where id in :ids" )
 	List<AppDepartment> getDepartmentsListByIdListIn(@Param("ids") List<Long> departmentIdsList);
+
+	Page<AppDepartment> findByDepartmentnameContainingIgnoreCase(String keyword, Pageable pageable);
 
 }

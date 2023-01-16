@@ -27,10 +27,8 @@ import lombok.extern.slf4j.Slf4j;
 @PropertySource(ignoreResourceNotFound = true, value = "classpath:messages.properties")
 public class AppDocWorkFlowController {
 
-
 	@Autowired
 	AppWorkflowDocumentRepository appWorkflowDocumentRepository;
-
 
 //	@GetMapping("/documentsworkflow")
 //	String documentsworkflowList(Model model) {
@@ -72,6 +70,8 @@ public class AppDocWorkFlowController {
 						AppWorkFlowDocumentStatus.valueOf(flowStatus), keyword, pageable);
 				model.addAttribute("keyword", keyword);
 				model.addAttribute("flowStatus", flowStatus);
+			} else {
+				pageTuts = appWorkflowDocumentRepository.findAll(pageable);
 			}
 
 			allfiles = pageTuts.getContent();
@@ -80,6 +80,7 @@ public class AppDocWorkFlowController {
 			model.addAttribute("currentPage", pageTuts.getNumber() + 1);
 			model.addAttribute("totalItems", pageTuts.getTotalElements());
 			model.addAttribute("totalPages", pageTuts.getTotalPages());
+			model.addAttribute("totalfiles", appWorkflowDocumentRepository.count());
 			model.addAttribute("pageSize", size);
 			model.addAttribute("sortField", sortField);
 			model.addAttribute("sortDirection", sortDirection);
@@ -115,6 +116,7 @@ public class AppDocWorkFlowController {
 			model.addAttribute("currentPage", pageTuts.getNumber() + 1);
 			model.addAttribute("totalItems", pageTuts.getTotalElements());
 			model.addAttribute("totalPages", pageTuts.getTotalPages());
+			model.addAttribute("totalfiles", appWorkflowDocumentRepository.count());
 			model.addAttribute("pageSize", size);
 			model.addAttribute("sortField", sortField);
 			model.addAttribute("sortDirection", sortDirection);
@@ -125,6 +127,5 @@ public class AppDocWorkFlowController {
 
 		return "documents_workflow";
 	}
-
 
 }

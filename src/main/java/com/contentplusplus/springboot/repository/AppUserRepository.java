@@ -53,4 +53,6 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 	Page<AppUser> findByUserenabledTrue(Pageable pageable);
 
 	Page<AppUser> findByUserenabledFalse(Pageable pageable);
+
+	Page<AppUser> findByUseremailContainingIgnoreCaseAndUserenabledFalse(String keyword, Pageable pageable);
 }

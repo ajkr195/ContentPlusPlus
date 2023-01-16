@@ -29,14 +29,20 @@ CREATE TABLE app_department (
   departmentheadname varchar(255) NOT NULL,
   departmentheademail varchar(255) NOT NULL,
   departmentname varchar(255) NOT NULL,
+  userid bigint NOT NULL,
+  created_by VARCHAR(150) NOT NULL,
+  created_date VARCHAR(150) NOT NULL,
+  modified_by VARCHAR(150) NOT NULL,
+  modified_date VARCHAR(150) NOT NULL,
   PRIMARY KEY (id)) ENGINE=InnoDB;
   
 CREATE TABLE app_user_department (
   userid BIGINT NOT NULL,
   departmentid BIGINT NOT NULL
 ) ENGINE=InnoDB;
-ALTER TABLE app_user_department ADD CONSTRAINT FK_AURPAREAUSERID FOREIGN KEY (userid) REFERENCES app_user (id);
-ALTER TABLE app_user_department ADD CONSTRAINT FK_AURUSRPAREAID FOREIGN KEY (departmentid) REFERENCES app_department (id); 
+ALTER TABLE app_user_department ADD CONSTRAINT FK_AUSERDEPTUSERID FOREIGN KEY (userid) REFERENCES app_user (id);
+ALTER TABLE app_user_department ADD CONSTRAINT FK_AUSERDEPTDEPTID FOREIGN KEY (departmentid) REFERENCES app_department (id); 
+ALTER TABLE app_department ADD CONSTRAINT FK_AUSERUSERID FOREIGN KEY (userid) REFERENCES app_user (id);
 
 CREATE TABLE app_user_role (
 id BIGINT NOT NULL AUTO_INCREMENT,
@@ -194,16 +200,16 @@ INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('15',
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('15', '3');
 INSERT INTO `contentplusplus`.`app_user_role` (`userid`, `roleid`) VALUES ('16', '3');
 
-INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department1', 'Department1HeadName1', 'Department1Head1@email.com');
-INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department2', 'Department2HeadName1', 'Department2Head2@email.com');
-INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department3', 'Department3HeadName3', 'Department3Head3@email.com');
-INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department4', 'Department4HeadName4', 'Department4Head4@email.com');
-INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department5', 'Department5HeadName5', 'Department5Head5@email.com');
-INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department6', 'Department6HeadName6', 'Department6Head1@email.com');
-INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department7', 'Department7HeadName7', 'Department7Head7@email.com');
-INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department8', 'Department8HeadName8', 'Department8Head8@email.com');
-INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department9', 'Department9HeadName9', 'Department9Head9@email.com');
-INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail) VALUES ('Department10', 'Department10HeadName10', 'Department10Head10@email.com');
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail,  `created_by`, `created_date`, `modified_by`, `modified_date`, userid) VALUES ('Department1', 'Department1HeadName1', 'Department1Head1@email.com', 'System', CURDATE(), 'System', CURDATE(),1);
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail,  `created_by`, `created_date`, `modified_by`, `modified_date`, userid) VALUES ('Department2', 'Department2HeadName1', 'Department2Head2@email.com', 'System', CURDATE(), 'System', CURDATE(),2);
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail,  `created_by`, `created_date`, `modified_by`, `modified_date`, userid) VALUES ('Department3', 'Department3HeadName3', 'Department3Head3@email.com', 'System', CURDATE(), 'System', CURDATE(),3);
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail,  `created_by`, `created_date`, `modified_by`, `modified_date`, userid) VALUES ('Department4', 'Department4HeadName4', 'Department4Head4@email.com', 'System', CURDATE(), 'System', CURDATE(),4);
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail,  `created_by`, `created_date`, `modified_by`, `modified_date`, userid) VALUES ('Department5', 'Department5HeadName5', 'Department5Head5@email.com', 'System', CURDATE(), 'System', CURDATE(),5);
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail,  `created_by`, `created_date`, `modified_by`, `modified_date`, userid) VALUES ('Department6', 'Department6HeadName6', 'Department6Head1@email.com', 'System', CURDATE(), 'System', CURDATE(),6);
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail,  `created_by`, `created_date`, `modified_by`, `modified_date`, userid) VALUES ('Department7', 'Department7HeadName7', 'Department7Head7@email.com', 'System', CURDATE(), 'System', CURDATE(),7);
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail,  `created_by`, `created_date`, `modified_by`, `modified_date`, userid) VALUES ('Department8', 'Department8HeadName8', 'Department8Head8@email.com', 'System', CURDATE(), 'System', CURDATE(),8);
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail,  `created_by`, `created_date`, `modified_by`, `modified_date`, userid) VALUES ('Department9', 'Department9HeadName9', 'Department9Head9@email.com', 'System', CURDATE(), 'System', CURDATE(),9);
+INSERT INTO app_department (departmentname,  departmentheadname, departmentheademail,  `created_by`, `created_date`, `modified_by`, `modified_date`, userid) VALUES ('Department10', 'Department10HeadName10', 'Department10Head10@email.com', 'System', CURDATE(), 'System', CURDATE(), 10);
 
 INSERT INTO app_user_department (userid, departmentid) VALUES ('1', '1');
 INSERT INTO app_user_department (userid, departmentid) VALUES ('1', '2');

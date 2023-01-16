@@ -34,11 +34,17 @@
 
 								<input th:type="hidden" id="id" name="id" th:field="${user.id}" />
 
-								<div class="row mb-3">
-									<div class="col-lg-6">
 
+								<div th:if="${userEmailid}" class="col-lg-4 mb-3">
+									<label class="form-label fw-bolder fs-3" for="signup-userlastname">Email</label>
+									<p th:text="${userEmailid}" />
+								</div>
+
+								<div class="row mb-3">
+									<div class="col-lg-4">
 										<div class="mb-3">
-											<label class="form-label fw-bolder fs-3" for="signup-userfirstname">FirstName</label>
+											<label class="form-label fw-bolder fs-3"
+												for="signup-userfirstname">FirstName</label>
 											<input type="text" class="form-control" placeholder="Your First Name"
 												aria-label="userfirstname" name="userfirstname"
 												th:field="${user.userfirstname}" />
@@ -46,9 +52,10 @@
 												th:if="${#fields.hasErrors('userfirstname')}">
 										</div>
 									</div>
-									<div class="col-lg-6">
+									<div class="col-lg-4">
 										<div class="mb-3">
-											<label class="form-label fw-bolder fs-3" for="signup-userlastname">LastName</label>
+											<label class="form-label fw-bolder fs-3"
+												for="signup-userlastname">LastName</label>
 											<input type="text" class="form-control" placeholder="Your Last Name"
 												aria-label="userlastname" name="userlastname"
 												th:field="${user.userlastname}" />
@@ -57,12 +64,7 @@
 										</div>
 									</div>
 
-									<div class="col-lg-6 mb-3">
-										<label class="form-label fw-bolder fs-3" for="signup-userlastname">Email</label>
-										<input id="signup-email" name="signup-email" type="email"
-											class="form-control signup-email" placeholder="Your Email-Id"
-											th:field="${user.useremail}" readonly />
-									</div>
+
 
 									<label class="form-label fw-bolder fs-3">Active Status</label>
 									<div class="form-selectgroup-boxes row mb-3">
@@ -109,8 +111,8 @@
 												<label class="form-label fw-bolder fs-3" for="signup-userroles">Select
 													Department(s)</label>
 												<select class="form-select form-select-sm" id="userdepartments"
-													th:field="${user.departments}" multiple>
-													<option value="" selected>-- Select Department --</option>
+													th:field="${user.departments}" multiple size="10">
+													<option value="" disabled selected>-- Select Department --</option>
 													<option th:each="department : ${departments}"
 														th:value="${department.id}"
 														th:text="${department.departmentname}">
@@ -123,10 +125,11 @@
 										</div>
 										<div class="col-lg-4">
 											<div class="mb-3">
-												<label class="form-label fw-bolder fs-3" for="signup-userroles">Select Role(s)</label>
+												<label class="form-label fw-bolder fs-3" for="signup-userroles">Select
+													Role(s)</label>
 												<select class="form-select form-select-sm" id="userroles"
-													th:field="${user.roles}" multiple>
-													<option value="" selected>-- Select Role --</option>
+													th:field="${user.roles}" multiple size="10">
+													<option value="" disabled selected>-- Select Role --</option>
 													<option th:each="role : ${roles}" th:value="${role.id}"
 														th:text="${role.name}">Role
 													</option>

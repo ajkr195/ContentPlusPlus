@@ -50,27 +50,36 @@
 								<h3 class="card-title">Manage DB Files</h3>
 							</div>
 							<div class="card-body border-bottom py-3">
-								<div class="d-flex">
-									<div class="text-muted" th:if="${!allfiles.empty}">
-										Show
-										<div class="mx-2 d-inline-block">
-											<select class="dropdown-toggle" id="pageSizeSelect">
-												<option selected disabled value="itemsperpage">PageSize</option>
-												<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
-													th:value="${pageSize}">
-												</option>
-											</select>
+
+
+								<form th:action="@{/documentsdb}" id="searchForm">
+									<div class="d-flex">
+										<div class="text-muted" th:if="${!allfiles.empty}">
+											<div class="mx-2 d-inline-block">
+												<select class="form-select h-100 w-100" form="searchForm" name="size"
+													th:value="${pageSize}" onchange="changePageSize()" id="pageSize">
+													<option class="text-center" value="" disabled selected>-- PageSize
+														(Items per
+														Page) --</option>
+													<option class="text-center" th:each="s : ${ {10, 20, 50, 100} }"
+														th:value="${s}" th:text="${s}"></option>
+												</select>
+											</div>
 										</div>
-										entries
-									</div>
-									<div class="ms-auto text-muted" th:if="${!allfiles.empty}">
-										Search:
-										<div class="ms-2 d-inline-block">
-											<input type="text" class="form-control form-control-sm"
-												aria-label="Search invoice">
+										<div class="ms-auto text-muted" th:if="${!allfiles.empty}">
+											<div class="input-group">
+												<input type="text" class="form-control" id="keyword" name="keyword"
+													placeholder="Search Filename..."
+													aria-label="Recipient's username with two button addons"
+													th:value="${keyword}">
+												<button class="btn btn-primary" type="submit">Search</button>
+												<button class="btn app-btn-secondary" id="btnClear"
+													th:onClick="clearInputKeyword()" type="button">Clear</button>
+											</div>
 										</div>
 									</div>
-								</div>
+								</form>
+
 							</div>
 
 							<div class="table-responsive">
@@ -181,7 +190,8 @@
 														class="fa-solid fa-download text-success"></i></a><a
 													class="btn btn-sm btn-outline-default"
 													th:onclick="deletedbfile([[${myfile.id}]], this);"
-													title="Delete this file"><i class="fa-regular fa-trash-can text-danger"></i>
+													title="Delete this file"><i
+														class="fa-regular fa-trash-can text-danger"></i>
 												</a></td>
 										</tr>
 									</tbody>
@@ -210,34 +220,37 @@
 								</div>
 							</div>
 
-							<div th:if="${!allfiles.empty}">
-								<p class="m-0 text-muted">Total records:<span th:text="${totalfiles}"></span> </p>
-								<ul class="pagination justify-content-center">
-									<li class="page-item" th:classappend="${allfiles.number == 0 ? 'disabled' : ''}">
-										<a class="page-link"
-											th:href="@{/documentsdb(pageSize=${selectedPageSize}, page=1)}"
-											tabindex="-1" aria-disabled="true">
-											First <i class="fa-solid fa-chevron-left icon"></i>
-
-										</a>
+							<div class="card-footer d-flex align-items-center" th:if="${!allfiles.empty}">
+								<p class="m-0">Showing: <span th:text="${totalItems}"></span> from <span th:text="${totalfiles}"></span>  </p>
+								<ul class="pagination m-0 ms-auto" th:if="${totalPages > 0}">
+									<li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+										<a th:replace="~{fragments/paging :: paging(1, '< First ', 'First Page')}"></a>
 									</li>
-									<li class="page-item"
-										th:classappend="${allfiles.number == (page - 1) ? 'active' : ''}"
-										th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-										<a class="page-link"
-											th:href="@{/documentsdb(pageSize=${selectedPageSize}, page=${page})}"
-											th:text="${page}"></a>
+									<li class="page-item font-weight-bold"
+										th:classappend="${currentPage == 1} ? 'disabled'">
+										<a
+											th:replace="~{fragments/paging :: paging(${currentPage - 1}, 'Prev', 'Previous Page')}"></a>
 									</li>
-									<li class="page-item"
-										th:classappend="${allfiles.number +1 == allfiles.totalPages ? 'disabled' : ''}">
-										<a class="page-link"
-											th:href="@{/documentsdb(pageSize=${selectedPageSize}, page=${allfiles.totalPages})}"
-											tabindex="-1" aria-disabled="true">
-											<i class="fa-solid fa-chevron-right icon"></i>
-											Last
-										</a>
+									<li class="page-item disabled" th:if="${currentPage - 2 > 1}"><i
+											class="fa-solid fa-ellipsis fa-xl text-primary mt-1 mx-2"></i>
 									</li>
-
+									<li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+										th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+										<a
+											th:replace="~{fragments/paging :: paging(${page}, ${page}, 'Page ' + ${page})}"></a>
+									</li>
+									<li class="page-item disabled" th:if="${currentPage + 2 < totalPages}"><i
+											class="fa-solid fa-ellipsis fa-xl text-primary mt-1 mx-2"></i>
+									</li>
+									<li class="page-item font-weight-bold"
+										th:classappend="${currentPage == totalPages} ? 'disabled'">
+										<a
+											th:replace="~{fragments/paging :: paging(${currentPage + 1},'Next', 'Next Page')}"></a>
+									</li>
+									<li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+										<a
+											th:replace="~{fragments/paging :: paging(${totalPages}, ' Last >', 'Last Page')}"></a>
+									</li>
 								</ul>
 							</div>
 
@@ -246,109 +259,6 @@
 				</div>
 			</div>
 
-			<div class="modal modal-blur fade" id="modal-reportx" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-dialog modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">New User</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<div class="mb-3">
-								<label class="form-label">Name</label>
-								<input type="text" class="form-control" name="example-text-input"
-									placeholder="Email-id">
-							</div>
-							<label class="form-label">User type</label>
-							<div class="form-selectgroup-boxes row mb-3">
-								<div class="col-lg-6">
-									<label class="form-selectgroup-item">
-										<input type="radio" name="report-type" value="1" class="form-selectgroup-input"
-											checked>
-										<span class="form-selectgroup-label d-flex align-items-center p-3">
-											<span class="me-3">
-												<span class="form-selectgroup-check"></span>
-											</span>
-											<span class="form-selectgroup-label-content">
-												<span class="form-selectgroup-title strong mb-1">Activated</span>
-												<span class="d-block text-muted">Set user as Active</span>
-											</span>
-										</span>
-									</label>
-								</div>
-								<div class="col-lg-6">
-									<label class="form-selectgroup-item">
-										<input type="radio" name="report-type" value="1" class="form-selectgroup-input">
-										<span class="form-selectgroup-label d-flex align-items-center p-3">
-											<span class="me-3">
-												<span class="form-selectgroup-check"></span>
-											</span>
-											<span class="form-selectgroup-label-content">
-												<span class="form-selectgroup-title strong mb-1">DeActivated</span>
-												<span class="d-block text-muted">Set user as DeActivated</span>
-											</span>
-										</span>
-									</label>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-8">
-									<div class="mb-3">
-										<label class="form-label">Report url</label>
-										<div class="input-group input-group-flat">
-											<span class="input-group-text">
-												https://github.com/ajkr195/ContentPlusPlus
-											</span>
-											<!--<input type="text" class="form-control ps-0" value="report-01" autocomplete="off">-->
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4">
-									<div class="mb-3">
-										<label class="form-label">Roles</label>
-										<select class="form-select">
-											<option value="1" selected>Private</option>
-											<option value="2">Public</option>
-											<option value="3">Hidden</option>
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-lg-6">
-									<div class="mb-3">
-										<label class="form-label">Department</label>
-										<input type="text" class="form-control">
-									</div>
-								</div>
-								<div class="col-lg-6">
-									<div class="mb-3">
-										<label class="form-label">Reporting period</label>
-										<input type="date" class="form-control">
-									</div>
-								</div>
-								<div class="col-lg-12">
-									<div>
-										<label class="form-label">Additional information</label>
-										<textarea class="form-control" rows="3"></textarea>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-								Cancel
-							</a>
-							<a href="#" class="btn btn-teal ms-auto" data-bs-dismiss="modal">
-								<i class="fa-solid fa-plus fa-lg me-2"></i>
-								Submit
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
 
 			<div th:replace="~{fragments/footer :: footer}"></div>
 
@@ -361,16 +271,20 @@
 	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
 	<script type="text/javascript" th:src="@{/js/app.js}"></script>
 	<script type="text/javascript" th:src="@{/js/fileupload.js}"></script>
-	<script>
-		var select_element = document.getElementById('pageSizeSelect');
-		select_element.onchange = function () {
-			var elem = (typeof this.selectedIndex === "undefined" ? window.event.srcElement : this);
-			var value = elem.value || elem.options[elem.selectedIndex].value;
-			//alert(value);
-			window.location.replace("/documentsdb?pageSize=" + value
-				+ "&page=1");
-		}
 
+	<script>
+		function clearInputKeyword() {
+			document.getElementById("keyword").value = "";
+			window.location = "[[@{/documentsdb}]]";
+			//location.reload();
+		}
+	</script>
+
+	<script>
+		function changePageSize() {
+			let form = document.getElementById("searchForm");
+			form.submit();
+		}
 	</script>
 
 </body>
