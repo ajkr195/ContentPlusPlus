@@ -83,7 +83,7 @@ public class AppUserWebController {
 		return (List<AppDepartment>) appDepartmentRepository.findAll();
 	}
 
-	@RequestMapping(value = { "/adminuseredit", "/adminuseredit/{id}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/adminuseredit/{id}" }, method = RequestMethod.GET)
 	public String adminusereditRegistrationsd(Model model, @PathVariable(required = false, name = "id") Long id) {
 		String editinguser = "editinguser";
 		model.addAttribute("editinguser", editinguser);

@@ -22,6 +22,15 @@
 								Departments
 							</h2>
 						</div>
+						<div class="col-auto ms-auto d-print-none">
+							<div class="btn-list">
+								<a href="/department" th:href="@{/department}"
+									class="btn app-btn-primary d-none d-sm-inline-block">
+									<i class="fa-solid fa-plus fa-xl"></i>
+									Add Department
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -33,10 +42,48 @@
 							<div class="card-header">
 								<h3 class="card-title">Manage Departments</h3>
 							</div>
+
+							<div id="deptmessage" th:fragment="fragdepartment">
+								<div class="alert alert-success alert-dismissible fade show js-alert" role="alert"
+									th:if="${departmentname}">
+									<strong>Department created ! </strong><span class="text-secondary"> DepartmentName:
+									</span> <span th:text="${departmentname}"></span> <span class="text-secondary">
+										DepartmentHead: </span> <span th:text="${useremail}"></span>
+									<button type="button" class="btn-close" data-bs-dismiss="alert"
+										aria-label="Close"></button>
+								</div>
+							</div>
+
+
+
+							<form id="form-dept" _="on htmx:afterRequest reset() me">
+								<div class="row mb-2">
+
+									<div class="col-md">
+										<input autofocus="autofocus" class="form-control" id="departmentname"
+											name="departmentname" placeholder="Department Name" required type="text">
+									</div>
+									<div class="col-md">
+										<select class="form-select" id="useremail" name="useremail">
+											<option value="" disabled selected>-- Select User --</option>
+											<option th:each="user : ${users}" th:value="${user.useremail}"
+												th:text="${user.useremail}">
+												User
+											</option>
+										</select>
+									</div>
+								</div>
+								<button id="mon" hx-include="#form-dept" th:attr="hx-post=@{/createdepartment}"
+									hx-target="#deptmessage" hx-swap="beforeend" hx-trigger="click"
+									class="btn btn-sm btn-primary" type="submit">Add
+								</button>
+
+							</form>
+
+
+
 							<div class="card-body border-bottom py-3">
-
-
-								<form th:action="@{/listdepartment}" id="searchForm">
+								<form th:action="@{/listdepartment}" id="searchForm" class>
 									<div class="d-flex">
 										<div class="text-muted" th:if="${!allfiles.empty}">
 											<div class="mx-2 d-inline-block">
@@ -105,10 +152,36 @@
 													th:text="${myObj.lastModifiedBy}">None</span></td>
 											<td class="cell table-col-hidden"><span class="note"
 													th:text="${myObj.lastModifiedDate}">None</span></td>-->
-											<td><a class="btn btn-sm btn-outline-default"
-													th:onclick="showDeptInfo([[${myObj}]]);" title="Details">
-													<i class="fa-solid fa-circle-info text-info fa-xl"></i></a></td>
+
+											<td><a class="dropdown text-primary" href="#" role="button"
+													data-bs-toggle="dropdown" aria-expanded="false">
+													<i class="fa-solid fa-circle-question fa-xl text-primary"></i>
+													<!--<i class="fa-solid fa-ellipsis-vertical"></i>-->
+													<ul class="dropdown-menu">
+														<li><a class="btn btn-sm btn-outline-default"
+																th:onclick="showDeptInfo([[${myObj}]]);"
+																title="Details">
+																<i
+																	class="fa-solid fa-circle-info text-info fa-xl mx-2"></i>
+																Details</a>
+														</li>
+
+														<li><a class="dropdown-item" href="#"
+																th:href="@{/departmentedit/{id}(id=${myObj.id})}"
+																title="Edit this Department"><i
+																	class="fa-solid fa-user-pen text-warning fa-xl mx-2"></i>Edit
+																Department</a>
+														</li>
+													</ul>
+												</a>
+
+
+											</td>
+
+
+
 										</tr>
+
 									</tbody>
 									<thead>
 										<tr>
@@ -240,6 +313,20 @@
 				}
 			})
 		}
+	</script>
+
+	<script>
+		function removeElems() {
+			if (document.querySelector('.js-alert')) {
+				document.querySelectorAll('.js-alert').forEach(function ($el) {
+					setTimeout(() => {
+						$el.classList.remove('show');
+						alert("yo !");
+					}, 500);
+				});
+			}
+		}
+		removeElems();
 	</script>
 
 

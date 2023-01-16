@@ -26,4 +26,6 @@ public interface AppDepartmentRepository extends JpaRepository<AppDepartment, Lo
 
 	Page<AppDepartment> findByDepartmentnameContainingIgnoreCase(String keyword, Pageable pageable);
 
+	AppDepartment findByDepartmentnameContainingIgnoreCase(String departmentname);
+
 }

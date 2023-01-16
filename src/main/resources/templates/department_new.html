@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<!-- Page header -->
+			<div class="page-header d-print-none">
+				<div class="container-xl">
+					<div class="row g-2 align-items-center">
+						<div class="col">
+							<!-- Page pre-title -->
+							<div class="page-pretitle">
+								Manage Users
+							</div>
+							<h2 class="page-title" th:if="${editingdepartment}">Edit Department
+							</h2>
+							<h2 class="page-title" th:if="${creatingdepartment}">Add New Department
+							</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Page body -->
+			<div class="page-body">
+				<div class="container-xl">
+					<div class="card">
+						<div class="card-body">
+							<form class="card-body border-bottom py-3" th:action="@{/department}"
+								th:object="${department}" method="post">
+
+								<input th:type="hidden" id="id" name="id" th:field="${department.id}" />
+
+
+								<div class="row mb-3">
+									<div class="col-lg-4">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3"
+												for="signup-departmentname">Department Name</label>
+											<input type="text" class="form-control" placeholder="Department name"
+												aria-label="departmentname" name="departmentname"
+												th:field="${department.departmentname}" />
+											<p class="errorclass" th:errors="*{departmentname}"
+												th:if="${#fields.hasErrors('departmentname')}">
+										</div>
+									</div>
+									<div class="col-lg-4" th:if="${editingdepartment}">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3"
+												for="signup-departmentheadname">Department Head's' Name</label>
+											<p th:text="${departmentheadname}" />
+										</div>
+									</div>
+									
+									<div class="col-lg-4" th:if="${departmentheademail}">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3"
+												for="signup-departmentheadname">Department Head's' Name</label>
+											<p th:text="${departmentheademail}" />
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="signup-departmentuser">
+												Department Head</label>
+											<select class="form-select form-select-sm" id="deptheaduser"
+												th:field="${department.appUser}" size="10">
+												<option value="" disabled selected>-- Select User --</option>
+												<option th:each="user : ${users}" th:value="${user.id}"
+													th:text="${user.useremail}">
+													User
+												</option>
+											</select>
+											<p class="errorclass" th:if="${#fields.hasErrors('appUser')}"
+												th:errors="*{appUser}" />
+										</div>
+									</div>
+								</div>
+								<div class="mt-3 mb-3 d-flex justity-content-between">
+									<a href="/listdepartment" th:href="@{/listdepartment}" class="btn app-btn-secondary">
+										Cancel
+									</a>
+									<button type="submit" class="btn app-btn-primary ms-auto">
+										<i class="fa-regular fa-circle-check fa-lg me-2"></i>
+										Submit
+									</button>
+								</div>
+
+							</form>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Modal -->
+
+		<div th:replace="~{fragments/footer :: footer}"></div>
+
+	</div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/js/userdata.js}"></script>
+
+</body>
+
+</html>
