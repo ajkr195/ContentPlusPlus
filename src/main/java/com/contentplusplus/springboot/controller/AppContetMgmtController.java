@@ -85,7 +85,7 @@ public class AppContetMgmtController {
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size,
 			@RequestParam(defaultValue = "id,asc") String[] sort) {
 		try {
-			model.addAttribute("pagename", "documentsworkflow");
+			model.addAttribute("pagename", "documentsdb");
 			List<AppDBContent> allfiles = new ArrayList<>();
 
 			String sortField = sort[0];
@@ -128,7 +128,7 @@ public class AppContetMgmtController {
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size,
 			@RequestParam(defaultValue = "id,asc") String[] sort) {
 		try {
-			model.addAttribute("pagename", "documentsworkflow");
+			model.addAttribute("pagename", "documentsfs");
 			List<AppFSContent> allfiles = new ArrayList<>();
 
 			String sortField = sort[0];
