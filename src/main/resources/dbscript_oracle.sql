@@ -72,9 +72,9 @@ userfirstname VARCHAR(150) NOT NULL,
 userlastname VARCHAR(150) NOT NULL,
 userenabled NUMBER(1) DEFAULT 0 NOT NULL,
 created_by VARCHAR(150) NOT NULL,
-created_date VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
 modified_by VARCHAR(150) NOT NULL,
-modified_date VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
 CONSTRAINT appuser_pk PRIMARY KEY (id), UNIQUE (useremail, useruuid));
 
 
@@ -92,9 +92,9 @@ departmentheademail varchar(255) NOT NULL,
 departmentname varchar(255) NOT NULL,
 userid NUMBER NOT NULL,
 created_by VARCHAR(150) NOT NULL,
-created_date VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
 modified_by VARCHAR(150) NOT NULL,
-modified_date VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
 CONSTRAINT appdepartment_pk PRIMARY KEY (id),UNIQUE (departmentname, departmentuuid));
 
 CREATE TABLE CONTENTPLUSPLUS.app_user_department (
@@ -123,9 +123,9 @@ filetype VARCHAR(150) NOT NULL,
 filesize VARCHAR(150) NOT NULL,
 filedata BLOB,
 created_by VARCHAR(150) NOT NULL,
-created_date VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
 modified_by VARCHAR(150) NOT NULL,
-modified_date VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
 optlock number,
 CONSTRAINT appdbcontent_pk PRIMARY KEY (id),UNIQUE (fileuuid));
 
@@ -137,9 +137,9 @@ filetype VARCHAR(150) NOT NULL,
 filesize VARCHAR(150) NOT NULL,
 filedata BLOB,
 created_by VARCHAR(150) NOT NULL,
-created_date VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
 modified_by VARCHAR(150) NOT NULL,
-modified_date VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
 optlock INT,
 workflowstatus VARCHAR(150) NOT NULL,
 CONSTRAINT appwfdocument_pk PRIMARY KEY (id),UNIQUE (fileuuid));
@@ -152,9 +152,9 @@ fileurl VARCHAR(150) NOT NULL,
 filetype VARCHAR(150) NOT NULL,
 filesize VARCHAR(150) NOT NULL,
 created_by VARCHAR(150) NOT NULL,
-created_date VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
 modified_by VARCHAR(150) NOT NULL,
-modified_date VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
 optlock NUMBER,
 CONSTRAINT appfscontent_pk PRIMARY KEY (id),UNIQUE (fileuuid));
  
@@ -409,3 +409,5 @@ INSERT INTO CONTENTPLUSPLUS.app_user_department (userid, departmentid) VALUES ('
 INSERT INTO CONTENTPLUSPLUS.app_user_department (userid, departmentid) VALUES ('16', '8');
 INSERT INTO CONTENTPLUSPLUS.app_user_department (userid, departmentid) VALUES ('16', '9');
 INSERT INTO CONTENTPLUSPLUS.app_user_department (userid, departmentid) VALUES ('16', '10');
+
+commit;

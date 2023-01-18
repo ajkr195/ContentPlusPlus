@@ -8,8 +8,9 @@ public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+		System.out.println("\n======== URL ========\nhttp://localhost:8080\n=====================");
 		System.out.println(
-				"\n=========DEFAULT CREDENTIALS=========\nIf used dbscript_mysql.sql then....\nUsername:admin@admin\nPassword:admin@admin\n=====================================\n");
+				"\n======= CREDENTIALS =======\nUsername:admin@admin\nPassword:admin@admin\n===========================");
 	}
 
 }
