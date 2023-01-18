@@ -25,11 +25,11 @@
 						<!-- Page title actions -->
 						<div class="col-auto ms-auto d-print-none">
 							<div class="btn-list">
-								<a href="#" class="btn app-btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
+								<!--<a href="#" class="btn app-btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
 									data-bs-target="#modal-report">
 									<i class="fa-solid fa-plus fa-xl"></i>
 									Add User
-								</a>
+								</a>-->
 								<a href="#" class="btn app-btn-secondary d-none d-sm-inline-block"
 									th:onClick="getSelectedCheckBoxes()"> Get Selected </a>
 							</div>
@@ -67,7 +67,7 @@
 														Active
 														Status --</option>
 													<option class="text-center"
-														th:each="s : ${ {'ACTIVE', 'INACTIVE'} }" th:value="${s}"
+														th:each="s : ${ {'ALL', 'ACTIVE', 'INACTIVE'} }" th:value="${s}"
 														th:text="${s}"></option>
 												</select>
 											</div>
@@ -243,7 +243,7 @@
 				</div>
 			</div>
 
-			<div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+			<!--<div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -296,7 +296,6 @@
 											<span class="input-group-text">
 												https://github.com/ajkr195/ContentPlusPlus
 											</span>
-											<!--<input type="text" class="form-control ps-0" value="report-01" autocomplete="off">-->
 										</div>
 									</div>
 								</div>
@@ -345,7 +344,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>-->
 			<!-- Modal -->
 
 			<div th:replace="~{fragments/footer :: footer}"></div>
@@ -360,17 +359,14 @@
 	<script type="text/javascript" th:src="@{/js/app.js}"></script>
 	<script type="text/javascript" th:src="@{/js/userdata.js}"></script>
 	<script>
-
-		var select_element = document.getElementById('pageSizeSelect');
-
-		select_element.onchange = function () {
-			var elem = (typeof this.selectedIndex === "undefined" ? window.event.srcElement : this);
-			var value = elem.value || elem.options[elem.selectedIndex].value;
-			//alert(value);
-			window.location.replace("/listuser?pageSize=" + value
-				+ "&page=1");
-		}
-
+		//var select_element = document.getElementById('pageSize');
+		//select_element.onchange = function () {
+			//var elem = (typeof this.selectedIndex === "undefined" ? window.event.srcElement : this);
+			//var value = elem.value || elem.options[elem.selectedIndex].value;
+			////alert(value);
+			//window.location.replace("/listuser?pageSize=" + value
+				//+ "&page=1");
+		//}
 	</script>
 	<script type="text/javascript">
 		function getSelectedCheckBoxes() {

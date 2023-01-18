@@ -182,7 +182,7 @@ public class AppUserWebController {
 	
 	@GetMapping("/listuser")
 	public String documentsworkflowPagenew(Model model, @RequestParam(required = false) String keyword,
-			@RequestParam(required = false, defaultValue = "DRAFT") String userStatus,
+			@RequestParam(required = false, defaultValue = "ALL") String userStatus,
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size,
 			@RequestParam(defaultValue = "id,asc") String[] sort) {
 		try {
@@ -228,7 +228,7 @@ public class AppUserWebController {
 			} else if (keyword != null && userStatus == null) {
 				log.info("Inside keyword == null AND userStatus== inactive condition");
 				pageTuts = appUserRepository.findByUseremailContainingIgnoreCase(keyword, pageable);
-			} else {
+			} else if (userStatus.equalsIgnoreCase("all")) {
 				pageTuts = appUserRepository.findAll(pageable);
 			}
 			

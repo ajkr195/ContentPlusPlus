@@ -106,12 +106,12 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-lg-8">
+										<div class="col-lg-7">
 											<div class="mb-3">
 												<label class="form-label fw-bolder fs-3" for="signup-userroles">Select
 													Department(s)</label>
 												<select class="form-select form-select-sm" id="userdepartments"
-													th:field="${user.departments}" multiple size="10">
+													th:field="${user.departments}" multiple size="8">
 													<option value="" disabled selected>-- Select Department --</option>
 													<option th:each="department : ${departments}"
 														th:value="${department.id}"
@@ -123,8 +123,29 @@
 													th:errors="*{departments}" />
 											</div>
 										</div>
-										<div class="col-lg-4">
+										<div class="col-lg-5">
+
+
 											<div class="mb-3">
+												<div class="col-lg-6">
+													<label class="form-label fw-bolder fs-3" for="userroles">Select Role(s)</label>
+												</div>
+												<div class="row">
+
+													<th:block th:each="role: ${roles}">
+														<div class="col-lg-6">
+															<input type="checkbox" th:field="${user.roles}"
+																th:value="${role.id}" th:text="${role.name}"
+																class="me-1 ms-3" />
+														</div>
+													</th:block>
+												</div>
+												<p class="errorclass" th:if="${#fields.hasErrors('roles')}"
+													th:errors="*{roles}" />
+											</div>
+
+
+											<!--div class="mb-3">
 												<label class="form-label fw-bolder fs-3" for="signup-userroles">Select
 													Role(s)</label>
 												<select class="form-select form-select-sm" id="userroles"
@@ -136,11 +157,11 @@
 												</select>
 												<p class="errorclass" th:if="${#fields.hasErrors('roles')}"
 													th:errors="*{roles}" />
-											</div>
+											</!div-->
 										</div>
 									</div>
 									<div class="mt-3 mb-3 d-flex justity-content-between">
-										<a href="#" class="btn app-btn-secondary">
+										<a href="/listuser" th:href="@{/listuser}" class="btn app-btn-secondary">
 											Cancel
 										</a>
 										<button type="submit" class="btn app-btn-primary ms-auto">
