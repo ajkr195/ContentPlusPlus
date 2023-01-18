@@ -43,10 +43,12 @@
 								<h3 class="card-title">Manage Departments</h3>
 							</div>
 
-							<div id="deptmessage" th:fragment="fragdepartment">
-								<div class="alert alert-success alert-dismissible fade show js-alert" role="alert"
-									th:if="${departmentname}">
-									<strong>Department created ! </strong><span class="text-secondary"> DepartmentName:
+
+							<div id="deptmessage">
+								<div id="hidethisalert" class="alert alert-success alert-dismissible fade show js-alert"
+									role="alert" th:if="${departmentname}" th:fragment="fragdepartment">
+									<strong>Department created ! </strong><span class="text-secondary">
+										DepartmentName:
 									</span> <span th:text="${departmentname}"></span> <span class="text-secondary">
 										DepartmentHead: </span> <span th:text="${useremail}"></span>
 									<button type="button" class="btn-close" data-bs-dismiss="alert"
@@ -56,48 +58,46 @@
 
 
 
-							<form id="form-dept" _="on htmx:afterRequest reset() me">
-								<div class="row mb-2">
-
-									<div class="col-md">
-										<input autofocus="autofocus" class="form-control" id="departmentname"
-											name="departmentname" placeholder="Department Name" required type="text">
-									</div>
-									<div class="col-md">
-										<select class="form-select" id="useremail" name="useremail">
-											<option value="" disabled selected>-- Select User --</option>
-											<option th:each="user : ${users}" th:value="${user.useremail}"
-												th:text="${user.useremail}">
-												User
-											</option>
-										</select>
-									</div>
-								</div>
-								<button id="mon" hx-include="#form-dept" th:attr="hx-post=@{/createdepartment}"
-									hx-target="#deptmessage" hx-swap="beforeend" hx-trigger="click"
-									class="btn btn-sm btn-primary" type="submit">Add
-								</button>
-
-							</form>
-
 
 
 							<div class="card-body border-bottom py-3">
-								<form th:action="@{/listdepartment}" id="searchForm" class>
-									<div class="d-flex">
-										<div class="text-muted" th:if="${!allfiles.empty}">
-											<div class="mx-2 d-inline-block">
-												<select class="form-select h-100 w-100" form="searchForm" name="size"
-													th:value="${pageSize}" onchange="changePageSize()" id="pageSize">
-													<option class="text-center" value="" disabled selected>-- PageSize
-														(Items per
-														Page) --</option>
-													<option class="text-center" th:each="s : ${ {5, 10, 20, 50, 100} }"
-														th:value="${s}" th:text="${s}"></option>
+								<div class="d-flex">
+									<div class="muted" th:if="${!allfiles.empty}">
+										<form id="form-dept" _="on htmx:afterRequest reset() me">
+											<div class="input-group">
+												<input autofocus="autofocus" class="form-control" id="departmentname"
+													name="departmentname" placeholder="Department Name" required
+													type="text">
+												<select class="form-select" id="useremail" name="useremail">
+													<option value="" disabled selected>-- Department Head --</option>
+													<option th:each="user : ${users}" th:value="${user.useremail}"
+														th:text="${user.useremail}">
+														User
+													</option>
 												</select>
+												<button class="btn app-btn-primary" hx-include="#form-dept"
+													th:attr="hx-post=@{/createdepartment}" hx-target="#deptmessage"
+													hx-swap="beforeend" hx-trigger="click" hx-afterRequest=""
+													type="submit">Add</button>
 											</div>
+										</form>
+									</div>
+
+									<div class="ms-auto text-muted" th:if="${!allfiles.empty}">
+										<div class="mx-2 d-inline-block">
+											<select class="form-select h-100 w-100" form="searchForm" name="size"
+												th:value="${pageSize}" onchange="changePageSize()" id="pageSize">
+												<option class="text-center" value="" disabled selected>-- PageSize
+													(Items per
+													Page) --</option>
+												<option class="text-center" th:each="s : ${ {5, 10, 20, 50, 100} }"
+													th:value="${s}" th:text="${s}"></option>
+											</select>
 										</div>
-										<div class="ms-auto text-muted" th:if="${!allfiles.empty}">
+									</div>
+
+									<div class="ms-auto text-muted" th:if="${!allfiles.empty}">
+										<form th:action="@{/listdepartment}" id="searchForm" class>
 											<div class="input-group">
 												<input type="text" class="form-control" id="keyword" name="keyword"
 													placeholder="Search Filename..."
@@ -107,9 +107,10 @@
 												<button class="btn app-btn-secondary" id="btnClear"
 													th:onClick="clearInputKeyword()" type="button">Clear</button>
 											</div>
-										</div>
+										</form>
 									</div>
-								</form>
+								</div>
+
 
 							</div>
 
@@ -259,6 +260,7 @@
 	<script th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
 	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/js/toastify-js.js}"></script>
 
 	<script>
 		function clearInputKeyword() {
@@ -316,21 +318,35 @@
 	</script>
 
 	<script>
-		function removeElems() {
+		function foo() {
+
 			if (document.querySelector('.js-alert')) {
 				document.querySelectorAll('.js-alert').forEach(function ($el) {
-					setTimeout(() => {
-						$el.classList.remove('show');
-						alert("yo !");
-					}, 500);
+					$el.remove();
 				});
 			}
 		}
-		removeElems();
+
+		foo();
 	</script>
-
-
-
+	<script>
+		document.addEventListener('htmx:afterRequest', function () {
+			Toastify({
+				text: "Department Got Created Successfully !",
+				duration: 2000,
+				newWindow: true,
+				gravity: 'bottom',
+				position: 'right',
+				stopOnFocus: true,
+				style: {
+					background: "radial-gradient(759px at 14% 22.3%, rgb(10, 64, 88) 0%, rgb(15, 164, 102) 90%)",
+				}, offset: {
+					x: 80, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+					y: 100 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+				},
+			}).showToast();
+		});
+	</script>
 </body>
 
 </html>
