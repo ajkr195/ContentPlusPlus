@@ -1,8 +1,10 @@
 package com.contentplusplus.springboot.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.contentplusplus.springboot.model.audit.Auditable;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
@@ -12,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
@@ -58,5 +61,8 @@ public class AppDepartment  extends Auditable<String> implements Serializable{
 	@Basic(optional = false)
 	@Column(name = "departmentheademail")
 	private String departmentheademail;
+	
+    @ManyToMany(mappedBy="departments")
+    private List<AppUser> users;
 
 }
