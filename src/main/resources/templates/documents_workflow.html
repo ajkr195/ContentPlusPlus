@@ -101,62 +101,62 @@
 
 
 							<div class="col-auto ms-auto d-print-none">
-								<a title="All" href="/documentsworkflowall" th:href="@{/documentsworkflowall}"
+								<a sec:authorize="hasRole('ADMIN')" title="All" href="/documentsworkflowall" th:href="@{/documentsworkflowall}"
 									class="btn btn-teal d-none d-sm-inline-block">
 									<i class="fa-solid fa-list-ul text-white"></i>
 									All
 								</a>
-								<a title="All" href="/documentsworkflowall" th:href="@{/documentsworkflowall}"
+								<a sec:authorize="hasRole('ADMIN')" title="All" href="/documentsworkflowall" th:href="@{/documentsworkflowall}"
 									class="btn btn-teal d-sm-none btn-icon">
 									<i class="fa-solid fa-list-ul text-white"></i>
 								</a>
 
-								<a title="DRAFT" href="/documentsworkflow?flowStatus=DRAFT&page=1&size=10&sort=id,asc"
+								<a sec:authorize="hasRole('DOCWFDRAFTER')" title="DRAFT" href="/documentsworkflow?flowStatus=DRAFT&page=1&size=10&sort=id,asc"
 									th:href="@{/documentsworkflow?flowStatus=DRAFT&page=1&size=10&sort=id,asc}"
 									class="btn btn-teal d-none d-sm-inline-block">
 									<i class="fa-regular fa-file-lines text-white"></i>
 									DRAFT
 								</a>
-								<a title="DRAFT" href="/documentsworkflow?flowStatus=DRAFT&page=1&size=10&sort=id,asc"
+								<a sec:authorize="hasRole('DOCWFDRAFTER')" title="DRAFT" href="/documentsworkflow?flowStatus=DRAFT&page=1&size=10&sort=id,asc"
 									th:href="@{/documentsworkflow?flowStatus=DRAFT&page=1&size=10&sort=id,asc}"
 									class="btn btn-teal d-sm-none btn-icon">
 									<i class="fa-regular fa-file-lines text-white"></i>
 								</a>
 
-								<a title="REVIEW" href="/documentsworkflow?flowStatus=REVIEW&page=1&size=10&sort=id,asc"
+								<a sec:authorize="hasRole('DOCWFREVIEWER')" title="REVIEW" href="/documentsworkflow?flowStatus=REVIEW&page=1&size=10&sort=id,asc"
 									th:href="@{/documentsworkflow?flowStatus=REVIEW&page=1&size=10&sort=id,asc}"
 									class="btn btn-teal d-none d-sm-inline-block">
 									<i class="fa-solid fa-magnifying-glass text-white"></i>
-									REVIEW
+									REVIEW 
 								</a>
-								<a title="REVIEW" href="/documentsworkflow?flowStatus=REVIEW&page=1&size=10&sort=id,asc"
+								<a sec:authorize="hasRole('DOCWFREVIEWER')" title="REVIEW" href="/documentsworkflow?flowStatus=REVIEW&page=1&size=10&sort=id,asc"
 									th:href="@{/documentsworkflow?flowStatus=REVIEW&page=1&size=10&sort=id,asc}"
 									class="btn btn-teal d-sm-none btn-icon">
 									<i class="fa-solid fa-magnifying-glass text-white"></i>
 								</a>
 
-								<a title="APPROVED"
+								<a sec:authorize="hasRole('DOCWFAPPROVER')" title="APPROVED"
 									href="/documentsworkflow?flowStatus=APPROVED&page=1&size=10&sort=id,asc"
 									th:href="@{/documentsworkflow?flowStatus=APPROVED&page=1&size=10&sort=id,asc}"
 									class="btn btn-teal d-none d-sm-inline-block">
 									<i class="fa-solid fa-check text-white"></i>
 									APPROVED
 								</a>
-								<a title="APPROVED"
+								<a sec:authorize="hasRole('DOCWFAPPROVER')" title="APPROVED"
 									href="/documentsworkflow?flowStatus=APPROVED&page=1&size=10&sort=id,asc"
 									th:href="@{/documentsworkflow?flowStatus=APPROVED&page=1&size=10&sort=id,asc}"
 									class="btn btn-teal d-sm-none btn-icon">
 									<i class="fa-solid fa-check text-white"></i>
 								</a>
 
-								<a title="FINALIZED"
+								<a sec:authorize="hasRole('DOCWFFINALIZER')" title="FINALIZED"
 									href="/documentsworkflow?flowStatus=FINALIZED&page=1&size=10&sort=id,asc"
 									th:href="@{/documentsworkflow?flowStatus=FINALIZED&page=1&size=10&sort=id,asc}"
 									class="btn btn-teal d-none d-sm-inline-block">
 									<i class="fa-solid fa-check-double text-white"></i>
 									FINALIZED
 								</a>
-								<a title="FINALIZED"
+								<a sec:authorize="hasRole('DOCWFFINALIZER')" title="FINALIZED"
 									href="/documentsworkflow?flowStatus=FINALIZED&page=1&size=10&sort=id,asc"
 									th:href="@{/documentsworkflow?flowStatus=FINALIZED&page=1&size=10&sort=id,asc}"
 									class="btn btn-teal d-sm-none btn-icon">
