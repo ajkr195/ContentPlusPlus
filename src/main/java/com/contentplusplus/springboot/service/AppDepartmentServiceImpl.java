@@ -16,7 +16,7 @@ public class AppDepartmentServiceImpl implements AppDepartmentService{
 	public void saveDepartment(AppDepartment appDepartment) {
 		appDepartment.setDepartmentname(appDepartment.getDepartmentname());
 		appDepartment.setDepartmentheadname(appDepartment.getAppUser().getUserfirstname() + " " + appDepartment.getAppUser().getUserlastname());
-		appDepartment.setDepartmentheademail(appDepartment.getAppUser().getUseremail());
+		appDepartment.setDepartmentemaildistlist(appDepartment.getDepartmentemaildistlist());
 		appDepartment.setAppUser(appDepartment.getAppUser());
 		appDepartmentRepository.save(appDepartment);
 	}
@@ -33,7 +33,7 @@ public class AppDepartmentServiceImpl implements AppDepartmentService{
 		if (null != entity) {
 			entity.setDepartmentname(appDepartment.getDepartmentname());
 			entity.setDepartmentheadname(appDepartment.getAppUser().getUserfirstname() + " " + appDepartment.getAppUser().getUserlastname());
-			entity.setDepartmentheademail(appDepartment.getAppUser().getUseremail());
+			entity.setDepartmentemaildistlist(appDepartment.getDepartmentemaildistlist());
 			entity.setAppUser(appDepartment.getAppUser());
 			
 		}

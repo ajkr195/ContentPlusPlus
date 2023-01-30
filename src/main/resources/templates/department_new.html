@@ -49,6 +49,19 @@
 												th:if="${#fields.hasErrors('departmentname')}">
 										</div>
 									</div>
+									
+									<div class="col-lg-4">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3"
+												for="signup-departmentname">Department's Email DL</label>
+											<input type="email" class="form-control" placeholder="Email Distribution List"
+												aria-label="departmentemaildistlist" name="departmentemaildistlist"
+												th:field="${department.departmentemaildistlist}" />
+											<p class="errorclass" th:errors="*{departmentemaildistlist}"
+												th:if="${#fields.hasErrors('departmentemaildistlist')}">
+										</div>
+									</div>
+									
 									<div class="col-lg-4" th:if="${editingdepartment}">
 										<div class="mb-3">
 											<label class="form-label fw-bolder fs-3"

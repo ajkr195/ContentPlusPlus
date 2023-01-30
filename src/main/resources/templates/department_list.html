@@ -121,10 +121,11 @@
 										<tr>
 											<th>#</th>
 											<th>Id</th>
-											<th>Name</th>
-											<th>Head</th>
-											<th>Head's Email</th>
-											<th>Head's ID</th>
+											<th>Department Name</th>
+											<th>Head Name</th>
+											<th>Head's Email-ID</th>
+											<th>Department Email DL</th>
+											
 											<!--<th class="table-col-hidden">CreatedBy</th>
 											<th class="table-col-hidden">DateCreated</th>
 											<th class="table-col-hidden">ModifiedBy</th>
@@ -141,10 +142,11 @@
 													th:text="${myObj.departmentname}">None</span></td>
 											<td class="cell"> <span class="truncate"
 													th:text="${myObj.departmentheadname}">None</span></td>
-											<td class="cell"> <span class="truncate"
-													th:text="${myObj.departmentheademail}">None</span></td>
-											<td class="cell"> <span class="truncate"
+													<td class="cell"> <span class="truncate"
 													th:text="${myObj.appUser.useremail}">None</span></td>
+											<td class="cell"> <span class="truncate"
+													th:text="${myObj.departmentemaildistlist}">None</span></td>
+											
 											<!--<td class="cell table-col-hidden"><span class="note"
 													th:text="${myObj.createdBy}">None</span></td>
 											<td class="cell table-col-hidden"><span class="note"
@@ -170,8 +172,14 @@
 														<li><a class="dropdown-item" href="#"
 																th:href="@{/departmentedit/{id}(id=${myObj.id})}"
 																title="Edit this Department"><i
-																	class="fa-solid fa-user-pen text-warning fa-xl mx-2"></i>Edit
+																	class="fa-regular fa-pen-to-square text-warning fa-xl mx-2"></i>Edit
 																Department</a>
+														</li>
+														<li><a class="dropdown-item" href="#"
+																th:href="@{/departmenteditcasetypes/{id}(id=${myObj.id})}"
+																title="Manage this Department Case Types"><i
+																	class="fa-regular fa-rectangle-list text-warning fa-xl mx-2"></i>Manage
+																Case Types</a>
 														</li>
 													</ul>
 												</a>
@@ -188,10 +196,10 @@
 										<tr>
 											<th>#</th>
 											<th>Id</th>
-											<th>Name</th>
-											<th>Head</th>
-											<th>Head's Email</th>
-											<th>Head's ID</th>
+											<th>Department Name</th>
+											<th>Head Name</th>
+											<th>Head's Email-ID</th>
+											<th>Department Email DL</th>
 											<!--<th class="table-col-hidden">CreatedBy</th>
 											<th class="table-col-hidden">DateCreated</th>
 											<th class="table-col-hidden">ModifiedBy</th>
@@ -281,7 +289,7 @@
 			let htmlstring = '<div class="row m-0"><div class="text-end col-4 mb-2"><b>Id: </b></div> <div class="text-start col-8">' + myfile.id + '</div></div>' +
 				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Department: </b></div> <div class="text-start col-8">' + myfile.departmentname + '</div></div>' +
 				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Head\'s Name: </b></div> <div class="text-start col-8">' + myfile.departmentheadname + '</div></div>' +
-				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Head\'s email: </b></div> <div class="text-start col-8">' + myfile.departmentheademail + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Department email DL: </b></div> <div class="text-start col-8">' + myfile.departmentemaildistlist + '</div></div>' +
 				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Creator: </b></div> <div class="text-start col-8">' + myfile.createdBy + '</div></div>' +
 				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>created Date: </b></div> <div class="text-start col-8">' + myfile.createdDate + '</div></div>' +
 				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Modifier: </b></div> <div class="text-start col-8">' + myfile.lastModifiedBy + '</div></div>' +

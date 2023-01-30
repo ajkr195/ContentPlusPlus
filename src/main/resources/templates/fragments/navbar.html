@@ -115,9 +115,11 @@
 								class="fa-solid fa-right-from-bracket text-muted me-1"></i>
 							Logout</a>
 						<!--<span class="me-1" th:text="${principal.Username}"></span>-->
-						<div th:if="${!principal.getAuthorities().empty}"><span th:text="${principal.getAuthorities()}"></span>
+						<div th:if="${!principal.getAuthorities().empty}"><span
+								th:text="${principal.getAuthorities()}"></span>
 						</div>
-						<div th:if="${principal.getAuthorities().empty}"><span class="text-center text-danger text-uppercase fw-bolder">No roles assigned yet.</span>
+						<div th:if="${principal.getAuthorities().empty}"><span
+								class="text-center text-danger text-uppercase fw-bolder">No roles assigned yet.</span>
 						</div>
 					</div>
 				</div>
@@ -164,7 +166,8 @@
 									<div class="dropdown-menu-column">
 										<a class="dropdown-item" href="/documentsworkflow"
 											th:href="@{/documentsworkflow}">
-											<i class="fa-solid fa-arrows-split-up-and-left me-2 text-primary"></i> Documents Workflow
+											<i class="fa-solid fa-arrows-split-up-and-left me-2 text-primary"></i>
+											Documents Workflow
 										</a>
 										<a class="dropdown-item" href="#">
 											Link1 <span
@@ -314,7 +317,8 @@
 							</div>
 						</li>
 						<!--sec:authorize="hasAuthority('ADMIN')" -->
-						<li class="nav-item dropdown" th:classappend="${pagename == 'listuser' OR pagename == 'listdepartment' ? 'active' : ''}">
+						<li class="nav-item dropdown"
+							th:classappend="${pagename == 'listuser' OR pagename == 'listdepartment' OR pagename == 'departmentedit' ? 'active' : ''}">
 							<a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
 								data-bs-auto-close="outside" role="button" aria-expanded="false">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -331,13 +335,13 @@
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
 										User List</span>
 								</a>
-								
+
 								<a class="dropdown-item" href="/listdepartment">
 									<i class="fa-solid fa-puzzle-piece icon text-purple me-1"></i> <span
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
 										Department List</span>
 								</a>
-								
+
 							</div>
 						</li>
 						<li class="nav-item dropdown" th:classappend="${pagename == 'help' ? 'active' : ''}">

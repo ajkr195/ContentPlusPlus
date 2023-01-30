@@ -2,19 +2,22 @@ package com.contentplusplus.springboot.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import com.contentplusplus.springboot.model.audit.Auditable;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
@@ -29,10 +32,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity(name = "AppDepartment")
 @Table(name = "app_department")
-public class AppDepartment  extends Auditable<String> implements Serializable{
-	
+public class AppDepartment extends Auditable<String> implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
@@ -49,7 +52,7 @@ public class AppDepartment  extends Auditable<String> implements Serializable{
 	@Basic(optional = false)
 	@Column(name = "departmentname")
 	private String departmentname;
-	
+
 	@Basic(optional = false)
 	@Column(name = "departmentheadname")
 	private String departmentheadname;
@@ -59,10 +62,14 @@ public class AppDepartment  extends Auditable<String> implements Serializable{
 	private AppUser appUser;
 
 	@Basic(optional = false)
-	@Column(name = "departmentheademail")
-	private String departmentheademail;
-	
-    @ManyToMany(mappedBy="departments")
-    private List<AppUser> users;
+	@Column(name = "departmentemaildistlist")
+	private String departmentemaildistlist;
+
+	@ManyToMany(mappedBy = "departments")
+	private List<AppUser> users;
+
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	private Set<AppCaseType> casetypeList;
 
 }

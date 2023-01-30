@@ -66,8 +66,8 @@ public class AppDepartmentController {
 		AppDepartment department = new AppDepartment();
 		AppUser appUser = appUserRepository.findByUseremailIgnoreCase(useremail);
 		department.setDepartmentname(departmentname);
-		department.setDepartmentheadname(appUser.getUseremail());
-		department.setDepartmentheademail(appUser.getUseremail());
+		//department.setDepartmentheadname(appUser.getUseremail());
+		department.setDepartmentemaildistlist(appUser.getUseremail());
 		department.setAppUser(appUser);
 		if (null == appDepartmentRepository.findByDepartmentnameContainingIgnoreCase(departmentname)) {
 			model.addAttribute("departmentname", departmentname);
@@ -102,10 +102,18 @@ public class AppDepartmentController {
 		appDepartmentService.saveDepartment(department);
 		return "redirect:/listdepartment";
 	}
+	
+	@RequestMapping(value = { "/departmenteditcasetypes/{id}" }, method = RequestMethod.GET)
+	public String manageCaseTypesForDept(Model model, @PathVariable(required = false, name = "id") Long id) {
+		model.addAttribute("pagename", "departmentedit");
+		model.addAttribute("id", id);
+		return "department_casetypes";
+	}
 
 	@RequestMapping(value = { "/departmentedit/{id}" }, method = RequestMethod.GET)
 	public String adminusereditRegistrationsd(Model model, @PathVariable(required = false, name = "id") Long id) {
 		String editingdepartment = "editingdepartment";
+		model.addAttribute("pagename", "departmentedit");
 		model.addAttribute("editingdepartment", editingdepartment);
 		model.addAttribute("department", appDepartmentRepository.findById(id));
 		model.addAttribute("departmentheadname",
@@ -115,13 +123,13 @@ public class AppDepartmentController {
 				appDepartmentRepository.findById(id).get().getAppUser().getUseremail());
 		return "department_edit";
 	}
-
+	
 	@RequestMapping(value = "/departmentedit", method = RequestMethod.POST)
 	public String adminusereditRegistration(@Valid @ModelAttribute("department") AppDepartment department,
 			BindingResult bindingResult, HttpServletRequest request, Model model) {
 
 		// log.info("User ID is :: " + user.getId());
-
+		model.addAttribute("pagename", "departmentedit");
 		String editingdepartment = "editingdepartment";
 		model.addAttribute("editingdepartment", editingdepartment);
 		model.addAttribute("department", department);
