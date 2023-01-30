@@ -76,7 +76,7 @@ public class AppCaseTypeController {
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size,
 			@RequestParam(defaultValue = "id,asc") String[] sort) {
 		try {
-			model.addAttribute("pagename", "listcasetypes");
+			model.addAttribute("pagename", "listcasetype");
 			List<AppCaseType> allfiles = new ArrayList<>();
 
 			String sortField = sort[0];

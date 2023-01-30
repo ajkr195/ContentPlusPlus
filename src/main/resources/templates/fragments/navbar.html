@@ -318,7 +318,7 @@
 						</li>
 						<!--sec:authorize="hasAuthority('ADMIN')" -->
 						<li class="nav-item dropdown"
-							th:classappend="${pagename == 'listuser' OR pagename == 'listdepartment' OR pagename == 'departmentedit' ? 'active' : ''}">
+							th:classappend="${pagename == 'listuser' OR pagename == 'listdepartment' OR pagename == 'listdepartment' OR pagename == 'listcasetype' OR pagename == 'appCaseTypeedit' ? 'active' : ''}">
 							<a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
 								data-bs-auto-close="outside" role="button" aria-expanded="false">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -341,7 +341,7 @@
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
 										Department List</span>
 								</a>
-								
+
 								<a class="dropdown-item" href="/listcasetype" th:href="@{/listcasetype}">
 									<i class="fa-solid fa-list-check icon text-blue me-1"></i> <span
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">

@@ -1,6 +1,7 @@
 package com.contentplusplus.springboot.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -9,6 +10,7 @@ import com.contentplusplus.springboot.model.audit.Auditable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,6 +19,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -65,5 +68,26 @@ public class AppCaseType extends Auditable<String> implements Serializable {
 	@JoinColumn(name = "departmentid", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private AppDepartment appDepartment;
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	private Set<AppCaseTypeProperty> casetypepropertyList;
+
+	public AppCaseType(Long id, String casetypename) {
+		super();
+		this.id = id;
+		this.casetypename = casetypename;
+	}
+
+	public AppCaseType(Long id, String casetypename, String casetypeuuid, String casetypedescription,
+			String casetypesladuration, String casetypeslaunit) {
+		super();
+		this.id = id;
+		this.casetypename = casetypename;
+		this.casetypeuuid = casetypeuuid;
+		this.casetypedescription = casetypedescription;
+		this.casetypesladuration = casetypesladuration;
+		this.casetypeslaunit = casetypeslaunit;
+	}
 
 }

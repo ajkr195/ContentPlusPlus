@@ -61,6 +61,7 @@ public class AppCaseTypeRESTController {
 
 		return new ResponseEntity<>(addresses, HttpStatus.OK); // findAllAppCaseTypeByAppDepartment
 																// //findAllByAppDepartmentOrderByIdAsc
+																// //findByFewFields
 	}
 
 }

@@ -122,6 +122,25 @@ ALTER TABLE CONTENTPLUSPLUS.app_user_department ADD CONSTRAINT FK_AUSERDEPTDEPTI
 ALTER TABLE CONTENTPLUSPLUS.app_department ADD CONSTRAINT FK_AUSERUSERID FOREIGN KEY (userid) REFERENCES app_user (id);
 ALTER TABLE CONTENTPLUSPLUS.app_case_type ADD CONSTRAINT FK_ACASETYPED FOREIGN KEY (departmentid) REFERENCES app_department (id);
 
+CREATE TABLE CONTENTPLUSPLUS.app_case_type_property (
+id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+casetypepropertyname VARCHAR(150) NOT NULL,
+casetypepropertyvalue varchar(255) NOT NULL,
+casepropertytype varchar(255),
+casepropertyrequired varchar(255),
+casepropertysize varchar(255),
+casepropertymin varchar(255),
+casepropertymax varchar(255),
+casepropertymaxlength varchar(255),
+created_by VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
+casetypeid NUMBER NOT NULL,
+CONSTRAINT appcasetypeproperty_pk PRIMARY KEY (id));
+
+ALTER TABLE CONTENTPLUSPLUS.app_case_type_property ADD CONSTRAINT FK_ACASETYPEPROPERTY FOREIGN KEY (casetypeid) REFERENCES app_case_type (id);
+
 CREATE TABLE CONTENTPLUSPLUS.app_user_role (
 id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
 userid NUMBER NOT NULL,

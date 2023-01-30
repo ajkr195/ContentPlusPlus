@@ -20,12 +20,14 @@ public interface AppCaseTypeRepository extends JpaRepository<AppCaseType, Long> 
 	@Query(value = "SELECT u FROM AppCaseType u where u.appDepartment =:appDepartment")
 	List<AppCaseType> findAllAppCaseTypeByAppDepartment(@Param("appDepartment") AppDepartment appDepartment);
 
+	@Query("select new AppCaseType(act.id, act.casetypename, act.casetypedescription, act.casetypeuuid, act.casetypesladuration, act.casetypeslaunit) from AppCaseType act where act.appDepartment =:appDepartment")
+	public List<AppCaseType> findByFewFields(@Param("appDepartment") AppDepartment appDepartment);
+
 	AppCaseType findByAppDepartment(Long appDepartmentId);
-	
+
 	AppCaseType findByCasetypenameContainingIgnoreCase(String casetypename);
 
-	AppCaseType findByAppDepartmentAndCasetypenameIgnoreCase(AppDepartment appDepartment,
-			String casetypename);
+	AppCaseType findByAppDepartmentAndCasetypenameIgnoreCase(AppDepartment appDepartment, String casetypename);
 
 	@Transactional
 	void deleteByAppDepartmentId(long appDepartmentId);

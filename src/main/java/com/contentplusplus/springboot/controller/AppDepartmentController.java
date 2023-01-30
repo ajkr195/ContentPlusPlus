@@ -106,6 +106,7 @@ public class AppDepartmentController {
 	@RequestMapping(value = { "/departmenteditcasetypes/{id}" }, method = RequestMethod.GET)
 	public String manageCaseTypesForDept(Model model, @PathVariable(required = false, name = "id") Long id) {
 		model.addAttribute("pagename", "departmentedit");
+		model.addAttribute("departmentname", appDepartmentRepository.findById(id).get().getDepartmentname());
 		model.addAttribute("id", id);
 		return "department_casetypes";
 	}
