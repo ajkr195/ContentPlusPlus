@@ -50,6 +50,15 @@ public class AppCaseType extends Auditable<String> implements Serializable {
 	protected void onCreate() {
 		setCasetypeuuid(java.util.UUID.randomUUID().toString());
 	}
+	
+	@Column(name = "casetypedescription")
+	private String casetypedescription;
+	
+	@Column(name = "casetypesladuration")
+	private String casetypesladuration;
+	
+	@Column(name = "casetypeslaunit")
+	private String casetypeslaunit;
 
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)

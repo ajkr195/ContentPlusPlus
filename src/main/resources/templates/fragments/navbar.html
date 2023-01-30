@@ -330,16 +330,22 @@
 								</span>
 							</a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="/listuser">
+								<a class="dropdown-item" href="/listuser" th:href="@{/listuser}">
 									<i class="fa-solid fa-user-group icon text-teal me-1"></i> <span
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
 										User List</span>
 								</a>
 
-								<a class="dropdown-item" href="/listdepartment">
+								<a class="dropdown-item" href="/listdepartment" th:href="@{/listdepartment}">
 									<i class="fa-solid fa-puzzle-piece icon text-purple me-1"></i> <span
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
 										Department List</span>
+								</a>
+								
+								<a class="dropdown-item" href="/listcasetype" th:href="@{/listcasetype}">
+									<i class="fa-solid fa-list-check icon text-blue me-1"></i> <span
+										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
+										CaseType List</span>
 								</a>
 
 							</div>

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<!-- Page header -->
+			<div class="page-header d-print-none">
+				<div class="container-xl">
+					<div class="row g-2 align-items-center">
+						<div class="col">
+							<!-- Page pre-title -->
+							<div class="page-pretitle">
+								Manage CaseType
+							</div>
+							<h2 class="page-title" th:if="${editingappCaseType}">Edit CaseType
+							</h2>
+							<h2 class="page-title" th:if="${creatingappCaseType}">Add New Department
+							</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Page body -->
+			<div class="page-body">
+				<div class="container-xl">
+					<div class="card">
+						<div class="card-body">
+							<form class="card-body border-bottom py-3" th:action="@{/casetypeEdit}"
+								th:object="${appCaseType}" method="post">
+
+								<input th:type="hidden" id="id" name="id" th:field="${appCaseType.id}" />
+
+								<div class="col-lg-4" th:if="${editingappCaseType}">
+									<div class="mb-3">
+										<label class="form-label fw-bolder fs-3" for="casetypedepartmentname">Associated
+											Department</label>
+										<p th:text="${casetypedepartmentname}" />
+										<!--th:text="${casetypedepartmentname}"   th:text="|Hi, ${casetypedepartmentname} ${casetypedepartmentname}|"-->
+									</div>
+								</div>
+
+								<div class="col-lg-4">
+									<div class="mb-3">
+										<label class="form-label fw-bolder fs-3" for="signup-appCaseTypename">CaseType
+											Name</label>
+										<input type="text" class="form-control" placeholder="Department name"
+											aria-label="appCaseTypename" name="casetypename"
+											th:field="${appCaseType.casetypename}" />
+										<p class="errorclass" th:errors="*{casetypename}"
+											th:if="${#fields.hasErrors('casetypename')}">
+									</div>
+								</div>
+
+								<div class="col-lg-4">
+									<div class="mb-3">
+										<label class="form-label fw-bolder fs-3"
+											for="casetypedescription">Description</label>
+										<input type="text" class="form-control" placeholder="Case Type's 'Description"
+											aria-label="casetypedescription" name="casetypedescription"
+											th:field="${appCaseType.casetypedescription}" />
+										<p class="errorclass" th:errors="*{casetypedescription}"
+											th:if="${#fields.hasErrors('casetypedescription')}">
+									</div>
+								</div>
+
+								<div class="row mb-3">
+
+									<div class="col-lg-6">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="casetypesladuration">SLA
+												Duration</label>
+											<select class="form-select" th:field="${appCaseType.casetypesladuration}"
+												name="casetypesladuration" id="casetypesladuration">
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="10">10</option>
+												<option value="15">15</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+											</select>
+											<p class="errorclass" th:errors="*{casetypesladuration}"
+												th:if="${#fields.hasErrors('casetypesladuration')}">
+										</div>
+									</div>
+
+									<div class="col-lg-2">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="casetypeslaunit">SLA
+												Unit</label>
+											<select class="form-select" th:field="${appCaseType.casetypeslaunit}"
+												name="casetypeslaunit" id="casetypeslaunit">
+												<option value="week">Week(s)</option>
+												<option value="day">Day(s)</option>
+												<option value="month">Month(s)</option>
+												<option value="year">Year(s)</option>
+												<option value="hour">Hour(s)</option>
+											</select>
+											<p class="errorclass" th:errors="*{casetypeslaunit}"
+												th:if="${#fields.hasErrors('casetypeslaunit')}">
+										</div>
+									</div>
+
+
+
+									<!--									<div class="col-lg-4" th:if="${appCaseTypeheademail}">-->
+									<!--										<div class="mb-3">-->
+									<!--											<label class="form-label fw-bolder fs-3"-->
+									<!--												for="signup-appCaseTypeheadname">Department Head's Email-Id</label>-->
+									<!--											<p th:text="${appCaseTypeheademail}" />-->
+									<!--										</div>-->
+									<!--									</div>-->
+
+
+								</div>
+								<div class="mt-3 mb-3 d-flex justity-content-between">
+									<a href="/listcasetype" th:href="@{/listcasetype}" class="btn app-btn-secondary">
+										Cancel
+									</a>
+									<button type="submit" class="btn app-btn-primary ms-auto">
+										<i class="fa-regular fa-circle-check fa-lg me-2"></i>
+										Submit
+									</button>
+								</div>
+
+							</form>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Modal -->
+
+		<div th:replace="~{fragments/footer :: footer}"></div>
+
+	</div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/js/userdata.js}"></script>
+
+</body>
+
+</html>

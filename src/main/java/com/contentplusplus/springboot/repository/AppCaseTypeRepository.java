@@ -2,6 +2,8 @@ package com.contentplusplus.springboot.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -27,4 +29,6 @@ public interface AppCaseTypeRepository extends JpaRepository<AppCaseType, Long> 
 
 	@Transactional
 	void deleteByAppDepartmentId(long appDepartmentId);
+
+	Page<AppCaseType> findByCasetypenameContainingIgnoreCase(String keyword, Pageable pageable);
 }

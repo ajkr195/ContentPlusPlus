@@ -30,7 +30,11 @@ public class AppCaseTypeServiceImpl implements AppCaseTypeService {
 		if (null != entity) {
 			entity.setCasetypename(appCaseType.getCasetypename());
 			entity.setCasetypeuuid(entity.getCasetypeuuid());
-			entity.setAppDepartment(appCaseType.getAppDepartment());
+			entity.setCasetypedescription(appCaseType.getCasetypedescription());
+			entity.setCasetypesladuration(appCaseType.getCasetypesladuration());
+			entity.setCasetypeslaunit(appCaseType.getCasetypeslaunit());
+			entity.setCasetypeuuid(entity.getCasetypeuuid());
+			entity.setAppDepartment(entity.getAppDepartment());
 		}
 		return appCaseTypeRepository.save(entity);
 	}
