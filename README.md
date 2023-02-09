@@ -50,6 +50,8 @@ Content Management Systems were supposed to:
   - Attach/Detach/Delete Case Documents
   - Track history and milestones of a Case (Work-Item).
   - A quick overview is here - https://github.com/ajkr195/CaseManager
+  
+  ![content++](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/Content%2B%2B.JPG)
 
 
 UI is derived and heavily based on (if you want to support this project) - https://github.com/tabler/tabler 
