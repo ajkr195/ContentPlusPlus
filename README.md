@@ -65,6 +65,10 @@ Content Management Systems were supposed to:
 # Overview:
   
   ![content++](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/Content%2B%2B.JPG)
+  
+# Dashboard:  
+  
+  ![content++](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/Dashboard.JPG)
 
 
 UI is derived and heavily based on (if you want to support this project) - https://github.com/tabler/tabler 
