@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<!-- Page header -->
+			<div class="page-header d-print-none">
+				<div class="container-xl">
+					<div class="row g-2 align-items-center">
+						<div class="col">
+							<!-- Page pre-title -->
+							<div class="page-pretitle">
+								Manage CaseType
+							</div>
+							<h2 class="page-title" th:if="${editingappCaseTypeProp}">Edit CaseType Property
+							</h2>
+							<h2 class="page-title" th:if="${creatingappCaseTypeProp}">Add CaseType Property
+							</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Page body -->
+			<div class="page-body">
+				<div class="container-xl">
+					<div class="card">
+						<div class="card-body">
+							<form class="card-body border-bottom py-3" th:action="@{/casetypepropEdit}"
+								th:object="${appCaseTypeProperty}" method="post">
+
+								<input th:type="hidden" id="id" name="id" th:field="${appCaseTypeProperty.id}" />
+
+								<!--								<div class="col-lg-4" th:if="${editingappCaseType}">-->
+								<!--									<div class="mb-3">-->
+								<!--										<label class="form-label fw-bolder fs-3" for="casetypedepartmentname">Associated-->
+								<!--											Department</label>-->
+								<!--										<p th:text="${casetypename}" />-->
+								<!--th:text="${casetypename}"   th:text="|Hi, ${casetypename} ${casetypename}|"-->
+								<!--									</div>-->
+								<!--								</div>-->
+								<div class="row mb-3">
+
+
+
+
+
+									<div class="col-lg-3">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="signup-userroles">Select
+												CaseType</label>
+											<select class="form-select form-select-sm" id="userdepartments"
+												th:field="${appCaseTypeProperty.appCaseType}" size="8">
+												<option value="" disabled selected>-- Select CaseType --</option>
+												<option th:each="casetype : ${casetypes}" th:value="${casetype.id}"
+													th:text="${casetype.casetypename}">
+													CaseType
+												</option>
+											</select>
+											<p class="errorclass" th:if="${#fields.hasErrors('appCaseType')}"
+												th:errors="*{departments}" />
+										</div>
+									</div>
+
+
+
+									<div class="col-lg-3">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="casetypepropertyname">CaseType
+												Property Name</label>
+											<input type="text" class="form-control" placeholder="CaseType Property name"
+												aria-label="casetypepropertyname" name="casetypepropertyname"
+												th:field="${appCaseTypeProperty.casetypepropertyname}" />
+											<p class="errorclass" th:errors="*{casetypepropertyname}"
+												th:if="${#fields.hasErrors('casetypepropertyname')}">
+										</div>
+									</div>
+
+									<div class="col-lg-3">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="casetypepropertyvalue">Default
+												Value</label>
+											<input type="text" class="form-control" placeholder="Initial default value"
+												aria-label="casetypepropertyvalue" name="casetypepropertyvalue"
+												th:field="${appCaseTypeProperty.casetypepropertyvalue}" />
+											<p class="errorclass" th:errors="*{casetypepropertyvalue}"
+												th:if="${#fields.hasErrors('casetypepropertyvalue')}">
+										</div>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+
+									<div class="col-lg-2">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="casetypepropertytype">Property
+												type</label>
+											<select class="form-select"
+												th:field="${appCaseTypeProperty.casetypepropertytype}"
+												name="casetypepropertytype" id="casetypepropertytype">
+												<option value="text">Text</option>
+												<option value="email">Email</option>
+												<option value="date">Date</option>
+												<option value="number">Number</option>
+											</select>
+											<p class="errorclass" th:errors="*{casetypepropertytype}"
+												th:if="${#fields.hasErrors('casetypepropertytype')}">
+										</div>
+									</div>
+
+									<div class="col-lg-2">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="casetypepropertyrequired">Is
+												Required?
+											</label>
+											<select class="form-select"
+												th:field="${appCaseTypeProperty.casetypepropertyrequired}"
+												name="casetypepropertyrequired" id="casetypepropertyrequired">
+												<option value="yes">Yes</option>
+												<option value="no">No</option>
+											</select>
+											<p class="errorclass" th:errors="*{casetypepropertyrequired}"
+												th:if="${#fields.hasErrors('casetypepropertyrequired')}">
+										</div>
+									</div>
+
+									<div class="col-lg-2">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="casetypepropertysize">Size
+											</label>
+											<select class="form-select"
+												th:field="${appCaseTypeProperty.casetypepropertysize}"
+												name="casetypepropertysize" id="casetypepropertysize">
+												<option value="10">10</option>
+												<option value="15">15</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+											</select>
+											<p class="errorclass" th:errors="*{casetypepropertysize}"
+												th:if="${#fields.hasErrors('casetypepropertysize')}">
+										</div>
+									</div>
+
+									<div class="col-lg-2">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="casetypepropertymin">Min
+												Value</label>
+											<select class="form-select"
+												th:field="${appCaseTypeProperty.casetypepropertymin}"
+												name="casetypepropertymin" id="casetypepropertymin">
+												<option value="10">10</option>
+												<option value="15">15</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+											</select>
+											<p class="errorclass" th:errors="*{casetypepropertymin}"
+												th:if="${#fields.hasErrors('casetypepropertymin')}">
+										</div>
+									</div>
+
+									<div class="col-lg-2">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="casetypepropertymax">Max
+												Value</label>
+											<select class="form-select"
+												th:field="${appCaseTypeProperty.casetypepropertymax}"
+												name="casetypepropertymax" id="casetypepropertymax">
+												<option value="10">10</option>
+												<option value="15">15</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+											</select>
+											<p class="errorclass" th:errors="*{casetypepropertymax}"
+												th:if="${#fields.hasErrors('casetypepropertymax')}">
+										</div>
+									</div>
+									<div class="col-lg-2">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="casetypeslaunit">Max
+												Length</label>
+											<select class="form-select"
+												th:field="${appCaseTypeProperty.casetypepropertymaxlength}"
+												name="casetypepropertymaxlength" id="casetypepropertymaxlength">
+												<option value="10">10</option>
+												<option value="15">15</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+											</select>
+											<p class="errorclass" th:errors="*{casetypepropertymaxlength}"
+												th:if="${#fields.hasErrors('casetypepropertymaxlength')}">
+										</div>
+									</div>
+
+
+								</div>
+								<div class="mt-3 mb-3 d-flex justity-content-between">
+									<a href="/listcasetype" th:href="@{/listcasetype}" class="btn app-btn-secondary">
+										Cancel
+									</a>
+									<button type="submit" class="btn app-btn-primary ms-auto">
+										<i class="fa-regular fa-circle-check fa-lg me-2"></i>
+										Submit
+									</button>
+								</div>
+
+							</form>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Modal -->
+
+		<div th:replace="~{fragments/footer :: footer}"></div>
+
+	</div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/js/userdata.js}"></script>
+
+</body>
+
+</html>

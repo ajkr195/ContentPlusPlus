@@ -28,4 +28,6 @@ public interface AppDepartmentRepository extends JpaRepository<AppDepartment, Lo
 
 	AppDepartment findByDepartmentnameContainingIgnoreCase(String departmentname);
 
+	AppDepartment[] findByUsers_Useremail(String name);
+
 }

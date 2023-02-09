@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<!-- Page header -->
+			<div class="page-header d-print-none">
+				<div class="container-xl">
+					<div class="row g-2 align-items-center">
+						<div class="col">
+							<!-- Page pre-title -->
+							<div class="page-pretitle">
+								Manage Cases
+							</div>
+							<h2 class="page-title">
+								Case List
+							</h2>
+						</div>
+						<div class="col-auto ms-auto d-print-none">
+							<div class="btn-list">
+								<a href="/home" th:href="@{/home}" class="btn app-btn-primary d-none d-sm-inline-block">
+									<i class="fa-solid fa-home fa-xl"></i>
+									Home
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Page body -->
+			<div class="page-body">
+				<div class="container-xl">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Manage Cases</h3>
+							</div>
+
+
+							<div class="card-body border-bottom py-3">
+								<div class="d-flex">
+									<div class="muted" th:if="${!allfiles.empty}">
+
+									</div>
+
+									<div class=" " th:if="${!allfiles.empty}">
+										<div class="mx-2 d-inline-block">
+											<select class="form-select h-100 w-100" form="searchForm" name="size"
+												th:value="${pageSize}" onchange="changePageSize()" id="pageSize">
+												<option class="text-center" value="" disabled selected>-- PageSize
+													(Items per
+													Page) --</option>
+												<option class="text-center" th:each="s : ${ {5, 10, 20, 50, 100} }"
+													th:value="${s}" th:text="${s}"></option>
+											</select>
+										</div>
+									</div>
+
+									<div class="ms-auto" th:if="${!allfiles.empty}">
+										<select class="form-select h-100 w-100" form="searchForm" name="caseStatus"
+											th:value="${caseStatus}" id="caseStatus">
+											<option class="text-center" value="" disabled selected>-- Filter by
+												Case
+												Status --</option>
+											<option class="text-center"
+												th:each="s : ${ {'ALL', 'NEW', 'IN_PROGRESS', 'CLOSED'} }"
+												th:value="${s}" th:text="${s}"></option>
+										</select>
+									</div>
+
+									<div class="ms-auto " th:if="${!allfiles.empty}">
+										<form th:action="@{/listappcase}" id="searchForm" class>
+											<div class="input-group">
+												<input type="text" class="form-control" id="keyword" name="keyword"
+													placeholder="Search Case Title ..."
+													aria-label="Recipient's username with two button addons"
+													th:value="${keyword}">
+												<button class="btn btn-primary" type="submit">Search</button>
+												<button class="btn app-btn-secondary" id="btnClear"
+													th:onClick="clearInputKeyword()" type="button">Clear</button>
+											</div>
+										</form>
+									</div>
+								</div>
+
+
+							</div>
+
+							<div class="table-responsive">
+								<table class="table card-table table-vcenter text-nowrap datatable"
+									th:if="${!allfiles.empty}">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Id</th>
+											<th>LockedBy</th>
+											<th>CaseTitle</th>
+											<th>CaseStatus</th>
+											<th>CurrentStep</th>
+											<th>UniqueID</th>
+											<th>AssignedTo</th>
+											<th>CaseType</th>
+
+											<!--<th class="table-col-hidden">CreatedBy</th>
+											<th class="table-col-hidden">DateCreated</th>
+											<th class="table-col-hidden">ModifiedBy</th>
+											<th class="table-col-hidden">LastModified</th>-->
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										<tr th:each="myObj,rowStat : ${allfiles}">
+											<td class="cell" th:text="${rowStat.count}">1</td>
+											<td class="cell" th:text="${myObj.id}"></td>
+											<!--<td th:text="${myObj.lockedby}" class="cell">-NA-</td>-->
+											<td th:switch="${myObj.lockedby}">
+												<span th:case="null">-NA-</span>
+												<span th:case="*" th:text="${myObj.lockedby}"></span>
+											</td>
+											<td class="cell"> <span class="truncate"
+													th:text="${myObj.casetitle}">None</span></td>
+											<td class="cell"> <span class="truncate"
+													th:text="${myObj.casestatus}">None</span></td>
+											<td class="cell"> <span class="truncate"
+													th:text="${myObj.currentstepname}">None</span></td>
+											<td class="cell"> <span class="truncate"
+													th:text="${myObj.caseuuid}">None</span></td>
+											<!--<td class="cell"> <span class="truncate"-->
+											<!-- th:text="${myObj.assignedto}">None</span></td>-->
+											<td th:switch="${myObj.assignedto}">
+												<span th:case="null">-NA-</span>
+												<span th:case="*" class="badge bg-success"
+													th:text="${myObj.assignedto}"></span>
+											</td>
+											<td class="cell"> <span class="truncate"
+													th:text="${myObj.appCaseType.casetypename}">None</span></td>
+											<!--<td class="cell table-col-hidden"><span class="note"
+													th:text="${myObj.createdBy}">None</span></td>
+											<td class="cell table-col-hidden"><span class="note"
+													th:text="${myObj.createdDate}">None</span></td>
+											<td class="cell table-col-hidden"><span class="note"
+													th:text="${myObj.lastModifiedBy}">None</span></td>
+											<td class="cell table-col-hidden"><span class="note"
+													th:text="${myObj.lastModifiedDate}">None</span></td>-->
+											<td><a class="dropdown text-primary" href="#" role="button"
+													data-bs-toggle="dropdown" aria-expanded="false">
+													<i class="fa-solid fa-circle-question fa-xl text-primary"></i>
+													<!--<i class="fa-solid fa-ellipsis-vertical"></i>-->
+													<ul class="dropdown-menu">
+
+														<li><a class="dropdown-item" href="#"
+																th:href="@{/caseEditById/{id}(id=${myObj.id})}"
+																title="Process Case"><i
+																	class="fa-solid fa-arrows-spin text-primary fa-xl mx-2"></i>Process
+																Case</a>
+														</li>
+													</ul>
+												</a>
+											</td>
+										</tr>
+									</tbody>
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Id</th>
+											<th>LockedBy</th>
+											<th>CaseTitle</th>
+											<th>CaseStatus</th>
+											<th>CurrentStep</th>
+											<th>UniqueID</th>
+											<th>AssignedTo</th>
+											<th>CaseType</th>
+											<!--<th class="table-col-hidden">CreatedBy</th>
+											<th class="table-col-hidden">DateCreated</th>
+											<th class="table-col-hidden">ModifiedBy</th>
+											<th class="table-col-hidden">LastModified</th>-->
+											<th>Actions</th>
+										</tr>
+									</thead>
+								</table>
+
+							</div>
+
+							<div class="app-card-body p-4" th:if="${allfiles.empty}">
+								<div>
+									No Cases found.
+								</div>
+							</div>
+
+							<div class="card-footer d-flex align-items-center" th:if="${!allfiles.empty}">
+								<p class="m-0">Showing: <span th:text="${totalItems}"></span> from <span
+										th:text="${totalfiles}"></span> </p>
+								<ul class="pagination m-0 ms-auto" th:if="${totalPages > 0}">
+									<li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+										<a
+											th:replace="~{fragments/paging :: casepaging(1, '< First ', 'First Page')}"></a>
+									</li>
+									<li class="page-item font-weight-bold"
+										th:classappend="${currentPage == 1} ? 'disabled'">
+										<a
+											th:replace="~{fragments/paging :: casepaging(${currentPage - 1}, 'Prev', 'Previous Page')}"></a>
+									</li>
+									<li class="page-item disabled" th:if="${currentPage - 2 > 1}"><i
+											class="fa-solid fa-ellipsis fa-xl text-primary mt-1 mx-2"></i>
+									</li>
+									<li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+										th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+										<a
+											th:replace="~{fragments/paging :: casepaging(${page}, ${page}, 'Page ' + ${page})}"></a>
+									</li>
+									<li class="page-item disabled" th:if="${currentPage + 2 < totalPages}"><i
+											class="fa-solid fa-ellipsis fa-xl text-primary mt-1 mx-2"></i>
+									</li>
+									<li class="page-item font-weight-bold"
+										th:classappend="${currentPage == totalPages} ? 'disabled'">
+										<a
+											th:replace="~{fragments/paging :: casepaging(${currentPage + 1},'Next', 'Next Page')}"></a>
+									</li>
+									<li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+										<a
+											th:replace="~{fragments/paging :: casepaging(${totalPages}, ' Last >', 'Last Page')}"></a>
+									</li>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div th:replace="~{fragments/footer :: footer}"></div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/js/toastify-js.js}"></script>
+
+	<script>
+		function clearInputKeyword() {
+			document.getElementById("keyword").value = "";
+			window.location = "[[@{/listappcase}]]";
+			//location.reload();
+		}
+	</script>
+
+	<script>
+		function changePageSize() {
+			let form = document.getElementById("searchForm");
+			form.submit();
+		}
+	</script>
+	<script>
+		function showDeptInfo(myfile) {
+			let htmlstring = '<div class="row m-0"><div class="text-end col-4 mb-2"><b>Id: </b></div> <div class="text-start col-8">' + myfile.id + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Department: </b></div> <div class="text-start col-8">' + myfile.departmentname + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Head\'s Name: </b></div> <div class="text-start col-8">' + myfile.departmentheadname + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Department email DL: </b></div> <div class="text-start col-8">' + myfile.departmentemaildistlist + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Creator: </b></div> <div class="text-start col-8">' + myfile.createdBy + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>created Date: </b></div> <div class="text-start col-8">' + myfile.createdDate + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Modifier: </b></div> <div class="text-start col-8">' + myfile.lastModifiedBy + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Modified Date: </b></div> <div class="text-start col-8">' + myfile.lastModifiedDate + '</div></div>' +
+				'</br>Auto closing in <b><timer></timer></b> milliseconds.';
+
+			let timerInterval;
+
+			Swal.fire({
+				title: myfile.departmentname,
+				icon: 'info',
+				html: htmlstring,
+				showCloseButton: true,
+				showConfirmButton: false,
+				showCancelButton: true,
+				cancelButtonText: 'Close',
+				cancelButtonColor: '#28a745',
+				//allowOutsideClick: false,
+				timer: 10000,
+				timerProgressBar: true,
+
+				didOpen: () => {
+					//Swal.showLoading()
+					const b = Swal.getHtmlContainer().querySelector('timer')
+					timerInterval = setInterval(() => {
+						b.textContent = Swal.getTimerLeft()
+					}, 100)
+				},
+				willClose: () => {
+					clearInterval(timerInterval)
+				}
+			})
+		}
+	</script>
+
+	<script>
+		function foo() {
+
+			if (document.querySelector('.js-alert')) {
+				document.querySelectorAll('.js-alert').forEach(function ($el) {
+					$el.remove();
+				});
+			}
+		}
+
+		foo();
+	</script>
+	<script>
+		document.addEventListener('htmx:afterRequest', function () {
+			Toastify({
+				text: "Department Got Created Successfully !",
+				duration: 2000,
+				newWindow: true,
+				gravity: 'bottom',
+				position: 'right',
+				stopOnFocus: true,
+				style: {
+					background: "radial-gradient(759px at 14% 22.3%, rgb(10, 64, 88) 0%, rgb(15, 164, 102) 90%)",
+				}, offset: {
+					x: 80, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+					y: 100 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+				},
+			}).showToast();
+		});
+	</script>
+</body>
+
+</html>

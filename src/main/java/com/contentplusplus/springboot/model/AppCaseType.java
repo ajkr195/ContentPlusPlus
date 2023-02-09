@@ -1,6 +1,7 @@
 package com.contentplusplus.springboot.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.annotations.OnDelete;
@@ -69,9 +70,17 @@ public class AppCaseType extends Auditable<String> implements Serializable {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private AppDepartment appDepartment;
 	
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	private Set<AppCaseTypeProperty> casetypepropertyList;
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "appCaseType")
+	private List<AppCaseTypeProperty> caseTypePropertyList;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "appCaseType")
+	private List<AppCaseTypeDocumentType> caseTypeDocumentTypeList;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "appCaseType")
+	private List<AppCaseTypeStep> appCaseStepList;
+	
 
 	public AppCaseType(Long id, String casetypename) {
 		super();

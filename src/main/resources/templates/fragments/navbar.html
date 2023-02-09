@@ -10,7 +10,7 @@
 				<img src="/img/brand.png" width="110" height="32" alt="Content++" class="navbar-brand-image">
 			</h1>
 			<div class="navbar-nav flex-row order-md-last">
-				<div class="d-none d-md-flex">
+				<!--	<div class="d-none d-md-flex">
 					<div class="nav-item dropdown d-none d-md-flex me-3" sec:authorize="isAuthenticated()">
 						<a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1"
 							aria-label="Show notifications">
@@ -95,7 +95,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="nav-item dropdown" sec:authorize="isAuthenticated()">
 					<a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
 						aria-label="Open user menu">
@@ -109,7 +109,8 @@
 					<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 						<a href="#" class="dropdown-item"><i class="fa-regular fa-user text-muted me-1"></i> Profile</a>
 						<div class="dropdown-divider"></div>
-						<a href="./settings.html" class="dropdown-item"><i class="fa-solid fa-cog text-muted me-1"></i>
+						<a href="/settings" th:href="@{/settings}" class="dropdown-item"><i
+								class="fa-solid fa-cog text-muted me-1"></i>
 							Settings</a>
 						<a href="/logout" th:href="@{/logout}" class="dropdown-item"><i
 								class="fa-solid fa-right-from-bracket text-muted me-1"></i>
@@ -150,23 +151,31 @@
 							</a>
 						</li>
 						<li class="nav-item dropdown"
-							th:classappend="${pagename == 'documentsworkflow' OR pagename == 'activity' OR pagename == 'steps' ? 'active' : ''}">
+							th:classappend="${pagename == 'documentsworkflow' OR pagename == 'activity' OR pagename == 'launchpad' OR pagename == 'listappcase' OR pagename == 'processcase' OR pagename == 'steps' ? 'active' : ''}">
 							<a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
 								data-bs-auto-close="outside" role="button" aria-expanded="false">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
 									<i class="fa-solid fa-arrows-turn-to-dots text-teal"></i>
 								</span>
 								<span class="nav-link-title"
-									th:classappend="${pagename == 'documentsworkflow' OR pagename == 'activity' OR pagename == 'steps' ? 'fs-3 fw-bolder text-primary' : ''}">
+									th:classappend="${pagename == 'documentsworkflow' OR pagename == 'activity' OR pagename == 'launchpad' OR pagename == 'listappcase' OR pagename == 'processcase' OR pagename == 'steps' ? 'fs-3 fw-bolder text-primary' : ''}">
 									WorkFlow
 								</span>
 							</a>
 							<div class="dropdown-menu">
 								<div class="dropdown-menu-columns">
 									<div class="dropdown-menu-column">
+
+										<a class="dropdown-item" href="/launchpad" th:href="@{/launchpad}">
+											<i
+												class="fa-solid fa-arrows-split-up-and-left me-2 text-primary fa-rotate-90"></i>
+											Launch Pad
+										</a>
+
 										<a class="dropdown-item" href="/documentsworkflow"
 											th:href="@{/documentsworkflow}">
-											<i class="fa-solid fa-arrows-split-up-and-left me-2 text-primary"></i>
+											<i
+												class="fa-solid fa-arrows-split-up-and-left me-2 text-primary fa-rotate-270"></i>
 											Documents Workflow
 										</a>
 										<a class="dropdown-item" href="#">
@@ -224,6 +233,12 @@
 										</div>
 									</div>
 									<div class="dropdown-menu-column">
+
+										<a class="dropdown-item" href="/listappcase" th:href="@{/listappcase}">
+											<i class="fa-solid fa-list-ol me-2 text-success"></i>
+											Case List
+										</a>
+
 										<a class="dropdown-item" href="/activity" th:href="@{/activity}">
 											Activity <span
 												class="badge badge-sm bg-success-lt text-uppercase ms-auto">Activity</span>
@@ -318,18 +333,26 @@
 						</li>
 						<!--sec:authorize="hasAuthority('ADMIN')" -->
 						<li class="nav-item dropdown"
-							th:classappend="${pagename == 'listuser' OR pagename == 'listdepartment' OR pagename == 'listdepartment' OR pagename == 'listcasetype' OR pagename == 'appCaseTypeedit' ? 'active' : ''}">
+							th:classappend="${pagename == 'listuser' OR pagename == 'listinventory' OR pagename == 'listdepartment'  OR pagename == 'listcasetype' OR pagename == 'appCaseTypeedit' OR pagename == 'listcasepropstype' ? 'active' : ''}">
 							<a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
 								data-bs-auto-close="outside" role="button" aria-expanded="false">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
 									<i class="fa-solid fa-screwdriver-wrench icon text-teal"></i>
 								</span>
 								<span class="nav-link-title"
-									th:classappend="${pagename == 'listuser' ? 'fs-3 fw-bolder text-primary' : ''}">
+									th:classappend="${pagename == 'listuser' OR pagename == 'listinventory' OR pagename == 'listdepartment'  OR pagename == 'listcasetype' OR pagename == 'appCaseTypeedit' OR pagename == 'listcasepropstype' ? 'fs-3 fw-bolder text-primary' : ''}">
 									Admin
 								</span>
 							</a>
+
 							<div class="dropdown-menu">
+
+								<a class="dropdown-item" href="/api/csv/listinventory" th:href="@{/api/csv/listinventory}">
+									<i class="fa-solid fa-server icon text-teal me-1"></i> <span
+										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
+										Inventory</span>
+								</a>
+
 								<a class="dropdown-item" href="/listuser" th:href="@{/listuser}">
 									<i class="fa-solid fa-user-group icon text-teal me-1"></i> <span
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
@@ -347,6 +370,18 @@
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
 										CaseType List</span>
 								</a>
+								<a class="dropdown-item" href="/listcasetypeprops" th:href="@{/listcasetypeprops}">
+									<i class="fa-solid fa-list-check icon text-blue me-1"></i> <span
+										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
+										CaseType Properties List</span>
+								</a>
+								<a class="dropdown-item" href="/listcasetypesteps" th:href="@{/listcasetypesteps}">
+									<i class="fa-solid fa-list-check icon text-blue me-1"></i> <span
+										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
+										CaseType Step List</span>
+								</a>
+
+
 
 							</div>
 						</li>

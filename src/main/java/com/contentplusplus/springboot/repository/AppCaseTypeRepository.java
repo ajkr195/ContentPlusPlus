@@ -33,4 +33,10 @@ public interface AppCaseTypeRepository extends JpaRepository<AppCaseType, Long> 
 	void deleteByAppDepartmentId(long appDepartmentId);
 
 	Page<AppCaseType> findByCasetypenameContainingIgnoreCase(String keyword, Pageable pageable);
+	
+	@Query("SELECT act FROM AppCaseType act WHERE act.appDepartment in :ids")
+	List<AppCaseType> getAppCaseTypeListByDeptIdListIn(@Param("ids") List<Long> deptIdList);
+
+	List<AppCaseType> findByAppDepartmentIn(List<AppDepartment> deptList);
+
 }

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<!-- Page header -->
+			<div class="page-header d-print-none">
+				<div class="container-xl">
+					<div class="row g-2 align-items-center">
+						<div class="col">
+							<!-- Page pre-title -->
+							<div class="page-pretitle">
+								Manage CaseType
+							</div>
+							<h2 class="page-title" th:if="${editingappCaseTypeStep}">CaseType Step
+							</h2>
+							<h2 class="page-title" th:if="${creatingappCaseTypeStep}">CaseType Step
+							</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Page body -->
+			<div class="page-body">
+				<div class="container-xl">
+					<div class="card">
+						<div class="card-body">
+							<form class="card-body border-bottom py-3" th:action="@{/casetypestepEdit}"
+								th:object="${appCaseTypeStep}" method="post">
+
+								<input th:type="hidden" id="id" name="id" th:field="${appCaseTypeStep.id}" />
+
+								<!--								<div class="col-lg-4" th:if="${editingappCaseType}">-->
+								<!--									<div class="mb-3">-->
+								<!--										<label class="form-label fw-bolder fs-3" for="casetypedepartmentname">Associated-->
+								<!--											Department</label>-->
+								<!--										<p th:text="${casetypename}" />-->
+								<!--th:text="${casetypename}"   th:text="|Hi, ${casetypename} ${casetypename}|"-->
+								<!--									</div>-->
+								<!--								</div>-->
+								<div class="row mb-3">
+
+
+
+									<div class="col-lg-3">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="casetypess">Select
+												CaseType</label>
+											<select class="form-select form-select-sm" id="casetypes"
+												th:field="${appCaseTypeStep.appCaseType}" size="8" required>
+												<option value="" disabled selected>-- Select CaseType --</option>
+												<option th:each="casetype : ${casetypes}" th:value="${casetype.id}"
+													th:text="${casetype.casetypename}">
+													CaseType
+												</option>
+											</select>
+											<p class="errorclass" th:if="${#fields.hasErrors('appCaseType')}"
+												th:errors="*{appCaseType}" />
+										</div>
+									</div>
+
+
+									<div class="col-lg-3">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="casetypestepnumber">
+												Step Number</label>
+											<input type="text" class="form-control" placeholder="Step Number"
+												aria-label="casetypestepnumber" name="casetypestepnumber"
+												th:field="${appCaseTypeStep.casetypestepnumber}" required/>
+											<p class="errorclass" th:errors="*{casetypestepnumber}"
+												th:if="${#fields.hasErrors('casetypestepnumber')}">
+										</div>
+									</div>
+
+									<div class="col-lg-3">
+										<div class="mb-3">
+											<label class="form-label fw-bolder fs-3" for="casetypepropertyvalue">Step Name
+												</label>
+											<input type="text" class="form-control" placeholder="Step Name"
+												aria-label="casetypestepname" name="casetypestepname"
+												th:field="${appCaseTypeStep.casetypestepname}" required/>
+											<p class="errorclass" th:errors="*{casetypestepname}"
+												th:if="${#fields.hasErrors('casetypestepname')}">
+										</div>
+									</div>
+								</div>
+
+
+
+								</div>
+								<div class="mt-3 mb-3 d-flex justity-content-between">
+									<a href="/listcasetypesteps" th:href="@{/listcasetypesteps}" class="btn app-btn-secondary">
+										Cancel
+									</a>
+									<button type="submit" class="btn app-btn-primary ms-auto">
+										<i class="fa-regular fa-circle-check fa-lg me-2"></i>
+										Submit
+									</button>
+								</div>
+
+							</form>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Modal -->
+
+		<div th:replace="~{fragments/footer :: footer}"></div>
+
+	</div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/js/userdata.js}"></script>
+
+</body>
+
+</html>

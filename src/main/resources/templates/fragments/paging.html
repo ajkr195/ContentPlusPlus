@@ -13,3 +13,19 @@
   th:title="${tooltip}" rel="tooltip">
   [[${label}]]
 </a>
+
+<a th:fragment="casepaging(pageNum, label, tooltip)" class="page-link"
+  th:href="@{ ${servletPath} +'?'+ ${caseStatus!=null && caseStatus!=''? 'caseStatus=' + caseStatus + '&' : ''} + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''}
+                           + 'page=' + ${pageNum} + '&size=' + ${pageSize}
+                           + ${sortField!=null ? '&sort=' + sortField + ',' + sortDirection : ''}}"
+  th:title="${tooltip}" rel="tooltip">
+  [[${label}]]
+</a>
+
+<a th:fragment="inventoryPaging(pageNum, label, tooltip)" class="page-link"
+  th:href="@{ ${servletPath} +'?'+ ${objStatus!=null && objStatus!=''? 'objStatus=' + objStatus + '&' : ''} + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''}
+                           + 'page=' + ${pageNum} + '&size=' + ${pageSize}
+                           + ${sortField!=null ? '&sort=' + sortField + ',' + sortDirection : ''}}"
+  th:title="${tooltip}" rel="tooltip">
+  [[${label}]]
+</a>

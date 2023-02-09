@@ -83,7 +83,7 @@
 									th:if="${!allfiles.empty}">
 									<thead>
 										<tr>
-											<!--											<th>#</th>-->
+											<th>#</th>
 											<th>Id</th>
 											<th>CaseType Name</th>
 											<th>Description</th>
@@ -102,19 +102,19 @@
 									<tbody>
 
 										<tr th:each="myObj,rowStat : ${allfiles}">
-											<!--											<td class="cell" th:text="${rowStat.count}">1</td>-->
+											<td class="cell" th:text="${rowStat.count}">1</td>
 											<td class="cell" th:text="${myObj.id}"></td>
 											<td class="cell"> <span class="truncate"
 													th:text="${myObj.casetypename}">None</span></td>
 											<td class="cell"> <span class="truncate"
 													th:text="${myObj.casetypedescription}">None</span></td>
-											<td class="cell"> <span class="truncate"
+													<td class="cell"> <span class="truncate"
 													th:text="${myObj.casetypeuuid}">None</span></td>
-											<td class="cell"> <span class="truncate"
+													<td class="cell"> <span class="truncate"
 													th:text="${myObj.casetypesladuration}">None</span></td>
-											<td class="cell"> <span class="truncate"
+													<td class="cell"> <span class="truncate"
 													th:text="${myObj.casetypeslaunit}">None</span></td>
-											<td class="cell"> <span class="truncate"
+													<td class="cell"> <span class="truncate"
 													th:text="${myObj.appDepartment.departmentname}">None</span></td>
 
 											<!--<td class="cell table-col-hidden"><span class="note"
@@ -141,9 +141,15 @@
 
 														<li><a class="dropdown-item" href="#"
 																th:href="@{/casetypeEdit/{id}(id=${myObj.id})}"
-																title="Edit this Department"><i
+																title="Edit this CaseType"><i
 																	class="fa-regular fa-pen-to-square text-warning fa-xl mx-2"></i>Edit
 																CaseType</a>
+														</li>
+														<li><a class="dropdown-item" href="#"
+																th:href="@{/casetypeCasetypeProperties/{id}(id=${myObj.id})}"
+																title="Manage this Department Case Types"><i
+																	class="fa-regular fa-rectangle-list text-primary fa-xl mx-2"></i>Manage
+																Case Type Properties</a>
 														</li>
 													</ul>
 												</a>
@@ -158,7 +164,7 @@
 									</tbody>
 									<thead>
 										<tr>
-											<!--											<th>#</th>-->
+											<th>#</th>
 											<th>Id</th>
 											<th>CaseType Name</th>
 											<th>Description</th>
@@ -180,7 +186,7 @@
 
 							<div class="app-card-body p-4" th:if="${allfiles.empty}">
 								<div>
-									No Departments found.
+									No Case Types found.
 								</div>
 							</div>
 

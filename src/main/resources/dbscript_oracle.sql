@@ -125,7 +125,7 @@ ALTER TABLE CONTENTPLUSPLUS.app_case_type ADD CONSTRAINT FK_ACASETYPED FOREIGN K
 CREATE TABLE CONTENTPLUSPLUS.app_case_type_property (
 id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
 casetypepropertyname VARCHAR(150) NOT NULL,
-casetypepropertyvalue varchar(255) NOT NULL,
+casetypepropertyvalue varchar(255),
 casepropertytype varchar(255),
 casepropertyrequired varchar(255),
 casepropertysize varchar(255),
@@ -138,8 +138,120 @@ modified_by VARCHAR(150) NOT NULL,
 modified_date TIMESTAMP NOT NULL,
 casetypeid NUMBER NOT NULL,
 CONSTRAINT appcasetypeproperty_pk PRIMARY KEY (id));
-
 ALTER TABLE CONTENTPLUSPLUS.app_case_type_property ADD CONSTRAINT FK_ACASETYPEPROPERTY FOREIGN KEY (casetypeid) REFERENCES app_case_type (id);
+
+
+CREATE TABLE CONTENTPLUSPLUS.app_case_type_document_type (
+id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+casetypedocumenttypename VARCHAR(150) NOT NULL,
+created_by VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
+casetypeid NUMBER NOT NULL,
+CONSTRAINT appcasetypedoctype_pk PRIMARY KEY (id));
+ALTER TABLE CONTENTPLUSPLUS.app_case_type_document_type ADD CONSTRAINT FK_ACASETYPEDOCTYPE FOREIGN KEY (casetypeid) REFERENCES app_case_type (id);
+
+CREATE TABLE CONTENTPLUSPLUS.app_case_type_step (
+id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+casetypestepnumber NUMBER NOT NULL,
+casetypestepname VARCHAR(150) NOT NULL,
+created_by VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
+casetypeid NUMBER NOT NULL,
+CONSTRAINT appcasetypestep_pk PRIMARY KEY (id));
+ALTER TABLE CONTENTPLUSPLUS.app_case_type_step ADD CONSTRAINT FK_ACASESTEP FOREIGN KEY (casetypeid) REFERENCES app_case_type (id);
+
+CREATE TABLE CONTENTPLUSPLUS.app_case (
+id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+casetitle VARCHAR(150) NOT NULL,
+assignedto varchar(255) DEFAULT NULL,
+casestatus varchar(255) DEFAULT NULL,
+caseuuid varchar(255) DEFAULT NULL,
+currentstepname varchar(255) DEFAULT NULL,
+lockedby varchar(255) DEFAULT NULL,
+created_by VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
+casetypeid NUMBER NOT NULL,
+CONSTRAINT appcase_pk PRIMARY KEY (id));
+ALTER TABLE CONTENTPLUSPLUS.app_case ADD CONSTRAINT FK_APPCASE FOREIGN KEY (casetypeid) REFERENCES app_case_type (id);
+
+
+CREATE TABLE CONTENTPLUSPLUS.app_case_property (
+id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+casepropertyname VARCHAR(150) NOT NULL,
+casepropertyvalue varchar(255),
+casepropertytype varchar(255),
+casepropertyrequired varchar(255),
+casepropertysize varchar(255),
+casepropertymin varchar(255),
+casepropertymax varchar(255),
+casepropertymaxlength varchar(255),
+created_by VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
+caseid NUMBER DEFAULT NULL,
+CONSTRAINT appcaseproperty_pk PRIMARY KEY (id));
+ALTER TABLE CONTENTPLUSPLUS.app_case_property ADD CONSTRAINT FK_ACASEPROPERTY FOREIGN KEY (caseid) REFERENCES app_case (id);
+
+create table CONTENTPLUSPLUS.app_case_document(
+id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+fileuuid VARCHAR(150),
+filename VARCHAR(150) NOT NULL,
+documenttype VARCHAR(150),
+filetype VARCHAR(150) NOT NULL,
+filesize VARCHAR(150) NOT NULL,
+filedata BLOB,
+created_by VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
+optlock number,
+caseid NUMBER NOT NULL,
+CONSTRAINT appcasedocument_pk PRIMARY KEY (id),UNIQUE (fileuuid));
+ALTER TABLE CONTENTPLUSPLUS.app_case_document ADD CONSTRAINT FK_ACASEDOCUMENT FOREIGN KEY (caseid) REFERENCES app_case (id);
+
+
+create table CONTENTPLUSPLUS.app_case_comment(
+id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+casecomment VARCHAR(150),
+created_by VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
+optlock number,
+caseid NUMBER NOT NULL,
+CONSTRAINT appcasecomment_pk PRIMARY KEY (id));
+ALTER TABLE CONTENTPLUSPLUS.app_case_comment ADD CONSTRAINT FK_ACASECOMMENT FOREIGN KEY (caseid) REFERENCES app_case (id);
+
+
+create table CONTENTPLUSPLUS.app_case_history(
+id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+casehistorytext VARCHAR(150),
+created_by VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
+optlock number,
+caseid NUMBER NOT NULL,
+CONSTRAINT appcasehistory_pk PRIMARY KEY (id));
+ALTER TABLE CONTENTPLUSPLUS.app_case_history ADD CONSTRAINT FK_APPCASEHISTORY FOREIGN KEY (caseid) REFERENCES app_case (id);
+
+CREATE TABLE CONTENTPLUSPLUS.app_inventory (
+id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+title VARCHAR(150) NOT NULL,
+description VARCHAR(150) NOT NULL,
+active number(1),
+created_by VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
+CONSTRAINT appinventory_pk PRIMARY KEY (id));
 
 CREATE TABLE CONTENTPLUSPLUS.app_user_role (
 id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,

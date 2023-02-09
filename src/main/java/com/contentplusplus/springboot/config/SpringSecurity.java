@@ -24,6 +24,7 @@ public class SpringSecurity {
 
 		http.authorizeHttpRequests()
 		.requestMatchers("/register/**").permitAll()
+		.requestMatchers("/downloadhelpfile/**").permitAll()
 		//.requestMatchers("/listuser/**").hasAnyAuthority("ADMIN", "EDITOR", "VIEWER")//.hasAuthority("ADMIN")//.hasRole("ROLE_ADMIN")//.hasAuthority("ROLE_ADMIN")
 		//.requestMatchers("/listuser2/**").hasAuthority("ADMIN")
 		//.requestMatchers("/listuser/**").hasAuthority("ADMIN")

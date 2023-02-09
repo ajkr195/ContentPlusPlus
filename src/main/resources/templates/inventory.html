@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{fragments/head :: head}"></div>
+
+<body class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<!-- Page header -->
+			<div class="page-header d-print-none">
+				<div class="container-xl">
+					<div class="row g-2 align-items-center">
+						<div class="col">
+							<!-- Page pre-title -->
+							<div class="page-pretitle">
+								Manage Assets
+							</div>
+							<h2 class="page-title">
+								Inventory
+							</h2>
+						</div>
+						<div class="col-auto ms-auto d-print-none">
+							<div class="btn-list">
+								<a href="#" th:href="@{/api/csv/download/inventory.csv}"
+									class="btn btn-teal d-none d-sm-inline-block">
+									<i class="fa-solid fa-download fa-xl"></i>
+									Download
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Page body -->
+			<div class="page-body">
+				<div class="container-xl">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Manage Inventory</h3>
+							</div>
+							<div class="card-body border-bottom py-3">
+
+
+								<div class="upload-container">
+									<div class="upload-content">
+										<div class="single-upload">
+											<h3>Upload Inventory List </h3>
+											<form id="singleUploadForm" name="singleUploadForm">
+												<input id="singleFileUploadInput" type="file" name="file"
+													class="file-input" required />
+												<button type="submit" class="btn btn-teal d-none d-sm-inline-block"><i
+														class="fa-solid fa-upload fa-xl"></i> Upload</button>
+											</form>
+											<div class="upload-response">
+												<div id="singleFileUploadError"></div>
+												<div id="singleFileUploadSuccess"></div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+
+								<form th:action="@{/api/csv/listinventory}" id="searchForm">
+									<div class="container">
+										<div class="row d-flex justify-content-between">
+											<div class="col-sm-6 col-lg-3 mt-2 mb-2 mx-2">
+												<select class="form-select h-100 w-100" form="searchForm" name="size"
+													th:value="${pageSize}" onchange="changePageSize()" id="pageSize">
+													<option class="text-center" value="" disabled selected>-- PageSize
+														(Items per
+														Page) --</option>
+													<option class="text-center" th:each="s : ${ {10, 20, 50, 100} }"
+														th:value="${s}" th:text="${s}"></option>
+												</select>
+											</div>
+											<div class="col-sm-6 col-lg-3 mt-2 mb-2 mx-2">
+												<select class="form-select h-100 w-100" form="searchForm"
+													name="objStatus" th:value="${objStatus}" id="objStatus" required>
+													<option class="text-center" value="" disabled selected>-- Filter by
+														Active
+														Status --</option>
+													<option class="text-center"
+														th:each="s : ${ {'ALL', 'ACTIVE', 'INACTIVE'} }" th:value="${s}"
+														th:text="${s}"></option>
+												</select>
+											</div>
+											<div class="col-sm-6 col-lg-3 mt-2 mb-2 mx-2">
+												<div class="input-group">
+													<input type="text" class="form-control" id="keyword" name="keyword"
+														placeholder="Search user by title ..."
+														aria-label="Username search" th:value="${keyword}">
+													<button class="btn btn-primary" type="submit">Search</button>
+													<button class="btn app-btn-secondary" id="btnClear"
+														th:onClick="clearInputKeyword()" type="button">Clear</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+
+
+
+								<div class="table-responsive">
+									<table class="table card-table table-vcenter text-nowrap datatable">
+										<thead>
+											<tr>
+												<th th:replace="~{fragments/sorting :: sorting('id','Id')}"></th>
+												<th th:replace="~{fragments/sorting :: sorting('title','title')}">
+												</th>
+												<th>Description</th>
+												<th th:replace="~{fragments/sorting :: sorting('active','status')}">
+												</th>
+
+
+												<!--<th>CreatedBy</th>-->
+												<!--<th>DateCreated</th>-->
+												<!--<th>ModifiedBy</th>-->
+												<!--<th>DateModified</th>
+											<th>Roles</th>
+											<th>Departments</th>-->
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="myObj: ${inventories}">
+												<td th:text="${myObj.id}"></td>
+												<td> <span class="note" th:text="${myObj.title}"></span>
+												</td>
+												<td><span class="note" th:text="${myObj.description}"></span>
+												</td>
+												<td th:if="${myObj.active}">
+													<span class="badge bg-success me-1"></span> <span
+														th:text="Active"></span>
+												</td>
+												<td th:if="${!myObj.active}">
+													<span class="badge bg-danger me-1"></span> <span
+														th:text="InActive"></span>
+												</td>
+												<!--<td><span class="note" th:text="${myObj.createdBy}"></span>-->
+												<!--</td>-->
+												<!--<td><span class="note" th:text="${myObj.createdDate}"></span>-->
+												<!--</td>-->
+												<!--<td><span class="note" th:text="${myObj.lastModifiedBy}"></span>-->
+												<!--</td>-->
+												<!--<td><span class="note" th:text="${myObj.lastModifiedDate}"></span> </td>
+											<td>
+
+												<th:block th:each="role: ${myObj.roles}">
+													<p th:text="${role.id + ':' + role.name}"></p>
+												</th:block>
+											</td>
+											<td>
+
+												<th:block th:each="dept: ${myObj.departments}">
+													<p th:text="${dept.id + ':' + dept.departmentname}"></p>
+												</th:block>
+											</td>-->
+												<td><a class="dropdown text-primary" href="#" role="button"
+														data-bs-toggle="dropdown" aria-expanded="false">
+														<i class="fa-solid fa-circle-question fa-xl text-primary"></i>
+														<!--<i class="fa-solid fa-ellipsis-vertical"></i>-->
+														<ul class="dropdown-menu">
+															<li><a class="dropdown-item" href="#"
+																	th:onclick="showInventoryInfo([[${myObj}]]);"
+																	title="User Details"><i
+																		class="fa-solid fa-circle-info text-info fa-xl mx-2"></i>
+																	Details</a></li>
+															<li><a class="dropdown-item" href="#"
+																	th:onclick="deleteInventoryItem([[${myObj.id}]], this);"
+																	title="Delete"><i
+																		class="fa-regular fa-trash-can text-danger fa-xl mx-2"></i>
+																	Details</a></li>
+														</ul>
+													</a>
+
+
+												</td>
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+
+
+
+								<div class="card-footer d-flex align-items-center" th:if="${!inventories.empty}">
+									<p class="m-0">Showing: <span th:text="${totalinventory}"></span> from total: <span
+											th:text="${totalinventory}"></span> </p>
+									<ul class="pagination m-0 ms-auto" th:if="${totalPages > 0}">
+										<li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+											<a
+												th:replace="~{fragments/paging :: inventoryPaging(1, '< First ', 'First Page')}"></a>
+										</li>
+										<li class="page-item font-weight-bold"
+											th:classappend="${currentPage == 1} ? 'disabled'">
+											<a
+												th:replace="~{fragments/paging :: inventoryPaging(${currentPage - 1}, 'Prev', 'Previous Page')}"></a>
+										</li>
+										<li class="page-item disabled" th:if="${currentPage - 2 > 1}"><i
+												class="fa-solid fa-ellipsis fa-xl text-primary mt-1 mx-2"></i>
+										</li>
+										<li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+											th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+											<a
+												th:replace="~{fragments/paging :: inventoryPaging(${page}, ${page}, 'Page ' + ${page})}"></a>
+										</li>
+										<li class="page-item disabled" th:if="${currentPage + 2 < totalPages}"><i
+												class="fa-solid fa-ellipsis fa-xl text-primary mt-1 mx-2"></i>
+										</li>
+										<li class="page-item font-weight-bold"
+											th:classappend="${currentPage == totalPages} ? 'disabled'">
+											<a
+												th:replace="~{fragments/paging :: inventoryPaging(${currentPage + 1},'Next', 'Next Page')}"></a>
+										</li>
+										<li class="page-item"
+											th:classappend="${currentPage == totalPages} ? 'disabled'">
+											<a
+												th:replace="~{fragments/paging :: inventoryPaging(${totalPages}, ' Last >', 'Last Page')}"></a>
+										</li>
+									</ul>
+								</div>
+
+
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div th:replace="~{fragments/footer :: footer}"></div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script>
+
+		'use strict';
+
+		var singleUploadForm = document.querySelector('#singleUploadForm');
+		var singleFileUploadInput = document.querySelector('#singleFileUploadInput');
+		var singleFileUploadError = document.querySelector('#singleFileUploadError');
+		var singleFileUploadSuccess = document.querySelector('#singleFileUploadSuccess');
+
+
+		function uploadSingleFile(file) {
+			var formData = new FormData();
+			formData.append("file", file);
+
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "/api/csv/upload");
+
+			xhr.onload = function () {
+				console.log(xhr.responseText);
+				var response = JSON.parse(xhr.responseText);
+				if (xhr.status == 200) {
+					singleFileUploadError.style.display = "none";
+					singleFileUploadSuccess.innerHTML = "<p>File Uploaded Successfully.</p> ";
+					//<p>DownloadUrl : <a href='" + response.fileDownloadUri + "' target='_blank'>" + response.fileDownloadUri + "</a></p>
+					singleFileUploadSuccess.style.display = "block";
+				} else {
+					singleFileUploadSuccess.style.display = "none";
+					singleFileUploadError.innerHTML = "<p>" + (response && response.message) + "<p>" || "Some Error Occurred";
+					singleFileUploadSuccess.style.display = "block";
+
+				}
+			}
+
+			xhr.send(formData);
+		}
+
+
+
+		singleUploadForm.addEventListener('submit', function (event) {
+			var files = singleFileUploadInput.files;
+			if (files.length === 0) {
+				singleFileUploadError.innerHTML = "Please select a file";
+				singleFileUploadError.style.display = "block";
+			}
+			uploadSingleFile(files[0]);
+			event.preventDefault();
+		}, true);
+
+
+	</script>
+
+	<script>
+		function clearInputKeyword() {
+			document.getElementById("keyword").value = "";
+			window.location = "[[@{/api/csv/listinventory}]]";
+			//location.reload();
+		}
+	</script>
+
+	<script>
+		function changePageSize() {
+			let form = document.getElementById("searchForm");
+			form.submit();
+		}
+	</script>
+
+	<script>
+		function deleteInventoryItem(id, Object) {
+			Swal.fire({
+				title: 'Are you sure?',
+				text: "You want to Delete this item? This operation is irreversible and this may not be recovered later.",
+				icon: 'warning',
+				showDenyButton: true,
+				confirmButtonColor: '#006666',
+				denyButtonColor: 'gray',
+				confirmButtonText: 'Yes, delete it!',
+				denyButtonText: `Don't delete`,
+			}).then((result) => {
+				if (result.isConfirmed) {
+					fetch('/api/csv/deleteInventoryItem/' + id, {
+						method: 'DELETE',
+					})
+					Swal.fire(
+						'Deleted!',
+						'Your file has been deleted.',
+						'success'
+					)
+					Object.closest('tr').remove();
+				} else if (result.isDenied) {
+					Swal.fire('Great. Changes are not saved.', 'Your important inventory is safe  !!  ', 'info')
+				}
+			})
+		}
+	</script>
+	<script>
+		function showInventoryInfo(myfile) {
+
+			let htmlstring = '<div class="row m-0"><div class="text-end col-4 mb-2"><b>Id: </b></div> <div class="text-start col-8">' + myfile.id + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Title: </b></div> <div class="text-start col-8">' + myfile.title + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Description: </b></div> <div class="text-start col-8">' + myfile.description + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Active?: </b></div> <div class="text-start col-8">' + myfile.active + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Creator: </b></div> <div class="text-start col-8">' + myfile.createdBy + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>created Date: </b></div> <div class="text-start col-8">' + myfile.createdDate + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Modifier: </b></div> <div class="text-start col-8">' + myfile.lastModifiedBy + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>Modified Date: </b></div> <div class="text-start col-8">' + myfile.lastModifiedDate + '</div></div>' +
+				'<div class="row m-0"><div class="text-end col-4 mb-2"><b>MimeType: </b></div> <div class="text-start col-8">' + myfile.fileType + '</div></div>' +
+				'</br>Auto closing in <b><timer></timer></b> milliseconds.';
+
+			let timerInterval;
+
+			Swal.fire({
+				title: myfile.title,
+				icon: 'info',
+				html: htmlstring,
+				showCloseButton: true,
+				showConfirmButton: false,
+				showCancelButton: true,
+				cancelButtonText: 'Close',
+				cancelButtonColor: '#28a745',
+				//allowOutsideClick: false,
+				timer: 10000,
+				timerProgressBar: true,
+
+				didOpen: () => {
+					//Swal.showLoading()
+					const b = Swal.getHtmlContainer().querySelector('timer')
+					timerInterval = setInterval(() => {
+						b.textContent = Swal.getTimerLeft()
+					}, 100)
+				},
+				willClose: () => {
+					clearInterval(timerInterval)
+				}
+			})
+		}
+	</script>
+</body>
+
+</html>

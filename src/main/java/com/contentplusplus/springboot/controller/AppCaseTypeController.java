@@ -43,6 +43,15 @@ public class AppCaseTypeController {
 	
 	@Autowired
 	AppCaseTypeService appCaseTypeService;
+	
+	
+	@RequestMapping(value = { "/casetypeCasetypeProperties/{id}" }, method = RequestMethod.GET)
+	public String manageCaseTypesForDept(Model model, @PathVariable(required = false, name = "id") Long id) {
+		model.addAttribute("pagename", "appCaseTypeedit");
+		model.addAttribute("casetypename", appCaseTypeRepository.findById(id).get().getCasetypename());
+		model.addAttribute("id", id);
+		return "casetype_casetypeproperties";
+	}
 
 	@RequestMapping(value = { "/casetypeEdit/{id}" }, method = RequestMethod.GET)
 	public String adminusereditRegistrationsd(Model model, @PathVariable(required = false, name = "id") Long id) {

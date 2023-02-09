@@ -1,7 +1,5 @@
 package com.contentplusplus.springboot.model;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import com.contentplusplus.springboot.model.audit.Auditable;
 
 import jakarta.persistence.Column;

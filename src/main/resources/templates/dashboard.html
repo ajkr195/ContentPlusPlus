@@ -75,139 +75,12 @@
 											<!--											</div>-->
 										</div>
 									</div>
-									
+
 								</div>
 							</div>
 						</div>
-						
-						<div class="col-sm-6 col-lg-3">
-							<div class="card">
-								<div class="card-body">
-									<div class="d-flex align-items-center">
-										<div class="subheader">Sales</div>
-										<div class="ms-auto lh-1">
-											<div class="dropdown">
-												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-												<div class="dropdown-menu dropdown-menu-end">
-													<a class="dropdown-item active" href="#">Last 7 days</a>
-													<a class="dropdown-item" href="#">Last 30 days</a>
-													<a class="dropdown-item" href="#">Last 3 months</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="h1 mb-3">75%</div>
-									<div class="d-flex mb-2">
-										<div>Conversion rate</div>
-										<div class="ms-auto">
-											<span class="text-green d-inline-flex align-items-center lh-1">
-												7%
-												<i class="fa-solid fa-arrow-trend-up ms-1"></i>
-											</span>
-										</div>
-									</div>
-									<div class="progress progress-sm">
-										<div class="progress-bar bg-primary" style="width: 75%" role="progressbar"
-											aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-											aria-label="75% Complete">
-											<span class="visually-hidden">75% Complete</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-lg-3">
-							<div class="card">
-								<div class="card-body">
-									<div class="d-flex align-items-center">
-										<div class="subheader">Revenue</div>
-										<div class="ms-auto lh-1">
-											<div class="dropdown">
-												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-												<div class="dropdown-menu dropdown-menu-end">
-													<a class="dropdown-item active" href="#">Last 7 days</a>
-													<a class="dropdown-item" href="#">Last 30 days</a>
-													<a class="dropdown-item" href="#">Last 3 months</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="d-flex align-items-baseline">
-										<div class="h1 mb-0 me-2">$4,300</div>
-										<div class="me-auto">
-											<span class="text-green d-inline-flex align-items-center lh-1">
-												8%
-												<i class="fa-solid fa-arrow-trend-up ms-1"></i>
-											</span>
-										</div>
-									</div>
-								</div>
-								<div id="chart-revenue-bg" class="chart-sm"></div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-lg-3">
-							<div class="card">
-								<div class="card-body">
-									<div class="d-flex align-items-center">
-										<div class="subheader">New clients</div>
-										<div class="ms-auto lh-1">
-											<div class="dropdown">
-												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-												<div class="dropdown-menu dropdown-menu-end">
-													<a class="dropdown-item active" href="#">Last 7 days</a>
-													<a class="dropdown-item" href="#">Last 30 days</a>
-													<a class="dropdown-item" href="#">Last 3 months</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="d-flex align-items-baseline">
-										<div class="h1 mb-3 me-2">6,782</div>
-										<div class="me-auto">
-											<span class="text-yellow d-inline-flex align-items-center lh-1">
-												10%
-												<i class="fa-solid fa-arrow-trend-down ms-1"></i>
-											</span>
-										</div>
-									</div>
-									<div id="chart-new-clients" class="chart-sm"></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-lg-3">
-							<div class="card">
-								<div class="card-body">
-									<div class="d-flex align-items-center">
-										<div class="subheader">Active users</div>
-										<div class="ms-auto lh-1">
-											<div class="dropdown">
-												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-												<div class="dropdown-menu dropdown-menu-end">
-													<a class="dropdown-item active" href="#">Last 7 days</a>
-													<a class="dropdown-item" href="#">Last 30 days</a>
-													<a class="dropdown-item" href="#">Last 3 months</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="d-flex align-items-baseline">
-										<div class="h1 mb-3 me-2">2,986</div>
-										<div class="me-auto">
-											<span class="text-green d-inline-flex align-items-center lh-1">
-												4%
-												<i class="fa-solid fa-arrow-trend-up ms-1"></i>
-											</span>
-										</div>
-									</div>
-									<div id="chart-active-users" class="chart-sm"></div>
-								</div>
-							</div>
-						</div>
-						
+
+
 						<div class="col-12">
 							<div class="row row-cards">
 								<div class="col-sm-6 col-lg-3">
@@ -216,36 +89,16 @@
 											<div class="row align-items-center">
 												<div class="col-auto">
 													<span class="bg-primary text-white avatar">
-														<i class="fa-solid fa-dollar-sign"></i>
+														<i class="fa-solid fa-puzzle-piece"></i>
 													</span>
 												</div>
 												<div class="col">
 													<div class="font-weight-medium">
-														132 Sales
+														<span th:text="${totaldepartments}"></span> Departments
 													</div>
-													<div class="text-muted">
-														12 waiting payments
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6 col-lg-3">
-									<div class="card card-sm">
-										<div class="card-body">
-											<div class="row align-items-center">
-												<div class="col-auto">
-													<span class="bg-green text-white avatar">
-														<i class="fa-solid fa-cart-shopping"></i>
-													</span>
-												</div>
-												<div class="col">
-													<div class="font-weight-medium">
-														78 Orders
-													</div>
-													<div class="text-muted">
-														32 shipped
+													<div class="text-primary">
+														<a target="_blank" href="/listdepartment"
+															th:href="@{/listdepartment}"> Details </a>
 													</div>
 												</div>
 											</div>
@@ -258,15 +111,129 @@
 											<div class="row align-items-center">
 												<div class="col-auto">
 													<span class="bg-primary text-white avatar">
-														<i class="fa-solid fa-share-nodes"></i>
+														<i class="fa-solid fa-user-group"></i>
 													</span>
 												</div>
 												<div class="col">
 													<div class="font-weight-medium">
-														623 Shares
+														<span th:text="${totalusers}"></span> Users
 													</div>
-													<div class="text-muted">
-														16 today
+													<div class="text-primary">
+														<a target="_blank" href="/listuser" th:href="@{/listuser}">
+															Details </a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-primary text-white avatar">
+														<i class="fa-solid fa-user-check"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														<span th:text="${totalroles}"></span> Roles
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-primary text-white avatar">
+														<i class="fa-solid fa-list-check"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														<span th:text="${totalcasetypes}"></span> Case Types
+													</div>
+													<div class="text-primary">
+														<a target="_blank" href="/listcasetype"
+															th:href="@{/listcasetype}"> Details </a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-12">
+							<div class="row row-cards">
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-green text-white avatar">
+														<i class="fa-solid fa-list-check"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														<span th:text="${totalcases}"></span> Cases
+													</div>
+													<div class="text-primary">
+														<a target="_blank" href="/listappcase"
+															th:href="@{/listappcase}"> Details </a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-danger text-white avatar">
+														<i class="fa-solid fa-list-check"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														<span th:text="${totalnewcases}"></span> New Cases
+													</div>
+													<div class="text-primary">
+														<a target="_blank" href="/listappcase"
+															th:href="@{/listappcase}"> Details </a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-danger text-white avatar">
+														<i class="fa-solid fa-list-check"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														<span th:text="${totalinprogresscases}"></span> Cases
+														In-Progress
+													</div>
+													<div class="text-primary">
+														<a target="_blank" href="/listappcase"
+															th:href="@{/listappcase}"> Details </a>
 													</div>
 												</div>
 											</div>
@@ -279,12 +246,108 @@
 											<div class="row align-items-center">
 												<div class="col-auto">
 													<span class="bg-green text-white avatar">
-														<i class="fa-regular fa-thumbs-up"></i>
+														<i class="fa-solid fa-list-check"></i>
 													</span>
 												</div>
 												<div class="col">
 													<div class="font-weight-medium">
-														132 Likes
+														<span th:text="${totalclosedcases}"></span> Cases Closed
+													</div>
+													<div class="text-primary">
+														<a target="_blank" href="/listappcase"
+															th:href="@{/listappcase}"> Details </a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+						<div class="col-12">
+							<div class="row row-cards">
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-orange text-white avatar">
+														<i class="fa-solid fa-database"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														<span th:text="${dbrepodocs}"></span> DB Repository Files
+													</div>
+													<div class="text-primary">
+														<a target="_blank" href="/documentsdb"
+															th:href="@{/documentsdb}"> Details </a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-orange text-white avatar">
+														<i class="fa-solid fa-box-archive"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														<span th:text="${fsrepodocs}"></span> FS Repository Files
+													</div>
+													<div class="text-primary">
+														<a target="_blank" href="/documentsfs"
+															th:href="@{/documentsfs}"> Details </a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-orange text-white avatar">
+														<i class="fa-regular fa-folder-closed"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														<span th:text="${fsrepodocs}"></span> EC Repository Files
+													</div>
+													<!--													<div class="text-primary">-->
+													<!--														<a target="_blank" href="/someURI"-->
+													<!--															th:href="@{/someURI}"> Details </a>-->
+													<!--													</div>-->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-danger text-white avatar">
+														<i class="fa-solid fa-heart-pulse"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														Health Check
 													</div>
 													<div class="text-muted">
 														21 today
@@ -296,135 +359,10 @@
 								</div>
 							</div>
 						</div>
-						
-						
-						<div class="col-sm-6 col-lg-3">
-							<div class="card">
-								<div class="card-body">
-									<div class="d-flex align-items-center">
-										<div class="subheader">Sales</div>
-										<div class="ms-auto lh-1">
-											<div class="dropdown">
-												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-												<div class="dropdown-menu dropdown-menu-end">
-													<a class="dropdown-item active" href="#">Last 7 days</a>
-													<a class="dropdown-item" href="#">Last 30 days</a>
-													<a class="dropdown-item" href="#">Last 3 months</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="h1 mb-3">75%</div>
-									<div class="d-flex mb-2">
-										<div>Conversion rate</div>
-										<div class="ms-auto">
-											<span class="text-green d-inline-flex align-items-center lh-1">
-												7%
-												<i class="fa-solid fa-arrow-trend-up ms-1"></i>
-											</span>
-										</div>
-									</div>
-									<div class="progress progress-sm">
-										<div class="progress-bar bg-primary" style="width: 75%" role="progressbar"
-											aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-											aria-label="75% Complete">
-											<span class="visually-hidden">75% Complete</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-lg-3">
-							<div class="card">
-								<div class="card-body">
-									<div class="d-flex align-items-center">
-										<div class="subheader">Revenue</div>
-										<div class="ms-auto lh-1">
-											<div class="dropdown">
-												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-												<div class="dropdown-menu dropdown-menu-end">
-													<a class="dropdown-item active" href="#">Last 7 days</a>
-													<a class="dropdown-item" href="#">Last 30 days</a>
-													<a class="dropdown-item" href="#">Last 3 months</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="d-flex align-items-baseline">
-										<div class="h1 mb-0 me-2">$4,300</div>
-										<div class="me-auto">
-											<span class="text-green d-inline-flex align-items-center lh-1">
-												8%
-												<i class="fa-solid fa-arrow-trend-up ms-1"></i>
-											</span>
-										</div>
-									</div>
-								</div>
-								<div id="chart-revenue-bg" class="chart-sm"></div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-lg-3">
-							<div class="card">
-								<div class="card-body">
-									<div class="d-flex align-items-center">
-										<div class="subheader">New clients</div>
-										<div class="ms-auto lh-1">
-											<div class="dropdown">
-												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-												<div class="dropdown-menu dropdown-menu-end">
-													<a class="dropdown-item active" href="#">Last 7 days</a>
-													<a class="dropdown-item" href="#">Last 30 days</a>
-													<a class="dropdown-item" href="#">Last 3 months</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="d-flex align-items-baseline">
-										<div class="h1 mb-3 me-2">6,782</div>
-										<div class="me-auto">
-											<span class="text-yellow d-inline-flex align-items-center lh-1">
-												10%
-												<i class="fa-solid fa-arrow-trend-down ms-1"></i>
-											</span>
-										</div>
-									</div>
-									<div id="chart-new-clients" class="chart-sm"></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-lg-3">
-							<div class="card">
-								<div class="card-body">
-									<div class="d-flex align-items-center">
-										<div class="subheader">Active users</div>
-										<div class="ms-auto lh-1">
-											<div class="dropdown">
-												<a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-												<div class="dropdown-menu dropdown-menu-end">
-													<a class="dropdown-item active" href="#">Last 7 days</a>
-													<a class="dropdown-item" href="#">Last 30 days</a>
-													<a class="dropdown-item" href="#">Last 3 months</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="d-flex align-items-baseline">
-										<div class="h1 mb-3 me-2">2,986</div>
-										<div class="me-auto">
-											<span class="text-green d-inline-flex align-items-center lh-1">
-												4%
-												<i class="fa-solid fa-arrow-trend-up ms-1"></i>
-											</span>
-										</div>
-									</div>
-									<div id="chart-active-users" class="chart-sm"></div>
-								</div>
-							</div>
-						</div>
+
+
+
+
 						<div class="col-12">
 							<div class="row row-cards">
 								<div class="col-sm-6 col-lg-3">
@@ -432,16 +370,17 @@
 										<div class="card-body">
 											<div class="row align-items-center">
 												<div class="col-auto">
-													<span class="bg-primary text-white avatar">
-														<i class="fa-solid fa-dollar-sign"></i>
+													<span class="bg-teal text-white avatar">
+														<i class="fa-solid fa-server"></i>
 													</span>
 												</div>
 												<div class="col">
 													<div class="font-weight-medium">
-														132 Sales
+														<span th:text="${totalservers}"></span> Servers
 													</div>
-													<div class="text-muted">
-														12 waiting payments
+													<div class="text-primary">
+														<a target="_blank" href="/api/csv/listinventory"
+															th:href="@{/api/csv/listinventory}"> ServerList </a>
 													</div>
 												</div>
 											</div>
@@ -453,16 +392,38 @@
 										<div class="card-body">
 											<div class="row align-items-center">
 												<div class="col-auto">
-													<span class="bg-green text-white avatar">
-														<i class="fa-solid fa-cart-shopping"></i>
+													<span class="bg-teal text-white avatar">
+														<i class="fa-solid fa-shield"></i>
 													</span>
 												</div>
 												<div class="col">
 													<div class="font-weight-medium">
-														78 Orders
+														Manage Security
 													</div>
-													<div class="text-muted">
-														32 shipped
+													<div class="text-primary">
+														<a href="#"> Details </a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-sm-6 col-lg-3">
+									<div class="card card-sm">
+										<div class="card-body">
+											<div class="row align-items-center">
+												<div class="col-auto">
+													<span class="bg-teal text-white avatar">
+														<i class="fa-regular fa-file-lines"></i>
+													</span>
+												</div>
+												<div class="col">
+													<div class="font-weight-medium">
+														Monthly Report
+													</div>
+													<div class="text-primary">
+														<a href="#"> Details </a>
 													</div>
 												</div>
 											</div>
@@ -474,37 +435,16 @@
 										<div class="card-body">
 											<div class="row align-items-center">
 												<div class="col-auto">
-													<span class="bg-primary text-white avatar">
-														<i class="fa-solid fa-share-nodes"></i>
+													<span class="bg-teal text-white avatar">
+														<i class="fa-regular fa-folder-open"></i>
 													</span>
 												</div>
 												<div class="col">
 													<div class="font-weight-medium">
-														623 Shares
+														Extract Data
 													</div>
-													<div class="text-muted">
-														16 today
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6 col-lg-3">
-									<div class="card card-sm">
-										<div class="card-body">
-											<div class="row align-items-center">
-												<div class="col-auto">
-													<span class="bg-green text-white avatar">
-														<i class="fa-regular fa-thumbs-up"></i>
-													</span>
-												</div>
-												<div class="col">
-													<div class="font-weight-medium">
-														132 Likes
-													</div>
-													<div class="text-muted">
-														21 today
+													<div class="text-primary">
+														<a href="#"> Details </a>
 													</div>
 												</div>
 											</div>
@@ -513,6 +453,10 @@
 								</div>
 							</div>
 						</div>
+
+
+
+
 						<div class="col-12">
 							<div class="row row-cards">
 								<div class="col-12">
@@ -563,18 +507,18 @@
 						<div class="col-md-6 col-lg-4">
 							<div class="card">
 								<div class="card-header">
-									<h3 class="card-title">Social Media Traffic</h3>
+									<h3 class="card-title"><span th:text="${appname}"></span> Traffic</h3>
 								</div>
 								<table class="table card-table table-vcenter">
 									<thead>
 										<tr>
-											<th>Network</th>
-											<th colspan="2">Visitors</th>
+											<th>Path</th>
+											<th colspan="2">Users</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td>Instagram</td>
+											<td>Cases</td>
 											<td>3,550</td>
 											<td class="w-50">
 												<div class="progress progress-xs">
@@ -583,7 +527,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td>Twitter</td>
+											<td>Profile</td>
 											<td>1,798</td>
 											<td class="w-50">
 												<div class="progress progress-xs">
@@ -592,7 +536,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td>Facebook</td>
+											<td>Processing</td>
 											<td>1,245</td>
 											<td class="w-50">
 												<div class="progress progress-xs">
@@ -601,7 +545,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td>TikTok</td>
+											<td>Assign</td>
 											<td>986</td>
 											<td class="w-50">
 												<div class="progress progress-xs">
@@ -610,7 +554,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td>Pinterest</td>
+											<td>Approved</td>
 											<td>854</td>
 											<td class="w-50">
 												<div class="progress progress-xs">
@@ -619,7 +563,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td>VK</td>
+											<td>Rejected</td>
 											<td>650</td>
 											<td class="w-50">
 												<div class="progress progress-xs">
@@ -628,8 +572,8 @@
 											</td>
 										</tr>
 										<tr>
-											<td>Pinterest</td>
-											<td>420</td>
+											<td>Slacking</td>
+											<td>121</td>
 											<td class="w-50">
 												<div class="progress progress-xs">
 													<div class="progress-bar bg-primary" style="width: 8.4%"></div>
@@ -643,7 +587,7 @@
 						<div class="col-md-6 col-lg-8">
 							<div class="card">
 								<div class="card-header">
-									<h3 class="card-title">Tasks</h3>
+									<h3 class="card-title"><span th:text="${appname}"></span> Tasks</h3>
 								</div>
 								<div class="table-responsive">
 									<table class="table card-table table-vcenter">
@@ -830,279 +774,8 @@
 								</div>
 							</div>
 						</div>
-						
-						<div class="col-md-6 col-lg-8">
-							<div class="card">
-								<div class="card-header">
-									<h3 class="card-title">Tasks</h3>
-								</div>
-								<div class="table-responsive">
-									<table class="table card-table table-vcenter">
-										<tr>
-											<td class="w-1 pe-0">
-												<input type="checkbox"
-													class="form-check-input m-0 align-middle border border-success"
-													aria-label="Select task" checked>
-											</td>
-											<td class="w-100">
-												<a href="#" class="text-reset">Extend the data model.</a>
-											</td>
-											<td class="text-nowrap text-muted">
-												<i class="fa-regular fa-calendar-xmark"></i>
-												August 04, 2021
-											</td>
-											<td class="text-nowrap">
-												<a href="#" class="text-muted">
-													<i class="fa-solid fa-check"></i>
-													2/7
-												</a>
-											</td>
-											<td class="text-nowrap">
-												<a href="#" class="text-muted">
-													<i class="fa-regular fa-message"></i>
-													3
-												</a>
-											</td>
-											<td>
-												<span class="avatar avatar-sm"
-													style="background-image: url(img/profile-1.png)"></span>
-											</td>
-										</tr>
-										<tr>
-											<td class="w-1 pe-0">
-												<input type="checkbox"
-													class="form-check-input m-0 align-middle border border-success"
-													aria-label="Select task">
-											</td>
-											<td class="w-100">
-												<a href="#" class="text-reset">Verify the event flow.</a>
-											</td>
-											<td class="text-nowrap text-muted">
-												<i class="fa-regular fa-calendar-xmark"></i>
-												January 03, 2019
-											</td>
-											<td class="text-nowrap">
-												<a href="#" class="text-muted">
-													<i class="fa-solid fa-check"></i>
-													3/10
-												</a>
-											</td>
-											<td class="text-nowrap">
-												<a href="#" class="text-muted">
-													<i class="fa-regular fa-message"></i>
-													6
-												</a>
-											</td>
-											<td>
-												<span class="avatar avatar-sm">JL</span>
-											</td>
-										</tr>
-										<tr>
-											<td class="w-1 pe-0">
-												<input type="checkbox"
-													class="form-check-input m-0 align-middle border border-success"
-													aria-label="Select task">
-											</td>
-											<td class="w-100">
-												<a href="#" class="text-reset">Database backup and maintenance</a>
-											</td>
-											<td class="text-nowrap text-muted">
-												<i class="fa-regular fa-calendar-xmark"></i>
-												December 28, 2018
-											</td>
-											<td class="text-nowrap">
-												<a href="#" class="text-muted">
-													<i class="fa-solid fa-check"></i>
-													10/6
-												</a>
-											</td>
-											<td class="text-nowrap">
-												<a href="#" class="text-muted">
-													<i class="fa-regular fa-message"></i>
-													1
-												</a>
-											</td>
-											<td>
-												<span class="avatar avatar-sm"
-													style="background-image: url(img/profile-1.png)"></span>
-											</td>
-										</tr>
-										<tr>
-											<td class="w-1 pe-0">
-												<input type="checkbox"
-													class="form-check-input m-0 align-middle border border-success"
-													aria-label="Select task" checked>
-											</td>
-											<td class="w-100">
-												<a href="#" class="text-reset">Identify the implementation team.</a>
-											</td>
-											<td class="text-nowrap text-muted">
-												<i class="fa-regular fa-calendar-xmark"></i>
-												November 07, 2020
-											</td>
-											<td class="text-nowrap">
-												<a href="#" class="text-muted">
-													<i class="fa-solid fa-check"></i>
-													6/10
-												</a>
-											</td>
-											<td class="text-nowrap">
-												<a href="#" class="text-muted">
-													<i class="fa-regular fa-message"></i>
-													12
-												</a>
-											</td>
-											<td>
-												<span class="avatar avatar-sm"
-													style="background-image: url(img/profile-1.png)"></span>
-											</td>
-										</tr>
-										<tr>
-											<td class="w-1 pe-0">
-												<input type="checkbox"
-													class="form-check-input m-0 align-middle border border-success"
-													aria-label="Select task">
-											</td>
-											<td class="w-100">
-												<a href="#" class="text-reset">Define users and workflow</a>
-											</td>
-											<td class="text-nowrap text-muted">
-												<i class="fa-regular fa-calendar-xmark"></i>
-												November 23, 2021
-											</td>
-											<td class="text-nowrap">
-												<a href="#" class="text-muted">
-													<i class="fa-solid fa-check"></i>
-													3/7
-												</a>
-											</td>
-											<td class="text-nowrap">
-												<a href="#" class="text-muted">
-													<i class="fa-regular fa-message"></i>
-													5
-												</a>
-											</td>
-											<td>
-												<span class="avatar avatar-sm"
-													style="background-image: url(img/profile-1.png)"></span>
-											</td>
-										</tr>
-										<tr>
-											<td class="w-1 pe-0">
-												<input type="checkbox"
-													class="form-check-input m-0 align-middle border border-success"
-													aria-label="Select task" checked>
-											</td>
-											<td class="w-100">
-												<a href="#" class="text-reset">Check Pull Requests</a>
-											</td>
-											<td class="text-nowrap text-muted">
-												<i class="fa-regular fa-calendar-xmark"></i>
-												January 14, 2021
-											</td>
-											<td class="text-nowrap">
-												<a href="#" class="text-muted">
-													<i class="fa-solid fa-check"></i>
-													2/9
-												</a>
-											</td>
-											<td class="text-nowrap">
-												<a href="#" class="text-muted">
-													<i class="fa-regular fa-message"></i>
-													3
-												</a>
-											</td>
-											<td>
-												<span class="avatar avatar-sm"
-													style="background-image: url(img/profile-1.png)"></span>
-											</td>
-										</tr>
-									</table>
-								</div>
-							</div>
-						</div>
-						
-						<div class="col-md-6 col-lg-4">
-							<div class="card">
-								<div class="card-header">
-									<h3 class="card-title">Social Media Traffic</h3>
-								</div>
-								<table class="table card-table table-vcenter">
-									<thead>
-										<tr>
-											<th>Network</th>
-											<th colspan="2">Visitors</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Instagram</td>
-											<td>3,550</td>
-											<td class="w-50">
-												<div class="progress progress-xs">
-													<div class="progress-bar bg-primary" style="width: 71.0%"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Twitter</td>
-											<td>1,798</td>
-											<td class="w-50">
-												<div class="progress progress-xs">
-													<div class="progress-bar bg-primary" style="width: 35.96%"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Facebook</td>
-											<td>1,245</td>
-											<td class="w-50">
-												<div class="progress progress-xs">
-													<div class="progress-bar bg-primary" style="width: 24.9%"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>TikTok</td>
-											<td>986</td>
-											<td class="w-50">
-												<div class="progress progress-xs">
-													<div class="progress-bar bg-primary" style="width: 19.72%"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Pinterest</td>
-											<td>854</td>
-											<td class="w-50">
-												<div class="progress progress-xs">
-													<div class="progress-bar bg-primary" style="width: 17.08%"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>VK</td>
-											<td>650</td>
-											<td class="w-50">
-												<div class="progress progress-xs">
-													<div class="progress-bar bg-primary" style="width: 13.0%"></div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>Pinterest</td>
-											<td>420</td>
-											<td class="w-50">
-												<div class="progress progress-xs">
-													<div class="progress-bar bg-primary" style="width: 8.4%"></div>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-						
+
+
 					</div>
 				</div>
 			</div>
@@ -1224,7 +897,7 @@
 	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
 	<script type="text/javascript" th:src="@{/js/app.js}"></script>
-	
+
 </body>
 
 </html>

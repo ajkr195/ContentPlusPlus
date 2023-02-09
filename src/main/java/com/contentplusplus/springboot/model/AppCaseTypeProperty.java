@@ -6,6 +6,7 @@ import java.util.Set;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.contentplusplus.springboot.model.audit.Auditable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Basic;
@@ -29,7 +30,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity(name = "AppCaseTypeProperty")
 @Table(name = "app_case_type_property")
-public class AppCaseTypeProperty implements Serializable {
+public class AppCaseTypeProperty extends Auditable<String> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id

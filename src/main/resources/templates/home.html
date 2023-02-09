@@ -26,10 +26,20 @@
 						<div class="col-auto ms-auto d-print-none">
 							<div class="btn-list" sec:authorize="isAnonymous()">
 								<span class="d-none d-sm-inline">
-									<a href="/login" th:href="@{/login}" class="btn btn-sm btn-primary d-none d-sm-inline-block">
+									<a href="/login" th:href="@{/login}"
+										class="btn btn-sm btn-primary d-none d-sm-inline-block">
 										<i class="fa-solid fa-right-to-bracket"></i> Login
 									</a>
 								</span>
+							</div>
+						</div>
+						<div class="col-auto ms-auto d-print-none">
+							<div class="btn-list">
+								<a href="#" th:href="@{/downloadhelpfile}"
+									class="btn btn-teal d-none d-sm-inline-block">
+									<i class="fa-solid fa-download fa-xl"></i>
+									Download UserGuide
+								</a>
 							</div>
 						</div>
 					</div>
@@ -38,229 +48,246 @@
 			<!-- Page body -->
 			<div class="page-body">
 				<div class="container-xl">
-					<div class="row row-deck row-cards">
-						<div class="row">
-							<div class="col-sm-6 col-lg-3 mt-2 mb-2">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body border-bottom py-3">
 
-								<div class="icon-card mb-30">
-									<div class="icon orange">
-										<i class="fas fa-cog"></i>
-									</div>
-									<div class="d-flex position-relative">
-										<div>
-											<h2 class="mt-0">Custom component</h2>
-											<p>This is some placeholder content for the custom component. It is intended
-												to mimic what some real-world content would look like
-												.</p>
-											<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
-												somewhere</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-6 col-lg-3 mt-2 mb-2">
+								<div class="row">
+									<div class="col-sm-6 col-lg-3 mt-2 mb-2">
 
-								<div class="icon-card mb-30">
-									<div class="icon green">
-										<i class="fa-solid fa-border-all"></i>
-									</div>
-									<div class="d-flex position-relative">
-										<div>
-											<h2 class="mt-0">Custom component</h2>
-											<p>This is some placeholder content for the custom component. It is intended
-												to mimic what some real-world content would look like
-												.</p>
-											<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
-												somewhere</a>
+										<div class="icon-card mb-30">
+											<div class="icon orange">
+												<i class="fas fa-cog"></i>
+											</div>
+											<div class="d-flex position-relative">
+												<div>
+													<h2 class="mt-0">Custom component</h2>
+													<p>This is some placeholder content for the custom component. It is
+														intended
+														to mimic what some real-world content would look like
+														.</p>
+													<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
+														somewhere</a>
+												</div>
+											</div>
 										</div>
 									</div>
-								</div>
-							</div>
-							<div class="col-sm-6 col-lg-3 mt-2 mb-2">
+									<div class="col-sm-6 col-lg-3 mt-2 mb-2">
 
-								<div class="icon-card mb-30">
-									<div class="icon blue">
-										<i class="fa-solid fa-gauge-high"></i>
+										<div class="icon-card mb-30">
+											<div class="icon green">
+												<i class="fa-solid fa-border-all"></i>
+											</div>
+											<div class="d-flex position-relative">
+												<div>
+													<h2 class="mt-0">Custom component</h2>
+													<p>This is some placeholder content for the custom component. It is
+														intended
+														to mimic what some real-world content would look like
+														.</p>
+													<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
+														somewhere</a>
+												</div>
+											</div>
+										</div>
 									</div>
-									<div class="d-flex position-relative">
-										<div>
-											<h2 class="mt-0">Custom component</h2>
-											<p>This is some placeholder content for the custom component. It is intended
-												to mimic what some real-world content would look like
-												.</p>
-											<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
-												somewhere</a>
+									<div class="col-sm-6 col-lg-3 mt-2 mb-2">
+
+										<div class="icon-card mb-30">
+											<div class="icon blue">
+												<i class="fa-solid fa-gauge-high"></i>
+											</div>
+											<div class="d-flex position-relative">
+												<div>
+													<h2 class="mt-0">Custom component</h2>
+													<p>This is some placeholder content for the custom component. It is
+														intended
+														to mimic what some real-world content would look like
+														.</p>
+													<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
+														somewhere</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 col-lg-3 mt-2 mb-2">
+										<div class="icon-card mb-30">
+											<div class="icon purple">
+												<i class="fa-solid fa-radiation"></i>
+											</div>
+											<div class="d-flex position-relative">
+												<div>
+													<h2 class="mt-0">Custom component</h2>
+													<p>This is some placeholder content for the custom component. It is
+														intended
+														to mimic what some real-world content would look like
+														.</p>
+													<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
+														somewhere</a>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-sm-6 col-lg-3 mt-2 mb-2">
-								<div class="icon-card mb-30">
-									<div class="icon purple">
-										<i class="fa-solid fa-radiation"></i>
+
+								<div class="row">
+									<div class="col-sm-6 col-lg-3 mt-2 mb-2">
+
+										<div class="icon-card mb-30">
+											<div class="icon primary">
+												<i class="fa-solid fa-print"></i>
+											</div>
+											<div class="d-flex position-relative">
+												<div>
+													<h2 class="mt-0">Custom component</h2>
+													<p>This is some placeholder content for the custom component. It is
+														intended
+														to mimic what some real-world content would look like
+														.</p>
+													<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
+														somewhere</a>
+												</div>
+											</div>
+										</div>
 									</div>
-									<div class="d-flex position-relative">
-										<div>
-											<h2 class="mt-0">Custom component</h2>
-											<p>This is some placeholder content for the custom component. It is intended
-												to mimic what some real-world content would look like
-												.</p>
-											<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
-												somewhere</a>
+									<div class="col-sm-6 col-lg-3 mt-2 mb-2">
+
+										<div class="icon-card mb-30">
+											<div class="icon green">
+												<i class="fa-solid fa-barcode"></i>
+											</div>
+											<div class="d-flex position-relative">
+												<div>
+													<h2 class="mt-0">Custom component</h2>
+													<p>This is some placeholder content for the custom component. It is
+														intended
+														to mimic what some real-world content would look like
+														.</p>
+													<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
+														somewhere</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 col-lg-3 mt-2 mb-2">
+
+										<div class="icon-card mb-30">
+											<div class="icon blue">
+												<i class="fa-solid fa-server"></i>
+											</div>
+											<div class="d-flex position-relative">
+												<div>
+													<h2 class="mt-0">Custom component</h2>
+													<p>This is some placeholder content for the custom component. It is
+														intended
+														to mimic what some real-world content would look like
+														.</p>
+													<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
+														somewhere</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 col-lg-3 mt-2 mb-2">
+										<div class="icon-card mb-30">
+											<div class="icon success">
+												<i class="fa-solid fa-computer"></i>
+											</div>
+											<div class="d-flex position-relative">
+												<div>
+													<h2 class="mt-0">Custom component</h2>
+													<p>This is some placeholder content for the custom component. It is
+														intended
+														to mimic what some real-world content would look like
+														.</p>
+													<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
+														somewhere</a>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
+
+								<div class="row">
+									<div class="col-sm-6 col-lg-3 mt-2 mb-2">
+
+										<div class="icon-card mb-30">
+											<div class="icon orange">
+												<i class="fa-solid fa-database"></i>
+											</div>
+											<div class="d-flex position-relative">
+												<div>
+													<h2 class="mt-0">Custom component</h2>
+													<p>This is some placeholder content for the custom component. It is
+														intended
+														to mimic what some real-world content would look like
+														.</p>
+													<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
+														somewhere</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 col-lg-3 mt-2 mb-2">
+
+										<div class="icon-card mb-30">
+											<div class="icon primary">
+												<i class="fa-solid fa-file-shield"></i>
+											</div>
+											<div class="d-flex position-relative">
+												<div>
+													<h2 class="mt-0">Custom component</h2>
+													<p>This is some placeholder content for the custom component. It is
+														intended
+														to mimic what some real-world content would look like
+														.</p>
+													<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
+														somewhere</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 col-lg-3 mt-2 mb-2">
+
+										<div class="icon-card mb-30">
+											<div class="icon success">
+												<i class="far fa-user"></i>
+											</div>
+											<div class="d-flex position-relative">
+												<div>
+													<h2 class="mt-0">Custom component</h2>
+													<p>This is some placeholder content for the custom component. It is
+														intended
+														to mimic what some real-world content would look like
+														.</p>
+													<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
+														somewhere</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-6 col-lg-3 mt-2 mb-2">
+										<div class="icon-card mb-30">
+											<div class="icon purple">
+												<i class="fa-solid fa-heart-pulse"></i>
+											</div>
+											<div class="d-flex position-relative">
+												<div>
+													<h2 class="mt-0">Custom component</h2>
+													<p>This is some placeholder content for the custom component. It is
+														intended
+														to mimic what some real-world content would look like
+														.</p>
+													<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
+														somewhere</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
 							</div>
 						</div>
-
-						<div class="row">
-							<div class="col-sm-6 col-lg-3 mt-2 mb-2">
-
-								<div class="icon-card mb-30">
-									<div class="icon primary">
-										<i class="fa-solid fa-print"></i>
-									</div>
-									<div class="d-flex position-relative">
-										<div>
-											<h2 class="mt-0">Custom component</h2>
-											<p>This is some placeholder content for the custom component. It is intended
-												to mimic what some real-world content would look like
-												.</p>
-											<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
-												somewhere</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-6 col-lg-3 mt-2 mb-2">
-
-								<div class="icon-card mb-30">
-									<div class="icon green">
-										<i class="fa-solid fa-barcode"></i>
-									</div>
-									<div class="d-flex position-relative">
-										<div>
-											<h2 class="mt-0">Custom component</h2>
-											<p>This is some placeholder content for the custom component. It is intended
-												to mimic what some real-world content would look like
-												.</p>
-											<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
-												somewhere</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-6 col-lg-3 mt-2 mb-2">
-
-								<div class="icon-card mb-30">
-									<div class="icon blue">
-										<i class="fa-solid fa-server"></i>
-									</div>
-									<div class="d-flex position-relative">
-										<div>
-											<h2 class="mt-0">Custom component</h2>
-											<p>This is some placeholder content for the custom component. It is intended
-												to mimic what some real-world content would look like
-												.</p>
-											<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
-												somewhere</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-6 col-lg-3 mt-2 mb-2">
-								<div class="icon-card mb-30">
-									<div class="icon success">
-										<i class="fa-solid fa-computer"></i>
-									</div>
-									<div class="d-flex position-relative">
-										<div>
-											<h2 class="mt-0">Custom component</h2>
-											<p>This is some placeholder content for the custom component. It is intended
-												to mimic what some real-world content would look like
-												.</p>
-											<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
-												somewhere</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-sm-6 col-lg-3 mt-2 mb-2">
-
-								<div class="icon-card mb-30">
-									<div class="icon orange">
-										<i class="fa-solid fa-database"></i>
-									</div>
-									<div class="d-flex position-relative">
-										<div>
-											<h2 class="mt-0">Custom component</h2>
-											<p>This is some placeholder content for the custom component. It is intended
-												to mimic what some real-world content would look like
-												.</p>
-											<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
-												somewhere</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-6 col-lg-3 mt-2 mb-2">
-
-								<div class="icon-card mb-30">
-									<div class="icon primary">
-										<i class="fa-solid fa-file-shield"></i>
-									</div>
-									<div class="d-flex position-relative">
-										<div>
-											<h2 class="mt-0">Custom component</h2>
-											<p>This is some placeholder content for the custom component. It is intended
-												to mimic what some real-world content would look like
-												.</p>
-											<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
-												somewhere</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-6 col-lg-3 mt-2 mb-2">
-
-								<div class="icon-card mb-30">
-									<div class="icon success">
-										<i class="far fa-user"></i>
-									</div>
-									<div class="d-flex position-relative">
-										<div>
-											<h2 class="mt-0">Custom component</h2>
-											<p>This is some placeholder content for the custom component. It is intended
-												to mimic what some real-world content would look like
-												.</p>
-											<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
-												somewhere</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-6 col-lg-3 mt-2 mb-2">
-								<div class="icon-card mb-30">
-									<div class="icon purple">
-										<i class="fa-solid fa-heart-pulse"></i>
-									</div>
-									<div class="d-flex position-relative">
-										<div>
-											<h2 class="mt-0">Custom component</h2>
-											<p>This is some placeholder content for the custom component. It is intended
-												to mimic what some real-world content would look like
-												.</p>
-											<a target="_blank" href="#" class="btn btn-teal stretched-link">Go
-												somewhere</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
 					</div>
 				</div>
 

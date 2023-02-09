@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{fragments/head :: head}"></div>
+
+<style>
+	.hide-me {
+		display: none;
+	}
+</style>
+
+<body th:onload="|showDataFunction(${id})|" class=" ">
+	<!-- body class= layout-fluid layout-boxed OR blank""-->
+	<div class="page">
+		<!-- Navbar -->
+		<div th:replace="~{fragments/navbar :: navbar}"></div>
+		<div class="page-wrapper">
+			<!-- Page header -->
+			<div class="page-header d-print-none">
+				<div class="container-xl">
+					<div class="row g-2 align-items-center">
+						<div class="col">
+							<!-- Page pre-title -->
+							<div class="page-pretitle">
+								Manage CaseTypes
+							</div>
+							<h2 class="page-title">Properties of CaseType : <span class="ms-1"
+									th:text="${casetypename}"></span>
+							</h2>
+							<h2 class="page-title" th:if="${smetextabcd1234}">
+							</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Page body -->
+			<div class="page-body">
+				<div class="container-xl">
+					<div class="card">
+						<div class="card-body">
+
+							<button id="btnHide" onClick="show_hide_column()">Show/Hide</button>
+
+							<div class="appform">
+
+								<form name="fetch mb-3">
+
+
+									<div class="row mt-3 mb-3">
+
+
+										<div class="col-lg-2"><label class="form-label fw-bolder fs-3"
+												for="casetypepropertytype">
+												Property Name
+											</label>
+											<input type="text" class="form-control" id="casetypepropertyname"
+												name="casetypepropertyname" placeholder="Propertyname .."
+												aria-label="Recipient's username with two button addons" required>
+										</div>
+										<div class="col-lg-2"><label class="form-label fw-bolder fs-3"
+												for="casetypepropertytype">
+												Initial Value
+											</label><input type="text" class="form-control"
+												id="casetypepropertyvalue" name="casetypepropertyvalue"
+												placeholder="Initial value .."
+												aria-label="Recipient's username with two button addons" required></div>
+
+										<div class="col-lg-2"><label class="form-label fw-bolder fs-3"
+												for="casetypepropertytype">
+												Type
+											</label><select class="form-select" name="casetypepropertytype"
+												id="casetypepropertytype">
+												<option value="text">Text</option>
+												<option value="email">Email</option>
+												<option value="date">Date</option>
+												<option value="number">Number</option>
+											</select></div>
+
+										<div class="col-lg-2"><label class="form-label fw-bolder fs-3"
+												for="casetypepropertyrequired">Is
+												Required?
+											</label>
+											<select class="form-select" name="casetypepropertyrequired"
+												id="casetypepropertyrequired">
+												<option value="yes">Yes</option>
+												<option value="no">No</option>
+											</select>
+										</div>
+
+										<div class="col-lg-2"><label class="form-label fw-bolder fs-3"
+												for="casetypepropertysize">Size
+											</label>
+											<select class="form-select" name="casetypepropertysize"
+												id="casetypepropertysize">
+												<option value="10">10</option>
+												<option value="15">15</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+											</select>
+										</div>
+
+										<div class="col-lg-2"><label class="form-label fw-bolder fs-3"
+												for="casetypepropertymin">Min
+												Value</label>
+											<select class="form-select" name="casetypepropertymin"
+												id="casetypepropertymin">
+												<option value="10">10</option>
+												<option value="15">15</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+											</select>
+										</div>
+
+
+
+										<div class="col-lg-2"><label class="form-label fw-bolder fs-3"
+												for="casetypepropertymax">Max
+												Value</label>
+											<select class="form-select" name="casetypepropertymax"
+												id="casetypepropertymax">
+												<option value="10">10</option>
+												<option value="15">15</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+											</select>
+										</div>
+										<div class="col-lg-2"><label class="form-label fw-bolder fs-3"
+												for="casetypeslaunit">Max
+												Length</label>
+											<select class="form-select" name="casetypepropertymaxlength"
+												id="casetypepropertymaxlength">
+												<option value="10">10</option>
+												<option value="15">15</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option>
+											</select>
+										</div>
+									</div>
+
+
+
+
+
+
+
+
+
+
+									<div class="input-group">
+										<button class="btn app-btn-primary" th:onclick="postCaseTypeProps([[${id}]])"
+											type="button">Submit</button>
+										<!--										th:onClick="|postCaseTypeName(${id})|"-->
+										<button class="btn btn-primary mx-2" id="btnRefresh"
+											th:onClick="|showDataFunction(${id})|" type="button"><i
+												class="fa-solid fa-rotate"></i>
+										</button>
+										<button class="btn app-btn-secondary" id="btnClear"
+											th:onClick="clearInputKeyword()" type="button">Clear</button>
+									</div>
+								</form>
+
+							</div>
+							<!--							<button class="btn app-btn-primary" th:onClick="|postCaseTypeName(${id})|">Submit</button>-->
+							<div class="row mt-3">
+								<div class="table-responsive">
+									<div id="showData"></div>
+									<div id="getResult"></div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div th:replace="~{fragments/footer :: footer}"></div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/webjars/font-awesome/js/all.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/sweetalert2/dist/sweetalert2.all.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+	<script type="text/javascript" th:src="@{/js/userdata.js}"></script>
+
+
+
+	<script>
+		function clearInputKeyword() {
+			document.getElementById("casetypepropertyname").value = "";
+			//window.location = "[[@{/listdepartment}]]";
+			location.reload();
+		}
+	</script>
+
+	<script>
+
+		function postCaseTypeProps(id) {
+
+
+			if (document.getElementById("casetypepropertyname").value == "") {
+				alert('Property Name is required !');
+				return false;
+			}
+
+			const postdata = {
+				casetypepropertyname: document.getElementById("casetypepropertyname").value,
+				casetypepropertyvalue: document.getElementById("casetypepropertyvalue").value,
+				casetypepropertytype: document.getElementById("casetypepropertytype").value,
+				casetypepropertyrequired: document.getElementById("casetypepropertyrequired").value,
+				casetypepropertysize: document.getElementById("casetypepropertysize").value,
+				casetypepropertymin: document.getElementById("casetypepropertymin").value,
+				casetypepropertymax: document.getElementById("casetypepropertymax").value,
+				casetypepropertymaxlength: document.getElementById("casetypepropertymaxlength").value,
+			};
+
+			//alert(JSON.stringify(postdata));
+
+			fetch('http://localhost:8080/appCaseTypeProperty/' + id, {
+				method: 'POST', // or 'PUT'
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(postdata),
+			})
+				.then((response) => response.json())
+				.then((data) => {
+					//console.log('Success:', data);
+					drawTableFromData(id);
+					Swal.fire({
+						icon: 'success',
+						title: 'Success !',
+						text: 'Casetype Property Saved successfully !',
+						footer: '<a href="">Where I go from here?</a>'
+					});
+				})
+				.catch((error) => {
+					console.error('Error:', error);
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Duplicate Casetype Property Name Entered for this CaseType !',
+						footer: '<a href="">Why do I have this issue?</a>'
+					});
+				});
+			document.getElementById("casetypepropertyname").value = "";
+
+
+		}
+	</script>
+
+
+	<script>
+		function showDataFunction(id) {
+			drawTableFromData(id);
+		}
+	</script>
+
+	<script>
+
+		async function drawTableFromData(id) {
+			let resultElement = document.getElementById("getResult");
+			resultElement.innerHTML = "";
+
+			try {
+
+				const res = await fetch("http://localhost:8080/appCaseTypeProperty/" + id + "/appCaseTypeProperty");
+
+				if (!res.ok) {
+					const message = `An error has occured: ${res.status} - ${res.statusText}`;
+					throw new Error(message);
+				}
+
+				const data = await res.json();
+
+				//alert(data);
+
+				var col = [];
+				for (var i = 0; i < data.length; i++) {
+					for (var key in data[i]) {
+						if (col.indexOf(key) === -1) {
+							col.push(key);
+						}
+					}
+				}
+				// Create a table.
+				var table = document.createElement("table");
+				table.id = "myTable";
+
+				table.className = "table card-table table-vcenter datatable";
+
+				// Create table header row using the extracted headers above.
+				var tr = table.insertRow(-1);                   // table row.
+
+				for (var i = 0; i < col.length; i++) {
+					var th = document.createElement("th");      // table header.
+					th.innerHTML = col[i].toUpperCase();
+					tr.appendChild(th);
+					th.className = "hideme";
+				}
+
+				tr.insertCell(-1);
+
+				table.rows[0].cells[col.length].innerHTML = 'Actions';
+				table.rows[0].cells[col.length].style.fontWeight = "bold";
+				table.rows[0].cells[col.length].className = "hideme";
+
+				// add json data to the table as rows.
+				for (var i = 0; i < data.length; i++) {
+
+					//alert(data[0].id);
+
+					tr = table.insertRow(-1);
+
+					for (var j = 0; j < col.length; j++) {
+						var tabCell = tr.insertCell(-1);
+						tabCell.innerHTML = data[i][col[j]];
+
+					}
+					tr.className = "hideme";
+
+					var tabCell2 = tr.insertCell(-1);
+					tabCell2.innerHTML = `<a class="dropdown-item" href="/casetypepropEdit/${data[i].id}" title="Edit this CaseType">
+					<i class="fa-regular fa-pen-to-square text-warning fa-xl mx-2"></i></a>`;
+
+				}
+
+				// Now, add the newly created table with json data, to a container.
+				var divShowData = document.getElementById('showData');
+				divShowData.innerHTML = "";
+				divShowData.appendChild(table);
+
+			} catch (err) {
+				resultElement.innerHTML = htmlizeResponse(err.message);
+			}
+
+
+		}
+
+		function htmlizeResponse(res) {
+			return (
+				`<div class="alert alert-secondary mt-2" role="alert"><pre>` +
+				JSON.stringify(res, null, 2) +
+				"</pre></div>"
+			);
+		}
+
+	</script>
+
+	<script>
+
+
+		function show_hide_column() {
+			var hidemeitems = document.getElementsByClassName("hideme");
+
+			for (var i = 0; i < hidemeitems.length; i++) {
+				hidemeitems[i].classList.toggle("hide-me");
+			}
+		}
+
+	</script>
+
+
+</body>
+
+</html>
