@@ -1,3 +1,14 @@
+Next Steps
+Finish features:
+  - Assign case to self. 
+  - Assign case to someone else.
+  - Filter and paginate cases by department.
+  - Fix security wherever necessary.
+  - Allow department head to manage that department's users and their roles.
+  - Code Clean-Up
+  
+  
+
 # Content++
 A simplified and universal content management system.
 
