@@ -49,7 +49,7 @@ Content Management Systems were supposed to:
   - Re-assign a Case (Work-Item) to someone.
   - Attach/Detach/Delete Case Documents
   - Track history and milestones of a Case (Work-Item).
-  - A quick overview is here - https://github.com/ajkr195/CaseManager
+
   
   ![content++](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/Content%2B%2B.JPG)
 
