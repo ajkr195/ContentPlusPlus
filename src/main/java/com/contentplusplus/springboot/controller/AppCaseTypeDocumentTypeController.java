@@ -61,10 +61,8 @@ public class AppCaseTypeDocumentTypeController {
 
 	@RequestMapping(value = { "/casetypeDocTypeEdit", "/casetypeDocTypeEdit/{id}" }, method = RequestMethod.GET)
 	public String adminusereditRegistrationsd(Model model, @PathVariable(required = false, name = "id") Long id) {
-		String editingappCaseTypeStep = "editingappCaseTypeDocType";
 		model.addAttribute("pagename", "appCaseTypeDocTypeedit");
 		// model.addAttribute("casetypename", appCaseTypeRepository.findById(id));
-		model.addAttribute("editingappCaseTypeDocType", editingappCaseTypeStep);
 		if (null != id) {
 			model.addAttribute("appCaseTypeDocType", appCaseTypeDocumentTypeRepository.findById(id));
 			model.addAttribute("editingappCaseTypeDocType", "editingappCaseTypeDocType");
@@ -85,7 +83,7 @@ public class AppCaseTypeDocumentTypeController {
 		model.addAttribute("pagename", "appCaseTypeDocTypeedit");
 		String editingappCaseTypeType = "editingappCaseTypeType";
 		model.addAttribute("editingappCaseTypeStep", editingappCaseTypeType);
-		model.addAttribute("appCaseTypeDocumentType", appCaseTypeDocumentType);
+		model.addAttribute("editingappCaseTypeDocType", appCaseTypeDocumentType);
 
 		if ((null != appCaseTypeDocumentType.getId()) && (bindingResult.hasErrors())) {
 			appCaseTypeDocTypeAddValidator.validate(appCaseTypeDocumentType, bindingResult);

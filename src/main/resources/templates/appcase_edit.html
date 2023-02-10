@@ -239,7 +239,8 @@
 
 									<div class="col-md-6">
 										<label class="form-label fw-bolder fs-3" for="casetitle">CASE DOCUMENTS:</label>
-										<div class="text-end"><a href="#" class="btn btn-success d-none d-sm-inline-block"
+										<div class="text-end"><a href="#"
+												class="btn btn-success d-none d-sm-inline-block"
 												th:onClick="uploadCaseDocuments([[${appCase.id}]])">
 												<i class="fa-solid fa-plus fa-xl"></i>
 												Upload Case Files
@@ -253,7 +254,11 @@
 												title="Download this file"><i
 													class="fa-solid fa-download text-success"></i></a>
 										</div-->
-
+										<div class="app-card-body p-4" th:if="${appCase.caseDocumentList.empty}">
+											<div class="text-red">
+												No Case Files Added Yet. Click "Upload Case Files" to add.
+											</div>
+										</div>
 
 										<div class="table-responsive">
 											<table class="table card-table table-vcenter text-nowrap datatable"
@@ -416,7 +421,7 @@
 												<thead>
 													<tr>
 														<th>#</th>
-<!--														<th>Id</th>-->
+														<!--														<th>Id</th>-->
 														<th>Activity</th>
 														<!--th>Size</th-->
 														<th class="table-col-hidden">CaseWorker</th>
@@ -504,34 +509,34 @@
 	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
 	<script type="text/javascript" th:src="@{/js/app.js}"></script>
 	<script type="text/javascript" th:src="@{/js/userdata.js}"></script>
-	
+
 	<script>
-	function deleteCasefile(id, Object) {
-	Swal.fire({
-		title: 'Are you sure?',
-		text: "You want to Delete this file? This operation is irreversible and this file may not be recovered later.",
-		icon: 'warning',
-		showDenyButton: true,
-		confirmButtonColor: '#006666',
-		denyButtonColor: 'gray',
-		confirmButtonText: 'Yes, delete it!',
-		denyButtonText: `Don't delete`,
-	}).then((result) => {
-		if (result.isConfirmed) {
-			fetch('/deleteCasefile/' + id, {
-				method: 'DELETE',
+		function deleteCasefile(id, Object) {
+			Swal.fire({
+				title: 'Are you sure?',
+				text: "You want to Delete this file? This operation is irreversible and this file may not be recovered later.",
+				icon: 'warning',
+				showDenyButton: true,
+				confirmButtonColor: '#006666',
+				denyButtonColor: 'gray',
+				confirmButtonText: 'Yes, delete it!',
+				denyButtonText: `Don't delete`,
+			}).then((result) => {
+				if (result.isConfirmed) {
+					fetch('/deleteCasefile/' + id, {
+						method: 'DELETE',
+					})
+					Swal.fire(
+						'Deleted!',
+						'Your file has been deleted.',
+						'success'
+					)
+					Object.closest('tr').remove();
+				} else if (result.isDenied) {
+					Swal.fire('Great. Changes are not saved.', 'Your important file is safe  !!  ', 'info')
+				}
 			})
-			Swal.fire(
-				'Deleted!',
-				'Your file has been deleted.',
-				'success'
-			)
-			Object.closest('tr').remove();
-		} else if (result.isDenied) {
-			Swal.fire('Great. Changes are not saved.', 'Your important file is safe  !!  ', 'info')
 		}
-	})
-}
 	</script>
 
 	<script>

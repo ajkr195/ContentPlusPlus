@@ -333,14 +333,14 @@
 						</li>
 						<!--sec:authorize="hasAuthority('ADMIN')" -->
 						<li class="nav-item dropdown"
-							th:classappend="${pagename == 'listuser' OR pagename == 'listinventory' OR pagename == 'listdepartment'  OR pagename == 'listcasetype' OR pagename == 'appCaseTypeedit' OR pagename == 'listcasepropstype' ? 'active' : ''}">
+							th:classappend="${pagename == 'listuser' OR pagename == 'departmentedit' OR pagename == 'appCaseTypeDocTypeedit' OR pagename == 'listcasetypedoctypes' OR pagename == 'listinventory' OR pagename == 'listdepartment'  OR pagename == 'listcasetype' OR pagename == 'appCaseTypeedit' OR pagename == 'listcasepropstype' ? 'active' : ''}">
 							<a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
 								data-bs-auto-close="outside" role="button" aria-expanded="false">
 								<span class="nav-link-icon d-md-none d-lg-inline-block">
 									<i class="fa-solid fa-screwdriver-wrench icon text-teal"></i>
 								</span>
 								<span class="nav-link-title"
-									th:classappend="${pagename == 'listuser' OR pagename == 'listinventory' OR pagename == 'listdepartment'  OR pagename == 'listcasetype' OR pagename == 'appCaseTypeedit' OR pagename == 'listcasepropstype' ? 'fs-3 fw-bolder text-primary' : ''}">
+									th:classappend="${pagename == 'listuser' OR pagename == 'appCaseTypeDocTypeedit' OR pagename == 'listcasetypedoctypes' OR pagename == 'listinventory' OR pagename == 'departmentedit' OR pagename == 'listdepartment'  OR pagename == 'listcasetype' OR pagename == 'appCaseTypeedit' OR pagename == 'listcasepropstype' ? 'fs-3 fw-bolder text-primary' : ''}">
 									Admin
 								</span>
 							</a>
@@ -370,6 +370,25 @@
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
 										CaseType List</span>
 								</a>
+								
+								<a class="dropdown-item" href="/listcasetype" th:href="@{/listcasetype}">
+									<i class="fa-solid fa-list-check icon text-blue me-1"></i> <span
+										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
+										CaseType List</span>
+								</a>
+								
+								<a class="dropdown-item" href="/casetypeDocTypeEdit" th:href="@{/casetypeDocTypeEdit}">
+									<i class="fa-solid fa-list-check icon text-blue me-1"></i> <span
+										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
+										Create CaseType Doc Type</span>
+								</a>
+								
+								<a class="dropdown-item" href="/listcasetypedoctypes" th:href="@{/listcasetypedoctypes}">
+									<i class="fa-solid fa-list-check icon text-blue me-1"></i> <span
+										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
+										CaseType Doc Type List</span>
+								</a>
+								
 								<a class="dropdown-item" href="/listcasetypeprops" th:href="@{/listcasetypeprops}">
 									<i class="fa-solid fa-list-check icon text-blue me-1"></i> <span
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">

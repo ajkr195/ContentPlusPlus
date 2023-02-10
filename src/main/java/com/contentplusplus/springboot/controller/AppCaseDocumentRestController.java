@@ -81,22 +81,10 @@ public class AppCaseDocumentRestController {
 		AppCase appCase = appCaseRepository.findById(Long.parseLong(caseid)).get();
 
 		appCaseHistoryRepository.save(
-				new AppCaseHistory(getPrincipal() + " - Add file to this Case - " + appFile.getFileName(), appCase));
+				new AppCaseHistory(getPrincipal() + " - Added file to this Case - " + appFile.getFileName(), appCase));
 
 		return new AppContentUploadResponse(appFile.getFileName(), fileDownloadUri, file.getContentType(),
 				file.getSize());
-	}
-
-	private String getPrincipal() {
-		String userName = null;
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-		if (principal instanceof UserDetails) {
-			userName = ((UserDetails) principal).getUsername();
-		} else {
-			userName = principal.toString();
-		}
-		return userName;
 	}
 
 	@PostMapping("/uploadCaseMultipleFiles")
@@ -115,12 +103,14 @@ public class AppCaseDocumentRestController {
 	public ResponseEntity<Resource> downloadCaseFile(@PathVariable Long fileId) {
 		// Load file from database
 		AppCaseDocument appCaseContent = appContentStorageService.getCaseFile(fileId);
-		
+
 		AppCase appCase = appCaseRepository.findById(appCaseContent.getAppCase().getId()).get();
-		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - Downloaded case file - " + appCaseContent.getFileName(), appCase));
+		appCaseHistoryRepository.save(new AppCaseHistory(
+				getPrincipal() + " - Downloaded case file - " + appCaseContent.getFileName(), appCase));
 
 		return ResponseEntity.ok().contentType(MediaType.parseMediaType(appCaseContent.getFileType()))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + appCaseContent.getFileName() + "\"")
+				.header(HttpHeaders.CONTENT_DISPOSITION,
+						"attachment; filename=\"" + appCaseContent.getFileName() + "\"")
 				.body(new ByteArrayResource(appCaseContent.getFileData()));
 	}
 
@@ -129,7 +119,8 @@ public class AppCaseDocumentRestController {
 		// Load file from database
 		AppCaseDocument appCaseContent = appContentStorageService.getCaseFile(fileId);
 		AppCase appCase = appCaseRepository.findById(appCaseContent.getAppCase().getId()).get();
-		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - Viewed case file - " + appCaseContent.getFileName(), appCase));
+		appCaseHistoryRepository.save(
+				new AppCaseHistory(getPrincipal() + " - Viewed case file - " + appCaseContent.getFileName(), appCase));
 
 		return ResponseEntity.ok().contentType(MediaType.parseMediaType(appCaseContent.getFileType()))
 				.header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + appCaseContent.getFileName() + "\"")
@@ -139,13 +130,15 @@ public class AppCaseDocumentRestController {
 	@DeleteMapping("/deleteCasefile/{id}")
 	public ResponseEntity<HttpStatus> deletedbfile(@PathVariable("id") Long id) {
 		try {
-			appCaseDocumentRepository.deleteById(id);
-			
+
 			AppCaseDocument acd = appCaseDocumentRepository.findById(id).get();
-			
+
 			AppCase appCase = appCaseRepository.findById(acd.getAppCase().getId()).get();
-			appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - Deleted case file - " + acd.getFileName(), appCase));
+			appCaseHistoryRepository
+					.save(new AppCaseHistory(getPrincipal() + " - Deleted case file - " + acd.getFileName(), appCase));
 			
+			appCaseDocumentRepository.deleteById(id);
+
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -162,7 +155,17 @@ public class AppCaseDocumentRestController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
+
+	private String getPrincipal() {
+		String userName = null;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (principal instanceof UserDetails) {
+			userName = ((UserDetails) principal).getUsername();
+		} else {
+			userName = principal.toString();
+		}
+		return userName;
+	}
 
 }
