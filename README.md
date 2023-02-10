@@ -1,8 +1,9 @@
 Next Steps
 
-Finish features:
+Milestone 4:
   - Assign case to self. 
   - Assign case to someone else.
+  - Clear Assigne-To.
   - Filter and paginate cases by department.
   - Fix security wherever necessary.
   - Allow department head to manage that department's users and their roles.
