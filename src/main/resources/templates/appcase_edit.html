@@ -33,8 +33,7 @@
 			<div class="page-body">
 				<div class="container-xl">
 
-					<div class="d-flex flex-row justify-content-center align-items-center mt-2 mb-2"
-						data-aos="flip-down">
+					<div class="d-flex flex-row justify-content-center align-items-center" data-aos="flip-down">
 						<div class="arrow-steps clearfix">
 							<div class="step launch">
 								<span> LAUNCH </span>
@@ -49,20 +48,16 @@
 								<span> CLOSED </span>
 							</div>
 						</div>
-
-
 					</div>
-					<div class="m-0 d-flex flex-row justify-content-center align-items-center mb-2"
-						data-aos="flip-down">
-						<div class="col-md-3" th:if="${appCase.currentstepname != 'CLOSED_COMPLETE'}">
-							<div class="progress" role="progressbar">
-								<div th:if="${completionPercentage != null}" class="progress-bar" role="progressbar"
-									th:style="'width: ' + ${completionPercentage} + '%'" aria-valuemax="100"
-									th:text="${completionPercentage} + ' %'"></div>
+					<div class="d-flex flex-row justify-content-center align-items-center" data-aos="flip-down">
+						<div class="col-md-12" th:if="${appCase.currentstepname != 'CLOSED_COMPLETE'}">
+								<div th:if="${completionPercentage != null}" class="progress-bar bg-primary text-white" role="progressbar"
+									th:style="'width: ' + ${completionPercentage} + '%' + '; height:20px;'"
+									aria-valuemax="100" th:text="${completionPercentage} + ' %'">
+								</div>
 
-							</div>
 						</div>
-						<div class="col-md-3" th:if="${appCase.currentstepname == 'CLOSED_COMPLETE'}">
+						<div class="col-md-12" th:if="${appCase.currentstepname == 'CLOSED_COMPLETE'}">
 							<div class="progress" role="progressbar">
 								<div class="progress-bar bg-success" role="progressbar" style="width: 100%"
 									aria-valuemax="100">100%</div>
@@ -74,8 +69,8 @@
 
 					<div class="card">
 						<div class="card-body">
-							<form class="card-body border-bottom py-3" th:action="@{/caseEditById}"
-								th:object="${appCase}" method="post">
+							<form class="card-body border-bottom" th:action="@{/caseEditById}" th:object="${appCase}"
+								method="post">
 
 								<input th:type="hidden" id="id" name="id" th:field="${appCase.id}" />
 
@@ -91,10 +86,8 @@
 											class="fa-solid fa-forward fa-lg ms-2"></i></button>
 								</div>
 
-								<div class="col-md-12 mb-3">
-									<!--									<label class="form-label fw-bolder fs-3" for="casetitle">CASE INFO</label>-->
-
-
+								<div class="col-md-12">
+									<!--<label class="form-label fw-bolder fs-3" for="casetitle">CASE INFO</label>-->
 									<div class="row">
 										<div class="row col-md-4">
 											<div class="col-md-3">
@@ -575,7 +568,7 @@
 								icon: 'success',
 								title: 'Success !',
 								text: 'Case got approved successfully !',
-								footer: '<a href="/listappcase" th:href="@{/listappcase}">Go to Case List</a>'
+								footer: '<a href="/caseEditById/' + id +'">Back to Case</a>'
 							}).then(() => {
 								//location.reload();
 								window.location.href = "/listappcase";
@@ -618,7 +611,7 @@
 			Swal.fire({
 				title: 'Are you sure to reject?',
 				icon: 'warning',
-				width: '40%',
+				//width: '40%',
 				showDenyButton: true,
 				denyButtonText: 'Cancel',
 				showCloseButton: true,
@@ -647,9 +640,9 @@
 								icon: 'success',
 								title: 'Success !',
 								text: 'Case got rejected successfully !',
-								footer: '<a href="/listappcase" th:href="@{/listappcase}">Go to Case List</a>'
+								footer: '<a href="/caseEditById/' + id +'">Back to Case</a>'
 							}).then(() => {
-								window.location.href = "/listappcase";
+								window.location.href = "/listappcase" ;
 							});
 						}
 

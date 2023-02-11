@@ -104,6 +104,7 @@
 											<th>CaseStatus</th>
 											<th>CurrentStep</th>
 											<th>UniqueID</th>
+											<th>Department</th>
 											<th>AssignedTo</th>
 											<th>CaseType</th>
 
@@ -132,6 +133,8 @@
 													th:text="${myObj.currentstepname}">None</span></td>
 											<td class="cell"> <span class="truncate"
 													th:text="${myObj.caseuuid}">None</span></td>
+												<td class="cell"> <span class="truncate"
+													th:text="${myObj.appCaseType.appDepartment.departmentname}">None</span></td>	
 											<!--<td class="cell"> <span class="truncate"-->
 											<!-- th:text="${myObj.assignedto}">None</span></td>-->
 											<td th:switch="${myObj.assignedto}">
@@ -175,6 +178,7 @@
 											<th>CaseStatus</th>
 											<th>CurrentStep</th>
 											<th>UniqueID</th>
+											<th>Department</th>
 											<th>AssignedTo</th>
 											<th>CaseType</th>
 											<!--<th class="table-col-hidden">CreatedBy</th>

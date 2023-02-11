@@ -38,5 +38,7 @@ public interface AppCaseTypeRepository extends JpaRepository<AppCaseType, Long> 
 	List<AppCaseType> getAppCaseTypeListByDeptIdListIn(@Param("ids") List<Long> deptIdList);
 
 	List<AppCaseType> findByAppDepartmentIn(List<AppDepartment> deptList);
+	
+	List<AppCaseType> findByAppDepartmentIn(List<AppDepartment> deptList, Pageable pageable);
 
 }

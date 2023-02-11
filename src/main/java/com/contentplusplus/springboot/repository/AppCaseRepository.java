@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.contentplusplus.springboot.model.AppCase;
 import com.contentplusplus.springboot.model.AppCaseStatus;
+import com.contentplusplus.springboot.model.AppCaseType;
+import com.contentplusplus.springboot.model.AppDepartment;
 
 public interface AppCaseRepository extends JpaRepository<AppCase, Long> {
 
@@ -26,6 +28,10 @@ public interface AppCaseRepository extends JpaRepository<AppCase, Long> {
 	List<AppCase> findByCaseuuidIgnoreCaseContaining(String caseuuid);
 
 	List<AppCase> findByCaseuuidIgnoreCase(String caseuuid);
+	
+	List<AppCase> findByAppCaseType(AppCaseType appCaseType);
+	
+	List<AppCase> findByAppCaseTypeIn(List<AppCaseType> appCaseTypeList);
 
 	List<AppCase> findByAssignedto(String assignedto);
 
@@ -80,5 +86,13 @@ public interface AppCaseRepository extends JpaRepository<AppCase, Long> {
 
 	@Query("SELECT COUNT(ac) FROM AppCase ac WHERE ac.casestatus=?1")
 	Long getAllNewCasesCount(AppCaseStatus casestatus);
+
+	Page<AppCase> findByAppCaseTypeIn(List<AppCaseType> listAppCaseType, Pageable pageable);
+
+	Page<AppCase> findByAppCaseTypeInAndCasestatusAndCasetitleContainingIgnoreCase(List<AppCaseType> listAppCaseType,
+			AppCaseStatus new1, String keyword, Pageable pageable);
+
+	Page<AppCase> findByAppCaseTypeInAndCasetitleContainingIgnoreCase(List<AppCaseType> listAppCaseType,
+			String keyword, Pageable pageable);
 
 }

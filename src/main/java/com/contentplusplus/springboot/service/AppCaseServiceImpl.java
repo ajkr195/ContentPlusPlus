@@ -99,6 +99,7 @@ public class AppCaseServiceImpl implements AppCaseService {
 			} else {
 				System.out.println("Two...");
 				curreStepId = appCaseTypeStepRepository.findByCasetypestepnameIgnoreCase(currStep).getId();
+				
 
 				if (curreStepId.equals(set.last() - 1)) {
 					System.out.println("Three...");

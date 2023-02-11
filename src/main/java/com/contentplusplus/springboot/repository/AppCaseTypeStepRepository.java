@@ -17,6 +17,10 @@ public interface AppCaseTypeStepRepository extends JpaRepository<AppCaseTypeStep
 	List<AppCaseTypeStep> findAllAppCaseTypeStepsByAppCaseType(AppCaseType appCaseType);
 
 	AppCaseTypeStep findByAppCaseTypeAndCasetypestepnameIgnoreCase(AppCaseType appCaseType, String casetypestepname);
+	
+	AppCaseTypeStep findByIdAndAppCaseType(Long id, AppCaseType appCaseType);
+	
+	AppCaseTypeStep findByIdAndCasetypestepnameIgnoreCase(Long id, String casetypestepname);
 
 	AppCaseTypeStep findByAppCaseTypeAndCasetypestepnumberAndCasetypestepnameIgnoreCase(AppCaseType appCaseType,
 			Integer casetypestepnumber, String casetypestepname);

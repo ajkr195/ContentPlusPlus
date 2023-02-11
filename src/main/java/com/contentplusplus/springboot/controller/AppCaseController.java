@@ -126,7 +126,7 @@ public class AppCaseController {
 		if ((appCase.getCurrentstepname().equalsIgnoreCase("LAUNCHED"))
 				|| (appCase.getCurrentstepname().equalsIgnoreCase("CLOSED_COMPLETE"))) {
 
-			if (appCase.getCurrentstepname()
+			if (appCase.getCurrentstepname().equalsIgnoreCase("LAUNCHED") || appCase.getCurrentstepname()
 					.equalsIgnoreCase(appCaseTypeStepRepository.findById(set.first()).get().getCasetypestepname())) {
 				System.out.println("grrrrrrr...");
 				model.addAttribute("FIRSTSTEP", "FIRSTSTEP");
@@ -333,6 +333,134 @@ public class AppCaseController {
 	}
 
 	@GetMapping("/listappcase")
+	public String documentsworkflowPagenewList(Model model, @RequestParam(required = false) String keyword,
+			@RequestParam(required = false, defaultValue = "") String caseStatus,
+			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "id,asc") String[] sort) {
+		try {
+			model.addAttribute("pagename", "listappcase");
+			List<AppCase> allfiles = new ArrayList<>();
+
+			String sortField = sort[0];
+			String sortDirection = sort[1];
+
+			Direction direction = sortDirection.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+			Order order = new Order(direction, sortField);
+
+			Pageable pageable = PageRequest.of(page - 1, size, Sort.by(order));
+
+			Page<AppCase> pageTuts = null;
+
+			if (keyword != null) {
+				model.addAttribute("keyword", keyword);
+			}
+
+			if (caseStatus != "") {
+				model.addAttribute("caseStatus", caseStatus);
+			}
+
+			System.out.println("keyword: " + keyword + " caseStatus: " + caseStatus);
+
+			if (keyword == null && caseStatus == "") {
+				log.info("Inside keyword == null caseStatus== null");
+				pageTuts = appCaseRepository.findByAppCaseTypeIn(
+						appCaseTypeRepository.findByAppDepartmentIn(
+								appUserRepository.findByUseremailIgnoreCase(getPrincipal()).getDepartments()),
+						pageable);
+			} else if (keyword == "" && caseStatus == "") {
+				log.info("Inside keyword == AND caseStatus== condition");
+				pageTuts = appCaseRepository.findAll(pageable);
+			} else if (keyword != null && caseStatus.equalsIgnoreCase("NEW")) {
+				log.info("Inside keyword != null AND caseStatus== NEW condition");
+//				pageTuts = appCaseRepository.findByCasestatusAndCasetitleContainingIgnoreCase(AppCaseStatus.NEW,
+//						keyword, pageable);
+
+				pageTuts = appCaseRepository.findByAppCaseTypeInAndCasestatusAndCasetitleContainingIgnoreCase(
+						appCaseTypeRepository.findByAppDepartmentIn(
+								appUserRepository.findByUseremailIgnoreCase(getPrincipal()).getDepartments()),
+						AppCaseStatus.NEW, keyword, pageable);
+
+			} else if (keyword != null && caseStatus.equalsIgnoreCase("IN_PROGRESS")) {
+				log.info("Inside keyword != null AND  caseStatus== IN_PROGRESS condition");
+//				pageTuts = appCaseRepository.findByCasestatusAndCasetitleContainingIgnoreCase(AppCaseStatus.IN_PROGRESS,
+//						keyword, pageable);
+				pageTuts = appCaseRepository.findByAppCaseTypeInAndCasestatusAndCasetitleContainingIgnoreCase(
+						appCaseTypeRepository.findByAppDepartmentIn(
+								appUserRepository.findByUseremailIgnoreCase(getPrincipal()).getDepartments()),
+						AppCaseStatus.IN_PROGRESS, keyword, pageable);
+			} else if (keyword != null && caseStatus.equalsIgnoreCase("CLOSED")) {
+				log.info("Inside keyword != null AND  caseStatus== CLOSED condition");
+//				pageTuts = appCaseRepository.findByCasestatusAndCasetitleContainingIgnoreCase(AppCaseStatus.CLOSED,
+//						keyword, pageable);
+				pageTuts = appCaseRepository.findByAppCaseTypeInAndCasestatusAndCasetitleContainingIgnoreCase(
+						appCaseTypeRepository.findByAppDepartmentIn(
+								appUserRepository.findByUseremailIgnoreCase(getPrincipal()).getDepartments()),
+						AppCaseStatus.CLOSED, keyword, pageable);
+			} else if (keyword == null && caseStatus.equalsIgnoreCase("CLOSED")) {
+				log.info("Inside keyword == null AND  caseStatus== CLOSED condition");
+//				pageTuts = appCaseRepository.findByCasestatusAndCasetitleContainingIgnoreCase(AppCaseStatus.CLOSED,
+//						keyword, pageable);
+				pageTuts = appCaseRepository.findByAppCaseTypeInAndCasestatusAndCasetitleContainingIgnoreCase(
+						appCaseTypeRepository.findByAppDepartmentIn(
+								appUserRepository.findByUseremailIgnoreCase(getPrincipal()).getDepartments()),
+						AppCaseStatus.CLOSED, keyword, pageable);
+			} else if (keyword == null && caseStatus.equalsIgnoreCase("NEW")) {
+				log.info("Inside keyword == null AND  caseStatus== NEW condition");
+//				pageTuts = appCaseRepository.findByCasestatusAndCasetitleContainingIgnoreCase(AppCaseStatus.NEW,
+//						keyword, pageable);
+				pageTuts = appCaseRepository.findByAppCaseTypeInAndCasestatusAndCasetitleContainingIgnoreCase(
+						appCaseTypeRepository.findByAppDepartmentIn(
+								appUserRepository.findByUseremailIgnoreCase(getPrincipal()).getDepartments()),
+						AppCaseStatus.NEW, keyword, pageable);
+			} else if (keyword == null && caseStatus.equalsIgnoreCase("IN_PROGRESS")) {
+				log.info("Inside keyword == null AND  caseStatus== IN_PROGRESS condition");
+//				pageTuts = appCaseRepository.findByCasestatusAndCasetitleContainingIgnoreCase(AppCaseStatus.CLOSED,
+//						keyword, pageable);
+				pageTuts = appCaseRepository.findByAppCaseTypeInAndCasestatusAndCasetitleContainingIgnoreCase(
+						appCaseTypeRepository.findByAppDepartmentIn(
+								appUserRepository.findByUseremailIgnoreCase(getPrincipal()).getDepartments()),
+						AppCaseStatus.IN_PROGRESS, keyword, pageable);
+			} else if (keyword == null && caseStatus.equalsIgnoreCase("ALL")) {
+				log.info("Inside keyword == null AND  caseStatus== CLOSED condition");
+//				pageTuts = appCaseRepository.findAll(pageable);
+				pageTuts = appCaseRepository.findByAppCaseTypeIn(
+						appCaseTypeRepository.findByAppDepartmentIn(
+								appUserRepository.findByUseremailIgnoreCase(getPrincipal()).getDepartments()),
+						pageable);
+			} else if (keyword != "" && keyword != null) {
+				log.info("Inside keyword != null condition");
+//				pageTuts = appCaseRepository.findByCasetitleContainingIgnoreCase(keyword, pageable);
+				pageTuts = appCaseRepository.findByAppCaseTypeInAndCasetitleContainingIgnoreCase(
+						appCaseTypeRepository.findByAppDepartmentIn(
+								appUserRepository.findByUseremailIgnoreCase(getPrincipal()).getDepartments()),
+						keyword, pageable);
+			} else {
+				log.info("Inside findall condition");
+				pageTuts = appCaseRepository.findByAppCaseTypeIn(
+						appCaseTypeRepository.findByAppDepartmentIn(
+								appUserRepository.findByUseremailIgnoreCase(getPrincipal()).getDepartments()),
+						pageable);
+			}
+
+			allfiles = pageTuts.getContent();
+
+			model.addAttribute("allfiles", allfiles);
+			model.addAttribute("currentPage", pageTuts.getNumber() + 1);
+			model.addAttribute("totalItems", pageTuts.getTotalElements());
+			model.addAttribute("totalPages", pageTuts.getTotalPages());
+			model.addAttribute("totalfiles", appCaseRepository.count());
+			model.addAttribute("pageSize", size);
+			model.addAttribute("sortField", sortField);
+			model.addAttribute("sortDirection", sortDirection);
+			model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
+		} catch (Exception e) {
+			model.addAttribute("message", e.getMessage());
+		}
+
+		return "appcase_list";
+	}
+
+	@GetMapping("/listappcase_orig")
 	public String documentsworkflowPagenew(Model model, @RequestParam(required = false) String keyword,
 			@RequestParam(required = false, defaultValue = "") String caseStatus,
 			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size,
@@ -474,7 +602,10 @@ public class AppCaseController {
 		// appCaseTypeRepository.findByDepartmentIn(deptList));
 		model.addAttribute("pagename", "launchpad");
 
-		model.addAttribute("eligiblecasetypes", appCaseTypeRepository.findByAppDepartmentIn(deptList));
+		// model.addAttribute("eligiblecasetypes",
+		// appCaseTypeRepository.findByAppDepartmentIn(deptList));
+		model.addAttribute("eligiblecasetypes", appCaseTypeRepository
+				.findByAppDepartmentIn(appUserRepository.findByUseremailIgnoreCase(getPrincipal()).getDepartments()));
 
 		return "launchpad";
 	}
@@ -483,7 +614,7 @@ public class AppCaseController {
 	public ResponseEntity<String> createAppCaseType(@PathVariable(value = "appCaseTypeId") String appCaseTypeId,
 			@RequestBody AppCase postdata) {
 
-		//System.out.println("addressRequest : :" + postdata);
+		// System.out.println("addressRequest : :" + postdata);
 
 		String appCase = appCaseTypeRepository.findById(Long.parseLong(appCaseTypeId)).map(caseType -> {
 			postdata.setAppCaseType(caseType);
@@ -498,6 +629,8 @@ public class AppCaseController {
 
 	@PostMapping(value = "/appCaseApproveByCaseId/{caseId}", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<String> forwardCase(@PathVariable(value = "caseId") String caseId) {
+		
+		System.out.println("ApprovingCase ID : :" + caseId);
 
 		appCaseService.forwardCase(Long.parseLong(caseId));
 

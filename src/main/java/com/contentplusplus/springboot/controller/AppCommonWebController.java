@@ -12,6 +12,7 @@ import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.contentplusplus.springboot.model.AppCaseStatus;
+import com.contentplusplus.springboot.model.AppDepartment;
+import com.contentplusplus.springboot.model.AppUser;
 import com.contentplusplus.springboot.repository.AppCaseDocumentRepository;
 import com.contentplusplus.springboot.repository.AppCaseRepository;
 import com.contentplusplus.springboot.repository.AppCaseTypeRepository;
@@ -86,6 +89,11 @@ public class AppCommonWebController {
 		model.addAttribute("casedocs", appCaseDocumentRepository.count());
 		model.addAttribute("totalservers", appInventoryRepository.count());
 		
+		AppUser appUser = appUserRepository.findByUseremailIgnoreCase(getPrincipal());
+		//System.out.println("MyDepartments:"+appUser.getDepartments());
+		for (AppDepartment dept: appUser.getDepartments()) {
+			//System.out.println("deptName: "+ dept.getDepartmentname());
+		}
 		
 		return "dashboard";
 	}
@@ -180,16 +188,16 @@ public class AppCommonWebController {
 		return "redirect:login?logout";
 	}
 
-//	private String getPrincipal() {
-//		String userName = null;
-//		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//
-//		if (principal instanceof UserDetails) {
-//			userName = ((UserDetails) principal).getUsername();
-//		} else {
-//			userName = principal.toString();
-//		}
-//		return userName;
-//	}
+	private String getPrincipal() {
+		String userName = null;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (principal instanceof UserDetails) {
+			userName = ((UserDetails) principal).getUsername();
+		} else {
+			userName = principal.toString();
+		}
+		return userName;
+	}
 
 }

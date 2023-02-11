@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -110,76 +112,6 @@ public class AppUserWebController {
 		return "redirect:/listuser";
 	}
 
-	@GetMapping("/listuserx")
-	public String userPaginatedFiltered(Model model, @RequestParam(required = false) String keyword,
-			@RequestParam(required = false) String userStatus, @RequestParam(defaultValue = "1") int page,
-			@RequestParam(required = false, defaultValue = "10") int pageSize,
-			@RequestParam(defaultValue = "id,asc") String[] sort) {
-		try {
-			model.addAttribute("pagename", "listuser");
-			List<AppUser> allfiles = new ArrayList<>();
-
-			String sortField = sort[0];
-			String sortDirection = sort[1];
-
-			Direction direction = sortDirection.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
-			Order order = new Order(direction, sortField);
-
-			Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by(order));
-
-			Page<AppUser> pageTuts = null;
-
-			if (keyword != null) {
-				model.addAttribute("keyword", keyword);
-			} else {
-				log.info("Keyword  ==  null");
-			}
-
-			if (userStatus != null) {
-				model.addAttribute("userStatus", userStatus);
-			}
-
-			if (keyword == null && userStatus == null) {
-				log.info("Inside keyword == null userStatus== null");
-				pageTuts = appUserRepository.findAll(pageable);
-			} else if (keyword == "" && userStatus == "") {
-				log.info("Inside keyword == AND userStatus== condition");
-				pageTuts = appUserRepository.findAll(pageable);
-			} else if (keyword != null && userStatus.equalsIgnoreCase("active")) {
-				log.info("Inside keyword != null AND userStatus== active condition");
-				pageTuts = appUserRepository.findByUserenabledTrueAndUseremailContainingIgnoreCase(keyword, pageable);
-			} else if (keyword != null && userStatus.equalsIgnoreCase("inactive")) {
-				log.info("Inside keyword != null AND  userStatus== inactive condition");
-				pageTuts = appUserRepository.findByUseremailContainingIgnoreCaseAndUserenabledFalse(keyword, pageable);
-			} else if (keyword == null && userStatus.equalsIgnoreCase("active")) {
-				log.info("Inside keyword == null AND userStatus== active condition");
-				pageTuts = appUserRepository.findByUserenabledTrue(pageable);
-			} else if (keyword == null && userStatus.equalsIgnoreCase("inactive")) {
-				log.info("Inside keyword == null AND userStatus== inactive condition");
-				pageTuts = appUserRepository.findByUserenabledFalse(pageable);
-			} else if (keyword != null && userStatus == null) {
-				log.info("Inside keyword == null AND userStatus== inactive condition");
-				pageTuts = appUserRepository.findByUseremailContainingIgnoreCase(keyword, pageable);
-			}  
-
-			allfiles = pageTuts.getContent();
-
-			model.addAttribute("users", allfiles);
-			model.addAttribute("currentPage", pageTuts.getNumber() + 1);
-			model.addAttribute("totalItems", pageTuts.getTotalElements());
-			model.addAttribute("totalPages", pageTuts.getTotalPages());
-			model.addAttribute("pageSize", pageSize);
-			model.addAttribute("sortField", sortField);
-			model.addAttribute("sortDirection", sortDirection);
-			model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
-		} catch (Exception e) {
-			model.addAttribute("message", e.getMessage());
-		}
-
-		return "user_list";
-	}
-	
-	
 	@GetMapping("/listuser")
 	public String documentsworkflowPagenew(Model model, @RequestParam(required = false) String keyword,
 			@RequestParam(required = false, defaultValue = "ALL") String userStatus,
@@ -231,8 +163,6 @@ public class AppUserWebController {
 			} else if (userStatus.equalsIgnoreCase("all")) {
 				pageTuts = appUserRepository.findAll(pageable);
 			}
-			
-			
 
 			allfiles = pageTuts.getContent();
 
@@ -279,6 +209,18 @@ public class AppUserWebController {
 		}
 		userService.saveUser(user);
 		return "redirect:/login?regnsuccess";
+	}
+	
+	private String getPrincipal() {
+		String userName = null;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (principal instanceof UserDetails) {
+			userName = ((UserDetails) principal).getUsername();
+		} else {
+			userName = principal.toString();
+		}
+		return userName;
 	}
 
 }

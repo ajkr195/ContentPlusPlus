@@ -60,10 +60,9 @@ public class AppCaseTypeStepController {
 
 	@RequestMapping(value = { "/casetypestepEdit", "/casetypestepEdit/{id}" }, method = RequestMethod.GET)
 	public String adminusereditRegistrationsd(Model model, @PathVariable(required = false, name = "id") Long id) {
-		String editingappCaseTypeStep = "editingappCaseTypeStep";
+		
 		model.addAttribute("pagename", "appCaseTypeStepedit");
-		//model.addAttribute("casetypename", appCaseTypeRepository.findById(id));
-		model.addAttribute("editingappCaseTypeStep", editingappCaseTypeStep);
+		
 		if (null != id) {
 		model.addAttribute("appCaseTypeStep", appCaseTypeStepRepository.findById(id));
 		model.addAttribute("editingappCaseTypeProp", "editingappCaseTypeProp");
