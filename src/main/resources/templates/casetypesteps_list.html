@@ -89,7 +89,7 @@
 										<tr>
 											<!--											<th>#</th>-->
 											<th>Id</th>
-											<th>Step Number</th>
+<!--											<th>Step Number</th>-->
 											<th>Step Name</th>
 											<th>Case Type</th>
 											<!--<th class="table-col-hidden">CreatedBy</th>
@@ -104,10 +104,11 @@
 										<tr th:each="myObj,rowStat : ${allfiles}">
 											<!--											<td class="cell" th:text="${rowStat.count}">1</td>-->
 											<td class="cell" th:text="${myObj.id}"></td>
+										<!--	<td class="cell"> <span class="truncate"
+													th:text="${myObj.casetypestepnumber}">None</span></td> -->
 											<td class="cell"> <span class="truncate"
-													th:text="${myObj.casetypestepnumber}">None</span></td>
-											<td class="cell"> <span class="truncate"
-													th:text="${myObj.casetypestepname}">None</span></td>
+													th:text="${#strings.arraySplit(myObj.casetypestepname, '=')[0]}">None</span></td>
+													
 											<td class="cell"> <span class="truncate"
 													th:text="${myObj.appCaseType.casetypename}">None</span></td>
 
@@ -154,7 +155,7 @@
 									<thead>
 										<tr>
 											<th>Id</th>
-											<th>Step Number</th>
+<!--											<th>Step Number</th>-->
 											<th>Step Name</th>
 											<th>Case Type</th>
 

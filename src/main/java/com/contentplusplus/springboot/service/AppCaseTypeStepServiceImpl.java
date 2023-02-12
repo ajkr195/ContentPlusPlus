@@ -1,5 +1,7 @@
 package com.contentplusplus.springboot.service;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,7 @@ public class AppCaseTypeStepServiceImpl implements AppCaseTypeStepService {
 	public void saveAppCaseType(AppCaseTypeStep appCaseTypeStep) {
 		// TODO Auto-generated method stub
 		appCaseTypeStep.setCasetypestepnumber(appCaseTypeStep.getCasetypestepnumber());
-		appCaseTypeStep.setCasetypestepname(appCaseTypeStep.getCasetypestepname());
+		appCaseTypeStep.setCasetypestepname(appCaseTypeStep.getCasetypestepname() + "=" + UUID.randomUUID());
 		appCaseTypeStep.setAppCaseType(appCaseTypeStep.getAppCaseType());
 
 		appCaseTypeStepRepository.save(appCaseTypeStep);
@@ -34,7 +36,7 @@ public class AppCaseTypeStepServiceImpl implements AppCaseTypeStepService {
 		AppCaseTypeStep entity = appCaseTypeStepRepository.findById(appCaseTypeStep.getId()).orElse(null);
 		if (null != entity) {
 			entity.setCasetypestepnumber(appCaseTypeStep.getCasetypestepnumber());
-			entity.setCasetypestepname(appCaseTypeStep.getCasetypestepname());
+			entity.setCasetypestepname(appCaseTypeStep.getCasetypestepname() + "=" + UUID.randomUUID());
 			entity.setAppCaseType(appCaseTypeStep.getAppCaseType());
 		}
 		return appCaseTypeStepRepository.save(entity);

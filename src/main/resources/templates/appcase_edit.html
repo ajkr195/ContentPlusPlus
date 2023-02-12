@@ -40,7 +40,7 @@
 							</div>
 							<div th:each="caseStep : ${appCase.appCaseType.appCaseStepList}" th:class="mb-1"
 								th:classappend="${caseStep.casetypestepname == appCaseCurrentStep} ? 'step current mx-2' : 'step mx-2'"
-								th:text="${caseStep.casetypestepname}"></div>
+								th:text="${#strings.arraySplit(caseStep.casetypestepname, '=')[0]}"></div>
 							<div class="step closed" th:if="${CLOSED_COMPLETE}">
 								<span> CLOSED </span>
 							</div>
@@ -49,15 +49,20 @@
 							</div>
 						</div>
 					</div>
+
+
 					<div class="d-flex flex-row justify-content-center align-items-center" data-aos="flip-down">
-						<div class="col-md-12" th:if="${appCase.currentstepname != 'CLOSED_COMPLETE'}">
-								<div th:if="${completionPercentage != null}" class="progress-bar bg-primary text-white" role="progressbar"
-									th:style="'width: ' + ${completionPercentage} + '%' + '; height:20px;'"
-									aria-valuemax="100" th:text="${completionPercentage} + ' %'">
-								</div>
+						<div class="col-md-12"
+							th:if="${#strings.arraySplit(appCase.currentstepname, '=')[0] != 'CLOSED_COMPLETE'}">
+							<div th:if="${completionPercentage != null}" class="progress-bar bg-primary text-white"
+								role="progressbar"
+								th:style="'width: ' + ${completionPercentage} + '%' + '; height:20px;'"
+								aria-valuemax="100" th:text="${completionPercentage} + ' %'">
+							</div>
 
 						</div>
-						<div class="col-md-12" th:if="${appCase.currentstepname == 'CLOSED_COMPLETE'}">
+						<div class="col-md-12"
+							th:if="${#strings.arraySplit(appCase.currentstepname, '=')[0] == 'CLOSED_COMPLETE'}">
 							<div class="progress" role="progressbar">
 								<div class="progress-bar bg-success" role="progressbar" style="width: 100%"
 									aria-valuemax="100">100%</div>
@@ -148,6 +153,41 @@
 											</div>
 										</div>
 
+
+									</div>
+									
+									<div class="row">
+
+										<div class="row col-md-4">
+											<div class="col-md-3">
+												<span class="fw-bolder">AssignedTo:</span>
+											</div>
+											<div class="col-md-9" th:switch="${appCase.assignedto}">
+												<span th:case="null">-NA-</span>
+												<span th:case="*" class="badge bg-success"
+													th:text="${appCase.assignedto}"></span>
+											</div>
+										</div>
+
+										<div class="row col-md-4">
+											<div class="col-md-3">
+												<span class="fw-bolder">LockedBy: </span>
+											</div>
+											
+											<div class="col-md-9" th:switch="${appCase.lockedby}">
+												<span th:case="null">-NA-</span>
+												<span th:case="*" class="badge bg-success"
+													th:text="${appCase.lockedby}"></span>
+											</div>
+										</div>
+										<div class="row col-md-4">
+											<div class="col-md-3">
+												<span class="fw-bolder">CurrStep: </span>
+											</div>
+											<div class="col-md-9"><span
+													th:text="${#strings.arraySplit(appCase.currentstepname, '=')[0]}"></span>
+											</div>
+										</div>
 
 									</div>
 
@@ -409,8 +449,11 @@
 									<label class="form-label fw-bolder fs-3" for="casetitle">CASE HISOTRY:</label>
 									<div class="col-md-12">
 										<div class="table-responsive">
+											<!--											<table class="table card-table table-vcenter text-nowrap datatable"-->
+											<!--												th:if="${!appCase.appCaseHistoryList.empty}">-->
 											<table class="table card-table table-vcenter text-nowrap datatable"
-												th:if="${!appCase.appCaseHistoryList.empty}">
+												th:if="${!appCaseHistoryList.empty}">
+
 												<thead>
 													<tr>
 														<th>#</th>
@@ -418,16 +461,16 @@
 														<th>Activity</th>
 														<!--th>Size</th-->
 														<th class="table-col-hidden">CaseWorker</th>
-														<th class="table-col-hidden">Date Time</th>
+														<th class="table-col-hidden">TimeStamp</th>
 														<!--											<th class="table-col-hidden">ModifiedBy</th>-->
 														<!--											<th class="table-col-hidden">LastModified</th>-->
 													</tr>
 												</thead>
 												<tbody>
 
-													<tr th:each="myfile,rowStat : ${appCase.appCaseHistoryList}">
-														<td class="cell" th:text="${rowStat.count}">1</td>
-														<!--														<td class="cell" th:text="${myfile.id}"></td>-->
+													<tr th:each="myfile,rowStat : ${appCaseHistoryList}">
+														<!--														<td class="cell" th:text="${rowStat.count}">1</td>-->
+														<td class="cell" th:text="${myfile.id}"></td>
 														<td class="cell"> <span class="truncate"
 																th:text="${myfile.casehistorytext}">None</span></td>
 														<!--	<td th:switch="${myfile.fileSize gt 1024}">
@@ -534,11 +577,13 @@
 
 	<script>
 		function appCaseApproveByCaseId(id) {
-
+			let htmlstring = '<label class="form-label col-md-12 fw-bolder fs-3" for="casetitle"><label class="form-label fw-bolder fs-2" for="casetitle">Approval Comment</label>' +
+				'<input id="caseComment" name="caseComment"></select>';
 
 			Swal.fire({
 				title: 'Are you sure to approve?',
 				icon: 'question',
+				html: htmlstring,
 				//width: '40%',
 				showDenyButton: true,
 				denyButtonText: 'Cancel',
@@ -546,6 +591,16 @@
 				showConfirmButton: true,
 				confirmButtonText: 'Approve',
 				allowOutsideClick: false,
+				preConfirm: () => {
+
+					const caseComment = Swal.getPopup().querySelector('#caseComment').value
+					if (!caseComment) {
+						Swal.showValidationMessage(`Please provide comments for Approval. !`);
+					}
+
+
+
+				}
 			}).then((result) => {
 
 				if (result.isConfirmed) {
@@ -558,7 +613,7 @@
 						headers: {
 							'Content-Type': 'application/json',
 						},
-						body: JSON.stringify({"id": id}),
+						body: JSON.stringify({"id": id, "caseComment": document.getElementById("caseComment").value}),
 					}).then((response) => {
 
 						//alert(response.status);
@@ -568,7 +623,7 @@
 								icon: 'success',
 								title: 'Success !',
 								text: 'Case got approved successfully !',
-								footer: '<a href="/caseEditById/' + id +'">Back to Case</a>'
+								footer: '<a href="/caseEditById/' + id + '">Back to Case</a>'
 							}).then(() => {
 								//location.reload();
 								window.location.href = "/listappcase";
@@ -607,10 +662,14 @@
 	<script>
 		function appCaseRejectByCaseId(id) {
 
+			let htmlstring = '<label class="form-label col-md-12 fw-bolder fs-3" for="casetitle"><label class="form-label fw-bolder fs-2" for="casetitle">Rejection Comment</label>' +
+				'<input id="caseComment" name="caseComment"></select>';
+
 
 			Swal.fire({
 				title: 'Are you sure to reject?',
 				icon: 'warning',
+				html: htmlstring,
 				//width: '40%',
 				showDenyButton: true,
 				denyButtonText: 'Cancel',
@@ -618,11 +677,21 @@
 				showConfirmButton: true,
 				confirmButtonText: 'Reject',
 				allowOutsideClick: false,
+				preConfirm: () => {
+
+					const caseComment = Swal.getPopup().querySelector('#caseComment').value
+					if (!caseComment) {
+						Swal.showValidationMessage(`Please provide comments for Rejection. !`);
+					}
+
+
+
+				}
 			}).then((result) => {
 
 				if (result.isConfirmed) {
 
-					//alert(JSON.stringify(postdata));
+					alert(JSON.stringify({"id": id, "caseComment": document.getElementById("caseComment").value}));
 
 
 					fetch('/appCaseRejectByCaseId/' + id, {
@@ -630,7 +699,7 @@
 						headers: {
 							'Content-Type': 'application/json',
 						},
-						body: JSON.stringify({"id": id}),
+						body: JSON.stringify({"id": id, "caseComment": document.getElementById("caseComment").value}),
 					}).then((response) => {
 
 						//alert(response.status);
@@ -640,9 +709,9 @@
 								icon: 'success',
 								title: 'Success !',
 								text: 'Case got rejected successfully !',
-								footer: '<a href="/caseEditById/' + id +'">Back to Case</a>'
+								footer: '<a href="/caseEditById/' + id + '">Back to Case</a>'
 							}).then(() => {
-								window.location.href = "/listappcase" ;
+								window.location.href = "/listappcase";
 							});
 						}
 

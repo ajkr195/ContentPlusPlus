@@ -130,7 +130,7 @@
 											<td class="cell"> <span class="truncate"
 													th:text="${myObj.casestatus}">None</span></td>
 											<td class="cell"> <span class="truncate"
-													th:text="${myObj.currentstepname}">None</span></td>
+													th:text="${#strings.arraySplit(myObj.currentstepname, '=')[0]}">None</span></td>
 											<td class="cell"> <span class="truncate"
 													th:text="${myObj.caseuuid}">None</span></td>
 												<td class="cell"> <span class="truncate"

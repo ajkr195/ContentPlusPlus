@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeSet;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -109,6 +108,7 @@ public class AppCaseController {
 		model.addAttribute("editingappCase", "editingappCase");
 		model.addAttribute("pagename", "processcase");
 		model.addAttribute("appCase", appCase);
+		model.addAttribute("appCaseHistoryList", appCaseHistoryRepository.findByAppCaseOrderByIdDesc(appCase));
 
 		if (appCase.getCurrentstepname().equalsIgnoreCase("CLOSED_COMPLETE")) {
 			model.addAttribute("CLOSED_COMPLETE", "CLOSED_COMPLETE");
@@ -628,27 +628,42 @@ public class AppCaseController {
 	}
 
 	@PostMapping(value = "/appCaseApproveByCaseId/{caseId}", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<String> forwardCase(@PathVariable(value = "caseId") String caseId) {
-		
+	public ResponseEntity<String> forwardCase(@PathVariable(value = "caseId") String caseId, @RequestBody String caseComment) {
+
 		System.out.println("ApprovingCase ID : :" + caseId);
 
 		appCaseService.forwardCase(Long.parseLong(caseId));
 
 		AppCase appCase = appCaseRepository.findById(Long.parseLong(caseId)).get();
 
-		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - Approved this Case - ", appCase));
+		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - Approved this Case.", appCase));
+		
+		AppCaseComment newcaseComment = new AppCaseComment();
+
+		newcaseComment.setCasecomment("<b>[" + new Date() + "] " + getPrincipal() + " :</b> "
+				+ caseComment.substring(caseComment.lastIndexOf(':') + 1).replaceAll("\"", "").replaceAll("}", ""));
+		newcaseComment.setAppCase(appCase);
+		appCaseCommentRepository.save(newcaseComment);
 
 		return new ResponseEntity<>(caseId, HttpStatus.CREATED);
 	}
 
 	@PostMapping(value = "/appCaseRejectByCaseId/{caseId}", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<String> backwardCase(@PathVariable(value = "caseId") String caseId) {
+	public ResponseEntity<String> backwardCase(@PathVariable(value = "caseId") String caseId,
+			@RequestBody String caseComment) {
 
 		appCaseService.backwardCase(Long.parseLong(caseId));
 
 		AppCase appCase = appCaseRepository.findById(Long.parseLong(caseId)).get();
 
-		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - Rejected this Case - ", appCase));
+		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - Rejected this Case.", appCase));
+
+		AppCaseComment newcaseComment = new AppCaseComment();
+
+		newcaseComment.setCasecomment("<b>[" + new Date() + "] " + getPrincipal() + " :</b> "
+				+ caseComment.substring(caseComment.lastIndexOf(':') + 1).replaceAll("\"", "").replaceAll("}", ""));
+		newcaseComment.setAppCase(appCase);
+		appCaseCommentRepository.save(newcaseComment);
 
 		return new ResponseEntity<>(caseId, HttpStatus.CREATED);
 	}
