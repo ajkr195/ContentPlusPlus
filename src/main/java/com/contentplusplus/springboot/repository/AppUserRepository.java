@@ -9,6 +9,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.contentplusplus.springboot.model.AppCase;
+import com.contentplusplus.springboot.model.AppCaseComment;
+import com.contentplusplus.springboot.model.AppCaseType;
+import com.contentplusplus.springboot.model.AppDepartment;
 import com.contentplusplus.springboot.model.AppUser;
 
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
@@ -55,4 +59,7 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 	Page<AppUser> findByUserenabledFalse(Pageable pageable);
 
 	Page<AppUser> findByUseremailContainingIgnoreCaseAndUserenabledFalse(String keyword, Pageable pageable);
+	
+	List<AppUser> findByDepartmentsIn(List<AppDepartment> dept);
+
 }

@@ -155,7 +155,7 @@
 
 
 									</div>
-									
+
 									<div class="row">
 
 										<div class="row col-md-4">
@@ -163,21 +163,56 @@
 												<span class="fw-bolder">AssignedTo:</span>
 											</div>
 											<div class="col-md-9" th:switch="${appCase.assignedto}">
-												<span th:case="null">-NA-</span>
+												<span th:case="null">
+
+													<select class="form-select form-select-sm" id="thisCaseWorkers"
+														th:field="${appCase.assignedto}">
+														<option value="" th:selected="selected">-- Select Assignee --
+														</option>
+														<option th:each="caseWorker : ${thisCaseWorkers}"
+															th:value="${caseWorker.useremail}"
+															th:text="${caseWorker.useremail}">
+															Department
+														</option>
+													</select>
+
+
+
+												</span>
 												<span th:case="*" class="badge bg-success"
-													th:text="${appCase.assignedto}"></span>
+													th:text="${appCase.assignedto}"></span><i
+													th:if="${appCase.assignedto}" class="fa-solid fa-xmark fa-xl text-danger mx-1"
+													th:onClick="clearAssignedTo([[${appCase.id}]])"></i>
 											</div>
+
+
+
+
+
 										</div>
 
 										<div class="row col-md-4">
 											<div class="col-md-3">
 												<span class="fw-bolder">LockedBy: </span>
 											</div>
-											
+
 											<div class="col-md-9" th:switch="${appCase.lockedby}">
-												<span th:case="null">-NA-</span>
+												<span th:case="null">
+													<select class="form-select form-select-sm" id="thisCaseWorkers"
+														th:field="${appCase.lockedby}">
+														<option value="" th:selected="selected">-- Select Assignee --
+														</option>
+														<option th:each="caseWorker : ${thisCaseWorkers}"
+															th:value="${caseWorker.useremail}"
+															th:text="${caseWorker.useremail}">
+															Department
+														</option>
+													</select>
+												</span>
 												<span th:case="*" class="badge bg-success"
-													th:text="${appCase.lockedby}"></span>
+													th:text="${appCase.lockedby}"></span><i th:if="${appCase.lockedby}"
+													class="fa-solid fa-xmark fa-xl text-danger mx-1"
+													th:onClick="clearLockedBy([[${appCase.id}]])"></i>
 											</div>
 										</div>
 										<div class="row col-md-4">
@@ -265,7 +300,7 @@
 										<label class="form-label fw-bolder fs-3" for="casetitle">CASE COMMENTS:</label>
 										<input class="form-control mb-2" type="text" id="casecomment" name="casecomment"
 											required />
-										<div th:each="caseComment: ${appCase.caseCommentList}">
+										<div th:each="caseComment: ${appCaseComments}">
 											<p class="mt-2 mb-2 fs-3" th:utext="${caseComment.casecomment}"></p>
 										</div>
 									</div>
@@ -545,6 +580,75 @@
 	<script type="text/javascript" th:src="@{/js/main.js}" defer></script>
 	<script type="text/javascript" th:src="@{/js/app.js}"></script>
 	<script type="text/javascript" th:src="@{/js/userdata.js}"></script>
+
+	<script>
+		function clearLockedBy(id) {
+			//alert(id);
+			//, Object
+			Swal.fire({
+				title: 'Are you sure?',
+				text: "You want to Unlock this case?",
+				icon: 'warning',
+				showDenyButton: true,
+				confirmButtonColor: '#006666',
+				denyButtonColor: 'gray',
+				confirmButtonText: 'Yes, unlock it!',
+				denyButtonText: `Don't unlock`,
+			}).then((result) => {
+				if (result.isConfirmed) {
+					fetch('/clearLockedByCaseId/' + id, {
+						method: 'POST',
+					})
+					Swal.fire({
+						icon: 'success',
+						title: 'Success !',
+						text: 'Your casce has been unlocked successfully !',
+						footer: '<a href="/caseEditById/' + id + '">Back to Case</a>'
+					})
+					//Object.closest('tr').remove();
+				} else if (result.isDenied) {
+					Swal.fire('Great. Changes are not saved.', 'Case is still locked  !!  ', 'info')
+				}
+			})
+		}
+	</script>
+
+	<script>
+		function clearAssignedTo(id) {
+			//alert(id);
+			//, Object
+			Swal.fire({
+				title: 'Are you sure?',
+				text: "You want to remove Assignee? ",
+				icon: 'warning',
+				showDenyButton: true,
+				confirmButtonColor: '#006666',
+				denyButtonColor: 'gray',
+				confirmButtonText: 'Yes, clear it!',
+				denyButtonText: `Leave it`,
+			}).then((result) => {
+				if (result.isConfirmed) {
+					fetch('/clearAssignedToByCaseId/' + id, {
+						method: 'POST',
+					})
+					Swal.fire(
+						'Cleared!',
+						'Assignee removed.',
+						'success'
+					)
+					Swal.fire({
+						icon: 'success',
+						title: 'Cleared !',
+						text: 'Your Assignee has been removed successfully !',
+						footer: '<a href="/caseEditById/' + id + '">Back to Case</a>'
+					})
+					//Object.closest('tr').remove();
+				} else if (result.isDenied) {
+					Swal.fire('Great. Changes are not saved.', 'Your case is still assigned to an individual  !!  ', 'info')
+				}
+			})
+		}
+	</script>
 
 	<script>
 		function deleteCasefile(id, Object) {

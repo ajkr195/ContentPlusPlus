@@ -94,6 +94,12 @@ public class AppCommonWebController {
 		for (AppDepartment dept: appUser.getDepartments()) {
 			//System.out.println("deptName: "+ dept.getDepartmentname());
 		}
+		int mypeer = 1;
+		for (AppUser peer : appUserRepository.findByDepartmentsIn(appUser.getDepartments())) {
+			
+			//System.out.println("Peer " + mypeer + " : " +peer.getUseremail() );
+			
+		}
 		
 		return "dashboard";
 	}

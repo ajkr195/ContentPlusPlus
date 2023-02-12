@@ -94,5 +94,15 @@ public interface AppCaseRepository extends JpaRepository<AppCase, Long> {
 
 	Page<AppCase> findByAppCaseTypeInAndCasetitleContainingIgnoreCase(List<AppCaseType> listAppCaseType,
 			String keyword, Pageable pageable);
+	
+	@Modifying
+	@Transactional
+	@Query("UPDATE AppCase ac set ac.assignedto = null where ac.id =:caseid")
+	void clearAssignedTo( Long caseid);
+	
+	@Modifying
+	@Transactional
+	@Query("UPDATE AppCase ac set ac.lockedby = null where ac.id =:caseid")
+	void clearLockedBy( Long caseid);
 
 }

@@ -109,6 +109,13 @@ public class AppCaseController {
 		model.addAttribute("pagename", "processcase");
 		model.addAttribute("appCase", appCase);
 		model.addAttribute("appCaseHistoryList", appCaseHistoryRepository.findByAppCaseOrderByIdDesc(appCase));
+		
+		model.addAttribute("appCaseComments", appCaseCommentRepository.findByAppCaseOrderByIdDesc(appCase));
+		
+		List<AppDepartment> caseDept = new ArrayList<>();
+		caseDept.add(appCase.getAppCaseType().getAppDepartment());
+		model.addAttribute("thisCaseWorkers", appUserRepository.findByDepartmentsIn(caseDept));
+		
 
 		if (appCase.getCurrentstepname().equalsIgnoreCase("CLOSED_COMPLETE")) {
 			model.addAttribute("CLOSED_COMPLETE", "CLOSED_COMPLETE");
@@ -128,7 +135,7 @@ public class AppCaseController {
 
 			if (appCase.getCurrentstepname().equalsIgnoreCase("LAUNCHED") || appCase.getCurrentstepname()
 					.equalsIgnoreCase(appCaseTypeStepRepository.findById(set.first()).get().getCasetypestepname())) {
-				System.out.println("grrrrrrr...");
+				//System.out.println("grrrrrrr...");
 				model.addAttribute("FIRSTSTEP", "FIRSTSTEP");
 			}
 
@@ -626,9 +633,37 @@ public class AppCaseController {
 
 		return new ResponseEntity<>(appCase, HttpStatus.CREATED);
 	}
+	
+	@PostMapping(value = "/clearAssignedToByCaseId/{caseId}")
+	public ResponseEntity<String> clearAssignedTo(@PathVariable(value = "caseId") String caseId) {
+
+		System.out.println("clearAssignedTo ID : :" + caseId);
+
+		appCaseService.clearAssignedTo(Long.parseLong(caseId));
+
+		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - cleared AssignedTo for this Case.", appCaseRepository.findById(Long.parseLong(caseId)).get()));
+
+
+		return new ResponseEntity<>(caseId, HttpStatus.CREATED);
+	}
+	
+	@PostMapping(value = "/clearLockedByCaseId/{caseId}")
+	public ResponseEntity<String> clearLockedBy(@PathVariable(value = "caseId") String caseId) {
+
+		System.out.println("clearAssignedTo ID : :" + caseId);
+
+		appCaseService.clearLockedBy(Long.parseLong(caseId));
+
+		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - cleared LockedBy for this Case.", appCaseRepository.findById(Long.parseLong(caseId)).get()));
+
+
+		return new ResponseEntity<>(caseId, HttpStatus.CREATED);
+	}
+
 
 	@PostMapping(value = "/appCaseApproveByCaseId/{caseId}", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<String> forwardCase(@PathVariable(value = "caseId") String caseId, @RequestBody String caseComment) {
+	public ResponseEntity<String> forwardCase(@PathVariable(value = "caseId") String caseId,
+			@RequestBody String caseComment) {
 
 		System.out.println("ApprovingCase ID : :" + caseId);
 
@@ -637,7 +672,7 @@ public class AppCaseController {
 		AppCase appCase = appCaseRepository.findById(Long.parseLong(caseId)).get();
 
 		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - Approved this Case.", appCase));
-		
+
 		AppCaseComment newcaseComment = new AppCaseComment();
 
 		newcaseComment.setCasecomment("<b>[" + new Date() + "] " + getPrincipal() + " :</b> "

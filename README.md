@@ -1,13 +1,19 @@
 Next Steps
 
-Milestone 4:
-  - Assign case to self. 
-  - Assign case to someone else.
-  - Clear Assign-To.
-  - Filter and paginate cases by department.
+Milestone 5:
   - Fix security wherever necessary.
   - Allow department head to manage that department's users and their roles.
   - Code Clean-Up
+
+Milestone 4:
+  - Assign case to someone else. - DONE
+  - Clear Assign-To. - DONE
+  - Lock case. - DONE
+  - Clear Lock. - DONE
+  - Filter and paginate cases by department. - DONE
+  - Fix security wherever necessary.- DEFERRED to MileStone 5
+  - Allow department head to manage that department's users and their roles.- DEFERRED to MileStone 5
+  - Code Clean-Up - DEFERRED to MileStone 5
   
   
 
@@ -70,6 +76,10 @@ Content Management Systems were supposed to:
 # Dashboard:  
   
   ![content++](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/Dashboard.JPG)
+  
+# Case:  
+  
+  ![content++](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/Case.JPG)
 
 
 UI is derived and heavily based on (if you want to support this project) - https://github.com/tabler/tabler 

@@ -28,5 +28,9 @@ public interface AppCaseService {
 	
 	void unlockCaseByCaseUUID (String caseuuid);
 
+	void clearAssignedTo(Long id);
+	
+	void clearLockedBy(Long id);
+
 
 }
