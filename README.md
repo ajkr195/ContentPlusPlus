@@ -82,5 +82,9 @@ Content Management Systems were supposed to:
   
   ![content++](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/Case.JPG)
 
+# Case Details:  
+  
+  ![content++](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/CaseDetails.JPG)  
+
 
 UI is derived and heavily based on (if you want to support this project) - https://github.com/tabler/tabler 
