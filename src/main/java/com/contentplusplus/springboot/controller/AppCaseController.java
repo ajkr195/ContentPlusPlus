@@ -109,13 +109,12 @@ public class AppCaseController {
 		model.addAttribute("pagename", "processcase");
 		model.addAttribute("appCase", appCase);
 		model.addAttribute("appCaseHistoryList", appCaseHistoryRepository.findByAppCaseOrderByIdDesc(appCase));
-		
+
 		model.addAttribute("appCaseComments", appCaseCommentRepository.findByAppCaseOrderByIdDesc(appCase));
-		
+
 		List<AppDepartment> caseDept = new ArrayList<>();
 		caseDept.add(appCase.getAppCaseType().getAppDepartment());
 		model.addAttribute("thisCaseWorkers", appUserRepository.findByDepartmentsIn(caseDept));
-		
 
 		if (appCase.getCurrentstepname().equalsIgnoreCase("CLOSED_COMPLETE")) {
 			model.addAttribute("CLOSED_COMPLETE", "CLOSED_COMPLETE");
@@ -135,7 +134,7 @@ public class AppCaseController {
 
 			if (appCase.getCurrentstepname().equalsIgnoreCase("LAUNCHED") || appCase.getCurrentstepname()
 					.equalsIgnoreCase(appCaseTypeStepRepository.findById(set.first()).get().getCasetypestepname())) {
-				//System.out.println("grrrrrrr...");
+				// System.out.println("grrrrrrr...");
 				model.addAttribute("FIRSTSTEP", "FIRSTSTEP");
 			}
 
@@ -467,6 +466,106 @@ public class AppCaseController {
 		return "appcase_list";
 	}
 
+	@GetMapping("/listappcaseassignedtome")
+	public String casesAssignedToMe(Model model, @RequestParam(required = false) String keyword,
+			@RequestParam(required = false, defaultValue = "") String caseStatus,
+			@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "id,asc") String[] sort) {
+		try {
+			model.addAttribute("pagename", "listappcase");
+			List<AppCase> allfiles = new ArrayList<>();
+
+			String sortField = sort[0];
+			String sortDirection = sort[1];
+
+			Direction direction = sortDirection.equals("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+			Order order = new Order(direction, sortField);
+
+			Pageable pageable = PageRequest.of(page - 1, size, Sort.by(order));
+
+			Page<AppCase> pageTuts = null;
+
+			if (keyword != null) {
+				model.addAttribute("keyword", keyword);
+			}
+
+			if (caseStatus != "") {
+				model.addAttribute("caseStatus", caseStatus);
+			}
+
+			System.out.println("keyword: " + keyword + " caseStatus: " + caseStatus);
+
+			if (keyword == null && caseStatus == "") {
+				log.info("Inside keyword == null caseStatus== null");
+				pageTuts = appCaseRepository.findByAssignedto(getPrincipal(), pageable);
+			} else if (keyword == "" && caseStatus == "") {
+				log.info("Inside keyword == AND caseStatus== condition");
+				pageTuts = appCaseRepository.findAll(pageable);
+			} else if (keyword != null && caseStatus.equalsIgnoreCase("NEW")) {
+				log.info("Inside keyword != null AND caseStatus== NEW condition");
+//				pageTuts = appCaseRepository.findByCasestatusAndCasetitleContainingIgnoreCase(AppCaseStatus.NEW,
+//						keyword, pageable);
+
+				pageTuts = appCaseRepository.findByAssignedto(getPrincipal(), AppCaseStatus.NEW, keyword, pageable);
+
+			} else if (keyword != null && caseStatus.equalsIgnoreCase("IN_PROGRESS")) {
+				log.info("Inside keyword != null AND  caseStatus== IN_PROGRESS condition");
+//				pageTuts = appCaseRepository.findByCasestatusAndCasetitleContainingIgnoreCase(AppCaseStatus.IN_PROGRESS,
+//						keyword, pageable);
+				pageTuts = appCaseRepository.findByAssignedto(getPrincipal(), AppCaseStatus.IN_PROGRESS, keyword,
+						pageable);
+			} else if (keyword != null && caseStatus.equalsIgnoreCase("CLOSED")) {
+				log.info("Inside keyword != null AND  caseStatus== CLOSED condition");
+//				pageTuts = appCaseRepository.findByCasestatusAndCasetitleContainingIgnoreCase(AppCaseStatus.CLOSED,
+//						keyword, pageable);
+				pageTuts = appCaseRepository.findByAssignedto(getPrincipal(), AppCaseStatus.CLOSED, keyword, pageable);
+			} else if (keyword == null && caseStatus.equalsIgnoreCase("CLOSED")) {
+				log.info("Inside keyword == null AND  caseStatus== CLOSED condition");
+//				pageTuts = appCaseRepository.findByCasestatusAndCasetitleContainingIgnoreCase(AppCaseStatus.CLOSED,
+//						keyword, pageable);
+				pageTuts = appCaseRepository.findByAssignedto(getPrincipal(), AppCaseStatus.CLOSED, keyword, pageable);
+			} else if (keyword == null && caseStatus.equalsIgnoreCase("NEW")) {
+				log.info("Inside keyword == null AND  caseStatus== NEW condition");
+//				pageTuts = appCaseRepository.findByCasestatusAndCasetitleContainingIgnoreCase(AppCaseStatus.NEW,
+//						keyword, pageable);
+				pageTuts = appCaseRepository.findByAssignedto(getPrincipal(), AppCaseStatus.NEW, keyword, pageable);
+			} else if (keyword == null && caseStatus.equalsIgnoreCase("IN_PROGRESS")) {
+				log.info("Inside keyword == null AND  caseStatus== IN_PROGRESS condition");
+//				pageTuts = appCaseRepository.findByCasestatusAndCasetitleContainingIgnoreCase(AppCaseStatus.CLOSED,
+//						keyword, pageable);
+				pageTuts = appCaseRepository.findByAssignedto(getPrincipal(), AppCaseStatus.IN_PROGRESS, keyword,
+						pageable);
+			} else if (keyword == null && caseStatus.equalsIgnoreCase("ALL")) {
+				log.info("Inside keyword == null AND  caseStatus== CLOSED condition");
+//				pageTuts = appCaseRepository.findAll(pageable);
+				pageTuts = appCaseRepository.findByAssignedto(getPrincipal(), pageable);
+			} else if (keyword != "" && keyword != null) {
+				log.info("Inside keyword != null condition");
+//				pageTuts = appCaseRepository.findByCasetitleContainingIgnoreCase(keyword, pageable);
+				pageTuts = appCaseRepository.findByAssignedto(getPrincipal(), keyword, pageable);
+			} else {
+				log.info("Inside findall condition");
+				pageTuts = appCaseRepository.findByAssignedto(getPrincipal(), pageable);
+			}
+
+			allfiles = pageTuts.getContent();
+
+			model.addAttribute("allfiles", allfiles);
+			model.addAttribute("currentPage", pageTuts.getNumber() + 1);
+			model.addAttribute("totalItems", pageTuts.getTotalElements());
+			model.addAttribute("totalPages", pageTuts.getTotalPages());
+			model.addAttribute("totalfiles", appCaseRepository.count());
+			model.addAttribute("pageSize", size);
+			model.addAttribute("sortField", sortField);
+			model.addAttribute("sortDirection", sortDirection);
+			model.addAttribute("reverseSortDirection", sortDirection.equals("asc") ? "desc" : "asc");
+		} catch (Exception e) {
+			model.addAttribute("message", e.getMessage());
+		}
+
+		return "appcase_list";
+	}
+
 	@GetMapping("/listappcase_orig")
 	public String documentsworkflowPagenew(Model model, @RequestParam(required = false) String keyword,
 			@RequestParam(required = false, defaultValue = "") String caseStatus,
@@ -633,7 +732,7 @@ public class AppCaseController {
 
 		return new ResponseEntity<>(appCase, HttpStatus.CREATED);
 	}
-	
+
 	@PostMapping(value = "/clearAssignedToByCaseId/{caseId}")
 	public ResponseEntity<String> clearAssignedTo(@PathVariable(value = "caseId") String caseId) {
 
@@ -641,12 +740,12 @@ public class AppCaseController {
 
 		appCaseService.clearAssignedTo(Long.parseLong(caseId));
 
-		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - cleared AssignedTo for this Case.", appCaseRepository.findById(Long.parseLong(caseId)).get()));
-
+		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - cleared AssignedTo for this Case.",
+				appCaseRepository.findById(Long.parseLong(caseId)).get()));
 
 		return new ResponseEntity<>(caseId, HttpStatus.CREATED);
 	}
-	
+
 	@PostMapping(value = "/clearLockedByCaseId/{caseId}")
 	public ResponseEntity<String> clearLockedBy(@PathVariable(value = "caseId") String caseId) {
 
@@ -654,12 +753,11 @@ public class AppCaseController {
 
 		appCaseService.clearLockedBy(Long.parseLong(caseId));
 
-		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - cleared LockedBy for this Case.", appCaseRepository.findById(Long.parseLong(caseId)).get()));
-
+		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - cleared LockedBy for this Case.",
+				appCaseRepository.findById(Long.parseLong(caseId)).get()));
 
 		return new ResponseEntity<>(caseId, HttpStatus.CREATED);
 	}
-
 
 	@PostMapping(value = "/appCaseApproveByCaseId/{caseId}", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<String> forwardCase(@PathVariable(value = "caseId") String caseId,

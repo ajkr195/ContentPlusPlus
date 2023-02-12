@@ -130,11 +130,13 @@
 											<td class="cell"> <span class="truncate"
 													th:text="${myObj.casestatus}">None</span></td>
 											<td class="cell"> <span class="truncate"
-													th:text="${#strings.arraySplit(myObj.currentstepname, '=')[0]}">None</span></td>
+													th:text="${#strings.arraySplit(myObj.currentstepname, '=')[0]}">None</span>
+											</td>
 											<td class="cell"> <span class="truncate"
 													th:text="${myObj.caseuuid}">None</span></td>
-												<td class="cell"> <span class="truncate"
-													th:text="${myObj.appCaseType.appDepartment.departmentname}">None</span></td>	
+											<td class="cell"> <span class="truncate"
+													th:text="${myObj.appCaseType.appDepartment.departmentname}">None</span>
+											</td>
 											<!--<td class="cell"> <span class="truncate"-->
 											<!-- th:text="${myObj.assignedto}">None</span></td>-->
 											<td th:switch="${myObj.assignedto}">
@@ -195,6 +197,9 @@
 							<div class="app-card-body p-4" th:if="${allfiles.empty}">
 								<div>
 									No Cases found.
+									<a class="btn btn-sm btn-success" href="/listappcase" th:href="@{/listappcase}">
+										Go to Case List
+									</a>
 								</div>
 							</div>
 

@@ -105,4 +105,10 @@ public interface AppCaseRepository extends JpaRepository<AppCase, Long> {
 	@Query("UPDATE AppCase ac set ac.lockedby = null where ac.id =:caseid")
 	void clearLockedBy( Long caseid);
 
+	Page<AppCase> findByAssignedto(String principal, Pageable pageable);
+
+	Page<AppCase> findByAssignedto(String principal, AppCaseStatus casestatus, String keyword, Pageable pageable);
+
+	Page<AppCase> findByAssignedto(String principal, String keyword, Pageable pageable);
+
 }

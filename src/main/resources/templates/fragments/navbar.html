@@ -178,18 +178,14 @@
 												class="fa-solid fa-arrows-split-up-and-left me-2 text-primary fa-rotate-270"></i>
 											Documents Workflow
 										</a>
-										<a class="dropdown-item" href="#">
-											Link1 <span
-												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">Link1</span>
+										<a class="dropdown-item" href="/listappcase" th:href="@{/listappcase}">
+											<i class="fa-solid fa-list-ol me-2 text-success"></i>
+											Case List
 										</a>
-										<a class="dropdown-item" href="#">
-											Link2 <span
-												class="badge badge-sm bg-success-lt text-uppercase ms-auto">Link2</span>
-										</a>
-
-										<a class="dropdown-item" href="#">
-											Link3 <span
-												class="badge badge-sm bg-success-lt text-uppercase ms-auto">Link3</span>
+										
+										<a class="dropdown-item" href="/listappcaseassignedtome" th:href="@{/listappcaseassignedtome}">
+											<i class="fa-solid fa-list-ol me-2 text-danger"></i>
+											Case Assigned To Me
 										</a>
 
 										<div class="dropend">
@@ -238,6 +234,13 @@
 											<i class="fa-solid fa-list-ol me-2 text-success"></i>
 											Case List
 										</a>
+										
+										<a class="dropdown-item" href="/listappcaseassignedtome" th:href="@{/listappcaseassignedtome}">
+											<i class="fa-solid fa-list-ol me-2 text-danger"></i>
+											Case Assigned To Me
+										</a>
+										
+										
 
 										<a class="dropdown-item" href="/activity" th:href="@{/activity}">
 											Activity <span
