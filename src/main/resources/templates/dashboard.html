@@ -48,38 +48,39 @@
 			<div class="page-body">
 				<div class="container-xl">
 					<div class="row row-deck row-cards">
-						<div class="col-12">
-							<div class="card card-md">
-								<div class="card-stamp card-stamp-lg">
-									<div class="card-stamp-icon bg-primary">
-										<i class="fa-solid fa-file-shield"></i>
-									</div>
-								</div>
-								<div class="card-body">
-									<div class="row align-items-center">
-										<div class="col-10">
-											<h3 class="h1" th:text="${appname}">AppName</h3>
-											<div class="markdown text-muted">
-												All you see here is open source and are MIT-licensed. Visit
-												<a href="https://github.com/ajkr195/ContentPlusPlus" target="_blank"
-													rel="noopener">ContentPlusPlus</a>.
-												Download, fork, modify, customize the Content++ Repo and use it
-												the way you like it.<a
-													href="https://github.com/ajkr195/?tab=repositories"
-													class="btn btn-teal ms-2 text-white" target="_blank"
-													rel="noopener">Download
-													Now</a>
-											</div>
-											<!--											<div class="mt-3">-->
-											<!--												-->
-											<!--											</div>-->
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<div class="col-12">
+								<div class="card card-md">
+									<div class="card-stamp card-stamp-lg">
+										<div class="card-stamp-icon bg-primary">
+											<i class="fa-solid fa-file-shield"></i>
 										</div>
 									</div>
+									<div class="card-body">
 
-								</div>
+
+										<div class="row align-items-center">
+											<div class="col-10">
+												<h3 class="h1" th:text="${appname}">AppName</h3>
+												<div class="markdown text-muted">
+													All you see here is open source and are MIT-licensed. Visit
+													<a href="https://github.com/ajkr195/ContentPlusPlus" target="_blank"
+														rel="noopener">ContentPlusPlus</a>.
+													Download, fork, modify, customize the Content++ Repo and use it
+													the way you like it.<a
+														href="https://github.com/ajkr195/?tab=repositories"
+														class="btn btn-teal ms-2 text-white" target="_blank"
+														rel="noopener">Download
+														Now</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div><button type="button" class="btn-close" data-bs-dismiss="alert"
+											aria-label="Close"></button>
 							</div>
-						</div>
 
+						</div>
 
 						<div class="col-12">
 							<div class="row row-cards">
