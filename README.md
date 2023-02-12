@@ -1,6 +1,7 @@
 Next Steps
 
 Milestone 5:
+  - Add feature to allow users to add Adhoc-Tasks for each individual case.
   - Fix security wherever necessary.
   - Allow department head to manage that department's users and their roles.
   - Code Clean-Up
