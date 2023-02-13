@@ -469,7 +469,7 @@
 									</div>
 								</div>
 
-								<div class="row mt-2" th:if="${!appCase.caseTaskList.empty}">
+								<div class="row mt-2">
 									<div class="text-end"><a href="#" class="btn btn-success d-none d-sm-inline-block"
 											th:onClick="addCaseTask([[${appCase.id}]])">
 											<i class="fa-solid fa-plus fa-xl"></i>
@@ -484,7 +484,12 @@
 											aria-label="Close"></button>
 									</div>
 									<div class="col-md-12">
-										<div class="table-responsive">
+										<div class="app-card-body p-4" th:if="${appCase.caseTaskList.empty}">
+											<div class="text-primary">
+												No Tasks added Yet. Click "Add Task" to add adhoc tasks.
+											</div>
+										</div>
+										<div class="table-responsive" th:if="${!appCase.caseTaskList.empty}">
 											<!-- <table class="table card-table table-vcenter text-nowrap datatable"-->
 											<!-- th:if="${!appCase.appCaseHistoryList.empty}">-->
 											<table class="table card-table table-vcenter text-nowrap datatable">
@@ -494,10 +499,10 @@
 														<th>Id</th>
 														<th>Task Title</th>
 														<th>Completed?</th>
-<!--														<th class="table-col-hidden">CreatedBy</th>-->
-<!--														<th class="table-col-hidden">TimeStamp</th>-->
-<!--														<th class="table-col-hidden">UpdatedBy</th>-->
-<!--														<th class="table-col-hidden">LastModified</th>-->
+														<th class="table-col-hidden">CreatedBy</th>
+														<th class="table-col-hidden">DateCreated</th>
+														<!--														<th class="table-col-hidden">UpdatedBy</th>-->
+														<!--														<th class="table-col-hidden">LastModified</th>-->
 													</tr>
 												</thead>
 												<tbody>
@@ -522,14 +527,14 @@
 
 														<!--														<td class="cell"> <span class="truncate"-->
 														<!--																th:text="${myfile.taskcompleted}">None</span></td>-->
-<!--														<td class="cell table-col-hidden"><span class="note"-->
-<!--																th:text="${myfile.createdBy}">None</span></td>-->
-<!--														<td class="cell table-col-hidden"><span class="note"-->
-<!--																th:text="${myfile.createdDate}">None</span></td>-->
-<!--														<td class="cell table-col-hidden"><span class="note"-->
-<!--																th:text="${myfile.lastModifiedBy}">None</span></td>-->
-<!--														<td class="cell table-col-hidden"><span class="note"-->
-<!--																th:text="${myfile.lastModifiedDate}">None</span></td>-->
+														<td class="cell table-col-hidden"><span class="note"
+																th:text="${myfile.createdBy}">None</span></td>
+														<td class="cell table-col-hidden"><span class="note"
+																th:text="${myfile.createdDate}">None</span></td>
+														<!--														<td class="cell table-col-hidden"><span class="note"-->
+														<!--																th:text="${myfile.lastModifiedBy}">None</span></td>-->
+														<!--														<td class="cell table-col-hidden"><span class="note"-->
+														<!--																th:text="${myfile.lastModifiedDate}">None</span></td>-->
 													</tr>
 												</tbody>
 												<thead>
@@ -537,10 +542,10 @@
 														<th>Id</th>
 														<th>Task Title</th>
 														<th>Completed?</th>
-<!--														<th class="table-col-hidden">CreatedBy</th>-->
-<!--														<th class="table-col-hidden">TimeStamp</th>-->
-<!--														<th class="table-col-hidden">UpdatedBy</th>-->
-<!--														<th class="table-col-hidden">LastModified</th>-->
+														<th class="table-col-hidden">CreatedBy</th>
+														<th class="table-col-hidden">DateCreated</th>
+														<!--														<th class="table-col-hidden">UpdatedBy</th>-->
+														<!--														<th class="table-col-hidden">LastModified</th>-->
 													</tr>
 												</thead>
 											</table>

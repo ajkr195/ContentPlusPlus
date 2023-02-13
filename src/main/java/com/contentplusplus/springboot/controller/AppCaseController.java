@@ -108,7 +108,7 @@ public class AppCaseController {
 
 		AppCase appCase = appCaseRepository.findById(id).get(); // AppCasePropertyDto
 
-		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - Viewed this Case", appCase));
+		//appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - Viewed this Case", appCase));
 
 		model.addAttribute("editingappCase", "editingappCase");
 		model.addAttribute("pagename", "processcase");
@@ -775,6 +775,9 @@ public class AppCaseController {
 
 	      String status = taskcompleted ? "Completed" : "In-Complete";
 	      String message = "The Task \"" + appCaseTaskRepository.findById(id).get().getTasktitle() + "\" has been marked as: " + status;
+	      
+	      appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - marked the task - "+ appCaseTaskRepository.findById(id).get().getTasktitle()+" as " + status  ,
+					appCaseRepository.findById(caseId).get()));
 
 	      redirectAttributes.addFlashAttribute("message", message);
 	    } catch (Exception e) {

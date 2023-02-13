@@ -178,55 +178,8 @@
 												class="fa-solid fa-arrows-split-up-and-left me-2 text-primary fa-rotate-270"></i>
 											Documents Workflow
 										</a>
-										<a class="dropdown-item" href="/listappcase" th:href="@{/listappcase}">
-											<i class="fa-solid fa-list-ol me-2 text-success"></i>
-											Case List
-										</a>
-										
-										<a class="dropdown-item" href="/listappcaseassignedtome" th:href="@{/listappcaseassignedtome}">
-											<i class="fa-solid fa-list-ol me-2 text-danger"></i>
-											Case Assigned To Me
-										</a>
 
-										<div class="dropend">
-											<a class="dropdown-item dropdown-toggle" href="#sidebar-cards"
-												data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
-												aria-expanded="false">
-												Preferences
-												<span
-													class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
-											</a>
-											<div class="dropdown-menu">
-												<a class="dropdown-item" href="?appView=fluid" title="FullScreen View"
-													data-bs-toggle="tooltip" data-bs-placement="bottom">
-													<i class="fa-solid fa-expand text-muted me-2"></i> Layout 1<span
-														class="badge badge-sm bg-primary-lt text-uppercase ms-auto">
-														FLUID</span>
-												</a>
-												<a class="dropdown-item" href="?appView=boxed" title="Reading View"
-													data-bs-toggle="tooltip" data-bs-placement="bottom">
-													<i class="fa-solid fa-box fa-lg text-muted me-2"></i> Layout 2
-													<span class="badge badge-sm bg-green-lt text-uppercase ms-auto">
-														BOXED</span>
-												</a>
 
-												<a href="?theme=dark" class="dropdown-item hide-theme-dark"
-													title="Enable dark mode" data-bs-toggle="tooltip"
-													data-bs-placement="bottom">
-													<i class="fa-regular fa-moon fa-lg text-muted"></i>
-													<span class="badge badge-sm bg-green-lt text-uppercase ms-auto">
-														Dark-Mode</span>
-												</a>
-												<a href="?theme=light"
-													class="dropdown-item hide-theme-light text-yellow"
-													title="Enable light mode" data-bs-toggle="tooltip"
-													data-bs-placement="bottom">
-													<i class="fa-solid fa-sun fa-lg"></i>
-													<span class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">
-														Light-Mode</span>
-												</a>
-											</div>
-										</div>
 									</div>
 									<div class="dropdown-menu-column">
 
@@ -234,22 +187,13 @@
 											<i class="fa-solid fa-list-ol me-2 text-success"></i>
 											Case List
 										</a>
-										
-										<a class="dropdown-item" href="/listappcaseassignedtome" th:href="@{/listappcaseassignedtome}">
+
+										<a class="dropdown-item" href="/listappcaseassignedtome"
+											th:href="@{/listappcaseassignedtome}">
 											<i class="fa-solid fa-list-ol me-2 text-danger"></i>
 											Case Assigned To Me
 										</a>
-										
-										
 
-										<a class="dropdown-item" href="/activity" th:href="@{/activity}">
-											Activity <span
-												class="badge badge-sm bg-success-lt text-uppercase ms-auto">Activity</span>
-										</a>
-										<a class="dropdown-item" href="/steps" th:href="@{/steps}">
-											Steps <span
-												class="badge badge-sm bg-success-lt text-uppercase ms-auto">Steps</span>
-										</a>
 									</div>
 								</div>
 							</div>
@@ -283,8 +227,7 @@
 											<i class="fa-brands fa-aws fa-xl me-2 text-success"></i> Documents <span
 												class="badge badge-sm bg-success-lt text-uppercase ms-auto">S3Bucket</span>
 										</a>
-										<a class="dropdown-item" href="#">Link1</a>
-										<a class="dropdown-item" href="#">Link2</a>
+										<a class="dropdown-item" href="#">Link</a>
 									</div>
 								</div>
 							</div>
@@ -350,7 +293,8 @@
 
 							<div class="dropdown-menu">
 
-								<a class="dropdown-item" href="/api/csv/listinventory" th:href="@{/api/csv/listinventory}">
+								<a class="dropdown-item" href="/api/csv/listinventory"
+									th:href="@{/api/csv/listinventory}">
 									<i class="fa-solid fa-server icon text-red me-1"></i> <span
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
 										Inventory</span>
@@ -373,19 +317,20 @@
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
 										CaseType List</span>
 								</a>
-								
+
 								<a class="dropdown-item" href="/casetypeDocTypeEdit" th:href="@{/casetypeDocTypeEdit}">
 									<i class="fa-solid fa-list-check icon text-primary me-1"></i> <span
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
 										Create CaseType Doc Type</span>
 								</a>
-								
-								<a class="dropdown-item" href="/listcasetypedoctypes" th:href="@{/listcasetypedoctypes}">
+
+								<a class="dropdown-item" href="/listcasetypedoctypes"
+									th:href="@{/listcasetypedoctypes}">
 									<i class="fa-solid fa-list-check icon text-secondary me-1"></i> <span
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
 										CaseType Doc Type List</span>
 								</a>
-								
+
 								<a class="dropdown-item" href="/listcasetypeprops" th:href="@{/listcasetypeprops}">
 									<i class="fa-solid fa-list-check icon text-teal me-1"></i> <span
 										class="badge badge-sm bg-success-lt text-uppercase ms-auto">
@@ -416,6 +361,51 @@
 								<a class="dropdown-item" href="/help">
 									Information
 								</a>
+
+								<a class="dropdown-item" href="/activity" th:href="@{/activity}">
+									Activity <span
+										class="badge badge-sm bg-success-lt text-uppercase ms-auto">Activity</span>
+								</a>
+								<a class="dropdown-item" href="/steps" th:href="@{/steps}">
+									Steps <span class="badge badge-sm bg-success-lt text-uppercase ms-auto">Steps</span>
+								</a>
+								<div class="dropend">
+									<a class="dropdown-item dropdown-toggle" href="#sidebar-cards"
+										data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button"
+										aria-expanded="false">
+										Preferences
+										<span class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+									</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="?appView=fluid" title="FullScreen View"
+											data-bs-toggle="tooltip" data-bs-placement="bottom">
+											<i class="fa-solid fa-expand text-muted me-2"></i> Layout 1<span
+												class="badge badge-sm bg-primary-lt text-uppercase ms-auto">
+												FLUID</span>
+										</a>
+										<a class="dropdown-item" href="?appView=boxed" title="Reading View"
+											data-bs-toggle="tooltip" data-bs-placement="bottom">
+											<i class="fa-solid fa-box fa-lg text-muted me-2"></i> Layout 2
+											<span class="badge badge-sm bg-green-lt text-uppercase ms-auto">
+												BOXED</span>
+										</a>
+
+										<a href="?theme=dark" class="dropdown-item hide-theme-dark"
+											title="Enable dark mode" data-bs-toggle="tooltip"
+											data-bs-placement="bottom">
+											<i class="fa-regular fa-moon fa-lg text-muted"></i>
+											<span class="badge badge-sm bg-green-lt text-uppercase ms-auto">
+												Dark-Mode</span>
+										</a>
+										<a href="?theme=light" class="dropdown-item hide-theme-light text-yellow"
+											title="Enable light mode" data-bs-toggle="tooltip"
+											data-bs-placement="bottom">
+											<i class="fa-solid fa-sun fa-lg"></i>
+											<span class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">
+												Light-Mode</span>
+										</a>
+									</div>
+								</div>
 							</div>
 						</li>
 
