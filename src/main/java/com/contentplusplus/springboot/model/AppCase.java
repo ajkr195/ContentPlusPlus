@@ -69,6 +69,9 @@ public class AppCase extends Auditable<String> implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "appCase")
 	private List<AppCaseDocument> caseDocumentList;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "appCase")
+	private List<AppCaseTask> caseTaskList;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "appCase")
 	private List<AppCaseComment> caseCommentList;

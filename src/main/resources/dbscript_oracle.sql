@@ -217,6 +217,19 @@ CONSTRAINT appcasedocument_pk PRIMARY KEY (id),UNIQUE (fileuuid));
 ALTER TABLE CONTENTPLUSPLUS.app_case_document ADD CONSTRAINT FK_ACASEDOCUMENT FOREIGN KEY (caseid) REFERENCES app_case (id);
 
 
+create table CONTENTPLUSPLUS.app_case_task(
+id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+tasktitle VARCHAR(150),
+taskcompleted NUMBER(1) DEFAULT 0 NOT NULL,
+created_by VARCHAR(150) NOT NULL,
+created_date TIMESTAMP NOT NULL,
+modified_by VARCHAR(150) NOT NULL,
+modified_date TIMESTAMP NOT NULL,
+optlock number,
+caseid NUMBER NOT NULL,
+CONSTRAINT appcaseadhoctask_pk PRIMARY KEY (id));
+ALTER TABLE CONTENTPLUSPLUS.app_case_task ADD CONSTRAINT FK_ACASEADHOCTASK FOREIGN KEY (caseid) REFERENCES app_case (id);
+
 create table CONTENTPLUSPLUS.app_case_comment(
 id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
 casecomment VARCHAR(150),

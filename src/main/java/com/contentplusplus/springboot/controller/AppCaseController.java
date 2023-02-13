@@ -36,6 +36,7 @@ import com.contentplusplus.springboot.model.AppCaseComment;
 import com.contentplusplus.springboot.model.AppCaseHistory;
 import com.contentplusplus.springboot.model.AppCasePropertyDto;
 import com.contentplusplus.springboot.model.AppCaseStatus;
+import com.contentplusplus.springboot.model.AppCaseTask;
 import com.contentplusplus.springboot.model.AppCaseType;
 import com.contentplusplus.springboot.model.AppCaseTypeStep;
 import com.contentplusplus.springboot.model.AppDepartment;
@@ -43,6 +44,7 @@ import com.contentplusplus.springboot.repository.AppCaseCommentRepository;
 import com.contentplusplus.springboot.repository.AppCaseHistoryRepository;
 import com.contentplusplus.springboot.repository.AppCasePropertyRepository;
 import com.contentplusplus.springboot.repository.AppCaseRepository;
+import com.contentplusplus.springboot.repository.AppCaseTaskRepository;
 import com.contentplusplus.springboot.repository.AppCaseTypeRepository;
 import com.contentplusplus.springboot.repository.AppCaseTypeStepRepository;
 import com.contentplusplus.springboot.repository.AppDepartmentRepository;
@@ -95,6 +97,9 @@ public class AppCaseController {
 
 	@Autowired
 	AppCaseHistoryRepository appCaseHistoryRepository;
+	
+	@Autowired
+	AppCaseTaskRepository appCaseTaskRepository;
 
 	@GetMapping("/caseEditById/{id}")
 	public String viewCase(@PathVariable(name = "id") Long id,
@@ -758,12 +763,53 @@ public class AppCaseController {
 
 		return new ResponseEntity<>(caseId, HttpStatus.CREATED);
 	}
+	
+	  @GetMapping("/caseTaskEditById/{caseId}/{taskid}/task/{status}")
+	  public String updateTutorialPublishedStatus(@PathVariable("caseId") Long caseId,@PathVariable("taskid") Long id, @PathVariable("status") boolean taskcompleted,
+	      Model model, RedirectAttributes redirectAttributes) {
+	    try {
+	    	
+	    	//System.out.println("Setting to : " + taskcompleted);
+	    	
+	    	appCaseTaskRepository.updateCompletionStatus(id, taskcompleted);
+
+	      String status = taskcompleted ? "Completed" : "In-Complete";
+	      String message = "The Task \"" + appCaseTaskRepository.findById(id).get().getTasktitle() + "\" has been marked as: " + status;
+
+	      redirectAttributes.addFlashAttribute("message", message);
+	    } catch (Exception e) {
+	    	System.out.println("Catch Setting to : " + taskcompleted);
+	      redirectAttributes.addFlashAttribute("message", e.getMessage());
+	    }
+
+	    return "redirect:/caseEditById/"+ caseId;
+	  }
+	
+	@PostMapping(value = "/addCaseTaskByCaseId/{caseId}", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<String> addCaseTask(@PathVariable(value = "caseId") String caseId, @RequestBody String taskTitle
+			) {
+
+		//System.out.println("Adding task to case ID : :" + caseId);
+
+		appCaseService.forwardCase(Long.parseLong(caseId));
+
+		AppCase appCase = appCaseRepository.findById(Long.parseLong(caseId)).get();
+
+		appCaseHistoryRepository.save(new AppCaseHistory(getPrincipal() + " - Added this Case Task: " + taskTitle.substring(taskTitle.lastIndexOf(':') + 1).replaceAll("\"", "").replaceAll("}", ""), appCase));
+		
+		AppCaseTask newcaseTask = new AppCaseTask();
+		newcaseTask.setTasktitle(taskTitle.substring(taskTitle.lastIndexOf(':') + 1).replaceAll("\"", "").replaceAll("}", ""));
+		newcaseTask.setAppCase(appCase);
+		appCaseTaskRepository.save(newcaseTask);
+		
+		return new ResponseEntity<>(caseId, HttpStatus.CREATED);
+	}
 
 	@PostMapping(value = "/appCaseApproveByCaseId/{caseId}", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<String> forwardCase(@PathVariable(value = "caseId") String caseId,
 			@RequestBody String caseComment) {
 
-		System.out.println("ApprovingCase ID : :" + caseId);
+		//System.out.println("ApprovingCase ID : :" + caseId);
 
 		appCaseService.forwardCase(Long.parseLong(caseId));
 

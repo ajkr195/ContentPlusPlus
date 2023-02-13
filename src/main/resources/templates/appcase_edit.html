@@ -181,7 +181,8 @@
 												</span>
 												<span th:case="*" class="badge bg-success"
 													th:text="${appCase.assignedto}"></span><i
-													th:if="${appCase.assignedto}" class="fa-solid fa-xmark fa-xl text-danger mx-1"
+													th:if="${appCase.assignedto}"
+													class="fa-solid fa-xmark fa-xl text-danger mx-1"
 													th:onClick="clearAssignedTo([[${appCase.id}]])"></i>
 											</div>
 
@@ -312,7 +313,8 @@
 												th:onClick="uploadCaseDocuments([[${appCase.id}]])">
 												<i class="fa-solid fa-plus fa-xl"></i>
 												Upload Case Files
-											</a></div>
+											</a>
+										</div>
 
 
 										<!--div th:each="caseDoc: ${appCase.caseDocumentList}">
@@ -464,20 +466,89 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 									</div>
 								</div>
+
+								<div class="row">
+									<div class="text-end"><a href="#" class="btn btn-success d-none d-sm-inline-block"
+											th:onClick="addCaseTask([[${appCase.id}]])">
+											<i class="fa-solid fa-plus fa-xl"></i>
+											Add Task
+										</a>
+									</div>
+									<label class="form-label fw-bolder fs-3" for="casetitle">CASE Adhoc Tasks:</label>
+									<div th:if="${message != null}"
+										class="alert alert-success alert-dismissible fade show" role="alert">
+										[[${message}]]
+										<button type="button" class="btn-close" data-bs-dismiss="alert"
+											aria-label="Close"></button>
+									</div>
+									<div class="col-md-12">
+										<div class="table-responsive">
+											<!-- <table class="table card-table table-vcenter text-nowrap datatable"-->
+											<!-- th:if="${!appCase.appCaseHistoryList.empty}">-->
+											<table class="table card-table table-vcenter text-nowrap datatable">
+
+												<thead>
+													<tr>
+														<th>Id</th>
+														<th>Task Title</th>
+														<th>Completed?</th>
+														<th class="table-col-hidden">CreatedBy</th>
+														<th class="table-col-hidden">TimeStamp</th>
+														<th class="table-col-hidden">UpdatedBy</th>
+														<th class="table-col-hidden">LastModified</th>
+													</tr>
+												</thead>
+												<tbody>
+
+													<tr th:each="myfile,rowStat : ${appCase.caseTaskList}">
+														<!--<td class="cell" th:text="${rowStat.count}">1</td>-->
+														<td class="cell" th:text="${myfile.id}"></td>
+														<td class="cell"> <span class="truncate"
+																th:text="${myfile.tasktitle}">None</span></td>
+
+														<td>
+															<a th:if="${myfile.taskcompleted == true}"
+																th:href="@{'/caseTaskEditById/' + ${appCase.id} + '/' + ${myfile.id} + '/task/false'}"
+																title="Mark as InCompleted"><i
+																	class="fa-solid fa-square-check fa-xl"></i></a>
+															<a th:if="${myfile.taskcompleted == false}"
+																th:href="@{'/caseTaskEditById/' + ${appCase.id}+ '/' + ${myfile.id} + '/task/true'}"
+																title="Mark as Completed"><i
+																	class="fa-regular fa-square fa-xl"></i></a>
+														</td>
+
+
+														<!--														<td class="cell"> <span class="truncate"-->
+														<!--																th:text="${myfile.taskcompleted}">None</span></td>-->
+														<td class="cell table-col-hidden"><span class="note"
+																th:text="${myfile.createdBy}">None</span></td>
+														<td class="cell table-col-hidden"><span class="note"
+																th:text="${myfile.createdDate}">None</span></td>
+														<td class="cell table-col-hidden"><span class="note"
+																th:text="${myfile.lastModifiedBy}">None</span></td>
+														<td class="cell table-col-hidden"><span class="note"
+																th:text="${myfile.lastModifiedDate}">None</span></td>
+													</tr>
+												</tbody>
+												<thead>
+													<tr>
+														<th>Id</th>
+														<th>Task Title</th>
+														<th>Completed?</th>
+														<th class="table-col-hidden">CreatedBy</th>
+														<th class="table-col-hidden">TimeStamp</th>
+														<th class="table-col-hidden">UpdatedBy</th>
+														<th class="table-col-hidden">LastModified</th>
+													</tr>
+												</thead>
+											</table>
+
+										</div>
+									</div>
+								</div>
+
 
 
 								<div class="row">
@@ -676,6 +747,92 @@
 					Swal.fire('Great. Changes are not saved.', 'Your important file is safe  !!  ', 'info')
 				}
 			})
+		}
+	</script>
+
+
+
+	<script>
+		function addCaseTask(id) {
+			let htmlstring = '<label class="form-label col-md-12 fw-bolder fs-3" for="tasktitle"><label class="form-label fw-bolder fs-2" for="casetitle">Approval Comment</label>' +
+				'<input id="taskTitle" name="taskTitle"></select>';
+
+			Swal.fire({
+				title: 'Add Case Task',
+				icon: 'warning',
+				html: htmlstring,
+				//width: '40%',
+				showDenyButton: true,
+				denyButtonText: 'Cancel',
+				showCloseButton: true,
+				showConfirmButton: true,
+				confirmButtonText: 'Add',
+				allowOutsideClick: false,
+				preConfirm: () => {
+
+					const caseComment = Swal.getPopup().querySelector('#taskTitle').value
+					if (!caseComment) {
+						Swal.showValidationMessage(`Please provide Task Title !`);
+					}
+
+
+
+				}
+			}).then((result) => {
+
+				if (result.isConfirmed) {
+
+					//alert(JSON.stringify(postdata));
+
+					alert(JSON.stringify({"id": id, "taskTitle": document.getElementById("taskTitle").value}));
+					fetch('/addCaseTaskByCaseId/' + id, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({"id": id, "taskTitle": document.getElementById("taskTitle").value}),
+					}).then((response) => {
+
+						//alert(response.status);
+
+						if (response.status === 201) {
+							Swal.fire({
+								icon: 'success',
+								title: 'Success !',
+								text: 'Case got approved successfully !',
+								footer: '<a href="/caseEditById/' + id + '">Back to Case</a>'
+							}).then(() => {
+								//location.reload();
+								window.location.href = "/listappcase";
+							});
+						}
+
+					})
+						.then((data) => {
+							//alert('Success:', data);
+							//drawTableFromData(id);
+							//Swal.fire({
+							//icon: 'success',
+							//title: 'Success !',
+							//text: 'Casetype Property Saved successfully !',
+							//footer: '<a href="/listappcase" th:href="@{/listappcase}">Go to Case List</a>'
+							//});
+						})
+						.catch((error) => {
+							//console.error('Error:', error);
+							Swal.fire({
+								icon: 'error',
+								title: 'Oops...',
+								text: 'Case approval failed  !',
+								footer: '<a href="">Why do I have this issue?</a>'
+							});
+						});
+
+				} else if (result.isDenied) {
+					Swal.fire('No action performed', 'Try again to process  !!  ', 'info')
+				}
+			})
+
 		}
 	</script>
 

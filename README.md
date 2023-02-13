@@ -1,7 +1,7 @@
 Next Steps
 
 Milestone 5:
-  - Add feature to allow users to add Adhoc-Tasks for each individual case.
+  - Add feature to allow users to add Adhoc-Tasks for each individual case. - DONE
   - Fix security wherever necessary.
   - Allow department head to manage that department's users and their roles.
   - Code Clean-Up
@@ -85,6 +85,10 @@ Content Management Systems were supposed to:
 # Case Details:  
   
   ![content++](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/CaseDetails.JPG)  
+
+# Case Details2:  
+  
+  ![content++](https://github.com/ajkr195/ContentPlusPlus/blob/main/screenshots/CaseDetails2.JPG)  
 
 
 UI is derived and heavily based on (if you want to support this project) - https://github.com/tabler/tabler 
