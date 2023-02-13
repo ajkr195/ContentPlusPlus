@@ -469,7 +469,7 @@
 									</div>
 								</div>
 
-								<div class="row">
+								<div class="row mt-2" th:if="${!appCase.caseTaskList.empty}">
 									<div class="text-end"><a href="#" class="btn btn-success d-none d-sm-inline-block"
 											th:onClick="addCaseTask([[${appCase.id}]])">
 											<i class="fa-solid fa-plus fa-xl"></i>
@@ -494,10 +494,10 @@
 														<th>Id</th>
 														<th>Task Title</th>
 														<th>Completed?</th>
-														<th class="table-col-hidden">CreatedBy</th>
-														<th class="table-col-hidden">TimeStamp</th>
-														<th class="table-col-hidden">UpdatedBy</th>
-														<th class="table-col-hidden">LastModified</th>
+<!--														<th class="table-col-hidden">CreatedBy</th>-->
+<!--														<th class="table-col-hidden">TimeStamp</th>-->
+<!--														<th class="table-col-hidden">UpdatedBy</th>-->
+<!--														<th class="table-col-hidden">LastModified</th>-->
 													</tr>
 												</thead>
 												<tbody>
@@ -522,14 +522,14 @@
 
 														<!--														<td class="cell"> <span class="truncate"-->
 														<!--																th:text="${myfile.taskcompleted}">None</span></td>-->
-														<td class="cell table-col-hidden"><span class="note"
-																th:text="${myfile.createdBy}">None</span></td>
-														<td class="cell table-col-hidden"><span class="note"
-																th:text="${myfile.createdDate}">None</span></td>
-														<td class="cell table-col-hidden"><span class="note"
-																th:text="${myfile.lastModifiedBy}">None</span></td>
-														<td class="cell table-col-hidden"><span class="note"
-																th:text="${myfile.lastModifiedDate}">None</span></td>
+<!--														<td class="cell table-col-hidden"><span class="note"-->
+<!--																th:text="${myfile.createdBy}">None</span></td>-->
+<!--														<td class="cell table-col-hidden"><span class="note"-->
+<!--																th:text="${myfile.createdDate}">None</span></td>-->
+<!--														<td class="cell table-col-hidden"><span class="note"-->
+<!--																th:text="${myfile.lastModifiedBy}">None</span></td>-->
+<!--														<td class="cell table-col-hidden"><span class="note"-->
+<!--																th:text="${myfile.lastModifiedDate}">None</span></td>-->
 													</tr>
 												</tbody>
 												<thead>
@@ -537,10 +537,10 @@
 														<th>Id</th>
 														<th>Task Title</th>
 														<th>Completed?</th>
-														<th class="table-col-hidden">CreatedBy</th>
-														<th class="table-col-hidden">TimeStamp</th>
-														<th class="table-col-hidden">UpdatedBy</th>
-														<th class="table-col-hidden">LastModified</th>
+<!--														<th class="table-col-hidden">CreatedBy</th>-->
+<!--														<th class="table-col-hidden">TimeStamp</th>-->
+<!--														<th class="table-col-hidden">UpdatedBy</th>-->
+<!--														<th class="table-col-hidden">LastModified</th>-->
 													</tr>
 												</thead>
 											</table>
@@ -754,7 +754,7 @@
 
 	<script>
 		function addCaseTask(id) {
-			let htmlstring = '<label class="form-label col-md-12 fw-bolder fs-3" for="tasktitle"><label class="form-label fw-bolder fs-2" for="casetitle">Approval Comment</label>' +
+			let htmlstring = '<label class="form-label col-md-12 fw-bolder fs-3" for="tasktitle"><label class="form-label fw-bolder fs-2" for="casetitle">Task Title</label>' +
 				'<input id="taskTitle" name="taskTitle"></select>';
 
 			Swal.fire({
@@ -784,7 +784,7 @@
 
 					//alert(JSON.stringify(postdata));
 
-					alert(JSON.stringify({"id": id, "taskTitle": document.getElementById("taskTitle").value}));
+					//alert(JSON.stringify({"id": id, "taskTitle": document.getElementById("taskTitle").value}));
 					fetch('/addCaseTaskByCaseId/' + id, {
 						method: 'POST',
 						headers: {
