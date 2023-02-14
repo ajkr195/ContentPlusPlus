@@ -29,12 +29,14 @@ public class AppUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		AppUser user = userRepository.findByUseremailIgnoreCase(email);
 
-		if (user != null) {
+		if (user != null && user.isUserenabled()) {
 			return new org.springframework.security.core.userdetails.User(user.getUseremail(), user.getUserpassword(),
 					mapRolesToAuthorities(user.getRoles()));
 		} else {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
+		
+		
 	}
 
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<AppRole> roles) {

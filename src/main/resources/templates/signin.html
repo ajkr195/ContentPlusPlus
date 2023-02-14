@@ -22,7 +22,7 @@
 				<div class="card-body">
 					<h2 class="h2 text-center mb-4">Login to your account</h2>
 					<div th:if="${param.error}">
-						<div class="alert alert-danger">Invalid Email and/or Password.</div>
+						<div class="alert alert-danger">Invalid Email/Password. Or account is not Active.</div>
 					</div>
 					<div th:if="${param.logout}">
 						<div class="alert alert-success">You have been logged out.</div>
@@ -30,11 +30,17 @@
 					<div th:if="${param.regnsuccess}">
 						<div class="alert alert-success">Registration was successful. You can login now.</div>
 					</div>
+
+					<!--<div class="error" th:if="${param.error}"-->
+					<!--th:with="errorMsg=${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">-->
+					<!--Reason: <span th:text="${errorMsg}">Wrong input!</span>-->
+					<!--</div>-->
+
 					<form method="post" th:action="@{/login}" role="form" autocomplete="off">
 						<div class="mb-3">
 							<label class="form-label">Email address</label>
 							<input type="text" class="form-control" id="username" name="username"
-								placeholder="Your email-id" autocomplete="off"  th:required="required">
+								placeholder="Your email-id" autocomplete="off" th:required="required">
 						</div>
 						<div class="mb-4">
 							<label class="form-label">
@@ -45,7 +51,7 @@
 							</label>
 							<div class="input-group input-group-flat">
 								<input type="password" class="form-control" placeholder="Your password" id="password"
-									name="password" autocomplete="off"  th:required="required">
+									name="password" autocomplete="off" th:required="required">
 								<span class="input-group-text">
 									<a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
 										<i class="fa-regular fa-eye" onclick="showPassword()"></i>
